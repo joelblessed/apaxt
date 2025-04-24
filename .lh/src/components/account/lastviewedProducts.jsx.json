@@ -1,0 +1,50 @@
+{
+    "sourceFile": "src/components/account/lastviewedProducts.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1744996931844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1744996942832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   useEffect(() => {\n     const fetchViewedProducts = async () => {\n       try {\n-        const response = await fetch(http://localhost:5000/viewedProducts/${userId});\n+        const response = await fetch(`http://localhost:5000/viewedProducts/${userId});\n         if (!response.ok) {\n           throw new Error('Failed to fetch viewed products');\n         }\n         const data = await response.json();\n"
+                },
+                {
+                    "date": 1744996953828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   useEffect(() => {\n     const fetchViewedProducts = async () => {\n       try {\n-        const response = await fetch(`http://localhost:5000/viewedProducts/${userId});\n+        const response = await fetch(`http://localhost:5000/viewedProducts/${userId}`);\n         if (!response.ok) {\n           throw new Error('Failed to fetch viewed products');\n         }\n         const data = await response.json();\n"
+                },
+                {
+                    "date": 1744996964971,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n const LastViewedProducts = ({ userId }) => {\n   const [viewedProducts, setViewedProducts] = useState([]);\n   const [loading, setLoading] = useState(true);\n+  user\n \n   useEffect(() => {\n     const fetchViewedProducts = async () => {\n       try {\n"
+                },
+                {
+                    "date": 1744996974353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n const LastViewedProducts = ({ userId }) => {\n   const [viewedProducts, setViewedProducts] = useState([]);\n   const [loading, setLoading] = useState(true);\n-  user\n+ const  userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n \n   useEffect(() => {\n     const fetchViewedProducts = async () => {\n       try {\n"
+                },
+                {
+                    "date": 1744997022539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n const LastViewedProducts = ({ userId }) => {\n   const [viewedProducts, setViewedProducts] = useState([]);\n   const [loading, setLoading] = useState(true);\n- const  userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n+ const  userId = localStorage.getItem(\"userId\") ; // Check if user is logged in\n \n   useEffect(() => {\n     const fetchViewedProducts = async () => {\n       try {\n"
+                },
+                {
+                    "date": 1744997027983,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n const LastViewedProducts = ({ userId }) => {\n   const [viewedProducts, setViewedProducts] = useState([]);\n   const [loading, setLoading] = useState(true);\n- const  userId = localStorage.getItem(\"userId\") ; // Check if user is logged in\n+ const  userId = localStorage.getItem(\"userId\") ;\n \n   useEffect(() => {\n     const fetchViewedProducts = async () => {\n       try {\n"
+                },
+                {
+                    "date": 1744998110677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect, useState } from 'react';\n \n-const LastViewedProducts = ({  }) => {\n+const LastViewedProducts = ({ a }) => {\n   const [viewedProducts, setViewedProducts] = useState([]);\n   const [loading, setLoading] = useState(true);\n  const  userId = localStorage.getItem(\"userId\");\n \n"
+                },
+                {
+                    "date": 1744998125332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n   useEffect(() => {\n     const fetchViewedProducts = async () => {\n       try {\n-        const response = await fetch(`${}/viewedProducts/${userId}`);\n+        const response = await fetch(`${a}/viewedProducts/${userId}`);\n         if (!response.ok) {\n           throw new Error('Failed to fetch viewed products');\n         }\n         const data = await response.json();\n"
+                }
+            ],
+            "date": 1744996931844,
+            "name": "Commit-0",
+            "content": "import React, { useEffect, useState } from 'react';\n\nconst LastViewedProducts = ({ userId }) => {\n  const [viewedProducts, setViewedProducts] = useState([]);\n  const [loading, setLoading] = useState(true);\n\n  useEffect(() => {\n    const fetchViewedProducts = async () => {\n      try {\n        const response = await fetch(http://localhost:5000/viewedProducts/${userId});\n        if (!response.ok) {\n          throw new Error('Failed to fetch viewed products');\n        }\n        const data = await response.json();\n        setViewedProducts(data);\n      } catch (error) {\n        console.error('Error fetching viewed products:', error);\n      } finally {\n        setLoading(false);\n      }\n    };\n\n    if (userId) {\n      fetchViewedProducts();\n    }\n  }, [userId]);\n\n  if (loading) return <p>Loading viewed products...</p>;\n  if (!viewedProducts.length) return <p>No viewed products found.</p>;\n\n  return (\n    <div>\n      <h3>Last Viewed Products</h3>\n      <ul>\n        {viewedProducts.map((product) => (\n          <li key={product.id}>\n            Product ID: {product.productId} <br />\n            Viewed at: {new Date(product.timestamp).toLocaleString()}\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n};\n\nexport default LastViewedProducts;"
+        }
+    ]
+}

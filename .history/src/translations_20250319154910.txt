@@ -1,0 +1,6 @@
+src/
+    translations/
+     en/
+      translation.json
+    fr/
+translation.json

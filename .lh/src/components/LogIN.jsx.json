@@ -1,0 +1,154 @@
+{
+    "sourceFile": "src/components/LogIN.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 34,
+            "patches": [
+                {
+                    "date": 1737108663904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737108688335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import React from 'react'\n+import { useNavigate } from \"react-router-dom\";\n \n const LogIN = () => {\n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737108768240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n-\n+import \n const LogIN = () => {\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1737108774936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n-import \n+import SignUP from './signUP';\n const LogIN = () => {\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1737108782026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n-import SignUP from './signUP';\n+import SignUP\n+iml from './signUP';\n const LogIN = () => {\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1737108787942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n import SignUP\n-iml from './signUP';\n+import from './signUP';\n const LogIN = () => {\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1737108795261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n-import SignUP\n-import from './signUP';\n+import SignUP from './signUP';\n const LogIN = () => {\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1737108801685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n import SignUP from './signUP';\n+\n const LogIN = () => {\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1737108808349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n import SignUP from './signUP';\n-\n+import\n const LogIN = () => {\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1737108821276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n import SignUP from './signUP';\n-import\n+import SignIn from './signIN';\n const LogIN = () => {\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1737108964084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n import SignUP from './signUP';\n-import SignIn from './signIN';\n+import SignI from './signIN';\n const LogIN = () => {\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1737108971132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n import React from 'react'\n import { useNavigate } from \"react-router-dom\";\n import SignUP from './signUP';\n-import SignI from './signIN';\n+import SignIN from './signIN';\n const LogIN = () => {\n   return (\n     <div>\n-      \n+      <\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737108981290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import SignIN from './signIN';\n const LogIN = () => {\n   return (\n     <div>\n-      <\n+      <SignIN/>\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737108990831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n const LogIN = () => {\n   return (\n     <div>\n       <SignIN/>\n+      <S\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737109077329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,16 @@\n import { useNavigate } from \"react-router-dom\";\n import SignUP from './signUP';\n import SignIN from './signIN';\n const LogIN = () => {\n+\n+  // const navigate = useNavigate();\n+\n+  // const handleLogin = () => {\n+  //   // Simulate a login process\n+  //   onSignIn(); // Update authentication state\n+  //   navigate(\"/newProduct\"); // Navigate to dashboard after login\n+  // };\n   return (\n     <div>\n       <SignIN/>\n       <S\n"
+                },
+                {
+                    "date": 1737109082371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,15 +3,15 @@\n import SignUP from './signUP';\n import SignIN from './signIN';\n const LogIN = () => {\n \n-  // const navigate = useNavigate();\n+  const navigate = useNavigate();\n \n-  // const handleLogin = () => {\n-  //   // Simulate a login process\n-  //   onSignIn(); // Update authentication state\n-  //   navigate(\"/newProduct\"); // Navigate to dashboard after login\n-  // };\n+  const handleLogin = () => {\n+    // Simulate a login process\n+    onSignIn(); // Update authentication state\n+    navigate(\"/newProduct\"); // Navigate to dashboard after login\n+  };\n   return (\n     <div>\n       <SignIN/>\n       <S\n"
+                },
+                {
+                    "date": 1737109128013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   const navigate = useNavigate();\n \n   const handleLogin = () => {\n     // Simulate a login process\n-    onSignIn(); // Update authentication state\n+     // Update authentication state\n     navigate(\"/newProduct\"); // Navigate to dashboard after login\n   };\n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737109134591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,9 @@\n \n   const navigate = useNavigate();\n \n   const handleLogin = () => {\n-    // Simulate a login process\n-     // Update authentication state\n+    e\n     navigate(\"/newProduct\"); // Navigate to dashboard after login\n   };\n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737109140481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n \n   const navigate = useNavigate();\n \n   const handleLogin = () => {\n-    e\n     navigate(\"/newProduct\"); // Navigate to dashboard after login\n   };\n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737109149476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,12 +8,12 @@\n \n   const handleLogin = () => {\n     navigate(\"/newProduct\"); // Navigate to dashboard after login\n   };\n+\n   return (\n     <div>\n-      <SignIN/>\n-      <S\n+     \n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737109167462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const navigate = useNavigate();\n \n   const handleLogin = () => {\n-    navigate(\"/newProduct\"); // Navigate to dashboard after login\n+    navigate(\"/\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737109179992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const navigate = useNavigate();\n \n   const handleLogin = () => {\n-    navigate(\"/\"); // Navigate to dashboard after login\n+    navigate(\"/si\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737109205344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,13 +6,14 @@\n \n   const navigate = useNavigate();\n \n   const handleLogin = () => {\n-    navigate(\"/si\"); // Navigate to dashboard after login\n+    navigate(\"/signUP\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n+         <button onClick={handleLogin}>Sign In</button>\n      \n     </div>\n   )\n }\n"
+                },
+                {
+                    "date": 1737109216146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n \n   return (\n     <div>\n          <button onClick={handleLogin}>Sign In</button>\n+         \n      \n     </div>\n   )\n }\n"
+                },
+                {
+                    "date": 1737109227971,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n   return (\n     <div>\n          <button onClick={handleLogin}>Sign In</button>\n-         \n+         <button onClick={handleLogin}>Sign </button>\n      \n     </div>\n   )\n }\n"
+                },
+                {
+                    "date": 1737109241982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,10 @@\n   };\n \n   return (\n     <div>\n-         <button onClick={handleLogin}>Sign In</button>\n-         <button onClick={handleLogin}>Sign </button>\n+         <button onClick={handlesign}>Sign In</button>\n+         <button onClick={handleLogin}>Sign UP</button>\n      \n     </div>\n   )\n }\n"
+                },
+                {
+                    "date": 1737109250276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,15 +5,15 @@\n const LogIN = () => {\n \n   const navigate = useNavigate();\n \n-  const handleLogin = () => {\n+  const handlesignin = () => {\n     navigate(\"/signUP\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n-         <button onClick={handlesign}>Sign In</button>\n+         <button onClick={handlesignin}>Sign In</button>\n          <button onClick={handleLogin}>Sign UP</button>\n      \n     </div>\n   )\n"
+                },
+                {
+                    "date": 1737109257482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n   return (\n     <div>\n          <button onClick={handlesignin}>Sign In</button>\n-         <button onClick={handleLogin}>Sign UP</button>\n+         <button onClick={handleL}>Sign UP</button>\n      \n     </div>\n   )\n }\n"
+                },
+                {
+                    "date": 1737109264207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n   return (\n     <div>\n          <button onClick={handlesignin}>Sign In</button>\n-         <button onClick={handleL}>Sign UP</button>\n+         <button onClick={handlesignU}>Sign UP</button>\n      \n     </div>\n   )\n }\n"
+                },
+                {
+                    "date": 1737109279513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,17 @@\n \n   const handlesignin = () => {\n     navigate(\"/signUP\"); // Navigate to dashboard after login\n   };\n+  const navigate = useNavigate();\n \n+  const handlesignin = () => {\n+    navigate(\"/signUP\"); // Navigate to dashboard after login\n+  };\n   return (\n     <div>\n          <button onClick={handlesignin}>Sign In</button>\n-         <button onClick={handlesignU}>Sign UP</button>\n+         <button onClick={handlesignup}>Sign UP</button>\n      \n     </div>\n   )\n }\n"
+                },
+                {
+                    "date": 1737109287068,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,11 +7,12 @@\n   const navigate = useNavigate();\n \n   const handlesignin = () => {\n     navigate(\"/signUP\"); // Navigate to dashboard after login\n-  };\n-  const navigate = useNavigate();\n+  }\n \n+  \n+\n   const handlesignin = () => {\n     navigate(\"/signUP\"); // Navigate to dashboard after login\n   };\n   return (\n"
+                },
+                {
+                    "date": 1737109368287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   }\n \n   \n \n-  const handlesignin = () => {\n+  const handles = () => {\n     navigate(\"/signUP\"); // Navigate to dashboard after login\n   };\n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737109374427,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   }\n \n   \n \n-  const handles = () => {\n+  const handlesi = () => {\n     navigate(\"/signUP\"); // Navigate to dashboard after login\n   };\n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737109389043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   }\n \n   \n \n-  const handlesi = () => {\n+  const handlesignup = () => {\n     navigate(\"/signUP\"); // Navigate to dashboard after login\n   };\n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737109434514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const navigate = useNavigate();\n \n   const handlesignin = () => {\n-    navigate(\"/signUP\"); // Navigate to dashboard after login\n+    navigate(\"/sign\"); // Navigate to dashboard after login\n   }\n \n   \n \n"
+                }
+            ],
+            "date": 1737108663904,
+            "name": "Commit-0",
+            "content": "import React from 'react'\n\nconst LogIN = () => {\n  return (\n    <div>\n      \n    </div>\n  )\n}\n\nexport default LogIN\n"
+        }
+    ]
+}

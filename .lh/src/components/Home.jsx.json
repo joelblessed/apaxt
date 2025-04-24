@@ -1,0 +1,118 @@
+{
+    "sourceFile": "src/components/Home.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 25,
+            "patches": [
+                {
+                    "date": 1736935510256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1736935517853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935530915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts,,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935547807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts,,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts,product,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935561295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts,product,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts,products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935584599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts,products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935591512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({,products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935598355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({,products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts ,products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935603861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts ,products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts,products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935609692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts,products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts, products, setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935686913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts, products, setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts,  setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736935707135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts,  setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts, setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n@@ -46,9 +46,9 @@\n                         <button type='button' className='btn btn-danger btn-sm'>Delete</button>\n                     </div> */}\n                   {filteredProducts.map((product, index) => (\n                     \n-                    <div key={products._id} className='box2'  >\n+                    <div key={product._id} className='box2'  >\n                        \n                     <img className='image'\n                         src={'http://localhost:5000/images/'+product.image}\n                         alt={product.name}\n"
+                },
+                {
+                    "date": 1736937898359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,14 +12,10 @@\n \n   // Handle product click\n   // const {setSelectedProduct} = useContext(DataContext)\n  \n-  const handleProductClick = (product) => {\n-    setSelectedProduct(product);\n-    navigate(\"/selectedProduct\")\n-  };\n+  \n \n-\n   const highlightText = (text, term) => {\n     const regex = new RegExp(`(${term})`, \"gi\");\n     return text.replace(regex, \"<strong>$1</strong>\");\n   };\n"
+                },
+                {
+                    "date": 1736938074261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts, setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts, setSelectedProduct ,, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736938189638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts, setSelectedProduct ,, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts,  ,handleProductClick, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736938194722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts,  ,handleProductClick, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts ,handleProductClick, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736939324857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n \n   // Handle product click\n   // const {setSelectedProduct} = useContext(DataContext)\n  \n-  \n \n+\n   const highlightText = (text, term) => {\n     const regex = new RegExp(`(${term})`, \"gi\");\n     return text.replace(regex, \"<strong>$1</strong>\");\n   };\n"
+                },
+                {
+                    "date": 1736939357881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,18 +4,21 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts ,handleProductClick, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts  addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n   // Handle product click\n   // const {setSelectedProduct} = useContext(DataContext)\n  \n+  const handleProductClick = (product) => {\n+    setSelectedProduct(product);\n+    navigate(\"/selectedProduct\")\n+  };\n \n-\n   const highlightText = (text, term) => {\n     const regex = new RegExp(`(${term})`, \"gi\");\n     return text.replace(regex, \"<strong>$1</strong>\");\n   };\n"
+                },
+                {
+                    "date": 1736939373601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts  addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts , addToCart, loading, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736939390293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts , addToCart, loading, searchTerm}) => {\n+const Home = ({filteredProducts , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736939398044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,17 +4,21 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts ,handleProductClick,// const DataContext = createContext();\n \n+  // Handle product click\n+  // const {setSelectedProduct} = useContext(DataContext)\n+  addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+\n const navigate = useNavigate();\n // const DataContext = createContext();\n \n   // Handle product click\n   // const {setSelectedProduct} = useContext(DataContext)\n  \n-  const handleProductClick = (product) => {\n+ const handleProductClick = (product) => {\n     setSelectedProduct(product);\n     navigate(\"/selectedProduct\")\n   };\n \n"
+                },
+                {
+                    "date": 1736939417203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,14 +4,10 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts ,handleProductClick,// const DataContext = createContext();\n+const Home = ({filteredProducts ,, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n-  // Handle product click\n-  // const {setSelectedProduct} = useContext(DataContext)\n-  addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n-\n const navigate = useNavigate();\n // const DataContext = createContext();\n \n   // Handle product click\n"
+                },
+                {
+                    "date": 1736939465387,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts ,, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts ,setSelectedProduct, addToCart, loading, handleShowAlert , searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736939493828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts ,setSelectedProduct, addToCart, loading, handleShowAlert , searchTerm}) => {\n+const Home = ({filteredProducts ,setSelectedProduct, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736939697286,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts ,,setSelectedProduct, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts ,h,setSelectedProduct, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                },
+                {
+                    "date": 1736940093905,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"./products.css\"\n \n // import { createContext,useState,useContext } from 'react';\n \n-const Home = ({filteredProducts,, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n+const Home = ({filteredProducts,h, addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n \n const navigate = useNavigate();\n // const DataContext = createContext();\n \n"
+                }
+            ],
+            "date": 1736935510256,
+            "name": "Commit-0",
+            "content": "\nimport React, { useState, useEffect } from 'react';\nimport { useNavigate } from 'react-router-dom';\nimport \"./products.css\"\n\n// import { createContext,useState,useContext } from 'react';\n\nconst Home = ({products,setSelectedProduct , addToCart, loading, handleShowAlert ,showAlert, searchTerm}) => {\n\nconst navigate = useNavigate();\n// const DataContext = createContext();\n\n  // Handle product click\n  // const {setSelectedProduct} = useContext(DataContext)\n \n  const handleProductClick = (product) => {\n    setSelectedProduct(product);\n    navigate(\"/selectedProduct\")\n  };\n\n\n  const highlightText = (text, term) => {\n    const regex = new RegExp(`(${term})`, \"gi\");\n    return text.replace(regex, \"<strong>$1</strong>\");\n  };\n  \n\n\n  return (\n    <div>\n      <div>\n  \n\n      <div className='box1'>\n            <h1></h1>\n            {loading ? (\n                <p>Loading...</p>\n            ) : (\n                \n                <div style={{ display: 'flex', flexWrap: 'wrap' }}   >\n                    \n                    {/* <div>\n                        <a className='btn btn-primary btn-sm me-1' href=\"\">\n                            Edit\n                        </a>\n                        <button type='button' className='btn btn-danger btn-sm'>Delete</button>\n                    </div> */}\n                  {filteredProducts.map((product, index) => (\n                    \n                    <div key={products._id} className='box2'  >\n                       \n                    <img className='image'\n                        src={'http://localhost:5000/images/'+product.image}\n                        alt={product.name}\n                        onClick={() => handleProductClick(product)}\n                       \n                        />\n                         <span className='text'>\n                            <a  className='name'> <span style={{color:\"black\"}} \n                                dangerouslySetInnerHTML={{\n                                __html: highlightText(product.name, searchTerm),\n                                       }}\n                                 ></span> </a>\n                            <a>Description: {product.desc}</a>\n                            <a>Price: {product.price}</a>\n                         </span>\n                         <div className='cart'>\n                            <button className='btn btn-warning' onClick={() => addToCart(product)} >Add to Cart</button>\n                            \n                         </div>\n                          <span\n        // dangerouslySetInnerHTML={{\n        //   __html: highlightText(product.name, searchTerm),\n        // }}\n      ></span>\n                         \n                    </div>\n\n                  ))}\n                  \n                  <button onClick={handleShowAlert}>Show Custom Alert</button>\n      {showAlert && (\n        <div style={{ padding: \"10px\", backgroundColor: \"red\", color: \"white\" }}>\n          This is a custom alert!\n        </div>\n      )}\n      \n\n            {/* <h3>Total: ${totalPrice}</h3>  */}\n     \n                </div>\n               \n            )}\n            \n        </div > \n        {/* <div style={{display:\"\"}}>\n        {cart.map((item, index) => (\n        <ProductView key={index}\n      id={item.id} name={item.name} desc={item.desc} price={item.price} numberInStock={item.quantity}  />\n        \n      ))}\n        </div> */}\n\n      \n      \n\n   \n    </div>\n    </div>\n      \n\n\n  \n \n  )\n}\n\nexport default Home;\n"
+        }
+    ]
+}

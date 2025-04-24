@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/useWishlist.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1743673422331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743673429610,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \n export const useWishlist = (user) => {\n   const [wishlist, setWishlist] = useState([]);\n   const [deviceId] = useState(() => {\n-    return localStorage.getItem('deviceId') || device_${Math.random().toString(36).substr(2, 9)};\n+    return localStorage.getItem('deviceId') || `device_${Math.random().toString(36).substr(2, 9)};\n   });\n \n   // Initialize device ID\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1743673728541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,14 +3,14 @@\n   addToWishlist as apiAddToWishlist,\n   removeFromWishlist as apiRemoveFromWishlist,\n   fetchWishlist as apiFetchWishlist,\n   syncWishlist as apiSyncWishlist\n-} from '../services/api';\n+} from '../../';\n \n export const useWishlist = (user) => {\n   const [wishlist, setWishlist] = useState([]);\n   const [deviceId] = useState(() => {\n-    return localStorage.getItem('deviceId') || `device_${Math.random().toString(36).substr(2, 9)};\n+    return localStorage.getItem('deviceId') || `device_${Math.random().toString(36).substr(2, 9)}`;\n   });\n \n   // Initialize device ID\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1743673733799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   addToWishlist as apiAddToWishlist,\n   removeFromWishlist as apiRemoveFromWishlist,\n   fetchWishlist as apiFetchWishlist,\n   syncWishlist as apiSyncWishlist\n-} from '../../';\n+} from './';\n \n export const useWishlist = (user) => {\n   const [wishlist, setWishlist] = useState([]);\n   const [deviceId] = useState(() => {\n"
+                }
+            ],
+            "date": 1743673422331,
+            "name": "Commit-0",
+            "content": "import { useEffect, useState } from 'react';\nimport { \n  addToWishlist as apiAddToWishlist,\n  removeFromWishlist as apiRemoveFromWishlist,\n  fetchWishlist as apiFetchWishlist,\n  syncWishlist as apiSyncWishlist\n} from '../services/api';\n\nexport const useWishlist = (user) => {\n  const [wishlist, setWishlist] = useState([]);\n  const [deviceId] = useState(() => {\n    return localStorage.getItem('deviceId') || device_${Math.random().toString(36).substr(2, 9)};\n  });\n\n  // Initialize device ID\n  useEffect(() => {\n    localStorage.setItem('deviceId', deviceId);\n  }, [deviceId]);\n\n  // Load wishlist on mount\n  useEffect(() => {\n    const loadWishlist = async () => {\n      try {\n        if (user?.token) {\n          const data = await apiFetchWishlist(user.token);\n          setWishlist(data);\n        } else {\n          const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist')) || [];\n          setWishlist(guestWishlist);\n        }\n      } catch (error) {\n        console.error('Error loading wishlist:', error);\n      }\n    };\n\n    loadWishlist();\n  }, [user]);\n\n  // Toggle wishlist item\n  const toggleWishlistItem = async (productId) => {\n    const isInWishlist = wishlist.includes(productId);\n    let updatedWishlist;\n\n    if (isInWishlist) {\n      updatedWishlist = wishlist.filter(id => id !== productId);\n      if (user?.token) {\n        await apiRemoveFromWishlist(productId, user.token);\n      } else {\n        localStorage.setItem('guestWishlist', JSON.stringify(updatedWishlist));\n      }\n    } else {\n      updatedWishlist = [...wishlist, productId];\n      if (user?.token) {\n        await apiAddToWishlist(productId, user.token);\n      } else {\n        localStorage.setItem('guestWishlist', JSON.stringify(updatedWishlist));\n      }\n    }\n\n    setWishlist(updatedWishlist);\n  };\n\n  // Sync wishlist after login\n  const syncWishlist = async () => {\n    if (user?.token) {\n      const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist')) || [];\n      if (guestWishlist.length > 0) {\n        await apiSyncWishlist(guestWishlist, deviceId, user.token);\n        localStorage.removeItem('guestWishlist');\n        const data = await apiFetchWishlist(user.token);\n        setWishlist(data);\n      }\n    }\n  };\n\n  return { wishlist, toggleWishlistItem, syncWishlist, deviceId };\n};"
+        }
+    ]
+}

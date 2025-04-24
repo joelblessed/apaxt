@@ -1,0 +1,86 @@
+{
+    "sourceFile": "src/components/pages/formUpload.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 17,
+            "patches": [
+                {
+                    "date": 1740515478933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741082593422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,26 +1,1 @@\n-.form-container {\n-    max-width: 500px;\n-    margin: auto;\n-    padding: 20px;\n-    border: 1px solid #ddd;\n-    border-radius: 5px;\n-    background-color: #f9f9f9;\n-  }\n-  \n-  input, select {\n-    width: 100%;\n-    padding: 8px;\n-    margin-bottom: 10px;\n-  }\n-  \n-  .error {\n-    color: red;\n-    font-size: 12px;\n-  }\n-  \n-  .preview-image {\n-    width: 100px;\n-    height: 100px;\n-    object-fit: cover;\n-    margin-right: 5px;\n-  }\n\\ No newline at end of file\n+.\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741083161728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,100 @@\n-.\n\\ No newline at end of file\n+.form-container {\n+  width: 60%;\n+  margin: 90px auto;\n+  padding: 20px;\n+  background-color: #f9f9f9;\n+  border-radius: 8px;\n+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n+}\n+\n+.form-container h2 {\n+  text-align: center;\n+  margin-bottom: 20px;\n+  color: #333;\n+}\n+\n+form {\n+  display: flex;\n+  flex-direction: column;\n+  gap: 15px;\n+}\n+\n+input,\n+select,\n+textarea,\n+button {\n+  padding: 10px;\n+  border: 1px solid #ccc;\n+  border-radius: 4px;\n+  font-size: 16px;\n+  width: 100%;\n+  box-sizing: border-box;\n+}\n+\n+input:focus,\n+select:focus,\n+textarea:focus {\n+  border-color: #007bff;\n+  outline: none;\n+}\n+\n+button {\n+  background-color: #007bff;\n+  color: white;\n+  border: none;\n+  cursor: pointer;\n+  transition: background-color 0.3s ease;\n+}\n+\n+button:hover {\n+  background-color: #0056b3;\n+}\n+\n+.error {\n+  color: red;\n+  font-size: 14px;\n+  margin-top: 5px;\n+}\n+\n+.brand-input {\n+  display: flex;\n+  align-items: center;\n+  gap: 10px;\n+}\n+\n+.brand-input button {\n+  background-color: #dc3545;\n+  padding: 5px 10px;\n+  font-size: 14px;\n+}\n+\n+.brand-input button:hover {\n+  background-color: #c82333;\n+}\n+\n+.uploaded-images {\n+  display: flex;\n+  gap: 10px;\n+  flex-wrap: wrap;\n+  margin-top: 10px;\n+}\n+\n+.uploaded-images img {\n+  border-radius: 4px;\n+  border: 1px solid #ccc;\n+}\n+\n+.add-brand-button {\n+  background-color: #28a745;\n+  padding: 10px;\n+  font-size: 16px;\n+}\n+\n+.add-brand-button:hover {\n+  background-color: #218838;\n+}\n+\n+textarea {\n+  resize: vertical;\n+  min-height: 100px;\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741083907511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-.form-container {\n+/* .form-container {\n   width: 60%;\n   margin: 90px auto;\n   padding: 20px;\n   background-color: #f9f9f9;\n@@ -96,5 +96,5 @@\n \n textarea {\n   resize: vertical;\n   min-height: 100px;\n-}\n\\ No newline at end of file\n+} */\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741084065396,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-/* .form-container {\n+.form-container {\n   width: 60%;\n   margin: 90px auto;\n   padding: 20px;\n   background-color: #f9f9f9;\n@@ -96,5 +96,5 @@\n \n textarea {\n   resize: vertical;\n   min-height: 100px;\n-} */\n\\ No newline at end of file\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741085081964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n   border-color: #007bff;\n   outline: none;\n }\n \n-button {\n+.button {\n   background-color: #007bff;\n   color: white;\n   border: none;\n   cursor: pointer;\n"
+                },
+                {
+                    "date": 1741085113040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n   cursor: pointer;\n   transition: background-color 0.3s ease;\n }\n \n-button:hover {\n+.button:hover {\n   background-color: #0056b3;\n }\n \n .error {\n"
+                },
+                {
+                    "date": 1741085130473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \n input,\n select,\n textarea,\n-button {\n+.button {\n   padding: 10px;\n   border: 1px solid #ccc;\n   border-radius: 4px;\n   font-size: 16px;\n"
+                },
+                {
+                    "date": 1744998812503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .form-container {\n-  width: 60%;\n+  width: 90%;\n   margin: 90px auto;\n   padding: 20px;\n   background-color: #f9f9f9;\n   border-radius: 8px;\n"
+                },
+                {
+                    "date": 1744998869440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .form-container {\n-  width: 90%;\n+  width: 60%;\n   margin: 90px auto;\n   padding: 20px;\n   background-color: #f9f9f9;\n   border-radius: 8px;\n"
+                },
+                {
+                    "date": 1744998876655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n   padding: 20px;\n   background-color: #f9f9f9;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n+  \n }\n \n .form-container h2 {\n   text-align: center;\n"
+                },
+                {
+                    "date": 1744998883123,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,11 @@\n   padding: 20px;\n   background-color: #f9f9f9;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n-  \n+  @media screen {\n+    \n+  }\n }\n \n .form-container h2 {\n   text-align: center;\n"
+                },
+                {
+                    "date": 1744998939436,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,11 +4,9 @@\n   padding: 20px;\n   background-color: #f9f9f9;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n-  @media screen {\n-    \n-  }\n+\n }\n \n .form-container h2 {\n   text-align: center;\n"
+                },
+                {
+                    "date": 1744998945919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,5 +97,6 @@\n \n textarea {\n   resize: vertical;\n   min-height: 100px;\n-}\n\\ No newline at end of file\n+}\n+\n"
+                },
+                {
+                    "date": 1744998953834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,4 +99,8 @@\n   resize: vertical;\n   min-height: 100px;\n }\n \n+@media screen and (max-width: 768px) {\n+ \n+  \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1744998966315,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,7 +100,8 @@\n   min-height: 100px;\n }\n \n @media screen and (max-width: 768px) {\n+  \n  \n   \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1744998972710,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,8 +100,8 @@\n   min-height: 100px;\n }\n \n @media screen and (max-width: 768px) {\n-  \n+  .form-container\n  \n   \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1744998981078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -100,8 +100,10 @@\n   min-height: 100px;\n }\n \n @media screen and (max-width: 768px) {\n-  .form-container\n+  .form-container{\n+    width: 90%;\n+  }\n  \n   \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1740515478933,
+            "name": "Commit-0",
+            "content": ".form-container {\n    max-width: 500px;\n    margin: auto;\n    padding: 20px;\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    background-color: #f9f9f9;\n  }\n  \n  input, select {\n    width: 100%;\n    padding: 8px;\n    margin-bottom: 10px;\n  }\n  \n  .error {\n    color: red;\n    font-size: 12px;\n  }\n  \n  .preview-image {\n    width: 100px;\n    height: 100px;\n    object-fit: cover;\n    margin-right: 5px;\n  }"
+        }
+    ]
+}

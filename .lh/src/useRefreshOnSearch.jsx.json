@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/useRefreshOnSearch.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1739867212736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1739867212736,
+            "name": "Commit-0",
+            "content": "import { useEffect } from \"react\";\nimport { useLocation } from \"react-router-dom\";\n\nconst useRefreshOnSearch = () => {\n  const location = useLocation();\n\n  useEffect(() => {\n    const searchTriggered = sessionStorage.getItem(\"searchTriggered\");\n    const lastVisitedPath = sessionStorage.getItem(\"lastVisitedPage\");\n\n    if (searchTriggered === \"true\" && lastVisitedPath !== location.pathname) {\n      window.location.reload(); // Refresh other pages\n      sessionStorage.removeItem(\"searchTriggered\"); // Reset after refresh\n    }\n\n    sessionStorage.setItem(\"lastVisitedPage\", location.pathname);\n  }, [location]);\n};\n\nexport default useRefreshOnSearch;"
+        }
+    ]
+}

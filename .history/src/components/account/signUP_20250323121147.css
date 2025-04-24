@@ -1,0 +1,132 @@
+/* .signup-container {
+    margin-top: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .signup-card {
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .signup-card-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .signup-card-header h1 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .signup-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .radio-group label {
+    margin-right: 10px;
+  }
+  
+  .signup-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .signup-card-footer button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-card-footer button:hover {
+    background-color: #0056b3;
+  }
+  
+  .signup-card-footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .signup-card-footer a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+  }
+  
+  .signup-card-footer a:hover {
+    text-decoration: underline;
+  }
+  
+  .custom-country-input {
+    position: relative;
+    margin-top: 10px;
+  }
+  
+  .custom-country-input input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  
+  .custom-country-input input:focus {
+    border-color: #007bff;
+    outline: none;
+  } */

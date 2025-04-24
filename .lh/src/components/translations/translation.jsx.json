@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/translations/translation.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1742399950076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1742399950076,
+            "name": "Commit-0",
+            "content": "import i18n from \"i18next\";\nimport { initReactI18next } from \"react-i18next\";\nimport translationEN from \"./translations/en/translation.json\";\nimport translationFR from \"./translations/fr/translation.json\";\nimport translationES from \"./translations/es/translation.json\";\n\n// Resources for translations\nconst resources = {\n  en: {\n    translation: translationEN,\n  },\n  fr: {\n    translation: translationFR,\n  },\n  es: {\n    translation: translationES,\n  },\n};\n\ni18n.use(initReactI18next).init({\n  resources,\n  lng: \"en\", // Default language\n  fallbackLng: \"en\", // Fallback language if translation is missing\n  interpolation: {\n    escapeValue: false, // React already escapes values\n  },\n});\n\nexport default i18n;"
+        }
+    ]
+}

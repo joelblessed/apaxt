@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/wishListReducer.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1743617258381,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1743617258381,
+            "name": "Commit-0",
+            "content": "const initialState = {\n    items: [], // Ensure the wishlist starts as an empty array\n  };\n  \n  const wishlistReducer = (state = initialState, action) => {\n    switch (action.type) {\n      case \"wishlist/add\":\n        return {\n          ...state,\n          items: [...state.items, action.payload], // Add item to wishlist\n        };\n      case \"wishlist/remove\":\n        return {\n          ...state,\n          items: state.items.filter((item) => item.id !== action.payload), // Remove by ID\n        };\n      default:\n        return state;\n    }\n  };\n  \n  export default wishlistReducer;"
+        }
+    ]
+}

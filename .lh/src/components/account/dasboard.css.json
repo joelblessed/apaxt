@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/account/dasboard.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740603110616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740603118793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-dashboard-container {\n+.dashboard-container {\n     padding: 20px;\n }\n .account-section, .products-section, .sales-section {\n     margin-bottom: 20px;\n"
+                }
+            ],
+            "date": 1740603110616,
+            "name": "Commit-0",
+            "content": "dashboard-container {\n    padding: 20px;\n}\n.account-section, .products-section, .sales-section {\n    margin-bottom: 20px;\n}\n.profile-pic {\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n    object-fit: cover;\n}\n.product-card {\n    border: 1px solid #ddd;\n    padding: 10px;\n    margin: 10px;\n    display: inline-block;\n    text-align: center;\n}\n.edit-product-modal {\n    position: fixed;\n    background: white;\n    padding: 20px;\n    border: 1px solid #ddd;\n}"
+        }
+    ]
+}

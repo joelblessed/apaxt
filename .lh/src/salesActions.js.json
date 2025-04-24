@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/salesActions.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740603641246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740603648234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n // Fetch sales records and wallet balance\n export const fetchSalesRecords = (userId) => async (dispatch) => {\n     try {\n-        const response = await fetch(${API_URL}/user/${userId});\n+        const response = await fetch(  `${API_URL}/user/${userId});\n         const data = await response.json();\n \n         dispatch({ type: SET_SALES_RECORDS, payload: data.records });\n         dispatch({ type: SET_WALLET_BALANCE, payload: data.walletBalance });\n"
+                }
+            ],
+            "date": 1740603641246,
+            "name": "Commit-0",
+            "content": "import { SET_SALES_RECORDS, SET_WALLET_BALANCE } from \"./types\";\n\nconst API_URL = \"http://localhost:5000/sales\";\n\n// Fetch sales records and wallet balance\nexport const fetchSalesRecords = (userId) => async (dispatch) => {\n    try {\n        const response = await fetch(${API_URL}/user/${userId});\n        const data = await response.json();\n\n        dispatch({ type: SET_SALES_RECORDS, payload: data.records });\n        dispatch({ type: SET_WALLET_BALANCE, payload: data.walletBalance });\n    } catch (error) {\n        console.error(\"Error fetching sales records:\", error);\n    }\n};"
+        }
+    ]
+}

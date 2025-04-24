@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/components/signUP.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1737106190755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737106199639,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleLogin = () => {\n     // Simulate a login process\n     onSignIn(); // Update authentication state\n-    navigate(\"/\"); // Navigate to dashboard after login\n+    navigate(\"/newproduct\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737106206079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleLogin = () => {\n     // Simulate a login process\n     onSignIn(); // Update authentication state\n-    navigate(\"/newroduct\"); // Navigate to dashboard after login\n+    navigate(\"/newProduct\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737107569038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n import React, { useState } from 'react'\n+import { useNavigate } from \"react-router-dom\";\n \n \n \n \n \n-\n const SignUP = (e) => {\n \n \n   const navigate = useNavigate();\n"
+                }
+            ],
+            "date": 1737106190755,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\nimport { useNavigate } from \"react-router-dom\";\n\nfunction SignIn({ onSignIn }) {\n  const navigate = useNavigate();\n\n  const handleLogin = () => {\n    // Simulate a login process\n    onSignIn(); // Update authentication state\n    navigate(\"/\"); // Navigate to dashboard after login\n  };\n\n  return (\n    <div>\n      <h1>Sign In</h1>\n      <button onClick={handleLogin}>Sign In</button>\n    </div>\n  );\n}\n\nexport default SignIn"
+        }
+    ]
+}

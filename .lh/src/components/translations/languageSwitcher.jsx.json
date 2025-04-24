@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/components/translations/languageSwitcher.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1742400966692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742401144088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   return (\n     <div>\n       <button onClick={() => changeLanguage(\"en\")}>English</button>\n       <button onClick={() => changeLanguage(\"fr\")}>Français</button>\n-      <button onClick={() => changeLanguage(\"es\")}>Español</button>\n+  \n     </div>\n   );\n }\n \n"
+                },
+                {
+                    "date": 1742401375282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { useTranslation } from \"react-i18next\";\n \n function LanguageSwitcher() {\n   const { i18n } = useTranslation();\n-\n+const \n   const changeLanguage = (lng) => {\n     i18n.changeLanguage(lng); // Change the language\n   };\n \n"
+                },
+                {
+                    "date": 1742401384931,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { useTranslation } from \"react-i18next\";\n \n function LanguageSwitcher() {\n   const { i18n } = useTranslation();\n-const \n+const savedLanguage\n   const changeLanguage = (lng) => {\n     i18n.changeLanguage(lng); // Change the language\n   };\n \n"
+                },
+                {
+                    "date": 1742401395905,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { useTranslation } from \"react-i18next\";\n \n function LanguageSwitcher() {\n   const { i18n } = useTranslation();\n-const savedLanguage\n+const savedLanguage = l\n   const changeLanguage = (lng) => {\n     i18n.changeLanguage(lng); // Change the language\n   };\n \n"
+                },
+                {
+                    "date": 1742401402839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { useTranslation } from \"react-i18next\";\n \n function LanguageSwitcher() {\n   const { i18n } = useTranslation();\n-const savedLanguage = localStorage.get\n+const savedLanguage = localStorage.getItem\n   const changeLanguage = (lng) => {\n     i18n.changeLanguage(lng); // Change the language\n   };\n \n"
+                },
+                {
+                    "date": 1742401411239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { useTranslation } from \"react-i18next\";\n \n function LanguageSwitcher() {\n   const { i18n } = useTranslation();\n-const savedLanguage = localStorage.getItem(\"lan\")\n+const savedLanguage = localStorage.getItem(\"lang\")\n   const changeLanguage = (lng) => {\n     i18n.changeLanguage(lng); // Change the language\n   };\n \n"
+                }
+            ],
+            "date": 1742400966692,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\nimport { useTranslation } from \"react-i18next\";\n\nfunction LanguageSwitcher() {\n  const { i18n } = useTranslation();\n\n  const changeLanguage = (lng) => {\n    i18n.changeLanguage(lng); // Change the language\n  };\n\n  return (\n    <div>\n      <button onClick={() => changeLanguage(\"en\")}>English</button>\n      <button onClick={() => changeLanguage(\"fr\")}>Français</button>\n      <button onClick={() => changeLanguage(\"es\")}>Español</button>\n    </div>\n  );\n}\n\nexport default LanguageSwitcher;"
+        }
+    ]
+}

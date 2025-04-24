@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/others/hoverclic2.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1742578378479,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1742578378478,
+            "name": "Commit-0",
+            "content": "import React, { useRef } from \"react\";\n\nconst HoverClick = () => {\n  const buttonRef = useRef(null);\n\n  const handleMouseEnter = () => {\n    if (buttonRef.current) {\n      buttonRef.current.click();\n    }\n  };\n\n  return (\n    <div onMouseEnter={handleMouseEnter} style={{ padding: \"20px\", border: \"1px solid black\" }}>\n      <button ref={buttonRef} onClick={() => alert(\"Clicked!\")}>Click Me</button>\n    </div>\n  );\n};\n\nexport default HoverClick;"
+        }
+    ]
+}

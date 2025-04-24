@@ -1,0 +1,4 @@
+setWishList,
+addToWishList,
+removeFromWishList,
+clearWishList,

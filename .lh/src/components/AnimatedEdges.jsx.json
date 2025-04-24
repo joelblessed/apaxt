@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/AnimatedEdges.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1736973394527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1736973431851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React from \"react\";\n-import \"./AnimatedBox.css\";\n+import \"./Animated.css\";\n \n function AnimatedBox() {\n     return (\n         <div className=\"animated-box\">\n"
+                }
+            ],
+            "date": 1736973394527,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\nimport \"./AnimatedBox.css\";\n\nfunction AnimatedBox() {\n    return (\n        <div className=\"animated-box\">\n            <div className=\"box-edge top\"></div>\n            <div className=\"box-edge right\"></div>\n            <div className=\"box-edge bottom\"></div>\n            <div className=\"box-edge left\"></div>\n        </div>\n    );\n}\n\nexport default AnimatedBox"
+        }
+    ]
+}

@@ -1,0 +1,534 @@
+{
+    "sourceFile": "src/components/signIN.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 129,
+            "patches": [
+                {
+                    "date": 1737106881437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737107866974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleLogin = () => {\n     // Simulate a login process\n     onSignIn(); // Update authentication state\n-    navigate(\"newProduct\"); // Navigate to dashboard after login\n+    navigate(\"/newProduct\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n@@ -17,5 +17,5 @@\n     </div>\n   );\n }\n \n-export default SignI\n\\ No newline at end of file\n+export default SignIn\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737108834396,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n-function SignIn({ onSignIn }) {\n+function SignIN({ onSignIn }) {\n   const navigate = useNavigate();\n \n   const handleLogin = () => {\n     // Simulate a login process\n"
+                },
+                {
+                    "date": 1737111183193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleLogin = () => {\n     // Simulate a login process\n     onSignIn(); // Update authentication state\n-    navigate(\"/newProduct\"); // Navigate to dashboard after login\n+    navigate(\"\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n@@ -17,5 +17,5 @@\n     </div>\n   );\n }\n \n-export default SignIn\n\\ No newline at end of file\n+export default SignIN\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737111192838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleLogin = () => {\n     // Simulate a login process\n     onSignIn(); // Update authentication state\n-    navigate(\"\"); // Navigate to dashboard after login\n+    navigate(\"dashboard\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n"
+                },
+                {
+                    "date": 1737195716497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleLogin = () => {\n     // Simulate a login process\n     onSignIn(); // Update authentication state\n-    navigate(\"dashboard\"); // Navigate to dashboard after login\n+    navigate(\"/dashboard\"); // Navigate to dashboard after login\n   };\n \n   return (\n     <div>\n@@ -17,5 +17,8 @@\n     </div>\n   );\n }\n \n-export default SignIN\n\\ No newline at end of file\n+export default SignIN\n+\n+\n+http://localhost:4500/accounts\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737195748837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,5 +20,7 @@\n \n export default SignIN\n \n \n-http://localhost:4500/accounts\n\\ No newline at end of file\n+http://localhost:4500/accounts\n+\n+\n"
+                },
+                {
+                    "date": 1737195761824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,7 +20,29 @@\n \n export default SignIN\n \n \n-http://localhost:4500/accounts\n \n \n+\n+// SignIn.js\n+import React from \"react\";\n+import { useNavigate } from \"react-router-dom\";\n+\n+function SignIn({ onSignIn }) {\n+  const navigate = useNavigate();\n+\n+  const handleLogin = () => {\n+    // Simulate a login process\n+    onSignIn(); // Update authentication state\n+    navigate(\"/dashboard\"); // Navigate to dashboard after login\n+  };\n+\n+  return (\n+    <div>\n+      <h1>Sign In</h1>\n+      <button onClick={handleLogin}>Sign In</button>\n+    </div>\n+  );\n+}\n+\n+export default SignIn\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737195799012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,11 +20,11 @@\n \n export default SignIN\n \n \n+http://localhost:4500/accounts\n \n \n-\n // SignIn.js\n import React from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n"
+                },
+                {
+                    "date": 1737195804558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,25 +24,4 @@\n http://localhost:4500/accounts\n \n \n // SignIn.js\n-import React from \"react\";\n-import { useNavigate } from \"react-router-dom\";\n-\n-function SignIn({ onSignIn }) {\n-  const navigate = useNavigate();\n-\n-  const handleLogin = () => {\n-    // Simulate a login process\n-    onSignIn(); // Update authentication state\n-    navigate(\"/dashboard\"); // Navigate to dashboard after login\n-  };\n-\n-  return (\n-    <div>\n-      <h1>Sign In</h1>\n-      <button onClick={handleLogin}>Sign In</button>\n-    </div>\n-  );\n-}\n-\n-export default SignIn\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737195809732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,5 +23,77 @@\n \n http://localhost:4500/accounts\n \n \n-// SignIn.js\n+import React, { useState } from \"react\";\n+\n+const Login = () => {\n+  const [email, setEmail] = useState(\"\");\n+  const [password, setPassword] = useState(\"\");\n+  const [error, setError] = useState(\"\");\n+  const [isLoading, setIsLoading] = useState(false);\n+\n+  const handleLogin = async (e) => {\n+    e.preventDefault();\n+    setIsLoading(true);\n+    setError(\"\");\n+\n+    try {\n+      // Replace with your API endpoint\n+      const response = await fetch(\"https://example.com/api/login\", {\n+        method: \"POST\",\n+        headers: {\n+          \"Content-Type\": \"application/json\",\n+        },\n+        body: JSON.stringify({ email, password }),\n+      });\n+\n+      if (!response.ok) {\n+        throw new Error(\"Invalid email or password\");\n+      }\n+\n+      const data = await response.json();\n+      console.log(\"Login successful:\", data);\n+      // Save token to localStorage or context\n+      localStorage.setItem(\"token\", data.token);\n+\n+      // Redirect or update UI on successful login\n+      window.location.href = \"/dashboard\";\n+    } catch (err) {\n+      setError(err.message);\n+    } finally {\n+      setIsLoading(false);\n+    }\n+  };\n+\n+  return (\n+    <div className=\"login-container\">\n+      <h2>Login</h2>\n+      <form onSubmit={handleLogin}>\n+        <div>\n+          <label>Email:</label>\n+          <input\n+            type=\"email\"\n+            value={email}\n+            onChange={(e) => setEmail(e.target.value)}\n+            required\n+          />\n+        </div>\n+        <div>\n+          <label>Password:</label>\n+          <input\n+            type=\"password\"\n+            value={password}\n+            onChange={(e) => setPassword(e.target.value)}\n+            required\n+          />\n+        </div>\n+        {error && <p style={{ color: \"red\" }}>{error}</p>}\n+        <button type=\"submit\" disabled={isLoading}>\n+          {isLoading ? \"Logging in...\" : \"Login\"}\n+        </button>\n+      </form>\n+    </div>\n+  );\n+};\n+\n+export default Login\n"
+                },
+                {
+                    "date": 1737195838064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n     setError(\"\");\n \n     try {\n       // Replace with your API endpoint\n-      const response = await fetch(\"https://example.com/api/login\", {\n+      const response = await fetch(\"\", {\n         method: \"POST\",\n         headers: {\n           \"Content-Type\": \"application/json\",\n         },\n"
+                },
+                {
+                    "date": 1737195898647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,14 +33,15 @@\n   const [isLoading, setIsLoading] = useState(false);\n \n   const handleLogin = async (e) => {\n     e.preventDefault();\n+    o\n     setIsLoading(true);\n     setError(\"\");\n \n     try {\n       // Replace with your API endpoint\n-      const response = await fetch(\"\", {\n+      const response = await fetch(\"http://localhost:4500/accounts\", {\n         method: \"POST\",\n         headers: {\n           \"Content-Type\": \"application/json\",\n         },\n"
+                },
+                {
+                    "date": 1737195904893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n   const [isLoading, setIsLoading] = useState(false);\n \n   const handleLogin = async (e) => {\n     e.preventDefault();\n-    o\n+    onSignIn\n     setIsLoading(true);\n     setError(\"\");\n \n     try {\n"
+                },
+                {
+                    "date": 1737195911227,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n   const [isLoading, setIsLoading] = useState(false);\n \n   const handleLogin = async (e) => {\n     e.preventDefault();\n-    onSignIn\n+    onSignIn(treu)\n     setIsLoading(true);\n     setError(\"\");\n \n     try {\n"
+                },
+                {
+                    "date": 1737195935479,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,17 +25,17 @@\n \n \n import React, { useState } from \"react\";\n \n-const Login = () => {\n+const Login = ({}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const [isLoading, setIsLoading] = useState(false);\n \n   const handleLogin = async (e) => {\n     e.preventDefault();\n-    onSignIn(treu)\n+    onSignIn(true)\n     setIsLoading(true);\n     setError(\"\");\n \n     try {\n"
+                },
+                {
+                    "date": 1737195981465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n \n import React, { useState } from \"react\";\n \n-const Login = ({}) => {\n+const Login = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const [isLoading, setIsLoading] = useState(false);\n@@ -88,9 +88,9 @@\n             required\n           />\n         </div>\n         {error && <p style={{ color: \"red\" }}>{error}</p>}\n-        <button type=\"submit\" disabled={isLoading}>\n+        <button type=\"submit\" disabled={isLoading} onClick={handleLogin}>\n           {isLoading ? \"Logging in...\" : \"Login\"}\n         </button>\n       </form>\n     </div>\n"
+                },
+                {
+                    "date": 1737196001318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,9 @@\n   const handleLogin = async (e) => {\n     e.preventDefault();\n     onSignIn(true)\n     setIsLoading(true);\n+    \n     setError(\"\");\n \n     try {\n       // Replace with your API endpoint\n"
+                },
+                {
+                    "date": 1737196025808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n \n \n http://localhost:4500/accounts\n \n-\n+import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n \n const Login = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n@@ -33,11 +33,11 @@\n   const [isLoading, setIsLoading] = useState(false);\n \n   const handleLogin = async (e) => {\n     e.preventDefault();\n-    onSignIn(true)\n+    onSignIn(true);\n     setIsLoading(true);\n-    \n+    navigate(\"/dashboard\");\n     setError(\"\");\n \n     try {\n       // Replace with your API endpoint\n"
+                },
+                {
+                    "date": 1737196052142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,8 +30,9 @@\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const [isLoading, setIsLoading] = useState(false);\n+  const navigate = useNavigate();\n \n   const handleLogin = async (e) => {\n     e.preventDefault();\n     onSignIn(true);\n"
+                },
+                {
+                    "date": 1737196070744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,29 +1,6 @@\n-import React from \"react\";\n-import { useNavigate } from \"react-router-dom\";\n \n-function SignIN({ onSignIn }) {\n-  const navigate = useNavigate();\n \n-  const handleLogin = () => {\n-    // Simulate a login process\n-    onSignIn(); // Update authentication state\n-    navigate(\"/dashboard\"); // Navigate to dashboard after login\n-  };\n-\n-  return (\n-    <div>\n-      <h1>Sign In</h1>\n-      <button onClick={handleLogin}>Sign In</button>\n-    </div>\n-  );\n-}\n-\n-export default SignIN\n-\n-\n-http://localhost:4500/accounts\n-\n import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n \n const Login = ({onSignIn}) => {\n"
+                },
+                {
+                    "date": 1737196337453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,8 @@\n-\n-\n import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n \n-const Login = ({onSignIn}) => {\n+const  = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const [isLoading, setIsLoading] = useState(false);\n"
+                },
+                {
+                    "date": 1737196342753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n \n-const  = ({onSignIn}) => {\n+const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const [isLoading, setIsLoading] = useState(false);\n"
+                },
+                {
+                    "date": 1737196352611,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,5 +73,5 @@\n     </div>\n   );\n };\n \n-export default Login\n+export default Sig\n"
+                },
+                {
+                    "date": 1737196384503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n-\n+im\n const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n@@ -73,5 +73,5 @@\n     </div>\n   );\n };\n \n-export default Sig\n+export default SignIN\n"
+                },
+                {
+                    "date": 1737196391462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n-im\n+import \"\"\n const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n"
+                },
+                {
+                    "date": 1737196401122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n-import \"\"\n+import \"./si\"\n const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n"
+                },
+                {
+                    "date": 1737196406328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n-import \"./si\"\n+import \"./signIN\"\n const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n"
+                },
+                {
+                    "date": 1737196423758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n-import \"./signIN\"\n+import \"./signIN.css\"\n+\n const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n"
+                },
+                {
+                    "date": 1737196430776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useNavigate } from \"react-router-dom\";\n import React, { useState } from \"react\";\n-import \"./signIN.css\"\n+import \"./signIN.css\";\n \n const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n"
+                },
+                {
+                    "date": 1737196660262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n             required\n           />\n         </div>\n         {error && <p style={{ color: \"red\" }}>{error}</p>}\n-        <button type=\"submit\" disabled={isLoading} onClick={handleLogin}>\n+        <button type=\"submit\" disabled={isLoading} >\n           {isLoading ? \"Logging in...\" : \"Login\"}\n         </button>\n       </form>\n     </div>\n"
+                },
+                {
+                    "date": 1737196860833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   const handleLogin = async (e) => {\n     e.preventDefault();\n     onSignIn(true);\n     setIsLoading(true);\n-    navigate(\"/dashboard\");\n+    dashboard\");\n     setError(\"\");\n \n     try {\n       // Replace with your API endpoint\n"
+                },
+                {
+                    "date": 1737199191978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,14 +12,14 @@\n   const handleLogin = async (e) => {\n     e.preventDefault();\n     onSignIn(true);\n     setIsLoading(true);\n-    dashboard\");\n+    \n     setError(\"\");\n \n     try {\n       // Replace with your API endpoint\n-      const response = await fetch(\"http://localhost:4500/accounts\", {\n+      const response = await fetch(\"http://localhost:400/accounts\", {\n         method: \"POST\",\n         headers: {\n           \"Content-Type\": \"application/json\",\n         },\n"
+                },
+                {
+                    "date": 1737199197941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     setError(\"\");\n \n     try {\n       // Replace with your API endpoint\n-      const response = await fetch(\"http://localhost:400/accounts\", {\n+      const response = await fetch(\"http://localhost:4200/\", {\n         method: \"POST\",\n         headers: {\n           \"Content-Type\": \"application/json\",\n         },\n"
+                },
+                {
+                    "date": 1737199204468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,78 @@\n+import { useNavigate } from \"react-router-dom\";\n+import React, { useState } from \"react\";\n+import \"./signIN.css\";\n+\n+const SignIN = ({onSignIn}) => {\n+  const [email, setEmail] = useState(\"\");\n+  const [password, setPassword] = useState(\"\");\n+  const [error, setError] = useState(\"\");\n+  const [isLoading, setIsLoading] = useState(false);\n+  const navigate = useNavigate();\n+\n+  const handleLogin = async (e) => {\n+    e.preventDefault();\n+    onSignIn(true);\n+    setIsLoading(true);\n+    \n+    setError(\"\");\n+\n+    try {\n+      // Replace with your API endpoint\n+      const response = await fetch(\"http://localhost:4200/api/login\", {\n+        method: \"POST\",\n+        headers: {\n+          \"Content-Type\": \"application/json\",\n+        },\n+        body: JSON.stringify({ email, password }),\n+      });\n+\n+      if (!response.ok) {\n+        throw new Error(\"Invalid email or password\");\n+      }\n+\n+      const data = await response.json();\n+      console.log(\"Login successful:\", data);\n+      // Save token to localStorage or context\n+      localStorage.setItem(\"token\", data.token);\n+\n+      // Redirect or update UI on successful login\n+      window.location.href = \"/dashboard\";\n+    } catch (err) {\n+      setError(err.message);\n+    } finally {\n+      setIsLoading(false);\n+    }\n+  };\n+\n+  return (\n+    <div className=\"login-container\">\n+      <h2>Login</h2>\n+      <form onSubmit={handleLogin}>\n+        <div>\n+          <label>Email:</label>\n+          <input\n+            type=\"email\"\n+            value={email}\n+            onChange={(e) => setEmail(e.target.value)}\n+            required\n+          />\n+        </div>\n+        <div>\n+          <label>Password:</label>\n+          <input\n+            type=\"password\"\n+            value={password}\n+            onChange={(e) => setPassword(e.target.value)}\n+            required\n+          />\n+        </div>\n+        {error && <p style={{ color: \"red\" }}>{error}</p>}\n+        <button type=\"submit\" disabled={isLoading} >\n+          {isLoading ? \"Logging in...\" : \"Login\"}\n+        </button>\n+      </form>\n+    </div>\n+  );\n+};\n+\n+export default SignIN\n"
+                },
+                {
+                    "date": 1737200557774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n       // Save token to localStorage or context\n       localStorage.setItem(\"token\", data.token);\n \n       // Redirect or update UI on successful login\n-      window.location.href = \"/dashboard\";\n+       = \"/dashboard\";\n     } catch (err) {\n       setError(err.message);\n     } finally {\n       setIsLoading(false);\n@@ -75,82 +75,4 @@\n   );\n };\n \n export default SignIN\n-import { useNavigate } from \"react-router-dom\";\n-import React, { useState } from \"react\";\n-import \"./signIN.css\";\n-\n-const SignIN = ({onSignIn}) => {\n-  const [email, setEmail] = useState(\"\");\n-  const [password, setPassword] = useState(\"\");\n-  const [error, setError] = useState(\"\");\n-  const [isLoading, setIsLoading] = useState(false);\n-  const navigate = useNavigate();\n-\n-  const handleLogin = async (e) => {\n-    e.preventDefault();\n-    onSignIn(true);\n-    setIsLoading(true);\n-    \n-    setError(\"\");\n-\n-    try {\n-      // Replace with your API endpoint\n-      const response = await fetch(\"http://localhost:4200/\", {\n-        method: \"POST\",\n-        headers: {\n-          \"Content-Type\": \"application/json\",\n-        },\n-        body: JSON.stringify({ email, password }),\n-      });\n-\n-      if (!response.ok) {\n-        throw new Error(\"Invalid email or password\");\n-      }\n-\n-      const data = await response.json();\n-      console.log(\"Login successful:\", data);\n-      // Save token to localStorage or context\n-      localStorage.setItem(\"token\", data.token);\n-\n-      // Redirect or update UI on successful login\n-      window.location.href = \"/dashboard\";\n-    } catch (err) {\n-      setError(err.message);\n-    } finally {\n-      setIsLoading(false);\n-    }\n-  };\n-\n-  return (\n-    <div className=\"login-container\">\n-      <h2>Login</h2>\n-      <form onSubmit={handleLogin}>\n-        <div>\n-          <label>Email:</label>\n-          <input\n-            type=\"email\"\n-            value={email}\n-            onChange={(e) => setEmail(e.target.value)}\n-            required\n-          />\n-        </div>\n-        <div>\n-          <label>Password:</label>\n-          <input\n-            type=\"password\"\n-            value={password}\n-            onChange={(e) => setPassword(e.target.value)}\n-            required\n-          />\n-        </div>\n-        {error && <p style={{ color: \"red\" }}>{error}</p>}\n-        <button type=\"submit\" disabled={isLoading} >\n-          {isLoading ? \"Logging in...\" : \"Login\"}\n-        </button>\n-      </form>\n-    </div>\n-  );\n-};\n-\n-export default SignIN\n"
+                },
+                {
+                    "date": 1737200569741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n       // Save token to localStorage or context\n       localStorage.setItem(\"token\", data.token);\n \n       // Redirect or update UI on successful login\n-       = \"/dashboard\";\n+      navigate \"/dashboard\";\n     } catch (err) {\n       setError(err.message);\n     } finally {\n       setIsLoading(false);\n"
+                },
+                {
+                    "date": 1737200579430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n       // Save token to localStorage or context\n       localStorage.setItem(\"token\", data.token);\n \n       // Redirect or update UI on successful login\n-      navigate \"/dashboard\";\n+      navigate (\"/dashboard\");\n     } catch (err) {\n       setError(err.message);\n     } finally {\n       setIsLoading(false);\n"
+                },
+                {
+                    "date": 1737200747290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,78 +0,0 @@\n-import { useNavigate } from \"react-router-dom\";\n-import React, { useState } from \"react\";\n-import \"./signIN.css\";\n-\n-const SignIN = ({onSignIn}) => {\n-  const [email, setEmail] = useState(\"\");\n-  const [password, setPassword] = useState(\"\");\n-  const [error, setError] = useState(\"\");\n-  const [isLoading, setIsLoading] = useState(false);\n-  const navigate = useNavigate();\n-\n-  const handleLogin = async (e) => {\n-    e.preventDefault();\n-    onSignIn(true);\n-    setIsLoading(true);\n-    \n-    setError(\"\");\n-\n-    try {\n-      // Replace with your API endpoint\n-      const response = await fetch(\"http://localhost:4200/api/login\", {\n-        method: \"POST\",\n-        headers: {\n-          \"Content-Type\": \"application/json\",\n-        },\n-        body: JSON.stringify({ email, password }),\n-      });\n-\n-      if (!response.ok) {\n-        throw new Error(\"Invalid email or password\");\n-      }\n-\n-      const data = await response.json();\n-      console.log(\"Login successful:\", data);\n-      // Save token to localStorage or context\n-      localStorage.setItem(\"token\", data.token);\n-\n-      // Redirect or update UI on successful login\n-      navigate (\"/dashboard\");\n-    } catch (err) {\n-      setError(err.message);\n-    } finally {\n-      setIsLoading(false);\n-    }\n-  };\n-\n-  return (\n-    <div className=\"login-container\">\n-      <h2>Login</h2>\n-      <form onSubmit={handleLogin}>\n-        <div>\n-          <label>Email:</label>\n-          <input\n-            type=\"email\"\n-            value={email}\n-            onChange={(e) => setEmail(e.target.value)}\n-            required\n-          />\n-        </div>\n-        <div>\n-          <label>Password:</label>\n-          <input\n-            type=\"password\"\n-            value={password}\n-            onChange={(e) => setPassword(e.target.value)}\n-            required\n-          />\n-        </div>\n-        {error && <p style={{ color: \"red\" }}>{error}</p>}\n-        <button type=\"submit\" disabled={isLoading} >\n-          {isLoading ? \"Logging in...\" : \"Login\"}\n-        </button>\n-      </form>\n-    </div>\n-  );\n-};\n-\n-export default SignIN\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737200753670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,69 @@\n+import React, { useState } from \"react\";\n+import { useNavigate } from \"react-router-dom\";\n \n+const Login = () => {\n+  const [email, setEmail] = useState(\"\");\n+  const [password, setPassword] = useState(\"\");\n+  const [error, setError] = useState(\"\");\n+  const navigate = useNavigate();\n+\n+  const handleSubmit = async (e) => {\n+    e.preventDefault();\n+    setError(\"\");\n+\n+    try {\n+      // Call your backend API (replace with your actual API URL)\n+      const response = await fetch(\"http://localhost:5000/api/login\", {\n+        method: \"POST\",\n+        headers: { \"Content-Type\": \"application/json\" },\n+        body: JSON.stringify({ email, password }),\n+      });\n+\n+      if (!response.ok) {\n+        const errorData = await response.json();\n+        throw new Error(errorData.message || \"Failed to login\");\n+      }\n+\n+      const data = await response.json();\n+      console.log(\"Login successful\", data);\n+\n+      // Save the token in localStorage or context\n+      localStorage.setItem(\"token\", data.token);\n+\n+      // Navigate to a protected route after login\n+      navigate(\"/dashboard\");\n+    } catch (err) {\n+      setError(err.message);\n+    }\n+  };\n+\n+  return (\n+    <div className=\"login-container\">\n+      <h2>Login</h2>\n+      <form onSubmit={handleSubmit}>\n+        <div>\n+          <label>Email:</label>\n+          <input\n+            type=\"email\"\n+            value={email}\n+            onChange={(e) => setEmail(e.target.value)}\n+            required\n+          />\n+        </div>\n+        <div>\n+          <label>Password:</label>\n+          <input\n+            type=\"password\"\n+            value={password}\n+            onChange={(e) => setPassword(e.target.value)}\n+            required\n+          />\n+        </div>\n+        {error && <p style={{ color: \"red\" }}>{error}</p>}\n+        <button type=\"submit\">Login</button>\n+      </form>\n+    </div>\n+  );\n+};\n+\n+export default \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737200758832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,5 +65,5 @@\n     </div>\n   );\n };\n \n-export default \n\\ No newline at end of file\n+export default Sing\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737200771719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,5 +65,5 @@\n     </div>\n   );\n };\n \n-export default Sing\n\\ No newline at end of file\n+export default SigIN\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737200790516,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n-const Login = () => {\n+const  = () => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const navigate = useNavigate();\n@@ -65,5 +65,5 @@\n     </div>\n   );\n };\n \n-export default SigIN\n\\ No newline at end of file\n+export default SignIN\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737200796526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n-const  = () => {\n+const SignIN = () => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1737201011260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n+\n const SignIN = () => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n"
+                },
+                {
+                    "date": 1737201017415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n+import \"./s\"\n \n-\n const SignIN = () => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n"
+                },
+                {
+                    "date": 1737201025584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n-import \"./s\"\n+import \"./signIN\"\n \n const SignIN = () => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n"
+                },
+                {
+                    "date": 1737201546647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n-import \"./signIN\"\n+import \"./signIN.css\"\n \n const SignIN = () => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n@@ -13,9 +13,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:5000/api/login\", {\n+      const response = await fetch(\"http://localhost:00/api/login\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737201621590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:00/api/login\", {\n+      const response = await fetch(\"http://localhost:400/api/login\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737201627972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:400/api/login\", {\n+      const response = await fetch(\"\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737208178274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import \"./signIN.css\"\n \n-const SignIN = () => {\n+const SignIN = ({}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const navigate = useNavigate();\n@@ -13,9 +13,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"\", {\n+      const response = await fetch(\"http://localhost:4500/accounts\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737208183401,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import \"./signIN.css\"\n \n-const SignIN = ({}) => {\n+const SignIN = ({onSi}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1737208188618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import \"./signIN.css\"\n \n-const SignIN = ({onSi}) => {\n+const SignIN = ({onSig}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1737208238689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import \"./signIN.css\"\n \n-const SignIN = ({onSig}) => {\n+const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n   const [error, setError] = useState(\"\");\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1737208288087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n       }\n \n       const data = await response.json();\n       console.log(\"Login successful\", data);\n+      \n \n       // Save the token in localStorage or context\n       localStorage.setItem(\"token\", data.token);\n \n"
+                },
+                {
+                    "date": 1737208294673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n       }\n \n       const data = await response.json();\n       console.log(\"Login successful\", data);\n-      \n+      onSignIn()\n \n       // Save the token in localStorage or context\n       localStorage.setItem(\"token\", data.token);\n \n"
+                },
+                {
+                    "date": 1737208301768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n       }\n \n       const data = await response.json();\n       console.log(\"Login successful\", data);\n-      onSignIn()\n+      onSignIn();\n \n       // Save the token in localStorage or context\n       localStorage.setItem(\"token\", data.token);\n \n"
+                },
+                {
+                    "date": 1737210360039,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4500/accounts\", {\n+      const response = await fetch(\"\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737210456797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"\", {\n+      const response = await fetch(\"http://localhost:4500/accounts\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737210767601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4500/accounts\", {\n+      const response = await fetch(\"\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737210819609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,10 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"\", {\n+app.post(\"/api/login\", (req, res) => {\n+      const response = await fetch(\"http://localhost:4200\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737210853112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,8 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-app.post(\"/api/login\", (req, res) => {\n       const response = await fetch(\"http://localhost:4200\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n"
+                },
+                {
+                    "date": 1737210879384,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4200\", {\n+      const response = await fetch(\"http://localhost:4200gin\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737210915985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4200gin\", {\n+      const response = await fetch(\"http://localhost:4200/api/login\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n"
+                },
+                {
+                    "date": 1737211295794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,25 +19,25 @@\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n \n-      if (!response.ok) {\n-        const errorData = await response.json();\n-        throw new Error(errorData.message || \"Failed to login\");\n-      }\n+    //   if (!response.ok) {\n+    //     const errorData = await response.json();\n+    //     throw new Error(errorData.message || \"Failed to login\");\n+    //   }\n \n-      const data = await response.json();\n-      console.log(\"Login successful\", data);\n-      onSignIn();\n+    //   const data = await response.json();\n+    //   console.log(\"Login successful\", data);\n+    //   onSignIn();\n \n-      // Save the token in localStorage or context\n-      localStorage.setItem(\"token\", data.token);\n+    //   // Save the token in localStorage or context\n+    //   localStorage.setItem(\"token\", data.token);\n \n-      // Navigate to a protected route after login\n-      navigate(\"/dashboard\");\n-    } catch (err) {\n-      setError(err.message);\n-    }\n+    //   // Navigate to a protected route after login\n+    //   navigate(\"/dashboard\");\n+    // } catch (err) {\n+    //   setError(err.message);\n+    // }\n   };\n \n   return (\n     <div className=\"login-container\">\n"
+                },
+                {
+                    "date": 1737211303013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n     //   navigate(\"/dashboard\");\n     // } catch (err) {\n     //   setError(err.message);\n     // }\n-  };\n+  // };\n \n   return (\n     <div className=\"login-container\">\n       <h2>Login</h2>\n"
+                },
+                {
+                    "date": 1737211344883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   const handleSubmit = async (e) => {\n     e.preventDefault();\n     setError(\"\");\n \n-    try {\n+    // try {\n       // Call your backend API (replace with your actual API URL)\n       const response = await fetch(\"http://localhost:4200/api/login\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n"
+                },
+                {
+                    "date": 1737211364975,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,34 +11,34 @@\n   const handleSubmit = async (e) => {\n     e.preventDefault();\n     setError(\"\");\n \n-    // try {\n+    try {\n       // Call your backend API (replace with your actual API URL)\n       const response = await fetch(\"http://localhost:4200/api/login\", {\n         method: \"POST\",\n         headers: { \"Content-Type\": \"application/json\" },\n         body: JSON.stringify({ email, password }),\n       });\n \n-    //   if (!response.ok) {\n-    //     const errorData = await response.json();\n-    //     throw new Error(errorData.message || \"Failed to login\");\n-    //   }\n+      if (!response.ok) {\n+        const errorData = await response.json();\n+        throw new Error(errorData.message || \"Failed to login\");\n+      }\n \n-    //   const data = await response.json();\n-    //   console.log(\"Login successful\", data);\n-    //   onSignIn();\n+      const data = await response.json();\n+      console.log(\"Login successful\", data);\n+      onSignIn();\n \n-    //   // Save the token in localStorage or context\n-    //   localStorage.setItem(\"token\", data.token);\n+      // Save the token in localStorage or context\n+      localStorage.setItem(\"token\", data.token);\n \n-    //   // Navigate to a protected route after login\n-    //   navigate(\"/dashboard\");\n-    // } catch (err) {\n-    //   setError(err.message);\n-    // }\n-  // };\n+      // Navigate to a protected route after login\n+      navigate(\"/dashboard\");\n+    } catch (err) {\n+      setError(err.message);\n+    }\n+  };\n \n   return (\n     <div className=\"login-container\">\n       <h2>Login</h2>\n"
+                },
+                {
+                    "date": 1737217008853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n       navigate(\"/dashboard\");\n     } catch (err) {\n       setError(err.message);\n     }\n+    \n   };\n \n   return (\n     <div className=\"login-container\">\n"
+                },
+                {
+                    "date": 1737217026772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,10 @@\n       navigate(\"/dashboard\");\n     } catch (err) {\n       setError(err.message);\n     }\n-    \n+\n+    co\n   };\n \n   return (\n     <div className=\"login-container\">\n"
+                },
+                {
+                    "date": 1737217032892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n     } catch (err) {\n       setError(err.message);\n     }\n \n-    co\n+    const vali\n   };\n \n   return (\n     <div className=\"login-container\">\n"
+                },
+                {
+                    "date": 1737217067564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n     } catch (err) {\n       setError(err.message);\n     }\n \n-    const vali\n+    const vali \n   };\n \n   return (\n     <div className=\"login-container\">\n"
+                },
+                {
+                    "date": 1737217074789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n     } catch (err) {\n       setError(err.message);\n     }\n \n-    const vali \n+    const validd\n   };\n \n   return (\n     <div className=\"login-container\">\n"
+                },
+                {
+                    "date": 1737217081647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n     } catch (err) {\n       setError(err.message);\n     }\n \n-    const validd\n+    const validation \n   };\n \n   return (\n     <div className=\"login-container\">\n"
+                },
+                {
+                    "date": 1737217087571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n     } catch (err) {\n       setError(err.message);\n     }\n \n-    const validation \n+    const validation =() =>\n   };\n \n   return (\n     <div className=\"login-container\">\n"
+                },
+                {
+                    "date": 1737217096400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,11 @@\n     } catch (err) {\n       setError(err.message);\n     }\n \n-    const validation =() =>\n+    const validation =() =>{\n+      let \n+    }\n   };\n \n   return (\n     <div className=\"login-container\">\n"
+                },
+                {
+                    "date": 1737217112862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n       setError(err.message);\n     }\n \n     const validation =() =>{\n-      let \n+      let result= true\n     }\n   };\n \n   return (\n"
+                },
+                {
+                    "date": 1737217120345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,10 @@\n       setError(err.message);\n     }\n \n     const validation =() =>{\n-      let result= true\n+      let result= true;\n+      retur\n     }\n   };\n \n   return (\n"
+                },
+                {
+                    "date": 1737217125910,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     }\n \n     const validation =() =>{\n       let result= true;\n-      retur\n+      return result\n     }\n   };\n \n   return (\n"
+                },
+                {
+                    "date": 1737217146981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,10 @@\n     }\n \n     const validation =() =>{\n       let result= true;\n-      return result\n+      \n+      return result;\n     }\n   };\n \n   return (\n"
+                },
+                {
+                    "date": 1737217172791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     }\n \n     const validation =() =>{\n       let result= true;\n-      \n+      if(e)\n       return result;\n     }\n   };\n \n"
+                },
+                {
+                    "date": 1737217178574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     }\n \n     const validation =() =>{\n       let result= true;\n-      if(e)\n+      if(email )\n       return result;\n     }\n   };\n \n"
+                },
+                {
+                    "date": 1737217184948,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     }\n \n     const validation =() =>{\n       let result= true;\n-      if(email )\n+      if(email ===\"\" )\n       return result;\n     }\n   };\n \n"
+                },
+                {
+                    "date": 1737217191863,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     }\n \n     const validation =() =>{\n       let result= true;\n-      if(email ===\"\" )\n+      if(email ===\"\" || email)\n       return result;\n     }\n   };\n \n"
+                },
+                {
+                    "date": 1737217197080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     }\n \n     const validation =() =>{\n       let result= true;\n-      if(email ===\"\" || email)\n+      if(email ===\"\" || email === null)\n       return result;\n     }\n   };\n \n"
+                },
+                {
+                    "date": 1737217202271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     }\n \n     const validation =() =>{\n       let result= true;\n-      if(email ===\"\" || email === null)\n+      if(email ===\"\" || email === null){}\n       return result;\n     }\n   };\n \n"
+                },
+                {
+                    "date": 1737217221625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,11 @@\n     }\n \n     const validation =() =>{\n       let result= true;\n-      if(email ===\"\" || email === null){}\n+      if(email ===\"\" || email === null){\n+        re\n+      }\n       return result;\n     }\n   };\n \n"
+                },
+                {
+                    "date": 1737217227773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n \n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n-        re\n+        result \n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217234172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n \n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n-        result \n+        result = false;\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217242425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,8 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n+        tsdt\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217247688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,80 @@\n+import React, { useState } from \"react\";\n+import { useNavigate } from \"react-router-dom\";\n+import \"./signIN.css\"\n+\n+const SignIN = ({onSignIn}) => {\n+  const [email, setEmail] = useState(\"\");\n+  const [password, setPassword] = useState(\"\");\n+  const [error, setError] = useState(\"\");\n+  const navigate = useNavigate();\n+\n+  const handleSubmit = async (e) => {\n+    e.preventDefault();\n+    setError(\"\");\n+\n+    try {\n+      // Call your backend API (replace with your actual API URL)\n+      const response = await fetch(\"http://localhost:4200/api/login\", {\n+        method: \"POST\",\n+        headers: { \"Content-Type\": \"application/json\" },\n+        body: JSON.stringify({ email, password }),\n+      });\n+\n+      if (!response.ok) {\n+        const errorData = await response.json();\n+        throw new Error(errorData.message || \"Failed to login\");\n+      }\n+\n+      const data = await response.json();\n+      console.log(\"Login successful\", data);\n+      onSignIn();\n+\n+      // Save the token in localStorage or context\n+      localStorage.setItem(\"token\", data.token);\n+\n+      // Navigate to a protected route after login\n+      navigate(\"/dashboard\");\n+    } catch (err) {\n+      setError(err.message);\n+    }\n+\n+    const validation =() =>{\n+      let result= true;\n+      if(email ===\"\" || email === null){\n+        result = false;\n+        t\n+      }\n+      return result;\n+    }\n+  };\n+\n+  return (\n+    <div className=\"login-container\">\n+      <h2>Login</h2>\n+      <form onSubmit={handleSubmit}>\n+        <div>\n+          <label>Email:</label>\n+          <input\n+            type=\"email\"\n+            value={email}\n+            onChange={(e) => setEmail(e.target.value)}\n+            required\n+          />\n+        </div>\n+        <div>\n+          <label>Password:</label>\n+          <input\n+            type=\"password\"\n+            value={password}\n+            onChange={(e) => setPassword(e.target.value)}\n+            required\n+          />\n+        </div>\n+        {error && <p style={{ color: \"red\" }}>{error}</p>}\n+        <button type=\"submit\">Login</button>\n+      </form>\n+    </div>\n+  );\n+};\n+\n+export default SignIN\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737217255556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        t\n+        tos\n       }\n       return result;\n     }\n   };\n@@ -76,85 +76,5 @@\n     </div>\n   );\n };\n \n-export default SignIN\n-import React, { useState } from \"react\";\n-import { useNavigate } from \"react-router-dom\";\n-import \"./signIN.css\"\n-\n-const SignIN = ({onSignIn}) => {\n-  const [email, setEmail] = useState(\"\");\n-  const [password, setPassword] = useState(\"\");\n-  const [error, setError] = useState(\"\");\n-  const navigate = useNavigate();\n-\n-  const handleSubmit = async (e) => {\n-    e.preventDefault();\n-    setError(\"\");\n-\n-    try {\n-      // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4200/api/login\", {\n-        method: \"POST\",\n-        headers: { \"Content-Type\": \"application/json\" },\n-        body: JSON.stringify({ email, password }),\n-      });\n-\n-      if (!response.ok) {\n-        const errorData = await response.json();\n-        throw new Error(errorData.message || \"Failed to login\");\n-      }\n-\n-      const data = await response.json();\n-      console.log(\"Login successful\", data);\n-      onSignIn();\n-\n-      // Save the token in localStorage or context\n-      localStorage.setItem(\"token\", data.token);\n-\n-      // Navigate to a protected route after login\n-      navigate(\"/dashboard\");\n-    } catch (err) {\n-      setError(err.message);\n-    }\n-\n-    const validation =() =>{\n-      let result= true;\n-      if(email ===\"\" || email === null){\n-        result = false;\n-        tsdt\n-      }\n-      return result;\n-    }\n-  };\n-\n-  return (\n-    <div className=\"login-container\">\n-      <h2>Login</h2>\n-      <form onSubmit={handleSubmit}>\n-        <div>\n-          <label>Email:</label>\n-          <input\n-            type=\"email\"\n-            value={email}\n-            onChange={(e) => setEmail(e.target.value)}\n-            required\n-          />\n-        </div>\n-        <div>\n-          <label>Password:</label>\n-          <input\n-            type=\"password\"\n-            value={password}\n-            onChange={(e) => setPassword(e.target.value)}\n-            required\n-          />\n-        </div>\n-        {error && <p style={{ color: \"red\" }}>{error}</p>}\n-        <button type=\"submit\">Login</button>\n-      </form>\n-    </div>\n-  );\n-};\n-\n export default SignIN\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737217261050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        tos\n+        toString.\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217269721,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        toString.\n+        Toast.\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217275207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        Toast.\n+        tos\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217284290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        tos\n+        to\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217290381,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        to\n+        toaste\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217300933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        toaste\n+        toast.warnig\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217309585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        toast.warnig\n+        toast.warning\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217342354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        toast.warning\n+        toast.warning(in)\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217352590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        toast.warning(in)\n+        toast.warning(\"please \")\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217366247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        toast.warning(\"please \")\n+        toast.warning(\"please enter a valid user Name\")\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217380119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,8 +43,9 @@\n       if(email ===\"\" || email === null){\n         result = false;\n         toast.warning(\"please enter a valid user Name\")\n       }\n+      \n       return result;\n     }\n   };\n \n"
+                },
+                {
+                    "date": 1737217400740,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,12 @@\n       if(email ===\"\" || email === null){\n         result = false;\n         toast.warning(\"please enter a valid user Name\")\n       }\n-      \n+      if(pas ===\"\" || pas === null){\n+        result = false;\n+        toast.warning(\"please enter a valid user Name\")\n+      }\n       return result;\n     }\n   };\n \n"
+                },
+                {
+                    "date": 1737217407616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,11 +41,11 @@\n     const validation =() =>{\n       let result= true;\n       if(email ===\"\" || email === null){\n         result = false;\n-        toast.warning(\"please enter a valid user Name\")\n+        toast.warning(\"please enter a valid userName\")\n       }\n-      if(pas ===\"\" || pas === null){\n+      if(password ===\"\" || password === null){\n         result = false;\n         toast.warning(\"please enter a valid user Name\")\n       }\n       return result;\n"
+                },
+                {
+                    "date": 1737217414224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n         toast.warning(\"please enter a valid userName\")\n       }\n       if(password ===\"\" || password === null){\n         result = false;\n-        toast.warning(\"please enter a valid user Name\")\n+        toast.warning(\"please enter a valid \")\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217836271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import \"./signIN.css\"\n+import \"react-toastify/dist/ReactToastify.css\";\n \n const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n   const [password, setPassword] = useState(\"\");\n@@ -45,9 +46,9 @@\n         toast.warning(\"please enter a valid userName\")\n       }\n       if(password ===\"\" || password === null){\n         result = false;\n-        toast.warning(\"please enter a valid \")\n+        toast.warning(\"please enter a valid passward\")\n       }\n       return result;\n     }\n   };\n"
+                },
+                {
+                    "date": 1737217887702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import \"./signIN.css\"\n+\n import \"react-toastify/dist/ReactToastify.css\";\n \n const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n"
+                },
+                {
+                    "date": 1737218087078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import \"./signIN.css\"\n-\n+import {toast} from \"react-toastify\";\n import \"react-toastify/dist/ReactToastify.css\";\n \n const SignIN = ({onSignIn}) => {\n   const [email, setEmail] = useState(\"\");\n@@ -15,13 +15,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4200/api/login\", {\n-        method: \"POST\",\n-        headers: { \"Content-Type\": \"application/json\" },\n-        body: JSON.stringify({ email, password }),\n-      });\n+      const response = await fetch(\"http://localhost:4200/api/login\", );\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218093010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4200/api/login\", );\n+      const response = await fetch(\"http://localhost:4200/api/login\",);\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218098698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4200/api/login\",);\n+      const response = await fetch(\"http://localhost:4200/api/login\");\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218139590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4200/api/login\");\n+      const response = await fetch(\"\");\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218150925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"\");\n+      const response = await fetch(\"http://localhost:4500/accounts/\"+);\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218166330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4500/accounts/\"+);\n+      const response = await fetch(\"http://localhost:4500/accounts/\"+ );\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218175172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4500/accounts/\"+ );\n+      const response = await fetch(\"http://localhost:4500/accounts/\"+ email||);\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218180764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4500/accounts/\"+ email||);\n+      const response = await fetch(\"http://localhost:4500/accounts/\"+ email || );\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218191856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,10 @@\n     setError(\"\");\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n-      const response = await fetch(\"http://localhost:4500/accounts/\"+ email || );\n+      const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n+      \n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218202314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n-      \n+      .then()\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218215969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n-      .then()\n+      .then(res)=>\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218232701,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,11 @@\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n-      .then(res)=>\n+      .then(res)=>{\n+        return \n+      }\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218239422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     try {\n       // Call your backend API (replace with your actual API URL)\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n       .then(res)=>{\n-        return \n+        return res.\n       }\n \n       if (!response.ok) {\n         const errorData = await response.json();\n"
+                },
+                {
+                    "date": 1737218264927,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,10 @@\n \n     try {\n       // Call your backend API (replace with your actual API URL)\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n-      .then(res)=>{\n-        return res.\n+      .then((res)=>{\n+        return res.json\n       }\n \n       if (!response.ok) {\n         const errorData = await response.json();\n"
+                },
+                {
+                    "date": 1737218286802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n     try {\n       // Call your backend API (replace with your actual API URL)\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n       .then((res)=>{\n-        return res.json\n-      }\n+        return res.json()\n+      })\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218298280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n       .then((res)=>{\n         return res.json()\n       })\n+      \n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218307448,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n       .then((res)=>{\n         return res.json()\n       })\n-      \n+      .then\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218313456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n       .then((res)=>{\n         return res.json()\n       })\n-      .then\n+      .then((res))\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218321254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n       .then((res)=>{\n         return res.json()\n       })\n-      .then((res))\n+      .then((res) =>{})\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218351520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,11 @@\n       const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n       .then((res)=>{\n         return res.json()\n       })\n-      .then((res) =>{})\n+      .then((res) =>{\n+        cons\n+      })\n \n       if (!response.ok) {\n         const errorData = await response.json();\n         throw new Error(errorData.message || \"Failed to login\");\n"
+                },
+                {
+                    "date": 1737218359592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n       .then((res)=>{\n         return res.json()\n       })\n       .then((res) =>{\n-        console.log()\n+        console.log(res)\n       })\n \n       if (!response.ok) {\n         const errorData = await response.json();\n"
+                },
+                {
+                    "date": 1737218483620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,90 @@\n+import React, { useState } from \"react\";\n+import { useNavigate } from \"react-router-dom\";\n+import \"./signIN.css\"\n+import {toast} from \"react-toastify\";\n+import \"react-toastify/dist/ReactToastify.css\";\n+\n+const SignIN = ({onSignIn}) => {\n+  const [email, setEmail] = useState(\"\");\n+  const [password, setPassword] = useState(\"\");\n+  const [error, setError] = useState(\"\");\n+  const navigate = useNavigate();\n+\n+  const handleSubmit = async (e) => {\n+    e.preventDefault();\n+    setError(\"\");\n+\n+    try {\n+      // Call your backend API (replace with your actual API URL)\n+      const response = await fetch(\"http://localhost:4500/accounts/\"+ email)\n+      .then((res)=>{\n+        return res.json()\n+      })\n+      .then((res) =>{\n+        console.log(res)\n+      })\n+      .catch((err)=>{\n+        toast.error(\"log in failed due to :\"+erro )\n+      })\n+      if (!response.ok) {\n+        const errorData = await response.json();\n+        throw new Error(errorData.message || \"Failed to login\");\n+      }\n+\n+      const data = await response.json();\n+      console.log(\"Login successful\", data);\n+      onSignIn();\n+\n+      // Save the token in localStorage or context\n+      localStorage.setItem(\"token\", data.token);\n+\n+      // Navigate to a protected route after login\n+      navigate(\"/dashboard\");\n+    } catch (err) {\n+      setError(err.message);\n+    }\n+\n+    const validation =() =>{\n+      let result= true;\n+      if(email ===\"\" || email === null){\n+        result = false;\n+        toast.warning(\"please enter a valid userName\")\n+      }\n+      if(password ===\"\" || password === null){\n+        result = false;\n+        toast.warning(\"please enter a valid passward\")\n+      }\n+      return result;\n+    }\n+  };\n+\n+  return (\n+    <div className=\"login-container\">\n+      <h2>Login</h2>\n+      <form onSubmit={handleSubmit}>\n+        <div>\n+          <label>Email:</label>\n+          <input\n+            type=\"email\"\n+            value={email}\n+            onChange={(e) => setEmail(e.target.value)}\n+            required\n+          />\n+        </div>\n+        <div>\n+          <label>Password:</label>\n+          <input\n+            type=\"password\"\n+            value={password}\n+            onChange={(e) => setPassword(e.target.value)}\n+            required\n+          />\n+        </div>\n+        {error && <p style={{ color: \"red\" }}>{error}</p>}\n+        <button type=\"submit\">Login</button>\n+      </form>\n+    </div>\n+  );\n+};\n+\n+export default SignIN\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1737106881437,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\nimport { useNavigate } from \"react-router-dom\";\n\nfunction SignIn({ onSignIn }) {\n  const navigate = useNavigate();\n\n  const handleLogin = () => {\n    // Simulate a login process\n    onSignIn(); // Update authentication state\n    navigate(\"newProduct\"); // Navigate to dashboard after login\n  };\n\n  return (\n    <div>\n      <h1>Sign In</h1>\n      <button onClick={handleLogin}>Sign In</button>\n    </div>\n  );\n}\n\nexport default SignI"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/components/Navbar/Account/ProtectedRoute.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1737562257793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737562269774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React, { useContext } from 'react';\n-import { AuthContext } from './AuthContext';\n+import { AuthContext } from '.';\n import { Navigate } from 'react-router-dom';\n \n const ProtectedRoute = ({ children }) => {\n   const { user } = useContext(AuthContext);\n"
+                },
+                {
+                    "date": 1737562276718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React, { useContext } from 'react';\n-import { AuthContext } from '.';\n+import { AuthContext } from '../../';\n import { Navigate } from 'react-router-dom';\n \n const ProtectedRoute = ({ children }) => {\n   const { user } = useContext(AuthContext);\n"
+                },
+                {
+                    "date": 1737562283459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React, { useContext } from 'react';\n-import { AuthContext } from '../../';\n+import { AuthContext } from '../../../authContext';\n import { Navigate } from 'react-router-dom';\n \n const ProtectedRoute = ({ children }) => {\n   const { user } = useContext(AuthContext);\n"
+                }
+            ],
+            "date": 1737562257793,
+            "name": "Commit-0",
+            "content": "import React, { useContext } from 'react';\nimport { AuthContext } from './AuthContext';\nimport { Navigate } from 'react-router-dom';\n\nconst ProtectedRoute = ({ children }) => {\n  const { user } = useContext(AuthContext);\n\n  if (!user) {\n    return <Navigate to=\"/login\" replace />;\n  }\n\n  return children;\n};\n\nexport default ProtectedRoute"
+        }
+    ]
+}

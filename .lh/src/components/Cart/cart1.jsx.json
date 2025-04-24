@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/Cart/cart1.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740391582321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740391587993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,5 +86,5 @@\n     </div>\n   );\n };\n \n-export default Cart\n\\ No newline at end of file\n+export default Cart1\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1740391582321,
+            "name": "Commit-0",
+            "content": "import React, { createContext, use, useEffect, useState } from \"react\";\nimport { useSelector } from \"react-redux\";\n\nconst Cart1 = () => {\nconst [product, setProducts] = useState(localStorage.getItem(\"cart\"))\nconst [cartItems, setCart] = useState([])\nconst user = useSelector((state) => state.user); // Check if user is signed in\nconst [isInCart, setIsInCart] = useState(false);\nconst [quantity, setQuantity] = useState(0);\n\n  useEffect(() => {\n    const savedCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n    setCart(savedCart);\n  }, []);\n \n\n  useEffect(() => {\n    // Check if item is already in cart (for local storage)\n    const cart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n    setIsInCart(cart.some((item) => item.id === product.id));\n  }, []);\n\n\n  useEffect(() => {\n    // Check if item is already in cart (for local storage)\n    const cart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n    const existingItem = cart.find((item) => item.id === product.id);\n    setQuantity(existingItem ? existingItem.quantity : 0);\n  }, []);\n\n    // Decrement quantity function\n    const handleIncrement = () => {\n        const cart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n        const existingItem = cart.find((item) => item.id === product.id);\n    \n        if (existingItem && existingItem.quantity > 1) {\n          existingItem.quantity -= 1;\n          localStorage.setItem(\"cart\", JSON.stringify(cart));\n          setQuantity((prevQuantity) => prevQuantity + 1);\n        } else {\n          HandleRemoveFromCart(); // Remove item if quantity reaches 0\n        }\n      };\n    \n \n  // Decrement quantity function\n  const handleDecrement = () => {\n    const cart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n    const existingItem = cart.find((item) => item.id === product.id);\n\n    if (existingItem && existingItem.quantity > 1) {\n      existingItem.quantity -= 1;\n      localStorage.setItem(\"cart\", JSON.stringify(cart));\n      setQuantity((prevQuantity) => prevQuantity - 1);\n    } else {\n      HandleRemoveFromCart(); // Remove item if quantity reaches 0\n    }\n  };\n\n  // Remove from cart function\n  const HandleRemoveFromCart = () => {\n    const cart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n    const updatedCart = cart.filter((item) => item.id !== product.id);\n    localStorage.setItem(\"cart\", JSON.stringify(updatedCart));\n    setQuantity(0);\n  };\n  // Remove from cart function\n  const handleRemoveFromCart = () => {\n    const cart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n    const updatedCart = cart.filter((item) => item.id !== product.id);\n    localStorage.setItem(\"cart\", JSON.stringify(updatedCart));\n    setIsInCart(false);\n  };\n\n  return (\n    <div style={{marginTop:\" 90px\"}}>\n      <h2>Your Cart</h2>\n      {cartItems.length === 0 ? <p>Cart is empty</p> : \n        cartItems.map((item) => (\n          <div key={item.id}>\n            <h4>{item.name}</h4>\n            <p>Price: ${item.price}</p>\n          </div>\n        ))\n      }\n    </div>\n  );\n};\n\nexport default Cart"
+        }
+    ]
+}

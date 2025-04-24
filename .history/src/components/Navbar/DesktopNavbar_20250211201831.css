@@ -1,0 +1,39 @@
+.desktop-navbar {
+    display: flex;
+    justify-content:space-between;
+    background: linear-gradient(to enter, red 33%, #feb47b 33%, #86a8e7 66%, #91eae4 66%);
+    height: 60px;
+    color: white;
+    
+}
+ 
+.desktop-navbar ul {
+    display: flex;
+    list-style: none;
+    padding-top:10px;
+    height:60px;
+    width: 100%;
+  
+}
+
+.desktop-navbar li {
+  
+    margin: 0px 15px;
+    cursor: pointer;
+    color: white;
+    height:30px;
+    font-size: larger;
+    
+}
+ul > :first-child{
+    margin-right: auto;
+
+}
+
+.desktop-navbar li:hover {
+    text-decoration: underline;
+}
+.desktop-navbar li a{
+    color:black;
+    font-size: x-large;
+}

@@ -1,0 +1,110 @@
+{
+    "sourceFile": "src/orderService.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 23,
+            "patches": [
+                {
+                    "date": 1742913757030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742913765031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n   return response.json();\n };\n \n export const cancelOrder = async (orderId) => {\n-  const response = await fetch(${API_URL}/${orderId}/cancel, {\n+  const response = await fetch(`${API_URL}/${orderId}/cancel, {\n     method: 'PATCH',\n     headers: getAuthHeader()\n   });\n   \n"
+                },
+                {
+                    "date": 1742913775445,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   return response.json();\n };\n \n export const fetchUserOrders = async (userId) => {\n-  const response = await fetch(${API_URL}/user/${userId}, {\n+  const response = await fetch(`${API_URL}/user/${userId}, {\n     headers: getAuthHeader()\n   });\n   \n   if (!response.ok) {\n@@ -34,9 +34,9 @@\n   return response.json();\n };\n \n export const cancelOrder = async (orderId) => {\n-  const response = await fetch(`${API_URL}/${orderId}/cancel, {\n+  const response = await fetch(`${API_URL}/${orderId}/cancel`, {\n     method: 'PATCH',\n     headers: getAuthHeader()\n   });\n   \n"
+                },
+                {
+                    "date": 1742913783514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n     'Content-Type': 'application/json',\n-    'Authorization': Bearer ${token}\n+    'Authorization':`` Bearer ${token}\n   };\n };\n \n export const fetchAllOrders = async () => {\n@@ -21,9 +21,9 @@\n   return response.json();\n };\n \n export const fetchUserOrders = async (userId) => {\n-  const response = await fetch(`${API_URL}/user/${userId}, {\n+  const response = await fetch(`${API_URL}/user/${userId}`, {\n     headers: getAuthHeader()\n   });\n   \n   if (!response.ok) {\n"
+                },
+                {
+                    "date": 1742913795849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n     'Content-Type': 'application/json',\n-    'Authorization':`` Bearer ${token}\n+    'Authorization': `Bearer ${token}`\n   };\n };\n \n export const fetchAllOrders = async () => {\n@@ -48,9 +48,9 @@\n   return response.json();\n };\n \n export const deliverOrder = async (orderId, deliveryDate) => {\n-  const response = await fetch(${API_URL}/${orderId}/deliver, {\n+  const response = await fetch(`${API_URL}/${orderId}/deliver, {\n     method: 'PATCH',\n     headers: getAuthHeader(),\n     body: JSON.stringify({ deliveryDate })\n   });\n"
+                },
+                {
+                    "date": 1742913830525,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+\n const API_URL = 'http://localhost:3000/api/orders';\n \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n@@ -48,9 +49,9 @@\n   return response.json();\n };\n \n export const deliverOrder = async (orderId, deliveryDate) => {\n-  const response = await fetch(`${API_URL}/${orderId}/deliver, {\n+  const response = await fetch(`${API_URL}/${orderId}/deliver`, {\n     method: 'PATCH',\n     headers: getAuthHeader(),\n     body: JSON.stringify({ deliveryDate })\n   });\n"
+                },
+                {
+                    "date": 1742913838052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n-\n-const API_URL = 'http://localhost:3000/api/orders';\n-\n+import {api} from \"./config\";\n+const API_URL = \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n     'Content-Type': 'application/json',\n"
+                },
+                {
+                    "date": 1742913848046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import {api} from \"./config\";\n-const API_URL = \n+const API_URL = api\n+\n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n     'Content-Type': 'application/json',\n"
+                },
+                {
+                    "date": 1742913859864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import {api} from \"./config\";\n-const API_URL = api\n+const API_URL = 'http://localhost:3000/api/orders';\n \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n"
+                },
+                {
+                    "date": 1742913876554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import {api} from \"./config\";\n-const API_URL = 'http://localhost:3000/api/orders';\n+const API_URL = `/api/orders';\n \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n"
+                },
+                {
+                    "date": 1742913882157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import {api} from \"./config\";\n-const API_URL = `/api/orders';\n+const API_URL = `/api/orders`;\n \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n"
+                },
+                {
+                    "date": 1742913887645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import {api} from \"./config\";\n-const API_URL = `/api/orders`;\n+const API_URL = `$/api/orders`;\n \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n"
+                },
+                {
+                    "date": 1742913893477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,5 +60,6 @@\n     const error = await response.json();\n     throw new Error(error.error || 'Failed to mark order as delivered');\n   }\n   \n-  return response.json();\n\\ No newline at end of file\n+  return response.json();\n+};\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742915231442,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import {api} from \"./config\";\n-const API_URL = `$/api/orders`;\n+const API_URL = `${api}/orders`;\n \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n@@ -61,6 +61,5 @@\n     throw new Error(error.error || 'Failed to mark order as delivered');\n   }\n   \n   return response.json();\n-};\n };\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742915434763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import {api} from \"./config\";\n-const API_URL = `${api}/orders`;\n+const API_URL = `${api}`;\n \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n"
+                },
+                {
+                    "date": 1742915441334,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import {api} from \"./config\";\n-const API_URL = `${api}`;\n+const API_URL = \n \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n"
+                },
+                {
+                    "date": 1742915451981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import {api} from \"./config\";\n-const API_URL = \n+const API_URL = api\n \n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n@@ -9,9 +9,9 @@\n   };\n };\n \n export const fetchAllOrders = async () => {\n-  const response = await fetch(API_URL, {\n+  const response = await fetch(`API_URL, {\n     headers: getAuthHeader()\n   });\n   \n   if (!response.ok) {\n"
+                },
+                {
+                    "date": 1742915460144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   };\n };\n \n export const fetchAllOrders = async () => {\n-  const response = await fetch(`API_URL, {\n+  const response = await fetch(`API_URL/allOrders, {\n     headers: getAuthHeader()\n   });\n   \n   if (!response.ok) {\n"
+                },
+                {
+                    "date": 1742915468140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   };\n };\n \n export const fetchAllOrders = async () => {\n-  const response = await fetch(`API_URL/allOrders, {\n+  const response = await fetch(`/allOrders`, {\n     headers: getAuthHeader()\n   });\n   \n   if (!response.ok) {\n"
+                },
+                {
+                    "date": 1742915475275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   };\n };\n \n export const fetchAllOrders = async () => {\n-  const response = await fetch(`/allOrders`, {\n+  const response = await fetch(`${api}/allOrders`, {\n     headers: getAuthHeader()\n   });\n   \n   if (!response.ok) {\n"
+                },
+                {
+                    "date": 1742915501264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import {api} from \"./config\";\n-const API_URL = api\n \n+\n const getAuthHeader = () => {\n   const token = localStorage.getItem('token');\n   return {\n     'Content-Type': 'application/json',\n"
+                },
+                {
+                    "date": 1742915515884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   return response.json();\n };\n \n export const fetchUserOrders = async (userId) => {\n-  const response = await fetch(`${API_URL}/user/${userId}`, {\n+  const response = await fetch(`${api}/user/${userId}`, {\n     headers: getAuthHeader()\n   });\n   \n   if (!response.ok) {\n"
+                },
+                {
+                    "date": 1742915524452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,65 @@\n+import {api} from \"./config\";\n+\n+\n+const getAuthHeader = () => {\n+  const token = localStorage.getItem('token');\n+  return {\n+    'Content-Type': 'application/json',\n+    'Authorization': `Bearer ${token}`\n+  };\n+};\n+\n+export const fetchAllOrders = async () => {\n+  const response = await fetch(`${api}/allOrders`, {\n+    headers: getAuthHeader()\n+  });\n+  \n+  if (!response.ok) {\n+    const error = await response.json();\n+    throw new Error(error.error || 'Failed to fetch orders');\n+  }\n+  \n+  return response.json();\n+};\n+\n+export const fetchUserOrders = async (userId) => {\n+  const response = await fetch(`${api}/user/${userId}`, {\n+    headers: getAuthHeader()\n+  });\n+  \n+  if (!response.ok) {\n+    const error = await response.json();\n+    throw new Error(error.error || 'Failed to fetch user orders');\n+  }\n+  \n+  return response.json();\n+};\n+\n+export const cancelOrder = async (orderId) => {\n+  const response = await fetch(`${api}/${orderId}/cancel`, {\n+    method: 'PATCH',\n+    headers: getAuthHeader()\n+  });\n+  \n+  if (!response.ok) {\n+    const error = await response.json();\n+    throw new Error(error.error || 'Failed to cancel order');\n+  }\n+  \n+  return response.json();\n+};\n+\n+export const deliverOrder = async (orderId, deliveryDate) => {\n+  const response = await fetch(`${API_URL}/${orderId}/deliver`, {\n+    method: 'PATCH',\n+    headers: getAuthHeader(),\n+    body: JSON.stringify({ deliveryDate })\n+  });\n+  \n+  if (!response.ok) {\n+    const error = await response.json();\n+    throw new Error(error.error || 'Failed to mark order as delivered');\n+  }\n+  \n+  return response.json();\n+};\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742915532751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,9 @@\n   return response.json();\n };\n \n export const deliverOrder = async (orderId, deliveryDate) => {\n-  const response = await fetch(`${API_URL}/${orderId}/deliver`, {\n+  const response = await fetch(`${api}/${orderId}/deliver`, {\n     method: 'PATCH',\n     headers: getAuthHeader(),\n     body: JSON.stringify({ deliveryDate })\n   });\n@@ -61,70 +61,5 @@\n     throw new Error(error.error || 'Failed to mark order as delivered');\n   }\n   \n   return response.json();\n-};\n-import {api} from \"./config\";\n-\n-\n-const getAuthHeader = () => {\n-  const token = localStorage.getItem('token');\n-  return {\n-    'Content-Type': 'application/json',\n-    'Authorization': `Bearer ${token}`\n-  };\n-};\n-\n-export const fetchAllOrders = async () => {\n-  const response = await fetch(`${api}/allOrders`, {\n-    headers: getAuthHeader()\n-  });\n-  \n-  if (!response.ok) {\n-    const error = await response.json();\n-    throw new Error(error.error || 'Failed to fetch orders');\n-  }\n-  \n-  return response.json();\n-};\n-\n-export const fetchUserOrders = async (userId) => {\n-  const response = await fetch(`${api}/user/${userId}`, {\n-    headers: getAuthHeader()\n-  });\n-  \n-  if (!response.ok) {\n-    const error = await response.json();\n-    throw new Error(error.error || 'Failed to fetch user orders');\n-  }\n-  \n-  return response.json();\n-};\n-\n-export const cancelOrder = async (orderId) => {\n-  const response = await fetch(`${API_URL}/${orderId}/cancel`, {\n-    method: 'PATCH',\n-    headers: getAuthHeader()\n-  });\n-  \n-  if (!response.ok) {\n-    const error = await response.json();\n-    throw new Error(error.error || 'Failed to cancel order');\n-  }\n-  \n-  return response.json();\n-};\n-\n-export const deliverOrder = async (orderId, deliveryDate) => {\n-  const response = await fetch(`${API_URL}/${orderId}/deliver`, {\n-    method: 'PATCH',\n-    headers: getAuthHeader(),\n-    body: JSON.stringify({ deliveryDate })\n-  });\n-  \n-  if (!response.ok) {\n-    const error = await response.json();\n-    throw new Error(error.error || 'Failed to mark order as delivered');\n-  }\n-  \n-  return response.json();\n };\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1742913757030,
+            "name": "Commit-0",
+            "content": "const API_URL = 'http://localhost:3000/api/orders';\n\nconst getAuthHeader = () => {\n  const token = localStorage.getItem('token');\n  return {\n    'Content-Type': 'application/json',\n    'Authorization': Bearer ${token}\n  };\n};\n\nexport const fetchAllOrders = async () => {\n  const response = await fetch(API_URL, {\n    headers: getAuthHeader()\n  });\n  \n  if (!response.ok) {\n    const error = await response.json();\n    throw new Error(error.error || 'Failed to fetch orders');\n  }\n  \n  return response.json();\n};\n\nexport const fetchUserOrders = async (userId) => {\n  const response = await fetch(${API_URL}/user/${userId}, {\n    headers: getAuthHeader()\n  });\n  \n  if (!response.ok) {\n    const error = await response.json();\n    throw new Error(error.error || 'Failed to fetch user orders');\n  }\n  \n  return response.json();\n};\n\nexport const cancelOrder = async (orderId) => {\n  const response = await fetch(${API_URL}/${orderId}/cancel, {\n    method: 'PATCH',\n    headers: getAuthHeader()\n  });\n  \n  if (!response.ok) {\n    const error = await response.json();\n    throw new Error(error.error || 'Failed to cancel order');\n  }\n  \n  return response.json();\n};\n\nexport const deliverOrder = async (orderId, deliveryDate) => {\n  const response = await fetch(${API_URL}/${orderId}/deliver, {\n    method: 'PATCH',\n    headers: getAuthHeader(),\n    body: JSON.stringify({ deliveryDate })\n  });\n  \n  if (!response.ok) {\n    const error = await response.json();\n    throw new Error(error.error || 'Failed to mark order as delivered');\n  }\n  \n  return response.json();\n};"
+        }
+    ]
+}

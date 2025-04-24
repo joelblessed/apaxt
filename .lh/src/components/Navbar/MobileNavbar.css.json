@@ -1,0 +1,566 @@
+{
+    "sourceFile": "src/components/Navbar/MobileNavbar.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 137,
+            "patches": [
+                {
+                    "date": 1736962450793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1736963235895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .mobile-navbar {\n-    background-color: #333;\n+    background-color: #cf0808;\n     color: white;\n     padding: 10px;\n     position: relative;\n }\n"
+                },
+                {
+                    "date": 1736963254106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .mobile-navbar {\n-    background-color: #cf0808;\n+    background-color:;\n     color: white;\n     padding: 10px;\n     position: relative;\n }\n"
+                },
+                {
+                    "date": 1736963259581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .mobile-navbar {\n-    background-color:;\n+    background-color:green;\n     color: white;\n     padding: 10px;\n     position: relative;\n }\n"
+                },
+                {
+                    "date": 1736968218010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,5 +34,6 @@\n }\n \n .mobile-menu li:hover {\n     background-color: #555;\n-}\n\\ No newline at end of file\n+}\n+\n"
+                },
+                {
+                    "date": 1736968238233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,4 +36,7 @@\n .mobile-menu li:hover {\n     background-color: #555;\n }\n \n+li{\n+    tes\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968245037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,6 +37,6 @@\n     background-color: #555;\n }\n \n li{\n-    tes\n+    text-decoration: ;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968251357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,6 +37,6 @@\n     background-color: #555;\n }\n \n li{\n-    text-decoration: ;\n+    text-decoration: none;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968278264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,8 +30,9 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #444;\n     color: white;\n     cursor: pointer;\n+    \n }\n \n .mobile-menu li:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736968286217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #444;\n     color: white;\n     cursor: pointer;\n-    \n+    text-decoration: dashed;\n }\n \n .mobile-menu li:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736968291433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #444;\n     color: white;\n     cursor: pointer;\n-    text-decoration: dashed;\n+    text-decoration: ;\n }\n \n .mobile-menu li:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736968315640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #444;\n     color: white;\n     cursor: pointer;\n-    text-decoration: ;\n+    t\n }\n \n .mobile-menu li:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736968340132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,14 +30,15 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #444;\n     color: white;\n     cursor: pointer;\n-    t\n+    \n }\n \n .mobile-menu li:hover {\n     background-color: #555;\n }\n \n li{\n     text-decoration: none;\n+    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968345297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,6 +39,6 @@\n }\n \n li{\n     text-decoration: none;\n-    \n+    color: ;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968365589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,6 +39,7 @@\n }\n \n li{\n     text-decoration: none;\n-    color: ;\n+    color: black;\n+    de\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968371706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,6 +40,6 @@\n \n li{\n     text-decoration: none;\n     color: black;\n-    de\n+    deco\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968405195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,6 +40,6 @@\n \n li{\n     text-decoration: none;\n     color: black;\n-    deco\n+    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968493229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,6 +40,7 @@\n \n li{\n     text-decoration: none;\n     color: black;\n+    lis\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968498408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,7 +40,7 @@\n \n li{\n     text-decoration: none;\n     color: black;\n-    lis\n+    list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968513706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    color: black;\n+    color:;\n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968541441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    color:;\n+    \n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968547510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    \n+    marging\n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968554469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    marging\n+    margin:\"auto\"\n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968561164,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    margin:\"auto\"\n+    margin:\"auto\",\n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968579659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    margin:\"auto\",\n+    margin:\"auto\";\n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968588765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    margin:\"auto\";\n+    margin:\"\";\n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968595469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    margin:\"\";\n+    margin:\"2px\";\n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968606995,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    margin:\"2px\";\n+    margin:\"20px\";\n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736968614667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,8 @@\n }\n \n li{\n     text-decoration: none;\n-    margin:\"20px\";\n+    margin:\"\";\n     list-style: none;\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736971339398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .mobile-navbar {\n-    background-color:green;\n+    background-color:rgba(0, 128, 0, 0.249);\n     color: white;\n     padding: 10px;\n     position: relative;\n }\n"
+                },
+                {
+                    "date": 1736971345667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .mobile-navbar {\n-    background-color:rgba(0, 128, 0, 0.249);\n+    background-color:rgba(0, 128, 0, 0);\n     color: white;\n     padding: 10px;\n     position: relative;\n }\n"
+                },
+                {
+                    "date": 1736971351800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .mobile-navbar {\n-    background-color:rgba(0, 128, 0, 0);\n+    background-color:rgba(202, 207, 202, 0);\n     color: white;\n     padding: 10px;\n     position: relative;\n }\n"
+                },
+                {
+                    "date": 1736971359956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .mobile-navbar {\n-    background-color:rgba(202, 207, 202, 0);\n+    background-color:rgba(202, 202, 207, 0.403);\n     color: white;\n     padding: 10px;\n     position: relative;\n }\n"
+                },
+                {
+                    "date": 1736971590719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .mobile-navbar {\n-    background-color:rgba(202, 202, 207, 0.403);\n+    background-color:;\n     color: white;\n     padding: 10px;\n     position: relative;\n }\n"
+                },
+                {
+                    "date": 1736971596161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n .mobile-navbar {\n-    background-color:;\n+    background-color:orange;\n     color: white;\n     padding: 10px;\n     position: relative;\n }\n"
+                },
+                {
+                    "date": 1736971676235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .mobile-navbar {\n-    background-color:orange;\n+    background-color:orangered;\n     color: white;\n-    padding: 10px;\n+    padding: 0px;\n     position: relative;\n }\n \n .menu-toggle {\n"
+                },
+                {
+                    "date": 1736974010571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n     position: relative;\n+    \n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1736974017475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n     position: relative;\n-    \n+    pos\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1736974023112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n     position: relative;\n-    pos\n+    position: ;\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1736974106731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n     position: relative;\n-    position: ;\n+    position: st;\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1736974112767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n     position: relative;\n-    position: st;\n+    position: sti;\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1736974121386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n     position: relative;\n-    position: sti;\n+    position: sticky;\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1736974153089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n     color: white;\n     padding: 0px;\n     position: relative;\n     position: sticky;\n+    \n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1736974159010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n     color: white;\n     padding: 0px;\n     position: relative;\n     position: sticky;\n-    \n+    top: ;\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1736974164768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n     color: white;\n     padding: 0px;\n     position: relative;\n     position: sticky;\n-    top: ;\n+    top: 0px;\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1736974207544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     position: absolute;\n     top: 100%;\n     left: 0;\n     width: 100%;\n-    background-color: #333;\n+    background-color: #a21313;\n     padding: 10px 0;\n     list-style: none;\n     margin: 0;\n }\n"
+                },
+                {
+                    "date": 1736974238568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     flex-direction: column;\n     position: absolute;\n     top: 100%;\n     left: 0;\n-    width: 100%;\n+    width: 0%;\n     background-color: #a21313;\n     padding: 10px 0;\n     list-style: none;\n     margin: 0;\n"
+                },
+                {
+                    "date": 1736974258228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     flex-direction: column;\n     position: absolute;\n     top: 100%;\n     left: 0;\n-    width: 0%;\n+    width: 40%\\\\;\n     background-color: #a21313;\n     padding: 10px 0;\n     list-style: none;\n     margin: 0;\n"
+                },
+                {
+                    "date": 1736974289537,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,10 +20,10 @@\n     flex-direction: column;\n     position: absolute;\n     top: 100%;\n     left: 0;\n-    width: 40%\\\\;\n-    background-color: #a21313;\n+    width: auto;\n+    background-color: #fce1e1;\n     padding: 10px 0;\n     list-style: none;\n     margin: 0;\n }\n"
+                },
+                {
+                    "date": 1736974298876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     position: absolute;\n     top: 100%;\n     left: 0;\n     width: auto;\n-    background-color: #fce1e1;\n+    background-color: #f0f0f0;\n     padding: 10px 0;\n     list-style: none;\n     margin: 0;\n }\n"
+                },
+                {
+                    "date": 1736974323365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     top: 100%;\n     left: 0;\n     width: auto;\n     background-color: #f0f0f0;\n-    padding: 10px 0;\n+    padding: 0px 0;\n     list-style: none;\n     margin: 0;\n }\n \n"
+                },
+                {
+                    "date": 1736974331659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     top: 100%;\n     left: 0;\n     width: auto;\n     background-color: #f0f0f0;\n-    padding: 0px 0;\n+    \n     list-style: none;\n     margin: 0;\n }\n \n"
+                },
+                {
+                    "date": 1736974338724,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     top: 100%;\n     left: 0;\n     width: auto;\n     background-color: #f0f0f0;\n-    \n+    padding: 0px 0;\n     list-style: none;\n     margin: 0;\n }\n \n"
+                },
+                {
+                    "date": 1736974389651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n     left: 0;\n     width: auto;\n     background-color: #f0f0f0;\n     padding: 0px 0;\n+    \n     list-style: none;\n     margin: 0;\n }\n \n"
+                },
+                {
+                    "date": 1736974397130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     left: 0;\n     width: auto;\n     background-color: #f0f0f0;\n     padding: 0px 0;\n-    \n+    border\n     list-style: none;\n     margin: 0;\n }\n \n"
+                },
+                {
+                    "date": 1736974404388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     left: 0;\n     width: auto;\n     background-color: #f0f0f0;\n     padding: 0px 0;\n-    border\n+    border-radius: 10px;\n     list-style: none;\n     margin: 0;\n }\n \n"
+                },
+                {
+                    "date": 1736974431186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n     padding: 0px 0;\n     border-radius: 10px;\n     list-style: none;\n     margin: 0;\n+    de\n }\n \n .mobile-menu li {\n     padding: 10px 20px;\n"
+                },
+                {
+                    "date": 1736974439284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     padding: 0px 0;\n     border-radius: 10px;\n     list-style: none;\n     margin: 0;\n-    de\n+    text-decoration: ;\n }\n \n .mobile-menu li {\n     padding: 10px 20px;\n"
+                },
+                {
+                    "date": 1736974459047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     padding: 0px 0;\n     border-radius: 10px;\n     list-style: none;\n     margin: 0;\n-    text-decoration: ;\n+    \n }\n \n .mobile-menu li {\n     padding: 10px 20px;\n"
+                },
+                {
+                    "date": 1736974472177,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n }\n \n .mobile-menu li {\n     padding: 10px 20px;\n-    border-bottom: 1px solid #444;\n+    border-bottom: 1px solid #810505;\n     color: white;\n     cursor: pointer;\n     \n }\n"
+                },
+                {
+                    "date": 1736974485655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n }\n \n .mobile-menu li {\n     padding: 10px 20px;\n-    border-bottom: 1px solid #810505;\n+    border-bottom: 1px solid #05813d;\n     color: white;\n     cursor: pointer;\n     \n }\n"
+                },
+                {
+                    "date": 1736974610596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,9 @@\n     border-bottom: 1px solid #05813d;\n     color: white;\n     cursor: pointer;\n     \n+    \n }\n \n .mobile-menu li:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736974616146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,10 +34,10 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #05813d;\n     color: white;\n     cursor: pointer;\n+    b\n     \n-    \n }\n \n .mobile-menu li:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736974621475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #05813d;\n     color: white;\n     cursor: pointer;\n-    b\n+    border-radius: ;\n     \n }\n \n .mobile-menu li:hover {\n"
+                },
+                {
+                    "date": 1736974683132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     position: absolute;\n     top: 100%;\n     left: 0;\n     width: auto;\n-    background-color: #f0f0f0;\n+    background-color: #d50f0f;\n     padding: 0px 0;\n     border-radius: 10px;\n     list-style: none;\n     margin: 0;\n@@ -34,9 +34,9 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #05813d;\n     color: white;\n     cursor: pointer;\n-    border-radius: ;\n+    border-radius: 10px;\n     \n }\n \n .mobile-menu li:hover {\n"
+                },
+                {
+                    "date": 1736974691150,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     position: absolute;\n     top: 100%;\n     left: 0;\n     width: auto;\n-    background-color: #d50f0f;\n+    background-color: #f0f0f0;\n     padding: 0px 0;\n     border-radius: 10px;\n     list-style: none;\n     margin: 0;\n"
+                },
+                {
+                    "date": 1736974703341,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #05813d;\n     color: white;\n     cursor: pointer;\n-    border-radius: 10px;\n+    border-radius: 1px;\n     \n }\n \n .mobile-menu li:hover {\n"
+                },
+                {
+                    "date": 1736974709777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n     padding: 10px 20px;\n     border-bottom: 1px solid #05813d;\n     color: white;\n     cursor: pointer;\n-    border-radius: 1px;\n+    border-radius: 5px;\n     \n }\n \n .mobile-menu li:hover {\n"
+                },
+                {
+                    "date": 1739408628332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,9 @@\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n     position: relative;\n-    position: sticky;\n-    top: 0px;\n+    \n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1739408640717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,15 @@\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n     position: relative;\n-    \n+    height: 60px;\n+    position: fixed;\n+    top: 0;\n+    left: 0;\n+    width: 100%;\n+    height: 60px;\n+    z-index: 1000;\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1739408646853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n .mobile-navbar {\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n-    position: relative;\n     height: 60px;\n     position: fixed;\n     top: 0;\n     left: 0;\n"
+                },
+                {
+                    "date": 1739408656820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n .mobile-navbar {\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n-    height: 60px;\n     position: fixed;\n     top: 0;\n     left: 0;\n     width: 100%;\n"
+                },
+                {
+                    "date": 1739408680543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .mobile-navbar {\n     background-color:orangered;\n     color: white;\n-    padding: 0px;\n+    \n     position: fixed;\n     top: 0;\n     left: 0;\n     width: 100%;\n"
+                },
+                {
+                    "date": 1739408689905,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,10 @@\n .mobile-navbar {\n     background-color:orangered;\n     color: white;\n+    padding: 0px;\n+    position: relative;\n     \n-    position: fixed;\n-    top: 0;\n-    left: 0;\n-    width: 100%;\n-    height: 60px;\n-    z-index: 1000;\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1739408698416,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,16 @@\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n     position: relative;\n-    \n+    height: 60px;\n+    color: white;\n+    position: fixed;\n+    top: 0;\n+    left: 0;\n+    width: 100%;\n+    height: 60px;\n+    z-index: 1000;\n }\n \n .menu-toggle {\n     font-size: 24px;\n"
+                },
+                {
+                    "date": 1739408703590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     position: fixed;\n     top: 0;\n     left: 0;\n     width: 100%;\n-    height: 60px;\n+   \n     z-index: 1000;\n }\n \n .menu-toggle {\n"
+                },
+                {
+                    "date": 1739408718550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .mobile-navbar {\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n-    position: relative;\n+   \n     height: 60px;\n     color: white;\n     position: fixed;\n     top: 0;\n"
+                },
+                {
+                    "date": 1739408723698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,9 @@\n .mobile-navbar {\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n-   \n-    height: 60px;\n-    color: white;\n+   ;\n     position: fixed;\n     top: 0;\n     left: 0;\n     width: 100%;\n"
+                },
+                {
+                    "date": 1739408737614,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,12 @@\n .mobile-navbar {\n     background-color:orangered;\n     color: white;\n     padding: 0px;\n-   ;\n     position: fixed;\n     top: 0;\n     left: 0;\n     width: 100%;\n-   \n     z-index: 1000;\n }\n \n .menu-toggle {\n"
+                },
+                {
+                    "date": 1741076059708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,5 +49,33 @@\n     text-decoration: none;\n     margin:\"\";\n     list-style: none;\n     \n-}\n\\ No newline at end of file\n+}\n+\n+\n+.search-container {\n+    position: relative;\n+    display: flex;\n+    align-items: center;\n+    width: 400px;\n+  }\n+  \n+  .search-input {\n+    width: 100%;\n+    padding:5px; \n+    border: 1px solid #ccc;\n+    border-radius: 20px;\n+    outline:#581845\n+  }\n+  \n+  .search-button {\n+    position: absolute;\n+    right: 10px;\n+    background: none;\n+    border: none;\n+    cursor: pointer;\n+    font-size: 16px;\n+    color: #555;\n+  }\n+\n+  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741076068296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n     \n }\n \n \n-.search-container {\n+.Mobilesearch-container {\n     position: relative;\n     display: flex;\n     align-items: center;\n     width: 400px;\n"
+                },
+                {
+                    "date": 1741076080581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,16 +52,16 @@\n     \n }\n \n \n-.Mobilesearch-container {\n+.Mobile-search-container {\n     position: relative;\n     display: flex;\n     align-items: center;\n     width: 400px;\n   }\n   \n-  .search-input {\n+  .msearch-input {\n     width: 100%;\n     padding:5px; \n     border: 1px solid #ccc;\n     border-radius: 20px;\n"
+                },
+                {
+                    "date": 1741076089182,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,9 @@\n     align-items: center;\n     width: 400px;\n   }\n   \n-  .msearch-input {\n+  .Mobilesearch-input {\n     width: 100%;\n     padding:5px; \n     border: 1px solid #ccc;\n     border-radius: 20px;\n"
+                },
+                {
+                    "date": 1741076096562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,17 +59,17 @@\n     align-items: center;\n     width: 400px;\n   }\n   \n-  .Mobilesearch-input {\n+  .Mobile-search-input {\n     width: 100%;\n     padding:5px; \n     border: 1px solid #ccc;\n     border-radius: 20px;\n     outline:#581845\n   }\n   \n-  .search-button {\n+  .Msearch-button {\n     position: absolute;\n     right: 10px;\n     background: none;\n     border: none;\n"
+                },
+                {
+                    "date": 1741076158564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n     border-radius: 20px;\n     outline:#581845\n   }\n   \n-  .Msearch-button {\n+  .Mobile-search-button {\n     position: absolute;\n     right: 10px;\n     background: none;\n     border: none;\n"
+                },
+                {
+                    "date": 1741076170355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n .Mobile-search-container {\n     position: relative;\n     display: flex;\n     align-items: center;\n-    width: 400px;\n+    width: 100px;\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076183783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n .Mobile-search-container {\n     position: relative;\n     display: flex;\n     align-items: center;\n-    width: 100px;\n+    width: 200px;\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076248712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,8 +57,9 @@\n     position: relative;\n     display: flex;\n     align-items: center;\n     width: 200px;\n+    \n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076253956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n     position: relative;\n     display: flex;\n     align-items: center;\n     width: 200px;\n-    \n+    background-color: ;\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076260139,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n     position: relative;\n     display: flex;\n     align-items: center;\n     width: 200px;\n-    background-color: ;\n+    background-color: :red;\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076301794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,17 +57,18 @@\n     position: relative;\n     display: flex;\n     align-items: center;\n     width: 200px;\n-    background-color: :red;\n+    background-color: red;\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n     padding:5px; \n     border: 1px solid #ccc;\n     border-radius: 20px;\n     outline:#581845\n+    al\n   }\n   \n   .Mobile-search-button {\n     position: absolute;\n"
+                },
+                {
+                    "date": 1741076307641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,10 +65,10 @@\n     width: 100%;\n     padding:5px; \n     border: 1px solid #ccc;\n     border-radius: 20px;\n-    outline:#581845\n-    al\n+    outline:#581845;\n+    ali\n   }\n   \n   .Mobile-search-button {\n     position: absolute;\n"
+                },
+                {
+                    "date": 1741076314857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n     padding:5px; \n     border: 1px solid #ccc;\n     border-radius: 20px;\n     outline:#581845;\n-    ali\n+    align-items: ;\n   }\n   \n   .Mobile-search-button {\n     position: absolute;\n"
+                },
+                {
+                    "date": 1741076329105,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n     padding:5px; \n     border: 1px solid #ccc;\n     border-radius: 20px;\n     outline:#581845;\n-    align-items: ;\n+    align-contene: center;\n   }\n   \n   .Mobile-search-button {\n     position: absolute;\n"
+                },
+                {
+                    "date": 1741076337576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n     padding:5px; \n     border: 1px solid #ccc;\n     border-radius: 20px;\n     outline:#581845;\n-    align-contene: center;\n+   \n   }\n   \n   .Mobile-search-button {\n     position: absolute;\n"
+                },
+                {
+                    "date": 1741076345571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,8 +58,9 @@\n     display: flex;\n     align-items: center;\n     width: 200px;\n     background-color: red;\n+    margintop\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076353751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n     display: flex;\n     align-items: center;\n     width: 200px;\n     background-color: red;\n-    margintop\n+    margintop:20px\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076362598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n     display: flex;\n     align-items: center;\n     width: 200px;\n     background-color: red;\n-    margintop:20px\n+    margin-top:20px;\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076369109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n     display: flex;\n     align-items: center;\n     width: 200px;\n     background-color: red;\n-    margin-top:20px;\n+    margin-top:30px;\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076378182,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n     display: flex;\n     align-items: center;\n     width: 200px;\n     background-color: red;\n-    margin-top:30px;\n+    margin-top:3px;\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076386917,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n     display: flex;\n     align-items: center;\n     width: 200px;\n     background-color: red;\n-    margin-top:3px;\n+    margin-top:5px;\n   }\n   \n   .Mobile-search-input {\n     width: 100%;\n"
+                },
+                {
+                    "date": 1741076409945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n   }\n   \n   .Mobile-search-button {\n     position: absolute;\n-    right: 10px;\n+    right: 1px;\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076432086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n   }\n   \n   .Mobile-search-button {\n     position: absolute;\n-    right: 1px;\n+    right: 5px;\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076487001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n   }\n   \n   .Mobile-search-button {\n     position: absolute;\n-    right: 5px;\n+    right: px;\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076519685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,10 @@\n   }\n   \n   .Mobile-search-button {\n     position: absolute;\n-    right: px;\n+    right: 1px;\n+    top\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076525751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n   \n   .Mobile-search-button {\n     position: absolute;\n     right: 1px;\n-    top\n+    top:\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076538211,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n   \n   .Mobile-search-button {\n     position: absolute;\n     right: 1px;\n-    top:\n+    top:0.5px;\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076547060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n   \n   .Mobile-search-button {\n     position: absolute;\n     right: 1px;\n-    top:0.5px;\n+    top:0px;\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076555487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n   \n   .Mobile-search-button {\n     position: absolute;\n     right: 1px;\n-    top:0px;\n+    justi\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076562136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n   \n   .Mobile-search-button {\n     position: absolute;\n     right: 1px;\n-    justi\n+    justify-content: center;\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076574945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n   \n   .Mobile-search-button {\n     position: absolute;\n     right: 1px;\n-    justify-content: center;\n+    top:0px;\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076582505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n   \n   .Mobile-search-button {\n     position: absolute;\n     right: 1px;\n-    top:0px;\n+    top:1px;\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076589972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n   \n   .Mobile-search-button {\n     position: absolute;\n     right: 1px;\n-    top:1px;\n+    top:3px;\n     background: none;\n     border: none;\n     cursor: pointer;\n     font-size: 16px;\n"
+                },
+                {
+                    "date": 1741076763013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n .mobile-navbar {\n-    background-color:orangered;\n+    background: linear-gradient(-45deg, red 33%, #feb47b 33%, #86a8e7 66%,  #581845\n+    66%);\n     color: white;\n     padding: 0px;\n     position: fixed;\n     top: 0;\n"
+                },
+                {
+                    "date": 1741078267548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,9 @@\n     position: relative;\n     display: flex;\n     align-items: center;\n     width: 200px;\n-    background-color: red;\n+    background-color:;\n     margin-top:5px;\n   }\n   \n   .Mobile-search-input {\n"
+                },
+                {
+                    "date": 1741079922893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,86 +1,182 @@\n-.mobile-navbar {\n-    background: linear-gradient(-45deg, red 33%, #feb47b 33%, #86a8e7 66%,  #581845\n-    66%);\n-    color: white;\n-    padding: 0px;\n-    position: fixed;\n-    top: 0;\n-    left: 0;\n-    width: 100%;\n-    z-index: 1000;\n-}\n+import React, { useState } from \"react\";\n+import \"./MobileNavbar.css\";\n+import {AuthContext } from \"../../AuthContext\";\n+import { useContext } from \"react\";\n+import { Link, NavLink } from \"react-router-dom\";\n \n-.menu-toggle {\n-    font-size: 24px;\n-    background: none;\n-    color: white;\n-    border: none;\n-    cursor: pointer;\n-}\n+function MobileNavbar({\n+  cart,\n+  searchTerm,\n+  setSearchTerm,\n+  search,\n+  cartCount,\n+  categories,\n+  displayusername,\n+  selectedCategory,\n+  setSelectedCategory,\n+}) {\n \n-.mobile-menu {\n-    display: flex;\n-    flex-direction: column;\n-    position: absolute;\n-    top: 100%;\n-    left: 0;\n-    width: auto;\n-    background-color: #f0f0f0;\n-    padding: 0px 0;\n-    border-radius: 10px;\n-    list-style: none;\n-    margin: 0;\n-    \n-}\n+  const { username } = useContext(AuthContext);\n+  // const totalItems = cart.reduce((total, item) => total + item.forCount, 0);\n+  const [isMenuOpen, setIsMenuOpen] = useState(false);\n \n-.mobile-menu li {\n-    padding: 10px 20px;\n-    border-bottom: 1px solid #05813d;\n-    color: white;\n-    cursor: pointer;\n-    border-radius: 5px;\n-    \n-}\n+  const toggleMenu = () => {\n+    setIsMenuOpen(!isMenuOpen);\n+  };\n \n-.mobile-menu li:hover {\n-    background-color: #555;\n-}\n+  return (\n+    <>\n+      <nav className=\"mobile-navbar\">\n+        <div style={{ display: \"flex\", justifyContent: \"space-between\" }}>\n+          <button\n+            className=\"menu-toggle\"\n+            style={{ color: \"black\" }}\n+            onClick={toggleMenu}\n+          >\n+            {isMenuOpen ? \"✖\" : \"☰\"}\n+          </button>\n \n-li{\n-    text-decoration: none;\n-    margin:\"\";\n-    list-style: none;\n-    \n\\ No newline at end of file\n-}\n+          <li className=\"navbar-logo\">\n+            <h1>ApaxT</h1>\n+          </li>\n \n+          <li className=\"Mobile-search\" style={{ marginTop: \"\" }}>\n+          <div className=\"Mobile-search-container\">\n+            <input\n+              type=\"text\"\n+              placeholder=\"\"\n+              value={searchTerm}\n+              onChange={(e) => setSearchTerm(e.target.value)}\n+              className=\"search-input\"\n+            />\n+            <button onClick={search} className=\"Mobile-search-button\">\n+              <svg\n+                xmlns=\"http://www.w3.org/2000/svg\"\n+                height=\"34px\"\n+                viewBox=\"0 -960 960 960\"\n+                width=\"24px\"\n+                fill=\"red\"\n+              >\n+                <path d=\"M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z\" />\n+              </svg>\n+            </button>\n+          </div>\n+        </li>\n \n-.Mobile-search-container {\n-    position: relative;\n-    display: flex;\n-    align-items: center;\n-    width: 200px;\n-    background-color:;\n-    margin-top:5px;\n-  }\n-  \n-  .Mobile-search-input {\n-    width: 100%;\n-    padding:5px; \n-    border: 1px solid #ccc;\n-    border-radius: 20px;\n-    outline:#581845;\n-   \n-  }\n-  \n-  .Mobile-search-button {\n-    position: absolute;\n-    right: 1px;\n-    top:3px;\n-    background: none;\n-    border: none;\n-    cursor: pointer;\n-    font-size: 16px;\n-    color: #555;\n-  }\n+          <li href=\"#\">\n+            <NavLink to=\"/Cart\" activeClassName=\"active\" style={{}}>\n+              <div\n+                style={{\n+                  background: \"\",\n+                  width: \"20px\",\n+                  display: \"grid\",\n+                  marginTop: \"-22px\",\n+                }}\n+              >\n+                <div style={{ background: \"\"}}>\n+                  <label\n+                    style={{\n+                      color: \"green\",\n+                      background: \"\",\n+                      width: \"15px\",\n+                      height: \"20px\",\n+                      margin: \"0px\",\n+                      fontSize:\"19px\",\n+                      marginTop: \"0px\",\n+                      position :\"relative\",\n+                      left:\"7px\"\n+                    }}\n+                  >\n+                    {cartCount}\n+                  </label>\n+                </div>\n+                <div\n+                  style={{ display: \"flex\", background: \"\", height: \"inherit\" }}\n+                >\n+                  <svg\n+                    style={{ background: \"\", marginTop:\"-6px\" }}\n+                    xmlns=\"http://www.w3.org/2000/svg\"\n+                    height=\"23px\"\n+                    viewBox=\"0 -960 960 960\"\n+                    width=\"25px\"\n+                    fill=\"#F19E39\"\n+                  >\n+                    <path d=\"M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z\" />\n+                  </svg>\n+                </div>{\" \"}\n+              </div>\n+            </NavLink>\n+          </li>\n \n-  \n+          <li href=\"#\">\n+            <NavLink to=\"/dashboard\" actiiveClassName=\"active\">\n+              <div style={{ background: \"\", marginTop: \"-32px\" }}>\n+                <div>\n+                  <svg\n+                    xmlns=\"http://www.w3.org/2000/svg\"\n+                    height=\"48px\"\n+                    viewBox=\"0 -960 960 960\"\n+                    width=\"26px\"\n+                    fill=\"#999999\"\n+                  >\n+                    <path d=\"M222-255q63-44 125-67.5T480-346q71 0 133.5 23.5T739-255q44-54 62.5-109T820-480q0-145-97.5-242.5T480-820q-145 0-242.5 97.5T140-480q0 61 19 116t63 109Zm257.81-195q-57.81 0-97.31-39.69-39.5-39.68-39.5-97.5 0-57.81 39.69-97.31 39.68-39.5 97.5-39.5 57.81 0 97.31 39.69 39.5 39.68 39.5 97.5 0 57.81-39.69 97.31-39.68 39.5-97.5 39.5Zm.66 370Q398-80 325-111.5t-127.5-86q-54.5-54.5-86-127.27Q80-397.53 80-480.27 80-563 111.5-635.5q31.5-72.5 86-127t127.27-86q72.76-31.5 155.5-31.5 82.73 0 155.23 31.5 72.5 31.5 127 86t86 127.03q31.5 72.53 31.5 155T848.5-325q-31.5 73-86 127.5t-127.03 86Q562.94-80 480.47-80Zm-.47-60q55 0 107.5-16T691-212q-51-36-104-55t-107-19q-54 0-107 19t-104 55q51 40 103.5 56T480-140Zm0-370q34 0 55.5-21.5T557-587q0-34-21.5-55.5T480-664q-34 0-55.5 21.5T403-587q0 34 21.5 55.5T480-510Zm0-77Zm0 374Z\" />\n+                  </svg>\n+                </div>\n+                <div>{username}</div>\n+              </div>\n+            </NavLink>\n+          </li>\n+        </div>\n+        {isMenuOpen && (\n+          <ul className=\"mobile-menu\">\n+            <li>\n+              <NavLink to=\"/\" actiiveClassName=\"active\" exact>\n+                Home\n+              </NavLink>\n+            </li>\n+            <li>\n+              <NavLink to=\"/products\" actiiveClassName=\"active\">\n+                Products\n+              </NavLink>\n+            </li>\n+\n+            <li href=\"#\">\n+              {\" \"}\n+              <NavLink to=\"/category\">\n+              <select\n+              style={{\n+                width: \"auto\",\n+                border: \"0px\",\n+                background: \"none\",\n+                backgroundColor: \"none\",\n+                color: \"black\",\n+                cursor: \"pointer\",\n+              }}\n+              value={searchTerm}\n+              onChange={(e) => setSearchTerm(e.target.value)}\n+            >\n+              <option value=\"\" onClick={search}>\n+                Category\n+              </option>\n+              {categories.map((category, index) => (\n+                <option key={index} value={category} onClick={search}>\n+                  {category}\n+                </option>\n+              ))}\n+            </select>\n+              </NavLink>{\" \"}\n+            </li>\n+\n+            <li>\n+              <NavLink to=\"/newProduct\" actiiveClassName=\"active\">\n+                Sell\n+              </NavLink>\n+            </li>\n+          </ul>\n+        )}\n+      </nav>\n+    </>\n+  );\n+}\n+\n+export default MobileNavbar;\n"
+                },
+                {
+                    "date": 1741079938663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,9 +109,9 @@\n           </li>\n \n           <li href=\"#\">\n             <NavLink to=\"/dashboard\" actiiveClassName=\"active\">\n-              <div style={{ background: \"\", marginTop: \"-32px\" }}>\n+              <div >\n                 <div>\n                   <svg\n                     xmlns=\"http://www.w3.org/2000/svg\"\n                     height=\"48px\"\n"
+                },
+                {
+                    "date": 1741079949892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -143,16 +143,9 @@\n             <li href=\"#\">\n               {\" \"}\n               <NavLink to=\"/category\">\n               <select\n-              style={{\n-                width: \"auto\",\n-                border: \"0px\",\n-                background: \"none\",\n-                backgroundColor: \"none\",\n-                color: \"black\",\n-                cursor: \"pointer\",\n-              }}\n+             \n               value={searchTerm}\n               onChange={(e) => setSearchTerm(e.target.value)}\n             >\n               <option value=\"\" onClick={search}>\n"
+                },
+                {
+                    "date": 1741079967728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -93,9 +93,9 @@\n                 <div\n                   style={{ display: \"flex\", background: \"\", height: \"inherit\" }}\n                 >\n                   <svg\n-                    style={{ background: \"\", marginTop:\"-6px\" }}\n+                    \n                     xmlns=\"http://www.w3.org/2000/svg\"\n                     height=\"23px\"\n                     viewBox=\"0 -960 960 960\"\n                     width=\"25px\"\n"
+                },
+                {
+                    "date": 1741079981397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n                   display: \"grid\",\n                   marginTop: \"-22px\",\n                 }}\n               >\n-                <div style={{ background: \"\"}}>\n+               }>\n                   <label\n                     style={{\n                       color: \"green\",\n                       background: \"\",\n@@ -90,9 +90,9 @@\n                     {cartCount}\n                   </label>\n                 </div>\n                 <div\n-                  style={{ display: \"flex\", background: \"\", height: \"inherit\" }}\n+                 \n                 >\n                   <svg\n                     \n                     xmlns=\"http://www.w3.org/2000/svg\"\n"
+                },
+                {
+                    "date": 1741079986615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,21 +72,11 @@\n                   display: \"grid\",\n                   marginTop: \"-22px\",\n                 }}\n               >\n-               }>\n+               >\n                   <label\n-                    style={{\n-                      color: \"green\",\n-                      background: \"\",\n-                      width: \"15px\",\n-                      height: \"20px\",\n-                      margin: \"0px\",\n-                      fontSize:\"19px\",\n-                      marginTop: \"0px\",\n-                      position :\"relative\",\n-                      left:\"7px\"\n-                    }}\n+                  \n                   >\n                     {cartCount}\n                   </label>\n                 </div>\n"
+                },
+                {
+                    "date": 1741079999252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,14 +65,9 @@\n \n           <li href=\"#\">\n             <NavLink to=\"/Cart\" activeClassName=\"active\" style={{}}>\n               <div\n-                style={{\n-                  background: \"\",\n-                  width: \"20px\",\n-                  display: \"grid\",\n-                  marginTop: \"-22px\",\n-                }}\n+              \n               >\n                >\n                   <label\n                   \n"
+                },
+                {
+                    "date": 1741080011450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,9 +63,9 @@\n           </div>\n         </li>\n \n           <li href=\"#\">\n-            <NavLink to=\"/Cart\" activeClassName=\"active\" style={{}}>\n+            <NavLink to=\"/Cart\" activeClassName=\"active\">\n               <div\n               \n               >\n                >\n"
+                },
+                {
+                    "date": 1741080018291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n           <li className=\"navbar-logo\">\n             <h1>ApaxT</h1>\n           </li>\n \n-          <li className=\"Mobile-search\" style={{ marginTop: \"\" }}>\n+          <li className=\"Mobile-search\" >\n           <div className=\"Mobile-search-container\">\n             <input\n               type=\"text\"\n               placeholder=\"\"\n"
+                },
+                {
+                    "date": 1741080027306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n   return (\n     <>\n       <nav className=\"mobile-navbar\">\n-        <div style={{ display: \"flex\", justifyContent: \"space-between\" }}>\n+        <div}>\n           <button\n             className=\"menu-toggle\"\n             style={{ color: \"black\" }}\n             onClick={toggleMenu}\n"
+                },
+                {
+                    "date": 1741080040645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React, { useState } from \"react\";\n-import \"./MobileNavbar.css\";\n+\n import {AuthContext } from \"../../AuthContext\";\n import { useContext } from \"react\";\n import { Link, NavLink } from \"react-router-dom\";\n \n@@ -26,9 +26,9 @@\n \n   return (\n     <>\n       <nav className=\"mobile-navbar\">\n-        <div}>\n+        <div>\n           <button\n             className=\"menu-toggle\"\n             style={{ color: \"black\" }}\n             onClick={toggleMenu}\n"
+                },
+                {
+                    "date": 1741080053068,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n       <nav className=\"mobile-navbar\">\n         <div>\n           <button\n             className=\"menu-toggle\"\n-            style={{ color: \"black\" }}\n+         \n             onClick={toggleMenu}\n           >\n             {isMenuOpen ? \"✖\" : \"☰\"}\n           </button>\n"
+                },
+                {
+                    "date": 1741080336688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,160 +0,0 @@\n-import React, { useState } from \"react\";\n-\n-import {AuthContext } from \"../../AuthContext\";\n-import { useContext } from \"react\";\n-import { Link, NavLink } from \"react-router-dom\";\n-\n-function MobileNavbar({\n-  cart,\n-  searchTerm,\n-  setSearchTerm,\n-  search,\n-  cartCount,\n-  categories,\n-  displayusername,\n-  selectedCategory,\n-  setSelectedCategory,\n-}) {\n-\n-  const { username } = useContext(AuthContext);\n-  // const totalItems = cart.reduce((total, item) => total + item.forCount, 0);\n-  const [isMenuOpen, setIsMenuOpen] = useState(false);\n-\n-  const toggleMenu = () => {\n-    setIsMenuOpen(!isMenuOpen);\n-  };\n-\n-  return (\n-    <>\n-      <nav className=\"mobile-navbar\">\n-        <div>\n-          <button\n-            className=\"menu-toggle\"\n-         \n-            onClick={toggleMenu}\n-          >\n-            {isMenuOpen ? \"✖\" : \"☰\"}\n-          </button>\n-\n-          <li className=\"navbar-logo\">\n-            <h1>ApaxT</h1>\n-          </li>\n-\n-          <li className=\"Mobile-search\" >\n-          <div className=\"Mobile-search-container\">\n-            <input\n-              type=\"text\"\n-              placeholder=\"\"\n-              value={searchTerm}\n-              onChange={(e) => setSearchTerm(e.target.value)}\n-              className=\"search-input\"\n-            />\n-            <button onClick={search} className=\"Mobile-search-button\">\n-              <svg\n-                xmlns=\"http://www.w3.org/2000/svg\"\n-                height=\"34px\"\n-                viewBox=\"0 -960 960 960\"\n-                width=\"24px\"\n-                fill=\"red\"\n-              >\n-                <path d=\"M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z\" />\n-              </svg>\n-            </button>\n-          </div>\n-        </li>\n-\n-          <li href=\"#\">\n-            <NavLink to=\"/Cart\" activeClassName=\"active\">\n-              <div\n-              \n-              >\n-               >\n-                  <label\n-                  \n-                  >\n-                    {cartCount}\n-                  </label>\n-                </div>\n-                <div\n-                 \n-                >\n-                  <svg\n-                    \n-                    xmlns=\"http://www.w3.org/2000/svg\"\n-                    height=\"23px\"\n-                    viewBox=\"0 -960 960 960\"\n-                    width=\"25px\"\n-                    fill=\"#F19E39\"\n-                  >\n-                    <path d=\"M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z\" />\n-                  </svg>\n-                </div>{\" \"}\n-              </div>\n-            </NavLink>\n-          </li>\n-\n-          <li href=\"#\">\n-            <NavLink to=\"/dashboard\" actiiveClassName=\"active\">\n-              <div >\n-                <div>\n-                  <svg\n-                    xmlns=\"http://www.w3.org/2000/svg\"\n-                    height=\"48px\"\n-                    viewBox=\"0 -960 960 960\"\n-                    width=\"26px\"\n-                    fill=\"#999999\"\n-                  >\n-                    <path d=\"M222-255q63-44 125-67.5T480-346q71 0 133.5 23.5T739-255q44-54 62.5-109T820-480q0-145-97.5-242.5T480-820q-145 0-242.5 97.5T140-480q0 61 19 116t63 109Zm257.81-195q-57.81 0-97.31-39.69-39.5-39.68-39.5-97.5 0-57.81 39.69-97.31 39.68-39.5 97.5-39.5 57.81 0 97.31 39.69 39.5 39.68 39.5 97.5 0 57.81-39.69 97.31-39.68 39.5-97.5 39.5Zm.66 370Q398-80 325-111.5t-127.5-86q-54.5-54.5-86-127.27Q80-397.53 80-480.27 80-563 111.5-635.5q31.5-72.5 86-127t127.27-86q72.76-31.5 155.5-31.5 82.73 0 155.23 31.5 72.5 31.5 127 86t86 127.03q31.5 72.53 31.5 155T848.5-325q-31.5 73-86 127.5t-127.03 86Q562.94-80 480.47-80Zm-.47-60q55 0 107.5-16T691-212q-51-36-104-55t-107-19q-54 0-107 19t-104 55q51 40 103.5 56T480-140Zm0-370q34 0 55.5-21.5T557-587q0-34-21.5-55.5T480-664q-34 0-55.5 21.5T403-587q0 34 21.5 55.5T480-510Zm0-77Zm0 374Z\" />\n-                  </svg>\n-                </div>\n-                <div>{username}</div>\n-              </div>\n-            </NavLink>\n-          </li>\n-        </div>\n-        {isMenuOpen && (\n-          <ul className=\"mobile-menu\">\n-            <li>\n-              <NavLink to=\"/\" actiiveClassName=\"active\" exact>\n-                Home\n-              </NavLink>\n-            </li>\n-            <li>\n-              <NavLink to=\"/products\" actiiveClassName=\"active\">\n-                Products\n-              </NavLink>\n-            </li>\n-\n-            <li href=\"#\">\n-              {\" \"}\n-              <NavLink to=\"/category\">\n-              <select\n-             \n-              value={searchTerm}\n-              onChange={(e) => setSearchTerm(e.target.value)}\n-            >\n-              <option value=\"\" onClick={search}>\n-                Category\n-              </option>\n-              {categories.map((category, index) => (\n-                <option key={index} value={category} onClick={search}>\n-                  {category}\n-                </option>\n-              ))}\n-            </select>\n-              </NavLink>{\" \"}\n-            </li>\n-\n-            <li>\n-              <NavLink to=\"/newProduct\" actiiveClassName=\"active\">\n-                Sell\n-              </NavLink>\n-            </li>\n-          </ul>\n-        )}\n-      </nav>\n-    </>\n-  );\n-}\n-\n-export default MobileNavbar;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741625871898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,161 @@\n-\n+.navbar {\n+    background: #fff;\n+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n+    padding: 10px 20px;\n+    display: flex;\n+    align-items: center;\n+    justify-content: space-between;\n+    position: fixed;\n+    width: 100%;\n+    top: 0;\n+    z-index: 1000;\n+  }\n+  \n+  /* Menu Toggle */\n+  .menu-toggle {\n+    font-size: 24px;\n+    background: none;\n+    border: none;\n+    cursor: pointer;\n+    transition: 0.3s;\n+  }\n+  \n+  .menu-toggle:hover {\n+    color: #f19e39;\n+  }\n+  \n+  /* Logo */\n+  .logo {\n+    font-size: 50px;\n+    font-weight: bold;\n+    color: red;\n+  }\n+  \n+  /* Search Container */\n+  .search-container {\n+    display: flex;\n+    align-items: center;\n+    background: #f5f5f5;\n+    padding: 5px;\n+    border-radius: 5px;\n+  }\n+  \n+  .search-input {\n+    border: none;\n+    background: transparent;\n+    padding: 5px;\n+    outline: none;\n+    width: 120px;\n+  }\n+  \n+  .search-button {\n+    background: none;\n+    border: none;\n+    cursor: pointer;\n+  }\n+  \n+  /* Cart Icon Container */\n+  .cart-icon-container {\n+    position: relative;\n+    display: flex;\n+    align-items: center;\n+  }\n+  \n+  .cart-count {\n+    position: absolute;\n+    top: -10px;\n+    right: -5px;\n+    background: red;\n+    color: white;\n+    font-size: 12px;\n+    border-radius: 50%;\n+    width: 18px;\n+    height: 18px;\n+    display: flex;\n+    align-items: center;\n+    justify-content: center;\n+  }\n+  \n+  /* Account Container */\n+  .account-container {\n+    display: flex;\n+    flex-direction: column;\n+    align-items: center;\n+    cursor: pointer;\n+    font-size: 14px;\n+  }\n+  \n+  .profile-image {\n+    width: 30px;\n+    height: 30px;\n+    border-radius: 50%;\n+    object-fit: cover;\n+    margin-bottom: 4px; /* Add space between image and username */\n+  }\n+  \n+  /* Mobile Menu */\n+  .mobile-menu {\n+    list-style: none;\n+    background: #fff;\n+    position: absolute;\n+    top: 60px;\n+    left: 0px;\n+    width: 50%;\n+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n+    padding: 15px;\n+    display: none;\n+    animation: slideDown 0.3s ease-in-out;\n+  }\n+  \n+  .mobile-menu.open {\n+    display: block;\n+  }\n+  \n+  @keyframes slideDown {\n+    from {\n+      transform: translateY(-10px);\n+      opacity: 0;\n+    }\n+    to {\n+      transform: translateY(0);\n+      opacity: 1;\n+    }\n+  }\n+  \n+  .mobile-menu li {\n+    padding: 10px 0;\n+    text-align: center;\n+  }\n+  \n+  .mobile-menu a {\n+    text-decoration: none;\n+    color: #333;\n+    font-weight: bold;\n+  }\n+  \n+  .mobile-menu a:hover {\n+    color: #f19e39;\n+  }\n+  \n+  /* NavLink Styles */\n+  .nav-link {\n+    color: red;\n+    font-size: 20px;\n+    text-decoration: none;\n+  }\n+  \n+  /* Select Dropdown */\n+  .select-dropdown {\n+    width: 20%;\n+    color: red;\n+    background: none;\n+    border: none;\n+    font-weight: bold;\n+    font-size: 20px;\n+  }\n+  \n+  /* Option Styles */\n+  .option {\n+    background: red;\n+    color: white;\n+  }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741626425739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     border: none;\n     background: transparent;\n     padding: 5px;\n     outline: none;\n-    width: 120px;\n+    width: 10px;\n   }\n   \n   .search-button {\n     background: none;\n"
+                },
+                {
+                    "date": 1741626440192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     border: none;\n     background: transparent;\n     padding: 5px;\n     outline: none;\n-    width: 10px;\n+    width: auto;\n   }\n   \n   .search-button {\n     background: none;\n"
+                },
+                {
+                    "date": 1741626450547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     border: none;\n     background: transparent;\n     padding: 5px;\n     outline: none;\n-    width: auto;\n+    width: 100px;\n   }\n   \n   .search-button {\n     background: none;\n"
+                },
+                {
+                    "date": 1741626463266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     border: none;\n     background: transparent;\n     padding: 5px;\n     outline: none;\n-    width: 100px;\n+    minwidth: 100px;\n   }\n   \n   .search-button {\n     background: none;\n"
+                },
+                {
+                    "date": 1741626472260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     border: none;\n     background: transparent;\n     padding: 5px;\n     outline: none;\n-    minwidth: 100px;\n+    min-width: none;\n   }\n   \n   .search-button {\n     background: none;\n"
+                },
+                {
+                    "date": 1741626506819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     border: none;\n     background: transparent;\n     padding: 5px;\n     outline: none;\n-    min-width: none;\n+    min-width: 10px;\n   }\n   \n   .search-button {\n     background: none;\n"
+                },
+                {
+                    "date": 1741626514075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     border: none;\n     background: transparent;\n     padding: 5px;\n     outline: none;\n-    min-width: 10px;\n+    minwidth: 100px;\n   }\n   \n   .search-button {\n     background: none;\n"
+                },
+                {
+                    "date": 1741626520785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     border: none;\n     background: transparent;\n     padding: 5px;\n     outline: none;\n-    minwidth: 100px;\n+    width: 10px;\n   }\n   \n   .search-button {\n     background: none;\n"
+                },
+                {
+                    "date": 1741628397250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-.navbar {\n+/* .navbar {\n     background: #fff;\n     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n     padding: 10px 20px;\n     display: flex;\n@@ -44,9 +44,9 @@\n     border: none;\n     background: transparent;\n     padding: 5px;\n     outline: none;\n-    width: 10px;\n+    width: 50px;\n   }\n   \n   .search-button {\n     background: none;\n@@ -157,5 +157,5 @@\n   /* Option Styles */\n   .option {\n     background: red;\n     color: white;\n-  }\n\\ No newline at end of file\n+  } */\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1736962450793,
+            "name": "Commit-0",
+            "content": ".mobile-navbar {\n    background-color: #333;\n    color: white;\n    padding: 10px;\n    position: relative;\n}\n\n.menu-toggle {\n    font-size: 24px;\n    background: none;\n    color: white;\n    border: none;\n    cursor: pointer;\n}\n\n.mobile-menu {\n    display: flex;\n    flex-direction: column;\n    position: absolute;\n    top: 100%;\n    left: 0;\n    width: 100%;\n    background-color: #333;\n    padding: 10px 0;\n    list-style: none;\n    margin: 0;\n}\n\n.mobile-menu li {\n    padding: 10px 20px;\n    border-bottom: 1px solid #444;\n    color: white;\n    cursor: pointer;\n}\n\n.mobile-menu li:hover {\n    background-color: #555;\n}"
+        }
+    ]
+}

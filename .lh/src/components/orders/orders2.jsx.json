@@ -1,0 +1,50 @@
+{
+    "sourceFile": "src/components/orders/orders2.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1742917697864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742917837798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useState, useEffect } from 'react';\n-import { fetchAllOrders } from '../../services/orderService';\n \n+\n const OrderList = () => {\n   const [orders, setOrders] = useState([]);\n   const [loading, setLoading] = useState(true);\n   const [error, setError] = useState('');\n"
+                },
+                {
+                    "date": 1742917869215,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,21 +5,19 @@\n   const [orders, setOrders] = useState([]);\n   const [loading, setLoading] = useState(true);\n   const [error, setError] = useState('');\n \n+ const userId = localStorage.getItem(\"userId\")\n+  const token = localStorage.getItem(\"token\")\n+\n   useEffect(() => {\n-    const loadOrders = async () => {\n-      try {\n-        const data = await fetchAllOrders();\n-        setOrders(data);\n-      } catch (err) {\n-        setError(err.message);\n-      } finally {\n-        setLoading(false);\n-      }\n-    };\n-    loadOrders();\n-  }, []);\n+    fetch(`http://localhost:5000/orders/${userId}`, {\n+      headers: { Authorization: `Bearer ${token}` },\n+    })\n+      .then((res) => res.json())\n+      .then((data) => setOrders(data))\n+      .catch((error) => console.error(\"Error fetching orders:\", error));\n+  }, [userId, token]);\n \n   if (loading) return <div>Loading orders...</div>;\n   if (error) return <div className=\"alert alert-danger\">{error}</div>;\n \n"
+                },
+                {
+                    "date": 1742917938988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { useState, useEffect } from 'react';\n \n \n-const OrderList = () => {\n+const Orders2 = () => {\n   const [orders, setOrders] = useState([]);\n   const [loading, setLoading] = useState(true);\n   const [error, setError] = useState('');\n \n"
+                },
+                {
+                    "date": 1742917946319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,5 +59,5 @@\n     </div>\n   );\n };\n \n-export default OrderList\n\\ No newline at end of file\n+export default Orders2\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742918052882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,11 +17,8 @@\n       .then((data) => setOrders(data))\n       .catch((error) => console.error(\"Error fetching orders:\", error));\n   }, [userId, token]);\n \n-  if (loading) return <div>Loading orders...</div>;\n-  if (error) return <div className=\"alert alert-danger\">{error}</div>;\n-\n   return (\n     <div className=\"order-list\">\n       <h2>All Orders</h2>\n       <table className=\"table\">\n"
+                },
+                {
+                    "date": 1742918061745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n const Orders2 = () => {\n   const [orders, setOrders] = useState([]);\n   const [loading, setLoading] = useState(true);\n-  const [error, setError] = useState('');\n+ \n \n  const userId = localStorage.getItem(\"userId\")\n   const token = localStorage.getItem(\"token\")\n \n"
+                },
+                {
+                    "date": 1743761253061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n  const userId = localStorage.getItem(\"userId\")\n   const token = localStorage.getItem(\"token\")\n \n   useEffect(() => {\n-    fetch(`http://localhost:5000/orders/${userId}`, {\n+    fetch(`http://localhost:5000/orders`, {\n       headers: { Authorization: `Bearer ${token}` },\n     })\n       .then((res) => res.json())\n       .then((data) => setOrders(data))\n"
+                },
+                {
+                    "date": 1743761273838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n  const userId = localStorage.getItem(\"userId\")\n   const token = localStorage.getItem(\"token\")\n \n   useEffect(() => {\n-    fetch(`http://localhost:5000/orders`, {\n+    fetch(`http://localhost:5000/orders/${userId}`, {\n       headers: { Authorization: `Bearer ${token}` },\n     })\n       .then((res) => res.json())\n       .then((data) => setOrders(data))\n"
+                }
+            ],
+            "date": 1742917697864,
+            "name": "Commit-0",
+            "content": "import { useState, useEffect } from 'react';\nimport { fetchAllOrders } from '../../services/orderService';\n\nconst OrderList = () => {\n  const [orders, setOrders] = useState([]);\n  const [loading, setLoading] = useState(true);\n  const [error, setError] = useState('');\n\n  useEffect(() => {\n    const loadOrders = async () => {\n      try {\n        const data = await fetchAllOrders();\n        setOrders(data);\n      } catch (err) {\n        setError(err.message);\n      } finally {\n        setLoading(false);\n      }\n    };\n    loadOrders();\n  }, []);\n\n  if (loading) return <div>Loading orders...</div>;\n  if (error) return <div className=\"alert alert-danger\">{error}</div>;\n\n  return (\n    <div className=\"order-list\">\n      <h2>All Orders</h2>\n      <table className=\"table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>User</th>\n            <th>Date</th>\n            <th>Amount</th>\n            <th>Status</th>\n            <th>Delivery Date</th>\n            <th>Items</th>\n          </tr>\n        </thead>\n        <tbody>\n          {orders.map(order => (\n            <tr key={order.id}>\n              <td>{order.id}</td>\n              <td>{order.user.username} (ID: {order.user.userId})</td>\n              <td>{new Date(order.date).toLocaleString()}</td>\n              <td>${order.totalAmount.toFixed(2)}</td>\n              <td>{order.status}</td>\n              <td>{order.shipping.deliveryDate}</td>\n              <td>\n                {order.cart.map(item => (\n                  <div key={item.id}>\n                    {item.name} x{item.quantity}\n                  </div>\n                ))}\n              </td>\n            </tr>\n          ))}\n        </tbody>\n      </table>\n    </div>\n  );\n};\n\nexport default OrderList"
+        }
+    ]
+}

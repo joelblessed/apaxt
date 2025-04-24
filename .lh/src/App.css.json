@@ -1,0 +1,122 @@
+{
+    "sourceFile": "src/App.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 26,
+            "patches": [
+                {
+                    "date": 1739874602818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1739875835430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,29 +12,47 @@\n     animation: App-logo-spin infinite 20s linear;\n   }\n }\n \n-.App-header {\n-  background-color: #282c34;\n-  min-height: 100vh;\n+/* App.css */\n+\n+/* Container styling to make page scrollable */\n+.container {\n+  height: 2000px;\n+  padding: 50px;\n+  text-align: center;\n   display: flex;\n   flex-direction: column;\n   align-items: center;\n-  justify-content: center;\n-  font-size: calc(10px + 2vmin);\n-  color: white;\n }\n \n-.App-link {\n-  color: #61dafb;\n+/* Styling for content sections */\n+.content {\n+  padding: 50px;\n+  font-size: 24px;\n+  color: #333;\n }\n \n-@keyframes App-logo-spin {\n-  from {\n-    transform: rotate(0deg);\n-  }\n-  to {\n-    transform: rotate(360deg);\n-  }\n+/* Styling for the fade-box that appears/disappears */\n+.fade-box {\n+  opacity: 0;\n+  transform: translateY(50px);\n+  transition: opacity 0.6s ease, transform 0.6s ease;\n+  margin: 100px auto;\n+  padding: 30px;\n+  background-color: lightblue;\n+  border-radius: 5px;\n+  width: 300px;\n+  text-align: center;\n }\n \n+/* When the element is visible */\n+.fade-box.visible {\n+  opacity: 1;\n+  transform: translateY(0);\n+}\n \n+/* When the element is hidden */\n+.fade-box.hidden {\n+  opacity: 0;\n+  transform: translateY(50px);\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1739876175699,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,6 +53,6 @@\n \n /* When the element is hidden */\n .fade-box.hidden {\n   opacity: 0;\n-  transform: translateY(50px);\n+  transform: translateY(10px);\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1739876219330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,6 +53,6 @@\n \n /* When the element is hidden */\n .fade-box.hidden {\n   opacity: 0;\n-  transform: translateY(10px);\n+  transform: translateY(400px);\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1739876242583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,6 +53,6 @@\n \n /* When the element is hidden */\n .fade-box.hidden {\n   opacity: 0;\n-  transform: translateY(400px);\n+  transform: translateY(0px);\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1739876505730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,58 +1,75 @@\n-.App {\n-  text-align: center;\n-}\n+import React, { useState, useEffect, useRef } from \"react\";\n+import \"./App.css\";\n \n-.App-logo {\n-  height: 40vmin;\n-  pointer-events: none;\n-}\n+const ScrollEffect = () => {\n+  // List of elements we want to fade in\n+  const [boxes, setBoxes] = useState([1, 2, 3, 4, 5, 6, 7, 8]);\n \n-@media (prefers-reduced-motion: no-preference) {\n-  .App-logo {\n-    animation: App-logo-spin infinite 20s linear;\n-  }\n-}\n+  // Function to generate a list of elements\n+  const generateBoxes = () => {\n+    const newBoxes = [];\n+    for (let i = 0; i < 8; i++) {\n+      newBoxes.push(i);\n+    }\n+    setBoxes(newBoxes);\n+  };\n \n-/* App.css */\n+  useEffect(() => {\n+    generateBoxes(); // Create initial set of boxes\n+  }, []);\n \n-/* Container styling to make page scrollable */\n-.container {\n-  height: 2000px;\n-  padding: 50px;\n-  text-align: center;\n-  display: flex;\n-  flex-direction: column;\n-  align-items: center;\n-}\n+  return (\n+    <div className=\"container\">\n+      <div className=\"content\">\n+        <h1>Scroll down to see the fade-in effect</h1>\n+      </div>\n \n-/* Styling for content sections */\n-.content {\n-  padding: 50px;\n-  font-size: 24px;\n-  color: #333;\n-}\n+      {boxes.map((box, index) => (\n+        <FadeInBox key={index} />\n+      ))}\n \n\\ No newline at end of file\n-/* Styling for the fade-box that appears/disappears */\n-.fade-box {\n-  opacity: 0;\n-  transform: translateY(50px);\n-  transition: opacity 0.6s ease, transform 0.6s ease;\n-  margin: 100px auto;\n-  padding: 30px;\n-  background-color: lightblue;\n-  border-radius: 5px;\n-  width: 300px;\n-  text-align: center;\n-}\n+      <div className=\"content\">\n+        <h1>Keep scrolling...</h1>\n+      </div>\n \n-/* When the element is visible */\n-.fade-box.visible {\n-  opacity: 1;\n-  transform: translateY(0);\n-}\n+      <div className=\"content\">\n+        <h1>More content to scroll!</h1>\n+      </div>\n+    </div>\n+  );\n+};\n \n-/* When the element is hidden */\n-.fade-box.hidden {\n-  opacity: 0;\n-  transform: translateY(0px);\n-}\n+const FadeInBox = () => {\n+  const [isVisible, setIsVisible] = useState(false);\n+  const boxRef = useRef(null);\n+\n+  useEffect(() => {\n+    const observer = new IntersectionObserver(\n+      ([entry]) => {\n+        setIsVisible(entry.isIntersecting);\n+      },\n+      { threshold: 0.5 }\n+    );\n+\n+    if (boxRef.current) {\n+      observer.observe(boxRef.current);\n+    }\n+\n+    return () => {\n+      if (boxRef.current) {\n+        observer.unobserve(boxRef.current);\n+      }\n+    };\n+  }, []);\n+\n+  return (\n+    <div\n+      ref={boxRef}\n+      className={fade-box ${isVisible ? \"visible\" : \"hidden\"}}\n+    >\n+      <h2>This box fades in and out on scroll</h2>\n+    </div>\n+  );\n+};\n+\n+export default ScrollEffect\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1739876633756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,75 +1,59 @@\n-import React, { useState, useEffect, useRef } from \"react\";\n-import \"./App.css\";\n+.App {\n+  text-align: center;\n+}\n \n-const ScrollEffect = () => {\n-  // List of elements we want to fade in\n-  const [boxes, setBoxes] = useState([1, 2, 3, 4, 5, 6, 7, 8]);\n+.App-logo {\n+  height: 40vmin;\n+  pointer-events: none;\n+}\n \n-  // Function to generate a list of elements\n-  const generateBoxes = () => {\n-    const newBoxes = [];\n-    for (let i = 0; i < 8; i++) {\n-      newBoxes.push(i);\n-    }\n-    setBoxes(newBoxes);\n-  };\n+@media (prefers-reduced-motion: no-preference) {\n+  .App-logo {\n+    animation: App-logo-spin infinite 20s linear;\n+  }\n+}\n \n-  useEffect(() => {\n-    generateBoxes(); // Create initial set of boxes\n-  }, []);\n+/* App.css */\n \n-  return (\n-    <div className=\"container\">\n-      <div className=\"content\">\n-        <h1>Scroll down to see the fade-in effect</h1>\n-      </div>\n+/* Container styling to make page scrollable */\n+.container {\n+  height: 2000px;\n+  padding: 50px;\n+  text-align: center;\n+  display: flex;\n+  flex-direction: column;\n+  align-items: center;\n+}\n \n-      {boxes.map((box, index) => (\n-        <FadeInBox key={index} />\n-      ))}\n+/* Styling for content sections */\n+.content {\n+  padding: 50px;\n+  font-size: 24px;\n+  color: #333;\n+}\n \n-      <div className=\"content\">\n-        <h1>Keep scrolling...</h1>\n-      </div>\n+/* Styling for the fade-box that appears/disappears */\n+.fade-box {\n+  opacity: 0;\n+  transform: translateY(50px);\n+  transition: opacity 0.6s ease, transform 0.6s ease;\n+  margin: 100px auto;\n+  padding: 30px;\n+  background-color: lightblue;\n+  border-radius: 5px;\n+  width: 300px;\n+  text-align: center;\n+  transition-delay: 0.2s; /* Delay to allow the animation to smooth */\n+}\n \n\\ No newline at end of file\n-      <div className=\"content\">\n-        <h1>More content to scroll!</h1>\n-      </div>\n-    </div>\n-  );\n-};\n+/* When the element is visible */\n+.fade-box.visible {\n+  opacity: 1;\n+  transform: translateY(0);\n+}\n \n-const FadeInBox = () => {\n-  const [isVisible, setIsVisible] = useState(false);\n-  const boxRef = useRef(null);\n-\n-  useEffect(() => {\n-    const observer = new IntersectionObserver(\n-      ([entry]) => {\n-        setIsVisible(entry.isIntersecting);\n-      },\n-      { threshold: 0.5 }\n-    );\n-\n-    if (boxRef.current) {\n-      observer.observe(boxRef.current);\n-    }\n-\n-    return () => {\n-      if (boxRef.current) {\n-        observer.unobserve(boxRef.current);\n-      }\n-    };\n-  }, []);\n-\n-  return (\n-    <div\n-      ref={boxRef}\n-      className={fade-box ${isVisible ? \"visible\" : \"hidden\"}}\n-    >\n-      <h2>This box fades in and out on scroll</h2>\n-    </div>\n-  );\n-};\n-\n-export default ScrollEffect\n+/* When the element is hidden */\n+.fade-box.hidden {\n+  opacity: 0;\n+  transform: translateY(50px);\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740502733817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,59 +0,0 @@\n-.App {\n-  text-align: center;\n-}\n-\n-.App-logo {\n-  height: 40vmin;\n-  pointer-events: none;\n-}\n-\n-@media (prefers-reduced-motion: no-preference) {\n-  .App-logo {\n-    animation: App-logo-spin infinite 20s linear;\n-  }\n-}\n-\n-/* App.css */\n-\n-/* Container styling to make page scrollable */\n-.container {\n-  height: 2000px;\n-  padding: 50px;\n-  text-align: center;\n-  display: flex;\n-  flex-direction: column;\n-  align-items: center;\n-}\n-\n-/* Styling for content sections */\n-.content {\n-  padding: 50px;\n-  font-size: 24px;\n-  color: #333;\n-}\n-\n-/* Styling for the fade-box that appears/disappears */\n-.fade-box {\n-  opacity: 0;\n-  transform: translateY(50px);\n-  transition: opacity 0.6s ease, transform 0.6s ease;\n-  margin: 100px auto;\n-  padding: 30px;\n-  background-color: lightblue;\n-  border-radius: 5px;\n-  width: 300px;\n-  text-align: center;\n-  transition-delay: 0.2s; /* Delay to allow the animation to smooth */\n-}\n-\n-/* When the element is visible */\n-.fade-box.visible {\n-  opacity: 1;\n-  transform: translateY(0);\n-}\n-\n-/* When the element is hidden */\n-.fade-box.hidden {\n-  opacity: 0;\n-  transform: translateY(50px);\n-}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740502751064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,1 @@\n+body\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740502761087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-body\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740502768421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,1 @@\n+*\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740502776037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,3 @@\n-*\n\\ No newline at end of file\n+*{\n+  ma\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740502781856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n *{\n-  ma\n+  marginT\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740502787073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n *{\n-  marginT\n+  margin-top: 100px;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740502826087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n-*{\n+{\n   margin-top: 100px;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740502980717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +0,0 @@\n-{\n-  margin-top: 100px;\n-}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742689956140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,1 @@\n+*\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742689962670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-*\n\\ No newline at end of file\n+*{}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742689970090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,3 @@\n-*{}\n\\ No newline at end of file\n+*{\n+    b\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742690024648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n-*{\n-    b\n+body{\n+    background-color: black;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742690042450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n-body{\n+.body{\n     background-color: black;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742690059304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n-.body{\n+*{\n     background-color: black;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742690076853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n *{\n-    background-color: black;\n+    background-color: rgba(0, 0, 0, 0.378);\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742690095019,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n *{\n-    background-color: rgba(0, 0, 0, 0.378);\n+    background: rgba(0, 0, 0, 0.378);\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742691942441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +0,0 @@\n-*{\n-    background: rgba(0, 0, 0, 0.378);\n-}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742802574037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,19 @@\n+mport { useTranslation } from \"react-i18next\";\n+// import \"./products.css\";\n+\n+const CategoryPage = ({api,highlightText,addToCart, addToWishList, handleProductClick, searchTerm}) => {\n+  const { categoryName } = useParams();\n+  const [products, setProducts] = useState([]);\n+  const dispatch = useDispatch();\n+  const { t } = useTranslation();\n+  \n+\n+  useEffect(() => {\n+    fetch(`${api}/products`)\n+      .then((res) => res.json())\n+      .then((data) => {\n+        const products = data.filter((product) => product.category === categoryName);\n+        setProducts(products);\n+      })\n+      .catch((error) => console.error(\"Error fetching products:\", error));\n+  }, [categoryName]);\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742803340461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-mport { useTranslation } from \"react-i18next\";\n+/* mport { useTranslation } from \"react-i18next\";\n // import \"./products.css\";\n \n const CategoryPage = ({api,highlightText,addToCart, addToWishList, handleProductClick, searchTerm}) => {\n   const { categoryName } = useParams();\n@@ -15,5 +15,5 @@\n         const products = data.filter((product) => product.category === categoryName);\n         setProducts(products);\n       })\n       .catch((error) => console.error(\"Error fetching products:\", error));\n-  }, [categoryName]);\n\\ No newline at end of file\n+  }, [categoryName]); */\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1739874602818,
+            "name": "Commit-0",
+            "content": ".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n.App-header {\n  background-color: #282c34;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n\n"
+        }
+    ]
+}

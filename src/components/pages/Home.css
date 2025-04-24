@@ -1,0 +1,157 @@
+* General Styles */
+.landing-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Promotions Section */
+.promotions {
+  margin-bottom: 40px;
+}
+
+.promotion-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.promotion-card {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.promotion-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.promo-content {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: #fff;
+}
+
+.promo-content h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.promo-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #e64a19;
+}
+
+/* Categories Section */
+.categories {
+  margin-bottom: 40px;
+}
+
+.category-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.category-card {
+  text-align: center;
+  width: 150px;
+}
+
+.category-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.category-card h3 {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* Top Selling Items Section */
+.top-selling {
+  margin-bottom: 40px;
+}
+
+.product-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.product-card p {
+  font-size: 16px;
+  color: #ff5722;
+  margin: 10px 0;
+}
+
+.product-card button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-card button:hover {
+  background-color: #555;
+}
+
+/* Last Viewed Product Section */
+.last-viewed {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.last-viewed .product-card {
+  margin: 0 auto;
+}

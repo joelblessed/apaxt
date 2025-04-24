@@ -1,0 +1,178 @@
+import React, { useEffect, useState, useRef } from "react";
+import "./products.css";
+import { AuthContext } from "../../AuthContext";
+import { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCartBeforeLogin, addToCartAPI } from "../../cartAction";
+import styled, { keyframes } from "styled-components";
+
+import Slider from "react-slick";
+import { useNavigate, Link } from "react-router-dom";
+import "../translations/i18n";
+import { useTranslation } from "react-i18next";
+import SelectedProductDesktop from "./selectedProductsDesktop";
+import MobileCard from "./ProductCards/MobileCard";
+import DesktopCards from "./ProductCards/DesktopCards";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishlist, removeFromWishlist } from "../../wishlistSlice";
+
+import {
+  BoxContainer,
+  AddtocartButton,
+  MAddtocartButton,
+  MAddToWishList,
+  Price,
+  Discount,
+  DescriptionContainer,
+  DescriptionTitle,
+  DescriptionContent,
+  StatusContainer,
+  StatusContent,
+  StatusTitle,
+  CloseButton,
+  Name,
+  positions,
+  fontSizes,
+  categoryShadow,
+  iospositions,
+  iosfontSizes,
+} from "./styledComponents";
+
+const Box = ({
+  api,
+  loading,
+  add,
+  images,
+  filteredProducts,
+  SelectedProduct,
+  addToCart,
+  handleShowAlert,
+  showAlert,
+  searchTerm,
+  highlightText,
+  selectedCategory,
+  Fortop,
+
+  toggleLike,
+  // show,
+  handleProductClick,
+  // handleProductHid,
+  Mobject,
+  Dobject,
+  WishlistArray,
+  // isMobile,
+  // setSelectedProduct,
+  // selectedProduct,
+  // showDetails,
+  // position,
+  // Iposition,
+  // fontSize,
+  // IfontSize,
+}) => {
+  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch(); // Function to check screen size
+  const [isExpanded, setIsExpanded] = useState(false);
+  const userId = localStorage.getItem("userId") || "guest"; // Check user login
+  const maxLength = 20;
+  const [showDetails, setShowDetails] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const previewRef = useRef(null);
+
+  const position = positions[i18n.language] || position.en;
+  const fontSize = fontSizes[i18n.language] || fontSize.en;
+  const Iposition = iospositions[i18n.language] || position.en;
+  const IfontSize = iosfontSizes[i18n.language] || fontSize.en;
+
+  // Function to check screen size
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 1000);
+  };
+
+  useEffect(() => {
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize); // Update on resize
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleProductHid = () => {
+    setSelectedProduct(null);
+  };
+
+  const show = (event) => {
+    setShowDetails((prevShow) => !prevShow);
+    if (previewRef.current && !previewRef.current.contains(event.target)) {
+    }
+  };
+
+
+  const wishlistArray = useSelector((state) => state.wishlist.items)
+      .map((id) => id.toString());
+
+  const isInWishlist = wishlistArray.includes(product.id.toString());
+
+  const handleWishlistToggle = () => {
+      if (isInWishlist) {
+          dispatch(removeFromWishlist({ productId: product.id, userId }));
+      } else {
+          dispatch(addToWishlist({ productId: product.id, userId }));
+      }
+  };
+  
+
+  return (
+    <>
+      {isMobile ? (
+        <MobileCard
+          addToCartAPI={addToCartAPI}
+          addToCartBeforeLogin={addToCartBeforeLogin}
+          addToWishlist={addToWishlist}
+          handleWishlistToggle={handleWishlistToggle}
+          isInWishlist
+          Mobject={Mobject}
+          handleProductClick={handleProductClick}
+          show={show}
+          position={position}
+          Iposition={Iposition}
+          userId={userId}
+          highlightText={highlightText}
+          searchTerm={searchTerm}
+          fontSize={fontSize}
+          IfontSize={IfontSize}
+          showDetails={showDetails}
+          maxLength={maxLength}
+          isExpanded={isExpanded}
+          WishlistArray={WishlistArray}
+
+        />
+      ) : (
+        <DesktopCards
+          addToCartAPI={addToCartAPI}
+          addToCartBeforeLogin={addToCartBeforeLogin}
+          addToWishlist={addToWishlist}
+          Dobject={Dobject}
+          show={show}
+          position={position}
+          Iposition={Iposition}
+          userId={userId}
+          highlightText={highlightText}
+          searchTerm={searchTerm}
+          fontSize={fontSize}
+          IfontSize={IfontSize}
+          showDetails={showDetails}
+          selectedProduct={selectedProduct}
+          handleProductHid={handleProductHid}
+          setSelectedProduct={setSelectedProduct}
+          isExpanded={isExpanded}
+          toggleLike={toggleLike}
+          SelectedProductDesktop={SelectedProductDesktop}
+          maxLength={maxLength}
+        WishlistArray={WishlistArray}
+        />
+      )}
+    </>
+  );
+};
+
+export default Box;

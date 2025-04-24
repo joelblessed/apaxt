@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/account/dashboard.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1740606303620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740606312674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-dashboard {\n+.dashboard {\n     padding: 20px;\n     font-family: Arial, sans-serif;\n   }\n   \n"
+                },
+                {
+                    "date": 1740607147828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,20 @@\n+/* dashboard.css */\n .dashboard {\n     padding: 20px;\n-    font-family: Arial, sans-serif;\n   }\n   \n-  .dashboard-header {\n+  header {\n     display: flex;\n     justify-content: space-between;\n     align-items: center;\n-    margin-bottom: 20px;\n   }\n   \n   .user-profile,\n   .account-settings,\n   .product-preview,\n   .sales-records {\n-    margin-bottom: 30px;\n+    margin-bottom: 20px;\n   }\n   \n   .profile-picture img {\n     width: 100px;\n@@ -23,48 +22,35 @@\n     border-radius: 50%;\n     object-fit: cover;\n   }\n   \n-  .upload-input {\n+  .profile-picture input {\n+    display: block;\n     margin-top: 10px;\n   }\n   \n-  .product-list {\n-    list-style: none;\n+  .product-preview ul {\n+    list-style-type: none;\n     padding: 0;\n   }\n   \n-  .product-item {\n+  .product-preview li {\n     border: 1px solid #ddd;\n     padding: 10px;\n     margin-bottom: 10px;\n-    border-radius: 5px;\n   }\n   \n-  .sales-table {\n+  .sales-records table {\n     width: 100%;\n     border-collapse: collapse;\n   }\n   \n-  .sales-table th,\n-  .sales-table td {\n+  .sales-records th,\n+  .sales-records td {\n     border: 1px solid #ddd;\n     padding: 8px;\n     text-align: left;\n   }\n   \n-  .sales-table th {\n+  .sales-records th {\n     background-color: #f4f4f4;\n-  }\n-  \n-  button {\n-    padding: 8px 16px;\n-    background-color: #007bff;\n-    color: white;\n-    border: none;\n-    border-radius: 4px;\n-    cursor: pointer;\n-  }\n-  \n-  button:hover {\n-    background-color: #0056b3;\n   }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1740606303620,
+            "name": "Commit-0",
+            "content": "dashboard {\n    padding: 20px;\n    font-family: Arial, sans-serif;\n  }\n  \n  .dashboard-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n  }\n  \n  .user-profile,\n  .account-settings,\n  .product-preview,\n  .sales-records {\n    margin-bottom: 30px;\n  }\n  \n  .profile-picture img {\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n    object-fit: cover;\n  }\n  \n  .upload-input {\n    margin-top: 10px;\n  }\n  \n  .product-list {\n    list-style: none;\n    padding: 0;\n  }\n  \n  .product-item {\n    border: 1px solid #ddd;\n    padding: 10px;\n    margin-bottom: 10px;\n    border-radius: 5px;\n  }\n  \n  .sales-table {\n    width: 100%;\n    border-collapse: collapse;\n  }\n  \n  .sales-table th,\n  .sales-table td {\n    border: 1px solid #ddd;\n    padding: 8px;\n    text-align: left;\n  }\n  \n  .sales-table th {\n    background-color: #f4f4f4;\n  }\n  \n  button {\n    padding: 8px 16px;\n    background-color: #007bff;\n    color: white;\n    border: none;\n    border-radius: 4px;\n    cursor: pointer;\n  }\n  \n  button:hover {\n    background-color: #0056b3;\n  }"
+        }
+    ]
+}

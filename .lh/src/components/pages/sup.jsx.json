@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/components/pages/sup.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1743745587915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743745597392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,11 @@\n-rafece\n\\ No newline at end of file\n+import React from 'react'\n+\n+const up = () => {\n+  return (\n+    <div>\n+      \n+    </div>\n+  )\n+}\n+\n+export default up\n"
+                },
+                {
+                    "date": 1743745606271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n import React from 'react'\n \n-const up = () => {\n+const Sup = () => {\n   return (\n     <div>\n-      \n+      he\n     </div>\n   )\n }\n \n-export default up\n+export default Sup\n"
+                },
+                {
+                    "date": 1743745615408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n const Sup = () => {\n   return (\n     <div>\n-      he\n+      \n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1743745625551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n const Sup = () => {\n   return (\n     <div>\n-      \n+      <h4\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1743745792346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import React from 'react'\n \n-const Sup = () => {\n+const Sup = (fiil) => {\n   return (\n     <div>\n-      <h4\n+      <h4>hello me</h4>\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1743745798331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from 'react'\n \n-const Sup = (fi) => {\n+const Sup = (filteredProducts) => {\n   return (\n     <div>\n       <h4>hello me</h4>\n     </div>\n"
+                },
+                {
+                    "date": 1743745843014,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n const Sup = (filteredProducts) => {\n   return (\n     <div>\n-        {f}\n+        {fil}\n       <h4>hello me</h4>\n     </div>\n   )\n }\n"
+                }
+            ],
+            "date": 1743745587915,
+            "name": "Commit-0",
+            "content": "rafece"
+        }
+    ]
+}

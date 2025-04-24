@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/pages/selectedProductStyles.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1743502023183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743502039528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+import styled from \"styled-components\";\n+import { Link } from \"react-router-dom\";\n \n export const Container = styled.div`\n   padding: 20px;\n   margin: 50px auto;\n"
+                }
+            ],
+            "date": 1743502023183,
+            "name": "Commit-0",
+            "content": "\nexport const Container = styled.div`\n  padding: 20px;\n  margin: 50px auto;\n  max-width: 90%;\n  border-radius: 10px;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n  background: white;\n`;\n\nexport const ProductWrapper = styled.div`\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n  }\n`;\n\nexport const ImageContainer = styled.div`\n  width: 100%;\n  max-width: 400px;\n  margin-bottom: 20px;\n\n  @media (min-width: 768px) {\n    width: 50%;\n    margin-bottom: 0;\n  }\n`;\n\nexport const ProductImage = styled.img`\n  width: 100%;\n  border-radius: 8px;\n`;\n\nexport const NoImage = styled.p`\n  text-align: center;\n  font-size: 14px;\n  color: gray;\n`;\n\nexport const DetailsContainer = styled.div`\n  flex: 1;\n  padding: 20px;\n`;\n\nexport const SellerLink = styled(Link)`\n  font-size: 16px;\n  color: blue;\n  text-decoration: none;\n  font-weight: bold;\n`;\n\nexport const ProductTitle = styled.h1`\n  font-size: 24px;\n  margin: 10px 0;\n`;\n\nexport const ProductPrice = styled.p`\n  font-size: 18px;\n  font-weight: bold;\n`;\n\nexport const Rating = styled.div`\n  font-size: 20px;\n  margin: 10px 0;\n  color: gold;\n`;\n\nexport const ButtonsContainer = styled.div`\n  display: flex;\n  gap: 10px;\n  margin-top: 10px;\n`;\n\nexport const ActionButton = styled.button`\n  padding: 10px 20px;\n  border: 2px solid ${(props) => (props.secondary ? \"gray\" : \"orangered\")};\n  background: ${(props) => (props.secondary ? \"none\" : \"orangered\")};\n  color: ${(props) => (props.secondary ? \"gray\" : \"white\")};\n  border-radius: 5px;\n  cursor: pointer;\n  font-size: 16px;\n\n  &:hover {\n    background: ${(props) => (props.secondary ? \"lightgray\" : \"darkorange\")};\n  }\n`;\n\nexport const Tabs = styled.div`\n  display: flex;\n  justify-content: center;\n  margin-top: 20px;\n  border-bottom: 2px solid lightgray;\n`;\n\nexport const TabButton = styled.button`\n  flex: 1;\n  padding: 10px;\n  font-size: 16px;\n  border: none;\n  background: ${(props) => (props.active ? \"orangered\" : \"none\")};\n  color: ${(props) => (props.active ? \"white\" : \"black\")};\n  cursor: pointer;\n\n  &:hover {\n    background: ${(props) => (props.active ? \"darkorange\" : \"lightgray\")};\n  }\n`;\n\nexport const TabContent = styled.div`\n  padding: 20px;\n  font-size: 16px;\n`;\n\nexport const LoadingMessage = styled.div`\n  text-align: center;\n  font-size: 18px;\n  color: gray;\n  padding: 20px;\n`;"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/AuthContext.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1738861402065,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1738861407779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n   useEffect(() => {\n     const token = localStorage.getItem(\"token\");\n     const role = localStorage.getItem(\"role\");\n-    \n+    user\n     if (token && role) {\n       setUser({ token, role });\n     }\n   }, []);\n"
+                },
+                {
+                    "date": 1738861416354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n   useEffect(() => {\n     const token = localStorage.getItem(\"token\");\n     const role = localStorage.getItem(\"role\");\n-    user\n+    const\n     if (token && role) {\n       setUser({ token, role });\n     }\n   }, []);\n"
+                },
+                {
+                    "date": 1738861422846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n   useEffect(() => {\n     const token = localStorage.getItem(\"token\");\n     const role = localStorage.getItem(\"role\");\n-    const\n+    const user\n     if (token && role) {\n       setUser({ token, role });\n     }\n   }, []);\n"
+                },
+                {
+                    "date": 1738861428417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n   useEffect(() => {\n     const token = localStorage.getItem(\"token\");\n     const role = localStorage.getItem(\"role\");\n-    const username = \n+    const username = localStorage.removeItem(\"username\");\n     if (token && role) {\n       setUser({ token, role });\n     }\n   }, []);\n"
+                },
+                {
+                    "date": 1738861448071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     const token = localStorage.getItem(\"token\");\n     const role = localStorage.getItem(\"role\");\n     const username = localStorage.removeItem(\"username\");\n     if (token && role) {\n-      setUser({ usertoken, role });\n+      setUser({ username,token, role });\n     }\n   }, []);\n \n   const login = (token, role) => {\n"
+                }
+            ],
+            "date": 1738861402065,
+            "name": "Commit-0",
+            "content": "import { createContext, useState, useEffect } from \"react\";\n\nexport const AuthContext = createContext();\n\nexport const AuthProvider = ({ children }) => {\n  const [user, setUser] = useState(null);\n\n  useEffect(() => {\n    const token = localStorage.getItem(\"token\");\n    const role = localStorage.getItem(\"role\");\n    \n    if (token && role) {\n      setUser({ token, role });\n    }\n  }, []);\n\n  const login = (token, role) => {\n    localStorage.setItem(\"token\", token);\n    localStorage.setItem(\"role\", role);\n    setUser({ token, role });\n  };\n\n  const logout = () => {\n    localStorage.removeItem(\"token\");\n    localStorage.removeItem(\"role\");\n    setUser(null);\n  };\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n};"
+        }
+    ]
+}

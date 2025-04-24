@@ -1,0 +1,218 @@
+{
+    "sourceFile": "src/cartSlice.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 50,
+            "patches": [
+                {
+                    "date": 1739391686990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1739391696184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-mport { createSlice } from \"@reduxjs/toolkit\";\n+import { createSlice } from \"@reduxjs/toolkit\";\n \n const initialState = {\n   items: JSON.parse(localStorage.getItem(\"guestCart\")) || [],\n };\n"
+                },
+                {
+                    "date": 1740134631020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,27 +1,39 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const initialState = {\n-  items: JSON.parse(localStorage.getItem(\"guestCart\")) || [],\n+const loadCartFromLocalStorage = () => {\n+  try {\n+    const cart = localStorage.getItem(\"cart\");\n+    return cart ? JSON.parse(cart) : [];\n+  } catch (error) {\n+    console.error(\"Error loading cart from localStorage:\", error);\n+    return [];\n+  }\n };\n \n const cartSlice = createSlice({\n   name: \"cart\",\n-  initialState,\n+  initialState: {\n+    items: loadCartFromLocalStorage(),\n+  },\n   reducers: {\n     addToCart: (state, action) => {\n       state.items.push(action.payload);\n-      localStorage.setItem(\"guestCart\", JSON.stringify(state.items));\n+      localStorage.setItem(\"cart\", JSON.stringify(state.items));\n     },\n     removeFromCart: (state, action) => {\n       state.items = state.items.filter(item => item.id !== action.payload);\n-      localStorage.setItem(\"guestCart\", JSON.stringify(state.items));\n+      localStorage.setItem(\"cart\", JSON.stringify(state.items));\n     },\n-    setCart: (state, action) => {\n+    clearCart: (state) => {\n+      state.items = [];\n+      localStorage.removeItem(\"cart\");\n+    },\n+    syncCartWithServer: (state, action) => {\n       state.items = action.payload;\n-      localStorage.setItem(\"guestCart\", JSON.stringify(state.items));\n-    }\n+      localStorage.setItem(\"cart\", JSON.stringify(action.payload));\n+    },\n   },\n });\n \n-export const { addToCart, removeFromCart, setCart } = cartSlice.actions;\n+export const { addToCart, removeFromCart, clearCart, syncCartWithServer } = cartSlice.actions;\n export default cartSlice.reducer;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740473909108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,39 +1,28 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const loadCartFromLocalStorage = () => {\n-  try {\n-    const cart = localStorage.getItem(\"cart\");\n-    return cart ? JSON.parse(cart) : [];\n-  } catch (error) {\n-    console.error(\"Error loading cart from localStorage:\", error);\n-    return [];\n-  }\n-};\n-\n const cartSlice = createSlice({\n-  name: \"cart\",\n-  initialState: {\n-    items: loadCartFromLocalStorage(),\n-  },\n-  reducers: {\n-    addToCart: (state, action) => {\n-      state.items.push(action.payload);\n-      localStorage.setItem(\"cart\", JSON.stringify(state.items));\n+    name: \"cart\",\n+    initialState: {\n+        items: [],\n     },\n-    removeFromCart: (state, action) => {\n-      state.items = state.items.filter(item => item.id !== action.payload);\n-      localStorage.setItem(\"cart\", JSON.stringify(state.items));\n-    },\n-    clearCart: (state) => {\n-      state.items = [];\n-      localStorage.removeItem(\"cart\");\n-    },\n-    syncCartWithServer: (state, action) => {\n-      state.items = action.payload;\n-      localStorage.setItem(\"cart\", JSON.stringify(action.payload));\n-    },\n-  },\n+    reducers: {\n+        setCart: (state, action) => {\n+            state.items = action.payload;\n+        },\n+        addToCart: (state, action) => {\n+            state.items.push(action.payload);\n+            localStorage.setItem(\"cart\", JSON.stringify(state.items)); // Save to localStorage\n+        },\n+        removeFromCart: (state, action) => {\n+            state.items = state.items.filter(item => item.id !== action.payload);\n+            localStorage.setItem(\"cart\", JSON.stringify(state.items));\n+        },\n+        clearCart: (state) => {\n+            state.items = [];\n+            localStorage.removeItem(\"cart\");\n+        }\n+    }\n });\n \n-export const { addToCart, removeFromCart, clearCart, syncCartWithServer } = cartSlice.actions;\n+export const { setCart, addToCart, removeFromCart, clearCart } = cartSlice.actions;\n export default cartSlice.reducer;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740492240881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,28 +1,77 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n+const initialState = {\n+  items: [], // Cart items\n+};\n+\n const cartSlice = createSlice({\n-    name: \"cart\",\n-    initialState: {\n-        items: [],\n+  name: \"cart\",\n+  initialState,\n+  reducers: {\n+    // Set the entire cart (used when loading the cart from localStorage or backend)\n+    setCart: (state, action) => {\n+      state.items = action.payload;\n     },\n-    reducers: {\n-        setCart: (state, action) => {\n-            state.items = action.payload;\n-        },\n-        addToCart: (state, action) => {\n-            state.items.push(action.payload);\n-            localStorage.setItem(\"cart\", JSON.stringify(state.items)); // Save to localStorage\n-        },\n-        removeFromCart: (state, action) => {\n-            state.items = state.items.filter(item => item.id !== action.payload);\n-            localStorage.setItem(\"cart\", JSON.stringify(state.items));\n\\ No newline at end of file\n-        },\n-        clearCart: (state) => {\n-            state.items = [];\n-            localStorage.removeItem(\"cart\");\n+\n+    // Add a product to the cart\n+    addToCart: (state, action) => {\n+      const existingProductIndex = state.items.findIndex(\n+        (item) => item.id === action.payload.id\n+      );\n+\n+      if (existingProductIndex >= 0) {\n+        // If product exists in cart, increase quantity\n+        state.items[existingProductIndex].quantity += 1;\n+      } else {\n+        // If product doesn't exist in cart, add it with quantity 1\n+        state.items.push({ ...action.payload, quantity: 1 });\n+      }\n+    },\n+\n+    // Remove a product from the cart\n+    removeFromCart: (state, action) => {\n+      state.items = state.items.filter((item) => item.id !== action.payload);\n+    },\n+\n+    // Increment the quantity of a product in the cart\n+    incrementQuantity: (state, action) => {\n+      const existingProductIndex = state.items.findIndex(\n+        (item) => item.id === action.payload\n+      );\n+      if (existingProductIndex >= 0) {\n+        state.items[existingProductIndex].quantity += 1;\n+      }\n+    },\n+\n+    // Decrement the quantity of a product in the cart\n+    decrementQuantity: (state, action) => {\n+      const existingProductIndex = state.items.findIndex(\n+        (item) => item.id === action.payload\n+      );\n+      if (existingProductIndex >= 0) {\n+        const currentQuantity = state.items[existingProductIndex].quantity;\n+        if (currentQuantity > 1) {\n+          state.items[existingProductIndex].quantity -= 1;\n+        } else {\n+          state.items.splice(existingProductIndex, 1); // Remove item if quantity is 1\n         }\n-    }\n+      }\n+    },\n+\n+    // Clear the entire cart\n+    clearCart: (state) => {\n+      state.items = [];\n+    },\n+  },\n });\n \n-export const { setCart, addToCart, removeFromCart, clearCart } = cartSlice.actions;\n-export default cartSlice.reducer;\n+export const {\n+  setCart,\n+  addToCart,\n+  removeFromCart,\n+  incrementQuantity,\n+  decrementQuantity,\n+  clearCart,\n+} = cartSlice.actions;\n+\n+export default cartSlice.reducer\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740495075169,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,28 @@\n+import { createSlice } from \"@reduxjs/toolkit\";\n+\n+const cartSlice = createSlice({\n+    name: \"cart\",\n+    initialState: {\n+        items: [],\n+    },\n+    reducers: {\n+        setCart: (state, action) => {\n+            state.items = action.payload;\n+        },\n+        addToCart: (state, action) => {\n+            state.items.push(action.payload);\n+            localStorage.setItem(\"cart\", JSON.stringify(state.items)); // Save to localStorage\n+        },\n+        removeFromCart: (state, action) => {\n+            state.items = state.items.filter(item => item.id !== action.payload);\n+            localStorage.setItem(\"cart\", JSON.stringify(state.items));\n+        },\n+        clearCart: (state) => {\n+            state.items = [];\n+            localStorage.removeItem(\"cart\");\n+        }\n+    }\n+});\n+\n+export const { setCart, addToCart, removeFromCart, clearCart } = cartSlice.actions;\n+export default cartSlice.reducer;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740495085005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,34 +1,6 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const cartSlice = createSlice({\n-    name: \"cart\",\n-    initialState: {\n-        items: [],\n-    },\n-    reducers: {\n-        setCart: (state, action) => {\n-            state.items = action.payload;\n-        },\n-        addToCart: (state, action) => {\n-            state.items.push(action.payload);\n-            localStorage.setItem(\"cart\", JSON.stringify(state.items)); // Save to localStorage\n-        },\n-        removeFromCart: (state, action) => {\n-            state.items = state.items.filter(item => item.id !== action.payload);\n-            localStorage.setItem(\"cart\", JSON.stringify(state.items));\n-        },\n-        clearCart: (state) => {\n-            state.items = [];\n-            localStorage.removeItem(\"cart\");\n-        }\n-    }\n-});\n-\n-export const { setCart, addToCart, removeFromCart, clearCart } = cartSlice.actions;\n-export default cartSlice.reducer;\n-import { createSlice } from \"@reduxjs/toolkit\";\n-\n const initialState = {\n   items: [], // Cart items\n };\n \n"
+                },
+                {
+                    "date": 1740496914337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,77 +1,28 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const initialState = {\n-  items: [], // Cart items\n-};\n-\n const cartSlice = createSlice({\n-  name: \"cart\",\n-  initialState,\n-  reducers: {\n-    // Set the entire cart (used when loading the cart from localStorage or backend)\n-    setCart: (state, action) => {\n-      state.items = action.payload;\n+    name: \"cart\",\n+    initialState: {\n+        items: [],\n     },\n-\n-    // Add a product to the cart\n-    addToCart: (state, action) => {\n-      const existingProductIndex = state.items.findIndex(\n-        (item) => item.id === action.payload.id\n-      );\n-\n-      if (existingProductIndex >= 0) {\n-        // If product exists in cart, increase quantity\n-        state.items[existingProductIndex].quantity += 1;\n-      } else {\n-        // If product doesn't exist in cart, add it with quantity 1\n-        state.items.push({ ...action.payload, quantity: 1 });\n-      }\n-    },\n-\n-    // Remove a product from the cart\n-    removeFromCart: (state, action) => {\n-      state.items = state.items.filter((item) => item.id !== action.payload);\n-    },\n-\n-    // Increment the quantity of a product in the cart\n-    incrementQuantity: (state, action) => {\n-      const existingProductIndex = state.items.findIndex(\n-        (item) => item.id === action.payload\n-      );\n-      if (existingProductIndex >= 0) {\n-        state.items[existingProductIndex].quantity += 1;\n-      }\n-    },\n-\n-    // Decrement the quantity of a product in the cart\n-    decrementQuantity: (state, action) => {\n-      const existingProductIndex = state.items.findIndex(\n-        (item) => item.id === action.payload\n-      );\n-      if (existingProductIndex >= 0) {\n-        const currentQuantity = state.items[existingProductIndex].quantity;\n-        if (currentQuantity > 1) {\n-          state.items[existingProductIndex].quantity -= 1;\n-        } else {\n-          state.items.splice(existingProductIndex, 1); // Remove item if quantity is 1\n+    reducers: {\n+        setCart: (state, action) => {\n+            state.items = action.payload;\n+        },\n+        addToCart: (state, action) => {\n+            state.items.push(action.payload);\n+            localStorage.setItem(\"cart\", JSON.stringify(state.items)); // Save to localStorage\n+        },\n+        removeFromCart: (state, action) => {\n+            state.items = state.items.filter(item => item.id !== action.payload);\n+            localStorage.setItem(\"cart\", JSON.stringify(state.items));\n+        },\n+        clearCart: (state) => {\n+            state.items = [];\n+            localStorage.removeItem(\"cart\");\n         }\n-      }\n-    },\n\\ No newline at end of file\n-\n-    // Clear the entire cart\n-    clearCart: (state) => {\n-      state.items = [];\n-    },\n-  },\n+    }\n });\n \n-export const {\n-  setCart,\n-  addToCart,\n-  removeFromCart,\n-  incrementQuantity,\n-  decrementQuantity,\n-  clearCart,\n-} = cartSlice.actions;\n-\n-export default cartSlice.reducer\n+export const { setCart, addToCart, removeFromCart, clearCart } = cartSlice.actions;\n+export default cartSlice.reducer;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740597889218,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n+\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n         items: [],\n"
+                },
+                {
+                    "date": 1740597896179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-\n+const \n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n         items: [],\n"
+                },
+                {
+                    "date": 1740597906647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const \n+const loadCartAfterLogin\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n         items: [],\n"
+                },
+                {
+                    "date": 1740597923566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const loadCartAfterLogin\n+const loadCart\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n         items: [],\n"
+                },
+                {
+                    "date": 1740597932836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const loadCart\n+const loadCartFromStorage\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n         items: [],\n"
+                },
+                {
+                    "date": 1740597944979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const loadCartFromStorage\n+const loadCartFromStorage =()\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n         items: [],\n"
+                },
+                {
+                    "date": 1740597950376,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const loadCartFromStorage =()\n+const loadCartFromStorage =()=>\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n         items: [],\n"
+                },
+                {
+                    "date": 1740597960223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n-const loadCartFromStorage =()=>\n+const loadCartFromStorage =()=>{\n+    const\n+}\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n         items: [],\n"
+                },
+                {
+                    "date": 1740597965773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const\n+    const store\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740597972283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const store\n+    const storedCart\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740597991401,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const storedCart\n+    const storedCart = lo\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740597999094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const storedCart = lo\n+    const storedCart = loadCartFromStorage()\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598010742,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const storedCart = loadCartFromStorage()\n+    const storedCart = loadCartFromStorage(\"cart\")\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598016229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const storedCart = loadCartFromStorage(\"cart\")\n+    const storedCart = .get(\"cart\")\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598025043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const storedCart = .get(\"cart\")\n+    const storedCart = loadCartFromStorage.(\"cart\")\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598039453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const storedCart = loadCartFromStorage.(\"cart\")\n+    const storedCart = loadCartFromStorage.get(\"cart\")\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598050794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const storedCart = loadCartFromStorage.get(\"cart\")\n+    const storedCart = loadCartFromStorage.getItem(\"cart\")\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598083536,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n-    const storedCart = loadCartFromStorage.getItem(\"cart\")\n+    const storedCart = loadCartFromStorage.getItem(\"cart\");\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598091893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n     const storedCart = loadCartFromStorage.getItem(\"cart\");\n+    return\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598099183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n     const storedCart = loadCartFromStorage.getItem(\"cart\");\n-    return\n+    return St\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598107308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n     const storedCart = loadCartFromStorage.getItem(\"cart\");\n-    return St\n+    return storedCart \n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598113272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n     const storedCart = loadCartFromStorage.getItem(\"cart\");\n-    return storedCart \n+    return storedCart ? JSON\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598122799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n     const storedCart = loadCartFromStorage.getItem(\"cart\");\n-    return storedCart ? JSON\n+    return storedCart ? JSON.\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598131602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n     const storedCart = loadCartFromStorage.getItem(\"cart\");\n-    return storedCart ? JSON.\n+    return storedCart ? JSON.parse()\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598141968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n     const storedCart = loadCartFromStorage.getItem(\"cart\");\n-    return storedCart ? JSON.parse()\n+    return storedCart ? JSON.parse(stored)\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598152832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n     const storedCart = loadCartFromStorage.getItem(\"cart\");\n-    return storedCart ? JSON.parse(stored)\n+    return storedCart ? JSON.parse(storedCart) \n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598178833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { createSlice } from \"@reduxjs/toolkit\";\n \n const loadCartFromStorage =()=>{\n     const storedCart = loadCartFromStorage.getItem(\"cart\");\n-    return storedCart ? JSON.parse(storedCart) \n+    return storedCart ? JSON.parse(storedCart) : []\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n"
+                },
+                {
+                    "date": 1740598216522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items: [],\n+        items: ,\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n"
+                },
+                {
+                    "date": 1740598224919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items: ,\n+        items: loadCartFromStorage,\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n"
+                },
+                {
+                    "date": 1740598303856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,13 +6,14 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items: loadCartFromStorage,\n+        items: loadCartFromStorage(),\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n+            \n         },\n         addToCart: (state, action) => {\n             state.items.push(action.payload);\n             localStorage.setItem(\"cart\", JSON.stringify(state.items)); // Save to localStorage\n"
+                },
+                {
+                    "date": 1740598749066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,14 +6,14 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items: loadCartFromStorage(),\n+        items: loadCartFromStorage() ,\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n-            \n+            localStorage.setItem(\"cart\", JSON.stringify(state.items)); // Save to localStorage\n         },\n         addToCart: (state, action) => {\n             state.items.push(action.payload);\n             localStorage.setItem(\"cart\", JSON.stringify(state.items)); // Save to localStorage\n"
+                },
+                {
+                    "date": 1740598757534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items: loadCartFromStorage() ,\n+        items: loadCartFromStorage() || ,\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n"
+                },
+                {
+                    "date": 1740598782270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items: loadCartFromStorage() || ,\n+        items:  [],\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n"
+                },
+                {
+                    "date": 1740598817125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items:  [],\n+        items: loadCartFromStorage() || [],\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n"
+                },
+                {
+                    "date": 1740598822795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items: loadCartFromStorage() || [],\n+        items: loadCartFromStorage(),\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n"
+                },
+                {
+                    "date": 1740599023543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n             localStorage.setItem(\"cart\", JSON.stringify(state.items));\n         },\n         clearCart: (state) => {\n             state.items = [];\n-            localStorage.removeItem(\"cart\");\n+            // localStorage.removeItem(\"cart\");\n         }\n     }\n });\n \n"
+                },
+                {
+                    "date": 1740599047605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items: loadCartFromStorage(),\n+        items: ,\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n"
+                },
+                {
+                    "date": 1741090825334,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n const cartSlice = createSlice({\n     name: \"cart\",\n     initialState: {\n-        items: ,\n+        items: [],\n     },\n     reducers: {\n         setCart: (state, action) => {\n             state.items = action.payload;\n@@ -28,6 +28,23 @@\n         }\n     }\n });\n \n-export const { setCart, addToCart, removeFromCart, clearCart } = cartSlice.actions;\n+incrementQuantity: (state, action) => {\n+    const item = state.items.find(item => item.id === action.payload);\n+    if (item) {\n+        item.quantity += 1;\n+    }\n+    localStorage.setItem(\"cart\", JSON.stringify(state.items));\n+},\n+decrementQuantity: (state, action) => {\n+    const item = state.items.find(item => item.id === action.payload);\n+    if (item && item.quantity > 1) {\n+        item.quantity -= 1;\n+    }\n+    localStorage.setItem(\"cart\", JSON.stringify(state.items));\n+}\n+}\n+});\n+\n+export const { setCart, addToCart, removeFromCart, clearCart, incrementQuantity, decrementQuantity } = cartSlice.actions;\n export default cartSlice.reducer;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741090831524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,23 +28,4 @@\n         }\n     }\n });\n \n-incrementQuantity: (state, action) => {\n-    const item = state.items.find(item => item.id === action.payload);\n-    if (item) {\n-        item.quantity += 1;\n-    }\n-    localStorage.setItem(\"cart\", JSON.stringify(state.items));\n-},\n-decrementQuantity: (state, action) => {\n-    const item = state.items.find(item => item.id === action.payload);\n-    if (item && item.quantity > 1) {\n-        item.quantity -= 1;\n-    }\n-    localStorage.setItem(\"cart\", JSON.stringify(state.items));\n-}\n-}\n-});\n-\n-export const { setCart, addToCart, removeFromCart, clearCart, incrementQuantity, decrementQuantity } = cartSlice.actions;\n-export default cartSlice.reducer;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741090852877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,7 +25,6 @@\n         clearCart: (state) => {\n             state.items = [];\n             // localStorage.removeItem(\"cart\");\n         }\n-    }\n-});\n+    }});\n \n"
+                },
+                {
+                    "date": 1741090859085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,6 +25,24 @@\n         clearCart: (state) => {\n             state.items = [];\n             // localStorage.removeItem(\"cart\");\n         }\n-    }});\n+        incrementQuantity: (state, action) => {\n+            const item = state.items.find(item => item.id === action.payload);\n+            if (item) {\n+                item.quantity += 1;\n+            }\n+            localStorage.setItem(\"cart\", JSON.stringify(state.items));\n+        },\n+        decrementQuantity: (state, action) => {\n+            const item = state.items.find(item => item.id === action.payload);\n+            if (item && item.quantity > 1) {\n+                item.quantity -= 1;\n+            }\n+            localStorage.setItem(\"cart\", JSON.stringify(state.items));\n+        }\n+    }\n+});\n \n+export const { setCart, addToCart, removeFromCart, clearCart, incrementQuantity, decrementQuantity } = cartSlice.actions;\n+export default cartSlice.reducer;\n+\n"
+                },
+                {
+                    "date": 1741090868619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n         },\n         clearCart: (state) => {\n             state.items = [];\n             // localStorage.removeItem(\"cart\");\n-        }\n+        },\n         incrementQuantity: (state, action) => {\n             const item = state.items.find(item => item.id === action.payload);\n             if (item) {\n                 item.quantity += 1;\n"
+                },
+                {
+                    "date": 1741600684977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n             localStorage.setItem(\"cart\", JSON.stringify(state.items));\n         },\n         clearCart: (state) => {\n             state.items = [];\n-            // localStorage.removeItem(\"cart\");\n+            localStorage.removeItem(\"cart\");\n         },\n         incrementQuantity: (state, action) => {\n             const item = state.items.find(item => item.id === action.payload);\n             if (item) {\n"
+                }
+            ],
+            "date": 1739391686990,
+            "name": "Commit-0",
+            "content": "mport { createSlice } from \"@reduxjs/toolkit\";\n\nconst initialState = {\n  items: JSON.parse(localStorage.getItem(\"guestCart\")) || [],\n};\n\nconst cartSlice = createSlice({\n  name: \"cart\",\n  initialState,\n  reducers: {\n    addToCart: (state, action) => {\n      state.items.push(action.payload);\n      localStorage.setItem(\"guestCart\", JSON.stringify(state.items));\n    },\n    removeFromCart: (state, action) => {\n      state.items = state.items.filter(item => item.id !== action.payload);\n      localStorage.setItem(\"guestCart\", JSON.stringify(state.items));\n    },\n    setCart: (state, action) => {\n      state.items = action.payload;\n      localStorage.setItem(\"guestCart\", JSON.stringify(state.items));\n    }\n  },\n});\n\nexport const { addToCart, removeFromCart, setCart } = cartSlice.actions;\nexport default cartSlice.reducer;"
+        }
+    ]
+}

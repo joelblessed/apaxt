@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/routes/cart.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741891249529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741891249529,
+            "name": "Commit-0",
+            "content": "const express = require('express');\nconst router = express.Router();\nconst Cart = require('../models/Cart'); // Assuming you have a Cart model\n\n// Increment quantity\nrouter.post('/increment', async (req, res) => {\n  try {\n    const { userId, itemId } = req.body;\n    const cart = await Cart.findOne({ userId });\n    const item = cart.items.id(itemId);\n    item.quantity += 1;\n    await cart.save();\n    res.status(200).send(cart);\n  } catch (error) {\n    res.status(500).send(error);\n  }\n});\n\n// Decrement quantity\nrouter.post('/decrement', async (req, res) => {\n  try {\n    const { userId, itemId } = req.body;\n    const cart = await Cart.findOne({ userId });\n    const item = cart.items.id(itemId);\n    if (item.quantity > 1) {\n      item.quantity -= 1;\n      await cart.save();\n    }\n    res.status(200).send(cart);\n  } catch (error) {\n    res.status(500).send(error);\n  }\n});\n\nmodule.exports = router;\n"
+        }
+    ]
+}

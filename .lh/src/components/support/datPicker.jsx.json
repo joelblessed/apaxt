@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/support/datPicker.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1743604219708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743604235077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n       <DatePicker\n         id=\"dob\"\n         selected={selectedDate}\n         onChange={date => setSelectedDate(date)}\n-        dateFormat=\"MM/dd/yyyy\"\n+        dateFormat=\"/dd/yyyy\"\n         showMonthDropdown\n         showYearDropdown\n         dropdownMode=\"select\"\n         placeholderText=\"Select your date of birth\"\n"
+                },
+                {
+                    "date": 1743604241268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n       <DatePicker\n         id=\"dob\"\n         selected={selectedDate}\n         onChange={date => setSelectedDate(date)}\n-        dateFormat=\"/dd/yyyy\"\n+        dateFormat=\"dd//yyyy\"\n         showMonthDropdown\n         showYearDropdown\n         dropdownMode=\"select\"\n         placeholderText=\"Select your date of birth\"\n"
+                }
+            ],
+            "date": 1743604219708,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\nimport DatePicker from 'react-datepicker';\nimport \"react-datepicker/dist/react-datepicker.css\";\n\nconst DateOfBirthInput = () => {\n  const [selectedDate, setSelectedDate] = useState(null);\n\n  return (\n    <div>\n      <label htmlFor=\"dob\">Date of Birth:</label>\n      <DatePicker\n        id=\"dob\"\n        selected={selectedDate}\n        onChange={date => setSelectedDate(date)}\n        dateFormat=\"MM/dd/yyyy\"\n        showMonthDropdown\n        showYearDropdown\n        dropdownMode=\"select\"\n        placeholderText=\"Select your date of birth\"\n        maxDate={new Date()} // Prevent selecting future dates\n      />\n    </div>\n  );\n};\n\nexport default DateOfBirthInput;"
+        }
+    ]
+}

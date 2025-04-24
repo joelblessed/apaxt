@@ -1,0 +1,19 @@
+mport { useTranslation } from "react-i18next";
+// import "./products.css";
+
+const CategoryPage = ({api,highlightText,addToCart, addToWishList, handleProductClick, searchTerm}) => {
+  const { categoryName } = useParams();
+  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  
+
+  useEffect(() => {
+    fetch(`${api}/products`)
+      .then((res) => res.json())
+      .then((data) => {
+        const products = data.filter((product) => product.category === categoryName);
+        setProducts(products);
+      })
+      .catch((error) => console.error("Error fetching products:", error));
+  }, [categoryName]);

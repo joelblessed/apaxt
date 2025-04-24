@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/netlify.toml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1742586875313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1742586875313,
+            "name": "Commit-0",
+            "content": "[[redirects]]\n  from = \"/*\"\n  to = \"/index.html\"\n  status = 200"
+        }
+    ]
+}

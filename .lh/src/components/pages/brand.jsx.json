@@ -1,0 +1,66 @@
+{
+    "sourceFile": "src/components/pages/brand.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 12,
+            "patches": [
+                {
+                    "date": 1739464671357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1739464704263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-mport React, { useState, useEffect } from \"react\";\n+import React, { useState, useEffect } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n const Brands = () => {\n   const [brands, setBrands] = useState([]);\n"
+                },
+                {
+                    "date": 1739464713576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         {brands.map((brand) => (\n           <div \n             key={brand.id} \n             style={styles.brandBox} \n-            onClick={() => navigate(/brand/${brand.id})}\n+            onClick={() => navigate(`/brand/${brand.id}`)}\n           >\n             <img src={brand.image} alt={brand.name} style={styles.image} />\n             <p>{brand.name}</p>\n           </div>\n"
+                },
+                {
+                    "date": 1739465394624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,14 +4,14 @@\n const Brands = () => {\n   const [brands, setBrands] = useState([]);\n   const navigate = useNavigate();\n \n-  useEffect(() => {\n-    fetch(\"http://localhost:5000/brands\")\n-      .then((res) => res.json())\n-      .then((data) => setBrands(data))\n-      .catch((error) => console.error(\"Error fetching brands:\", error));\n-  }, []);\n+//   useEffect(() => {\n+//     fetch(\"http://localhost:5000/brands\")\n+//       .then((res) => res.json())\n+//       .then((data) => setBrands(data))\n+//       .catch((error) => console.error(\"Error fetching brands:\", error));\n+//   }, []);\n \n   return (\n     <div style={styles.container}>\n       <h1>Our Brands</h1>\n"
+                },
+                {
+                    "date": 1739465415776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,23 +1,23 @@\n import React, { useState, useEffect } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n const Brands = () => {\n-  const [brands, setBrands] = useState([]);\n+  const [products, setBrands] = useState([]);\n   const navigate = useNavigate();\n \n //   useEffect(() => {\n-//     fetch(\"http://localhost:5000/brands\")\n+//     fetch(\"http://localhost:5000/products\")\n //       .then((res) => res.json())\n //       .then((data) => setBrands(data))\n-//       .catch((error) => console.error(\"Error fetching brands:\", error));\n+//       .catch((error) => console.error(\"Error fetching products:\", error));\n //   }, []);\n \n   return (\n     <div style={styles.container}>\n       <h1>Our Brands</h1>\n       <div style={styles.brandsGrid}>\n-        {brands.map((brand) => (\n+        {products.map((brand) => (\n           <div \n             key={brand.id} \n             style={styles.brandBox} \n             onClick={() => navigate(`/brand/${brand.id}`)}\n"
+                },
+                {
+                    "date": 1739465426885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n const Brands = () => {\n-  const [products, setBrands] = useState([]);\n+  const [products, setproductd] = useState([]);\n   const navigate = useNavigate();\n \n //   useEffect(() => {\n //     fetch(\"http://localhost:5000/products\")\n"
+                },
+                {
+                    "date": 1739465439977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n-const Brands = () => {\n-  const [products, setproductd] = useState([]);\n+const Brands = ({}) => {\n+  const [products, setproducts] = useState([]);\n   const navigate = useNavigate();\n \n //   useEffect(() => {\n //     fetch(\"http://localhost:5000/products\")\n"
+                },
+                {
+                    "date": 1739465448397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState, useEffect } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n-const Brands = ({}) => {\n+const Brands = ({  filteredProducts }) => {\n   const [products, setproducts] = useState([]);\n   const navigate = useNavigate();\n \n //   useEffect(() => {\n"
+                },
+                {
+                    "date": 1739465456701,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n-const Brands = ({  filteredProducts }) => {\n-  const [products, setproducts] = useState([]);\n+const Brands = ({filteredProducts }) => {\n+  const [products, setproducts] = useState);\n   const navigate = useNavigate();\n \n //   useEffect(() => {\n //     fetch(\"http://localhost:5000/products\")\n"
+                },
+                {
+                    "date": 1739465465736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n const Brands = ({filteredProducts }) => {\n-  const [products, setproducts] = useState);\n+  const [products, setproducts] = useState(fil);\n   const navigate = useNavigate();\n \n //   useEffect(() => {\n //     fetch(\"http://localhost:5000/products\")\n"
+                },
+                {
+                    "date": 1739465487220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n \n const Brands = ({filteredProducts }) => {\n-  const [products, setproducts] = useState(fil);\n+  const [products, setproducts] = useState(filteredProducts);\n   const navigate = useNavigate();\n \n //   useEffect(() => {\n //     fetch(\"http://localhost:5000/products\")\n@@ -15,9 +15,9 @@\n   return (\n     <div style={styles.container}>\n       <h1>Our Brands</h1>\n       <div style={styles.brandsGrid}>\n-        {products.map((brand) => (\n+        {products.map(() => (\n           <div \n             key={brand.id} \n             style={styles.brandBox} \n             onClick={() => navigate(`/brand/${brand.id}`)}\n"
+                },
+                {
+                    "date": 1739465522380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n       <h1>Our Brands</h1>\n       <div style={styles.brandsGrid}>\n         {products.map((product) => (\n           <div \n-            key={pbrand.id} \n+            key={prbrand.id} \n             style={styles.brandBox} \n             onClick={() => navigate(`/brand/${brand.id}`)}\n           >\n             <img src={brand.image} alt={brand.name} style={styles.image} />\n"
+                },
+                {
+                    "date": 1739465555767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n             key={product.brand.id} \n             style={styles.brandBox} \n             onClick={() => navigate(`/brand/${brand.id}`)}\n           >\n-            <img src={productbrand.image} alt={brand.name} style={styles.image} />\n+            <img src={product.brand.image} alt={brand.name} style={styles.image} />\n             <p>{brand.name}</p>\n           </div>\n         ))}\n       </div>\n"
+                }
+            ],
+            "date": 1739464671357,
+            "name": "Commit-0",
+            "content": "mport React, { useState, useEffect } from \"react\";\nimport { useNavigate } from \"react-router-dom\";\n\nconst Brands = () => {\n  const [brands, setBrands] = useState([]);\n  const navigate = useNavigate();\n\n  useEffect(() => {\n    fetch(\"http://localhost:5000/brands\")\n      .then((res) => res.json())\n      .then((data) => setBrands(data))\n      .catch((error) => console.error(\"Error fetching brands:\", error));\n  }, []);\n\n  return (\n    <div style={styles.container}>\n      <h1>Our Brands</h1>\n      <div style={styles.brandsGrid}>\n        {brands.map((brand) => (\n          <div \n            key={brand.id} \n            style={styles.brandBox} \n            onClick={() => navigate(/brand/${brand.id})}\n          >\n            <img src={brand.image} alt={brand.name} style={styles.image} />\n            <p>{brand.name}</p>\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n};\n\nconst styles = {\n  container: { width: \"80%\", margin: \"auto\", textAlign: \"center\" },\n  brandsGrid: { display: \"flex\", flexWrap: \"wrap\", gap: \"15px\", justifyContent: \"center\" },\n  brandBox: {\n    width: \"200px\",\n    height: \"180px\",\n    backgroundColor: \"#f5f5f5\",\n    display: \"flex\",\n    flexDirection: \"column\",\n    justifyContent: \"center\",\n    alignItems: \"center\",\n    borderRadius: \"8px\",\n    cursor: \"pointer\",\n    padding: \"10px\",\n    boxShadow: \"0px 4px 6px rgba(0, 0, 0, 0.1)\"\n  },\n  image: { width: \"100px\", height: \"100px\", objectFit: \"contain\", marginBottom: \"10px\" }\n};\n\nexport default Brands;"
+        }
+    ]
+}

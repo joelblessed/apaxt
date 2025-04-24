@@ -1,0 +1,62 @@
+{
+    "sourceFile": "src/wishlistAction.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1740916630978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740916654154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { setCart, addToCart, removeFromCart, clearCart } from \"./cartSlice\";\n \n-const API_URL = \"http://localhost:5000/cart\";\n+const API_URL = \"http://localhost:5000/wish\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n export const addToCartBeforeLogin = (product) => (dispatch, getState) => {\n     dispatch(addToCart(product));\n"
+                },
+                {
+                    "date": 1740916666136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n-import { setCart, addToCart, removeFromCart, clearCart } from \"./cartSlice\";\n+import { setCart, addToCart, removeFromCart, clearCart } from \"./\";\n \n-const API_URL = \"http://localhost:5000/wish\";\n+const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n export const addToCartBeforeLogin = (product) => (dispatch, getState) => {\n     dispatch(addToCart(product));\n"
+                },
+                {
+                    "date": 1740916672439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { setCart, addToCart, removeFromCart, clearCart } from \"./\";\n+import { setCart, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n \n const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n"
+                },
+                {
+                    "date": 1740916685856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { setCart, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n+import { setC, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n \n const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n"
+                },
+                {
+                    "date": 1740916691417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { setC, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n+import { setwish, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n \n const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n"
+                },
+                {
+                    "date": 1740916696772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { setwish, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n+import { setW, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n \n const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n"
+                },
+                {
+                    "date": 1740916701897,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { setW, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n+import { setWishList, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n \n const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n"
+                },
+                {
+                    "date": 1740916708016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { setWishList, addToCart, removeFromCart, clearCart } from \"./wishlistSlice\";\n+import { setWishList, addToW, removeFromCart, clearCart } from \"./wishlistSlice\";\n \n const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n"
+                },
+                {
+                    "date": 1740916718161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { setWishList, addToW, removeFromCart, clearCart } from \"./wishlistSlice\";\n+import { setWishList, addToWishlist, removeFromWish, clearCart } from \"./wishlistSlice\";\n \n const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n"
+                },
+                {
+                    "date": 1740916723994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { setWishList, addToWishlist, removeFromWishList, clear } from \"./wishlistSlice\";\n+import { setWishList, addToWishlist, removeFromWishList, clearW } from \"./wishlistSlice\";\n \n const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n"
+                },
+                {
+                    "date": 1740919039784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n const API_URL = \"http://localhost:5000/wishlist\";\n \n // *Add to Cart Before Login (Saves in LocalStorage)*\n-export const addToBeforeLogin = (product) => (dispatch, getState) => {\n+export const addToWishListBeforeLogin = (product) => (dispatch, getState) => {\n   dispatch(addToWishList(product));\n   localStorage.setItem(\"WishList\", JSON.stringify(getState().cart.items));\n };\n \n"
+                }
+            ],
+            "date": 1740916630978,
+            "name": "Commit-0",
+            "content": "import { setCart, addToCart, removeFromCart, clearCart } from \"./cartSlice\";\n\nconst API_URL = \"http://localhost:5000/cart\";\n\n// *Add to Cart Before Login (Saves in LocalStorage)*\nexport const addToCartBeforeLogin = (product) => (dispatch, getState) => {\n    dispatch(addToCart(product));\n    localStorage.setItem(\"cart\", JSON.stringify(getState().cart.items));\n};\n\n// *Load Cart After Login (Merge Local with Server)*\nexport const loadCartAfterLogin = () => async (dispatch) => {\n    const token = localStorage.getItem(\"token\");\n    let localCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n\n    try {\n        // Fetch user cart from the server\n        const response = await fetch(API_URL, {\n            method: \"GET\",\n            headers: { \"Authorization\": `Bearer ${token}` },\n        });\n\n        let userCart = response.ok ? await response.json() : { cart: [] };\n\n        // Merge Local Cart & Server Cart (Remove Duplicates)\n        const mergedCart = [...new Map([...localCart, ...userCart.cart].map(item => [item.id, item])).values()];\n\n        dispatch(setCart(mergedCart));\n        console.log(setCart)\n\n        // Save merged cart to the server\n        await fetch(`${API_URL}/merge`, {\n            method: \"POST\",\n            headers: { \n                \"Content-Type\": \"application/json\",\n                \"Authorization\": `Bearer ${token}`\n            },\n            body: JSON.stringify({ localCart }),\n        });\n\n        // Clear local cart after merging\n        localStorage.removeItem(\"cart\");\n    } catch (error) {\n        console.error(\"Error fetching cart:\", error);\n    }\n};\n\n// *Add to Cart After Login*\nexport const addToCartAPI = (product) => async (dispatch) => {\n    const token = localStorage.getItem(\"token\");\n\n    dispatch(addToCart(product));\n\n    try {\n        await fetch(API_URL, {\n            method: \"POST\",\n            headers: { \n                \"Content-Type\": \"application/json\",\n                \"Authorization\": `Bearer ${token}`\n            },\n            body: JSON.stringify({ product }),\n        });\n    } catch (error) {\n        console.error(\"Error adding product to cart:\", error);\n    }\n};\n\n// *Remove Item from Cart*\nexport const removeFromCartAPI = (productId) => async (dispatch, getState) => {\n    const token = localStorage.getItem(\"token\");\n\n    dispatch(removeFromCart(productId));\n\n    try {\n        await fetch(`${API_URL}/${productId}`, {\n            method: \"DELETE\",\n            headers: { \"Authorization\": `Bearer ${token}` },\n        });\n    } catch (error) {\n        console.error(\"Error removing product from cart:\", error);\n    }\n};\n\n// *Clear Cart (Logout)*\nexport const clearCartOnLogout = () => async (dispatch) => {\n    const token = localStorage.getItem(\"token\");\n\n    dispatch(clearCart());\n\n    try {\n        await fetch(API_URL, {\n            method: \"DELETE\",\n            headers: { \"Authorization\": `Bearer ${token}` },\n        });\n    } catch (error) {\n        console.error(\"Error clearing cart:\", error);\n    }\n};\n\n"
+        }
+    ]
+}

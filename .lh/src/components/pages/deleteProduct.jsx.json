@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/pages/deleteProduct.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1742234701243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742234706538,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,5 +44,5 @@\n     </div>\n   );\n };\n \n-export defaultProducts;\n\\ No newline at end of file\n+export default Products;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742234722144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   }, []);\n \n   // Delete product by ID\n   const handleDelete = (id) => {\n-    fetch(${}/products/${id}, { method: \"DELETE\" })\n+    fetch(${a}/products/${id}, { method: \"DELETE\" })\n       .then((res) => {\n         if (res.ok) {\n           setProducts(products.filter((product) => product.id !== id)); // Remove from state\n         } else {\n"
+                }
+            ],
+            "date": 1742234701243,
+            "name": "Commit-0",
+            "content": "mport React, { useState, useEffect } from \"react\";\n\nconst API_URL = \"http://localhost:5000\"; // Change to your actual API URL\n\nconst DBProducts = () => {\n  const [products, setProducts] = useState([]);\n\n  // Fetch products from API\n  useEffect(() => {\n    fetch(${API_URL}/products)\n      .then((res) => res.json())\n      .then((data) => setProducts(data))\n      .catch((err) => console.error(\"Error fetching products:\", err));\n  }, []);\n\n  // Delete product by ID\n  const handleDelete = (id) => {\n    fetch(${API_URL}/products/${id}, { method: \"DELETE\" })\n      .then((res) => {\n        if (res.ok) {\n          setProducts(products.filter((product) => product.id !== id)); // Remove from state\n        } else {\n          console.error(\"Error deleting product\");\n        }\n      })\n      .catch((err) => console.error(\"Error deleting product:\", err));\n  };\n\n  return (\n    <div>\n      <h1>Product Management</h1>\n      <div style={{ display: \"grid\", gridTemplateColumns: \"repeat(auto-fit, minmax(250px, 1fr))\", gap: \"16px\" }}>\n        {products.map((product) => (\n          <div key={product.id} style={{ padding: \"16px\", backgroundColor: \"#fff\", borderRadius: \"8px\", boxShadow: \"0 2px 4px rgba(0, 0, 0, 0.1)\" }}>\n            <h3>{product.name}</h3>\n            <p>Price: ${product.price}</p>\n            <p>Stock: {product.stock}</p>\n            <button onClick={() => handleDelete(product.id)} style={{ backgroundColor: \"red\", color: \"white\", padding: \"8px\", border: \"none\", cursor: \"pointer\" }}>\n              Delete\n            </button>\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n};\n\nexport default DBProducts;"
+        }
+    ]
+}

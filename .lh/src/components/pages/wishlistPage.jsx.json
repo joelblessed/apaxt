@@ -1,0 +1,66 @@
+{
+    "sourceFile": "src/components/pages/wishlistPage.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 12,
+            "patches": [
+                {
+                    "date": 1743702044942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743702122263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect } from \"react\";\n import { useDispatch, useSelector } from \"react-redux\";\n-import { fetchWishlist, removeFromWishlist } from \"../redux/wishlistSlice\";\n+import { fetchWishlist, removeFromWishlist } from \"..//wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n"
+                },
+                {
+                    "date": 1743702135241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect } from \"react\";\n import { useDispatch, useSelector } from \"react-redux\";\n-import { fetchWishlist, removeFromWishlist } from \"..//wishlistSlice\";\n+import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n"
+                },
+                {
+                    "date": 1743703803448,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,11 @@\n     useEffect(() => {\n         dispatch(fetchWishlist(userId));\n     }, [dispatch, userId]);\n \n+\n+    \n+\n     return (\n         <div>\n             <h2>My Wishlist</h2>\n             {wishlist.length === 0 ? (\n"
+                },
+                {
+                    "date": 1743703820894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,18 +3,24 @@\n import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n+    \n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n     const wishlist = useSelector((state) => state.wishlist.items);\n \n     useEffect(() => {\n         dispatch(fetchWishlist(userId));\n     }, [dispatch, userId]);\n \n \n-    \n+    useEffect(() => {\n+        // Filter products in the frontend\n+        const filtered = allProducts.filter((product) => productIds.includes(product.id.toString()));\n+        setFilteredProducts(filtered);\n+    }, [allProducts]); // Runs when products are fetched\n \n+\n     return (\n         <div>\n             <h2>My Wishlist</h2>\n             {wishlist.length === 0 ? (\n"
+                },
+                {
+                    "date": 1743703832797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n-    \n+    const set\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n     const wishlist = useSelector((state) => state.wishlist.items);\n \n     useEffect(() => {\n"
+                },
+                {
+                    "date": 1743703838233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n-    const set\n+    const [wis]\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n     const wishlist = useSelector((state) => state.wishlist.items);\n \n     useEffect(() => {\n"
+                },
+                {
+                    "date": 1743703846361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n-    const [wis]\n+    const [wishlistProducts]\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n     const wishlist = useSelector((state) => state.wishlist.items);\n \n     useEffect(() => {\n"
+                },
+                {
+                    "date": 1743703853592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n-    const [wishlistProducts]\n+    const [wishlistProducts, setWis]\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n     const wishlist = useSelector((state) => state.wishlist.items);\n \n     useEffect(() => {\n"
+                },
+                {
+                    "date": 1743703862494,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n-    const [wishlistProducts, setWis]\n+    const [wishlistProducts, setWishlistProducts]\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n     const wishlist = useSelector((state) => state.wishlist.items);\n \n     useEffect(() => {\n"
+                },
+                {
+                    "date": 1743703867790,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n-    const [wishlistProducts, setWishlistProducts]\n+    const [wishlistProducts, setWishlistProducts] us\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n     const wishlist = useSelector((state) => state.wishlist.items);\n \n     useEffect(() => {\n"
+                },
+                {
+                    "date": 1743703874303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n const WishlistPage = () => {\n     const dispatch = useDispatch();\n-    const [wishlistProducts, setWishlistProducts] use\n+    const [wishlistProducts, setWishlistProducts] useS\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n     const wishlist = useSelector((state) => state.wishlist.items);\n \n     useEffect(() => {\n"
+                },
+                {
+                    "date": 1743703953712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useEffect, useState } from \"react\";\n import { useDispatch, useSelector } from \"react-redux\";\n import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n \n-const WishlistPage = ({filtered}) => {\n+const WishlistPage = ({filteredP}) => {\n     const dispatch = useDispatch();\n     const [wishlistProducts, setWishlistProducts] = useState([])\n     const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n     const wishlist = useSelector((state) => state.wishlist.items);\n"
+                }
+            ],
+            "date": 1743702044942,
+            "name": "Commit-0",
+            "content": "import React, { useEffect } from \"react\";\nimport { useDispatch, useSelector } from \"react-redux\";\nimport { fetchWishlist, removeFromWishlist } from \"../redux/wishlistSlice\";\n\nconst WishlistPage = () => {\n    const dispatch = useDispatch();\n    const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n    const wishlist = useSelector((state) => state.wishlist.items);\n\n    useEffect(() => {\n        dispatch(fetchWishlist(userId));\n    }, [dispatch, userId]);\n\n    return (\n        <div>\n            <h2>My Wishlist</h2>\n            {wishlist.length === 0 ? (\n                <p>No products in wishlist.</p>\n            ) : (\n                <ul>\n                    {wishlist.map((productId) => (\n                        <li key={productId}>\n                            Product ID: {productId}\n                            <button onClick={() => dispatch(removeFromWishlist({ productId, userId }))}>\n                                Remove\n                            </button>\n                        </li>\n                    ))}\n                </ul>\n            )}\n        </div>\n    );\n};\n\nexport default WishlistPage;"
+        }
+    ]
+}

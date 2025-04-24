@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/AnimatedEdges.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1736973473427,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1736973487362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,5 +42,5 @@\n     width: 100%;\n     animation-delay: 1s;\n }\n \n-/* L…\n\\ No newline at end of file\n+/* L\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736973608630,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,5 +42,4 @@\n     width: 100%;\n     animation-delay: 1s;\n }\n \n-/* L\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1736973473427,
+            "name": "Commit-0",
+            "content": "* Container Box */\n.animated-box {\n    position: relative;\n    width: 200px;\n    height: 200px;\n    margin: 50px auto;\n    background-color: #f4f4f4;\n    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);\n    overflow: hidden;\n}\n\n/* Common Edge Styling */\n.box-edge {\n    position: absolute;\n    background-color: #007bff; /* Blue color for edges */\n    animation: animate-edge 2s linear infinite;\n}\n\n/* Top Edge */\n.box-edge.top {\n    top: 0;\n    left: 0;\n    height: 4px;\n    width: 100%;\n    animation-delay: 0s;\n}\n\n/* Right Edge */\n.box-edge.right {\n    top: 0;\n    right: 0;\n    width: 4px;\n    height: 100%;\n    animation-delay: 0.5s;\n}\n\n/* Bottom Edge */\n.box-edge.bottom {\n    bottom: 0;\n    left: 0;\n    height: 4px;\n    width: 100%;\n    animation-delay: 1s;\n}\n\n/* L…"
+        }
+    ]
+}

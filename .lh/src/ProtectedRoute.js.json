@@ -1,0 +1,102 @@
+{
+    "sourceFile": "src/ProtectedRoute.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 21,
+            "patches": [
+                {
+                    "date": 1738184419474,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1738184425392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user) return <Navigate to=\"/lo\" />;\n+  if (!user) return <Navigate to=\"/Sign\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n \n   return children;\n };\n"
+                },
+                {
+                    "date": 1738231374745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user) return <Navigate to=\"/Sign\" />;\n+  if (!user) return <Navigate to=\"/SignIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n \n   return children;\n };\n"
+                },
+                {
+                    "date": 1741086997921,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user) return <Navigate to=\"/SignIN\" />;\n+  if (!user) return <Navigate to=\"/iignIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n \n   return children;\n };\n"
+                },
+                {
+                    "date": 1742914115088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user) return <Navigate to=\"/iignIN\" />;\n-  if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n+  if (!user) return <Navigate to=\"/signIN\" />;\n+  if (!allowedRoles.includes(user.role&&)) return <Navigate to=\"/unauthorized\" />;\n \n   return children;\n };\n \n"
+                },
+                {
+                    "date": 1742914173455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n   if (!user) return <Navigate to=\"/signIN\" />;\n-  if (!allowedRoles.includes(user.role&&)) return <Navigate to=\"/unauthorized\" />;\n+  if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n \n   return children;\n };\n \n"
+                },
+                {
+                    "date": 1742914192911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n   const { user } = useContext(AuthContext);\n \n   if (!user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n+  \n \n   return children;\n };\n \n"
+                },
+                {
+                    "date": 1742914199023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const { user } = useContext(AuthContext);\n \n   if (!user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n-  \n+  if ()\n \n   return children;\n };\n \n"
+                },
+                {
+                    "date": 1742914212021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const { user } = useContext(AuthContext);\n \n   if (!user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n-  if ()\n+  if (ad)\n \n   return children;\n };\n \n"
+                },
+                {
+                    "date": 1742914330287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const { user } = useContext(AuthContext);\n \n   if (!user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n-  if (ad)\n+  \n \n   return children;\n };\n \n"
+                },
+                {
+                    "date": 1745085814134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user) return <Navigate to=\"/signIN\" />;\n+  if (!user.id) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745085874950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user.id) return <Navigate to=\"/signIN\" />;\n+  if (!user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745085959071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user) return <Navigate to=\"/signIN\" />;\n+  if (!user.  userId) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745085993874,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user.  userId) return <Navigate to=\"/signIN\" />;\n+  if (!user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745086002470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user) return <Navigate to=\"/signIN\" />;\n+  if (user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745086010137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (user) return <Navigate to=\"/signIN\" />;\n+  if (user ==) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745086088954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (user ==) return <Navigate to=\"/signIN\" />;\n+  if (user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745086120518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (user) return <Navigate to=\"/signIN\" />;\n+  if (!user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745086372245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (!user) return <Navigate to=\"/signIN\" />;\n+  if (user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745086396013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n-  if (user) return <Navigate to=\"/signIN\" />;\n+  if (!user) return <Navigate to=\"/signIN\" />;\n   if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n"
+                },
+                {
+                    "date": 1745086590816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n   if (!user) return <Navigate to=\"/signIN\" />;\n-  if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n+  if (!allowedRoles.includes(user.rol)) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n };\n"
+                },
+                {
+                    "date": 1745086600222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n const ProtectedRoute = ({ children, allowedRoles }) => {\n   const { user } = useContext(AuthContext);\n \n   if (!user) return <Navigate to=\"/signIN\" />;\n-  if (!allowedRoles.includes({})) return <Navigate to=\"/unauthorized\" />;\n+  if (!allowedRoles.includes({user})) return <Navigate to=\"/unauthorized\" />;\n   \n \n   return children;\n };\n"
+                }
+            ],
+            "date": 1738184419474,
+            "name": "Commit-0",
+            "content": "import { useContext } from \"react\";\nimport { Navigate } from \"react-router-dom\";\nimport { AuthContext } from \"./AuthContext\";\n\nconst ProtectedRoute = ({ children, allowedRoles }) => {\n  const { user } = useContext(AuthContext);\n\n  if (!user) return <Navigate to=\"/lo\" />;\n  if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n\n  return children;\n};\n\nexport default ProtectedRoute"
+        }
+    ]
+}

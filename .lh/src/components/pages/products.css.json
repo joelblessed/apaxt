@@ -1,0 +1,370 @@
+{
+    "sourceFile": "src/components/pages/products.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 88,
+            "patches": [
+                {
+                    "date": 1738070906263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1738846828336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,67 +0,0 @@\n-.box1{\n-     width:85%;\n-     background:rgba(0, 0, 255, 0.051);\n-     float:right;\n-    \n-    \n-}\n-\n-.box2{\n-    background:rgba(255, 192, 203, 0.01);\n-    border-radius:8px; \n-    margin:10px;\n-    height:222.5px;\n-    width:150px;\n-    box-shadow:0px 0px 2px orangered;\n-   \n-   \n-}\n- .image{\n-    width:100%;\n-    height:150px;\n-    border-radius:8px 8px 0px 0px;\n- }\n- .text{\n-    \n-   display: grid;\n-   \n-\n- }\n- a{\n-    margin-top:0%;\n-    padding: 0%;\n-    font-size: 10px;\n-    text-decoration: none;\n-    margin-left: 2px;\n-    \n- }\n- .name{\n-    width:60%;\n-    text-decoration: none;\n- }\n- .cart{\n-    margin:0% ;\n-    \n- }\n- .btn{\n-    width:100%;\n-    height:25px;\n-    text-align: center;\n-    padding: 0px;\n-    margin-top: 0px;\n-    border-radius: 0px 0px 8px 8px;\n-\n- }\n-\n- @media(max-width:760px){\n-    .box1{\n-        width: 100%;\n-    }\n-   \n-    \n- }\n-  @media(max-width:1000px){\n-\n-\n-\n-  }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1738847090809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,67 @@\n+.box1{\n+     width:85%;\n+     background:rgba(0, 0, 255, 0.051);\n+     float:right;\n+    \n+    \n+}\n+\n+.box2{\n+    background:rgba(255, 192, 203, 0.01);\n+    border-radius:8px; \n+    margin:10px;\n+    height:222.5px;\n+    width:150px;\n+    box-shadow:0px 0px 2px orangered;\n+   \n+   \n+}\n+ .image{\n+    width:100%;\n+    height:150px;\n+    border-radius:8px 8px 0px 0px;\n+ }\n+ .text{\n+    \n+   display: grid;\n+   \n+\n+ }\n+ a{\n+    margin-top:0%;\n+    padding: 0%;\n+    font-size: 10px;\n+    text-decoration: none;\n+    margin-left: 2px;\n+    \n+ }\n+ .name{\n+    width:60%;\n+    text-decoration: none;\n+ }\n+ .cart{\n+    margin:0% ;\n+    \n+ }\n+ .btn{\n+    width:100%;\n+    height:25px;\n+    text-align: center;\n+    padding: 0px;\n+    margin-top: 0px;\n+    border-radius: 0px 0px 8px 8px;\n+\n+ }\n+\n+ @media(max-width:760px){\n+    .box1{\n+        width: 100%;\n+    }\n+   \n+    \n+ }\n+  @media(max-width:1000px){\n+\n+\n+\n+  }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1739380453590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -63,5 +63,6 @@\n   @media(max-width:1000px){\n \n \n \n-  }\n\\ No newline at end of file\n+  }\n+  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1739380482094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,5 +64,25 @@\n \n \n \n   }\n-  \n\\ No newline at end of file\n+\n+  .animated-box {\n+   \n+   background-color: blue;\n+   color: white;\n+   display: flex;\n+   align-items: center;\n+   justify-content: center;\n+   animation: slideIn 1s ease-in-out;\n+ }\n+ \n+ @keyframes slideIn {\n+   from {\n+     transform: translateY(-100px);\n+     opacity: 0;\n+   }\n+   to {\n+     transform: translateY(0);\n+     opacity: 1;\n+   }\n+ }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1739380505312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n   }\n \n   .animated-box {\n    \n-   background-color: blue;\n+  \n    color: white;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n"
+                },
+                {
+                    "date": 1739380523386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,10 +68,10 @@\n \n   .animated-box {\n    \n   \n-   color: white;\n-   display: flex;\n+   \n+   \n    align-items: center;\n    justify-content: center;\n    animation: slideIn 1s ease-in-out;\n  }\n"
+                },
+                {
+                    "date": 1739380545991,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,12 +66,9 @@\n \n   }\n \n   .animated-box {\n-   \n-  \n-   \n-   \n+\n    align-items: center;\n    justify-content: center;\n    animation: slideIn 1s ease-in-out;\n  }\n"
+                },
+                {
+                    "date": 1739380575393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,9 @@\n  }\n  \n  @keyframes slideIn {\n    from {\n-     transform: translateY(-100px);\n+     transform: translateY(-00px);\n      opacity: 0;\n    }\n    to {\n      transform: translateY(0);\n"
+                },
+                {
+                    "date": 1739380588641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,9 @@\n  }\n  \n  @keyframes slideIn {\n    from {\n-     transform: translateY(-00px);\n+     transform: translateY(-200px);\n      opacity: 0;\n    }\n    to {\n      transform: translateY(0);\n"
+                },
+                {
+                    "date": 1739380606639,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,9 @@\n  }\n  \n  @keyframes slideIn {\n    from {\n-     transform: translateY(-200px);\n+     transform: translateY(-00px);\n      opacity: 0;\n    }\n    to {\n      transform: translateY(0);\n"
+                },
+                {
+                    "date": 1739380625651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,9 @@\n  }\n  \n  @keyframes slideIn {\n    from {\n-     transform: translateY(-00px);\n+     transform: translateY(100px);\n      opacity: 0;\n    }\n    to {\n      transform: translateY(0);\n"
+                },
+                {
+                    "date": 1739409064393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,6 @@\n .box1{\n-     width:85%;\n-     background:rgba(0, 0, 255, 0.051);\n-     float:right;\n+     \n     \n     \n }\n \n"
+                },
+                {
+                    "date": 1739409148260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n .box1{\n      \n+   display: \"flex\",\n+   justifyContent: \"center\", // Center horizontally\n+   alignItems: \"center\", // Center vertically\n+   height: \"100vh\", // Full height of viewport\n+   backgroundColor: \"#f4f4f4\",\n     \n-    \n }\n \n .box2{\n     background:rgba(255, 192, 203, 0.01);\n"
+                },
+                {
+                    "date": 1739409156240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n .box1{\n      \n-   display: \"flex\",\n+   display: \"flex;\n    justifyContent: \"center\", // Center horizontally\n    alignItems: \"center\", // Center vertically\n    height: \"100vh\", // Full height of viewport\n    backgroundColor: \"#f4f4f4\",\n"
+                },
+                {
+                    "date": 1739409169218,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n-   display: \"flex;\n-   justifyContent: \"center\", // Center horizontally\n+   display: flex;\n+   justifyContent: \"center\n    alignItems: \"center\", // Center vertically\n    height: \"100vh\", // Full height of viewport\n    backgroundColor: \"#f4f4f4\",\n     \n"
+                },
+                {
+                    "date": 1739409176026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n    display: flex;\n-   justifyContent: \"center\n+   justifyContent: center;\n    alignItems: \"center\", // Center vertically\n    height: \"100vh\", // Full height of viewport\n    backgroundColor: \"#f4f4f4\",\n     \n"
+                },
+                {
+                    "date": 1739409184184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .box1{\n      \n    display: flex;\n    justifyContent: center;\n-   alignItems: \"center\", // Center vertically\n+   alignItems: \"center\n    height: \"100vh\", // Full height of viewport\n    backgroundColor: \"#f4f4f4\",\n     \n }\n"
+                },
+                {
+                    "date": 1739409193957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n .box1{\n      \n    display: flex;\n    justifyContent: center;\n-   alignItems: \"center\n-   height: \"100vh\", // Full height of viewport\n+   alignItems: center;\n+   height: \"100vh\n    backgroundColor: \"#f4f4f4\",\n     \n }\n \n"
+                },
+                {
+                    "date": 1739409199136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n      \n    display: flex;\n    justifyContent: center;\n    alignItems: center;\n-   height: \"100vh\n+   height: 100vh;\n    backgroundColor: \"#f4f4f4\",\n     \n }\n \n"
+                },
+                {
+                    "date": 1739409204929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n    display: flex;\n    justifyContent: center;\n    alignItems: center;\n    height: 100vh;\n-   backgroundColor: \"#f4f4f4\",\n+   backgroundColor: \"#f4f4f4\n     \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739409218320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n    display: flex;\n    justifyContent: center;\n    alignItems: center;\n    height: 100vh;\n-   backgroundColor: \"#f4f4f4\n+   backgroundColor: #f4f4f4;\n     \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739409226476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n    display: flex;\n    justifyContent: center;\n    alignItems: center;\n    height: 100vh;\n-   backgroundColor: #f4f4f4;\n+   backgroundolor: #f4f4f4;\n     \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739409234631,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n .box1{\n      \n    display: flex;\n-   justifyContent: center;\n+   justify-content: center;\n    alignItems: center;\n    height: 100vh;\n-   backgroundolor: #f4f4f4;\n+   background-color: #f4f4f4;\n     \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739409243526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .box1{\n      \n    display: flex;\n    justify-content: center;\n-   alignItems: center;\n+   align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n     \n }\n"
+                },
+                {
+                    "date": 1739409344446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,16 +8,11 @@\n     \n }\n \n .box2{\n-    background:rgba(255, 192, 203, 0.01);\n-    border-radius:8px; \n-    margin:10px;\n-    height:222.5px;\n-    width:150px;\n-    box-shadow:0px 0px 2px orangered;\n    \n    \n+   \n }\n  .image{\n     width:100%;\n     height:150px;\n"
+                },
+                {
+                    "date": 1739409355502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,11 +8,19 @@\n     \n }\n \n .box2{\n+   width: \"100px\n+   height: \"100px\",\n+   backgroundColor: \"teal\",\n+   color: \"white\",\n+   display: \"flex\",\n+   justifyContent: \"center\",\n+   alignItems: \"center\",\n+   margin: \"10px\",\n+   borderRadius: \"8px\",\n    \n    \n-   \n }\n  .image{\n     width:100%;\n     height:150px;\n"
+                },
+                {
+                    "date": 1739409360941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     \n }\n \n .box2{\n-   width: \"100px\n+   width: 100px;\n    height: \"100px\",\n    backgroundColor: \"teal\",\n    color: \"white\",\n    display: \"flex\",\n"
+                },
+                {
+                    "date": 1739409367336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n }\n \n .box2{\n    width: 100px;\n-   height: \"100px\",\n+   height: 100px\n    backgroundColor: \"teal\",\n    color: \"white\",\n    display: \"flex\",\n    justifyContent: \"center\",\n"
+                },
+                {
+                    "date": 1739409373549,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n }\n \n .box2{\n    width: 100px;\n-   height: 100px\n-   backgroundColor: \"teal\",\n+   height: 100px;\n+   backgroundolor: \"teal\",\n    color: \"white\",\n    display: \"flex\",\n    justifyContent: \"center\",\n    alignItems: \"center\",\n"
+                },
+                {
+                    "date": 1739409380538,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \n .box2{\n    width: 100px;\n    height: 100px;\n-   backgroundolor: \"teal\",\n+   background-Color: teal\n    color: \"white\",\n    display: \"flex\",\n    justifyContent: \"center\",\n    alignItems: \"center\",\n"
+                },
+                {
+                    "date": 1739409385798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \n .box2{\n    width: 100px;\n    height: 100px;\n-   background-Color: teal\n+   background-Color: teal;\n    color: \"white\",\n    display: \"flex\",\n    justifyContent: \"center\",\n    alignItems: \"center\",\n"
+                },
+                {
+                    "date": 1739409395011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n .box2{\n    width: 100px;\n    height: 100px;\n    background-Color: teal;\n-   color: \"white\",\n+   color: white\";\n    display: \"flex\",\n    justifyContent: \"center\",\n    alignItems: \"center\",\n    margin: \"10px\",\n"
+                },
+                {
+                    "date": 1739409401242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,10 @@\n .box2{\n    width: 100px;\n    height: 100px;\n    background-Color: teal;\n-   color: white\";\n-   display: \"flex\",\n+   color: white;\n+   display: flex\",\n    justifyContent: \"center\",\n    alignItems: \"center\",\n    margin: \"10px\",\n    borderRadius: \"8px\",\n"
+                },
+                {
+                    "date": 1739409413381,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n    width: 100px;\n    height: 100px;\n    background-Color: teal;\n    color: white;\n-   display: flex\",\n-   justifyContent: \"center\",\n+   display: flex;\n+   justifyontent: \"center\",\n    alignItems: \"center\",\n    margin: \"10px\",\n    borderRadius: \"8px\",\n    \n"
+                },
+                {
+                    "date": 1739409418554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n    height: 100px;\n    background-Color: teal;\n    color: white;\n    display: flex;\n-   justifyontent: \"center\",\n+   justify-content: \"center\n    alignItems: \"center\",\n    margin: \"10px\",\n    borderRadius: \"8px\",\n    \n"
+                },
+                {
+                    "date": 1739409427019,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,10 @@\n    height: 100px;\n    background-Color: teal;\n    color: white;\n    display: flex;\n-   justify-content: \"center\n-   alignItems: \"center\",\n+   justify-content:center;\n+   align-tems: \"center\",\n    margin: \"10px\",\n    borderRadius: \"8px\",\n    \n    \n"
+                },
+                {
+                    "date": 1739409433504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n    background-Color: teal;\n    color: white;\n    display: flex;\n    justify-content:center;\n-   align-tems: \"center\",\n+   align-items: \"center;\n    margin: \"10px\",\n    borderRadius: \"8px\",\n    \n    \n"
+                },
+                {
+                    "date": 1739409439736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,10 @@\n    background-Color: teal;\n    color: white;\n    display: flex;\n    justify-content:center;\n-   align-items: \"center;\n-   margin: \"10px\",\n+   align-items: center;\n+   margin: 10px\",\n    borderRadius: \"8px\",\n    \n    \n }\n"
+                },
+                {
+                    "date": 1739409445908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n    color: white;\n    display: flex;\n    justify-content:center;\n    align-items: center;\n-   margin: 10px\",\n+   margin: 10px;\n    borderRadius: \"8px\",\n    \n    \n }\n"
+                },
+                {
+                    "date": 1739409451041,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n    display: flex;\n    justify-content:center;\n    align-items: center;\n    margin: 10px;\n-   borderRadius: \"8px\",\n+   borderadius: \"8px\",\n    \n    \n }\n  .image{\n"
+                },
+                {
+                    "date": 1739409463024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n    display: flex;\n    justify-content:center;\n    align-items: center;\n    margin: 10px;\n-   borderadius: \"8px\",\n+   border-Radius: \"8px\",\n    \n    \n }\n  .image{\n"
+                },
+                {
+                    "date": 1739409469145,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n    display: flex;\n    justify-content:center;\n    align-items: center;\n    margin: 10px;\n-   border-Radius: \"8px\",\n+   border-Radius: 8px\n    \n    \n }\n  .image{\n"
+                },
+                {
+                    "date": 1739409475302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n    display: flex;\n    justify-content:center;\n    align-items: center;\n    margin: 10px;\n-   border-Radius: 8px\n+   border-Radius: 8px;\n    \n    \n }\n  .image{\n"
+                },
+                {
+                    "date": 1739409519737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n }\n \n .box2{\n    width: 100px;\n-   height: 100px;\n+   \n    background-Color: teal;\n    color: white;\n    display: flex;\n    justify-content:center;\n"
+                },
+                {
+                    "date": 1739409525126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,10 @@\n     \n }\n \n .box2{\n-   width: 100px;\n    \n+   \n    background-Color: teal;\n    color: white;\n    display: flex;\n    justify-content:center;\n"
+                },
+                {
+                    "date": 1739409532854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \n .box2{\n    \n    \n-   background-Color: teal;\n+   \n    color: white;\n    display: flex;\n    justify-content:center;\n    align-items: center;\n"
+                },
+                {
+                    "date": 1739409543593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,10 @@\n .box2{\n    \n    \n    \n-   color: white;\n-   display: flex;\n+   \n+  \n    justify-content:center;\n    align-items: center;\n    margin: 10px;\n    border-Radius: 8px;\n"
+                },
+                {
+                    "date": 1739409561329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   \n    justify-content:center;\n    align-items: center;\n    margin: 10px;\n-   border-Radius: 8px;\n+  \n    \n    \n }\n  .image{\n"
+                },
+                {
+                    "date": 1739409572689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n    \n    \n   \n    justify-content:center;\n-   align-items: center;\n+   \n    margin: 10px;\n   \n    \n    \n"
+                },
+                {
+                    "date": 1739409578779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n    \n    \n    \n   \n-   justify-content:center;\n+ \n    \n    margin: 10px;\n   \n    \n"
+                },
+                {
+                    "date": 1739409593725,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n    \n   \n  \n    \n-   margin: 10px;\n+   \n   \n    \n    \n }\n"
+                },
+                {
+                    "date": 1739409602268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,18 +9,8 @@\n }\n \n .box2{\n    \n-   \n-   \n-   \n-  \n- \n-   \n-   \n-  \n-   \n-   \n }\n  .image{\n     width:100%;\n     height:150px;\n"
+                },
+                {
+                    "date": 1739410063963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n    display: flex;\n-   justify-content: center;\n+  \n    align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n     \n"
+                },
+                {
+                    "date": 1739410095440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n    display: flex;\n-  \n+  jus\n    align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n     \n"
+                },
+                {
+                    "date": 1739410103361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n    display: flex;\n-  jus\n+  justify-items: ;\n    align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n     \n"
+                },
+                {
+                    "date": 1739410164049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n .box1{\n      \n    display: flex;\n-  justify-items: ;\n+  justify-items: center;\n    align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n-    \n+   \n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739410171946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   justify-items: center;\n    align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n-   \n+   margin-right: ;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739410192132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   justify-items: center;\n    align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n-   margin-right: ;\n+   margin-le: auto;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739410200902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   justify-items: center;\n    align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n-   margin-le: auto;\n+   margin-right: auto;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739410213313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   justify-items: center;\n    align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n-   margin-right: auto;\n+   margin-right:20px ;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739410220491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   justify-items: center;\n    align-items: center;\n    height: 100vh;\n    background-color: #f4f4f4;\n-   margin-right:20px ;\n+   margin-right:20px;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739410281216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,11 @@\n    display: flex;\n   justify-items: center;\n    align-items: center;\n    height: 100vh;\n+   width\n    background-color: #f4f4f4;\n-   margin-right:20px;\n+   margin-right:200px;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739410288177,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n    display: flex;\n   justify-items: center;\n    align-items: center;\n    height: 100vh;\n-   width\n+   width: ;\n    background-color: #f4f4f4;\n    margin-right:200px;\n }\n \n"
+                },
+                {
+                    "date": 1739410333696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,11 @@\n    display: flex;\n   justify-items: center;\n    align-items: center;\n    height: 100vh;\n-   width: ;\n+   width: 100%;\n    background-color: #f4f4f4;\n-   margin-right:200px;\n+   margin-right:-200px;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739410358503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n-   margin-right:-200px;\n+ \n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739411088846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n- \n+   \n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739411097060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n-   \n+   justify-content: flex-start;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739411160656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n .box1{\n      \n-   display: flex;\n+   display: ;\n   justify-items: center;\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n"
+                },
+                {
+                    "date": 1739411175370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n-   display: ;\n-  justify-items: center;\n+   display: grid;\n+ \n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n"
+                },
+                {
+                    "date": 1739411180766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n .box1{\n      \n-   display: grid;\n+   display: ;\n  \n    align-items: center;\n    height: 100vh;\n    width: 100%;\n"
+                },
+                {
+                    "date": 1739411209656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n-   display: ;\n- \n+   display: grid;\n+   \n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n"
+                },
+                {
+                    "date": 1739411223831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n    display: grid;\n-   \n+   grid-a\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n"
+                },
+                {
+                    "date": 1739411230593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n    display: grid;\n-   grid-a\n+   grid-auto-flow: column;\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n"
+                },
+                {
+                    "date": 1739411236353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n-   justify-content: flex-start;\n+   \n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739411245192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .box1{\n      \n    display: grid;\n    grid-auto-flow: column;\n-   align-items: center;\n+\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n    \n"
+                },
+                {
+                    "date": 1739411251051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .box1{\n      \n    display: grid;\n    grid-auto-flow: column;\n-\n+   align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n    \n"
+                },
+                {
+                    "date": 1739411271216,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n+   padd\n    \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739411277434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n-   padd\n+   paddingl;\n    \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739411297735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n-   paddingl;\n+   ;\n    \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739411428880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,13 @@\n .box1{\n      \n    display: grid;\n-   grid-auto-flow: column;\n+   gi\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n-   ;\n-   \n+   justify-content: flex-start;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739411481949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n .box1{\n      \n-   display: grid;\n-   gi\n+   display: flex;\n+\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n"
+                },
+                {
+                    "date": 1739411492537,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n-   justify-content: flex-start;\n+   justify-content: center;\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739411516877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n-   justify-content: center;\n+   justify-content: center;j\n+\n }\n \n .box2{\n    \n"
+                },
+                {
+                    "date": 1739411525671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n    align-items: center;\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n-   justify-content: center;j\n+   justify-content: center;\n+   justify\n \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739411531957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n    justify-content: center;\n-   justify\n+   justify-items: flex-start;\n \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739411553977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n    justify-content: center;\n-   justify-items: flex-start;\n+   justify-items: flex-star;\n \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739411561144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n    height: 100vh;\n    width: 100%;\n    background-color: #f4f4f4;\n    justify-content: center;\n-   justify-c: flex-start;\n+   justify-co: flex-start;\n \n }\n \n .box2{\n"
+                },
+                {
+                    "date": 1739430140438,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n .box1{\n      \n    display: flex;\n    align-self: center;\n-   background\n+   background: ;\n    height: 100vh;\n    width: 100%;\n   \n    justify-content: center;\n"
+                }
+            ],
+            "date": 1738070906263,
+            "name": "Commit-0",
+            "content": ".box1{\n     width:85%;\n     background:rgba(0, 0, 255, 0.051);\n     float:right;\n    \n    \n}\n\n.box2{\n    background:rgba(255, 192, 203, 0.01);\n    border-radius:8px; \n    margin:10px;\n    height:222.5px;\n    width:150px;\n    box-shadow:0px 0px 2px orangered;\n   \n   \n}\n .image{\n    width:100%;\n    height:150px;\n    border-radius:8px 8px 0px 0px;\n }\n .text{\n    \n   display: grid;\n   \n\n }\n a{\n    margin-top:0%;\n    padding: 0%;\n    font-size: 10px;\n    text-decoration: none;\n    margin-left: 2px;\n    \n }\n .name{\n    width:60%;\n    text-decoration: none;\n }\n .cart{\n    margin:0% ;\n    \n }\n .btn{\n    width:100%;\n    height:25px;\n    text-align: center;\n    padding: 0px;\n    margin-top: 0px;\n    border-radius: 0px 0px 8px 8px;\n\n }\n\n @media(max-width:760px){\n    .box1{\n        width: 100%;\n    }\n   \n    \n }\n  @media(max-width:1000px){\n\n\n\n  }"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+/* Style the input field */
+.custom-datepicker-input {
+    border: 2px solid #4CAF50;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  /* Style the calendar popup */
+  .custom-datepicker-calendar {
+    border: 1px solid #4CAF50;
+  }
+  
+  /* Customize header background and text in the calendar */
+  .custom-datepicker-calendar .react-datepicker__header {
+    background-color: #4CAF50;
+    border-bottom: none;
+  }
+  
+  .custom-datepicker-calendar .react-datepicker__current-month,
+  .custom-datepicker-calendar .react-datepicker-time__header {
+    color: #ba0e0e;
+  }
+  
+  /* Customize day styles */
+  .custom-datepicker-calendar .react-datepicker__day {
+    border-radius: 50%;
+  }
+  
+  .custom-datepicker-calendar .react-datepicker__day--selected {
+    background-color: #4CAF50;
+    color: white;
+  }

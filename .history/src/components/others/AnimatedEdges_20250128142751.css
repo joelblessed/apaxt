@@ -1,0 +1,44 @@
+* Container Box */
+.animated-box {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 50px auto;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Common Edge Styling */
+.box-edge {
+    position: absolute;
+    background-color: #007bff;     animation: animate-edge 2s linear infinite;
+}
+
+
+.box-edge.top {
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    animation-delay: 0s;
+}
+
+
+.box-edge.right {
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    animation-delay: 0.5s;
+}
+
+
+.box-edge.bottom {
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    animation-delay: 1s;
+}
+

@@ -1,0 +1,1 @@
+src/components/account/ProtectedRoute.js src/components/account/AuthContext.js

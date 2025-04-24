@@ -1,0 +1,162 @@
+{
+    "sourceFile": "src/components/account/dashboard.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 36,
+            "patches": [
+                {
+                    "date": 1738167556454,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1738181562222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n        \n     }, []);\n \n     const loadcustomer = () => {\n-        fetch(\"http://localhost:4500/customer\").then(res => {\n+        fetch(\"http://localhost:500/customer\").then(res => {\n             if (!res.ok) {\n                 return false\n             }\n             return res.json();\n@@ -34,9 +34,9 @@\n     }\n \n     const GetUserAccess = () => {\n         const userrole = sessionStorage.getItem('userrole') != null ? sessionStorage.getItem('userrole').toString() : '';\n-        fetch(\"http://localhost:00/roleaccess?role=\" + userrole + \"&menu=customer\").then(res => {\n+        fetch(\"http://localhost:5000/roleaccess?role=\" + userrole + \"&menu=customer\").then(res => {\n             if (!res.ok) {\n                 navigate('/');\n             toast.warning('You are not authorized to access');\n                 return false;\n"
+                },
+                {
+                    "date": 1738184776078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,133 +1,17 @@\n-import { useState, useEffect } from \"react\";\n-import { Link, useLocation, useNavigate } from \"react-router-dom\";\n-import { toast } from \"react-toastify\";\n+import React from \"react\";\n+import Sidebar from \"./Sidebar\";\n+import DashboardWidgets from \"./DashboardWidgets\";\n \n-\n-const Dashboard = () => {\n-    \n-\n-\n-    const [custlist, custupdate] = useState([]);\n-    const [haveedit, editchange] = useState(false);\n-    const [haveview, viewchange] = useState(false);\n-    const [haveadd, addchange] = useState(false);\n-    const [haveremove, removechange] = useState(false);\n-\n-    const navigate = useNavigate();\n-\n-\n-    useEffect(() => {\n-        GetUserAccess();\n-        loadcustomer();\n-       \n-    }, []);\n-\n-    const loadcustomer = () => {\n-        fetch(\"http://localhost:500/customer\").then(res => {\n-            if (!res.ok) {\n-                return false\n-            }\n-            return res.json();\n-        }).then(res => {\n-            custupdate(res)\n-        });\n-    }\n-\n-    const GetUserAccess = () => {\n-        const userrole = sessionStorage.getItem('userrole') != null ? sessionStorage.getItem('userrole').toString() : '';\n-        fetch(\"http://localhost:5000/roleaccess?role=\" + userrole + \"&menu=customer\").then(res => {\n-            if (!res.ok) {\n-                navigate('/');\n-            toast.warning('You are not authorized to access');\n-                return false;\n-            }\n-            return res.json();\n-        }).then(res => {\n-            console.log(res);\n-            if (res.length > 0) {\n-                viewchange(true);\n-                let userobj = res[0];\n-                editchange(userobj.haveedit);\n-                addchange(userobj.haveadd);\n-                removechange(userobj.havedelete);\n-            }else{\n-                navigate('/');\n-            toast.warning('You are not authorized to access');\n-            }\n-        })\n-    }\n-\n-    const handleadd = () => {\n-        if(haveadd){\n-        toast.success('added')\n-        }else{\n-            toast.warning('You are not having access for add');\n-        }\n-    }\n-    const handleedit = () => {\n-        if(haveedit){\n-        toast.success('edited')\n-        }\n-        else{\n-            toast.warning('You are not having access for Edit');\n-        }\n-    }\n-\n-    const handleremove = () => {\n-        if(haveremove){\n-        toast.success('removed')\n-        }else{\n-            toast.warning('You are not having access for remove');\n-        }\n-    }\n-\n-    const SignOut = () =>{\n-        sessionStorage.clear();\n-    }\n-\n-    return (<>\n-    <button onClick={SignOut}>signout</button>\n-           <div className=\"container\">\n-\n-<div className=\"card\">\n-    <div className=\"card-header\">\n-        <h3>Customer Listing</h3>\n+function Dashboard() {\n+  return (\n+    <div style={{ display: \"flex\" }}>\n+      <Sidebar />\n+      <div style={{ flexGrow: 1, padding: \"20px\" }}>\n+        <h2>Dashboard</h2>\n+        <DashboardWidgets />\n+      </div>\n     </div>\n-    <div className=\"card-body\">\n-        <button onClick={handleadd} className=\"btn btn-success\">Add (+)</button>\n-        <br></br>\n-        <table className=\"table table-bordered\">\n-            <thead className=\"bg-dark text-white\">\n-                <tr>\n-                    <th>Code</th>\n-                    <th>Name</th>\n-                    <th>Email</th>\n-                    <th>Action</th>\n-                </tr>\n-            </thead>\n-            <tbody>\n-                {custlist &&\n-                    custlist.map(item => (\n-                        <tr key={item.code}>\n-                            <td>{item.code}</td>\n-                            <td>{item.name}</td>\n-                            <td>{item.email}</td>\n-                            <td>\n-                                <button onClick={handleedit} className=\"btn btn-primary\">Edit</button> |\n-                                <button onClick={handleremove} className=\"btn btn-danger\">Remove</button>\n-                            </td>\n-\n-                        </tr>\n-                    ))\n-                }\n-            </tbody>\n-        </table>\n-    </div>\n-</div>\n-</div>\n-        \n-        </>\n-    );\n+  );\n }\n \n export default Dashboard;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1738185146764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from \"react\";\n import Sidebar from \"./Sidebar\";\n-import DashboardWidgets from \"./DashboardWidgets\";\n+import DashboardWidgets from \"\";\n \n function Dashboard() {\n   return (\n     <div style={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1738185216084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from \"react\";\n-import Sidebar from \"./Sidebar\";\n-import DashboardWidgets from \"\";\n+import Sidebar from \"\";\n+import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n   return (\n     <div style={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1738185221391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React from \"react\";\n-import Sidebar from \"\";\n+import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n   return (\n"
+                },
+                {
+                    "date": 1738185567641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from \"react\";\n-import Sidebar from \"./dasboardSidbar\";\n-import DashboardWidgets from \"./dasboardSidbar\";\n+// import Sidebar from \"./dasboardSidbar\";\n+// import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n   return (\n     <div style={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1738185584772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from \"react\";\n-// import Sidebar from \"./dasboardSidbar\";\n-// import DashboardWidgets from \"./dasboardSidbar\";\n+import Sidebar from \"./dasboardSidbar\";\n+import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n   return (\n     <div style={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1738255586068,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,12 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n+  const handleLogout = () => {\n+    localStorage.removeItem(\"user\");\n+    setUser(null);\n+};\n   return (\n     <div style={{ display: \"flex\" }}>\n       <Sidebar />\n       <div style={{ flexGrow: 1, padding: \"20px\" }}>\n"
+                },
+                {
+                    "date": 1738255619124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n     <div style={{ display: \"flex\" }}>\n       <Sidebar />\n       <div style={{ flexGrow: 1, padding: \"20px\" }}>\n         <h2>Dashboard</h2>\n+        \n         <DashboardWidgets />\n       </div>\n     </div>\n   );\n"
+                },
+                {
+                    "date": 1738255644934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,16 +4,16 @@\n \n function Dashboard() {\n   const handleLogout = () => {\n     localStorage.removeItem(\"user\");\n-    setUser(null);\n+    \n };\n   return (\n     <div style={{ display: \"flex\" }}>\n       <Sidebar />\n       <div style={{ flexGrow: 1, padding: \"20px\" }}>\n         <h2>Dashboard</h2>\n-        \n+        <button onClick={handleLogout}>Logout</button>\n         <DashboardWidgets />\n       </div>\n     </div>\n   );\n"
+                },
+                {
+                    "date": 1738255656730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n   const handleLogout = () => {\n-    localStorage.removeItem(\"user\");\n+    localStorage.removeItem(\"username\");\n     \n };\n   return (\n     <div style={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1738853160687,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n   const handleLogout = () => {\n-    localStorage.removeItem(\"username\");\n+   \n     \n };\n   return (\n     <div style={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1738853171807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,13 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n+  \n   const handleLogout = () => {\n-   \n+    localStorage.removeItem(\"token\");\n+    localStorage.removeItem(\"role\");\n+    setUser(null);\n     \n };\n   return (\n     <div style={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1738853179370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n-  \n+  const [user]\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     setUser(null);\n"
+                },
+                {
+                    "date": 1738853187383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n-  const [user]\n+  const [username se]\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     setUser(null);\n"
+                },
+                {
+                    "date": 1738853192433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n-  const [username se]\n+  const [username setuse]\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     setUser(null);\n"
+                },
+                {
+                    "date": 1738853199091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n-  const [username setuse]\n+  const [username setUserN]\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     setUser(null);\n"
+                },
+                {
+                    "date": 1738853208950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n-  const [username setUserN]\n+  const [username setUserName]\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     setUser(null);\n"
+                },
+                {
+                    "date": 1738853227269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n-  const [username setUserName]\n+  const [userName, setUserName]\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     setUser(null);\n"
+                },
+                {
+                    "date": 1738853236140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n-  const [userName, setUserName]\n+  const [userName, setUserName] = usse\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     setUser(null);\n"
+                },
+                {
+                    "date": 1738853241660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n-import React from \"react\";\n+import React, { useState } from \"react\";\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n-  const [userName, setUserName] = usse\n+  const [userName, setUserName] = useState()\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     setUser(null);\n"
+                },
+                {
+                    "date": 1738853288258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,13 +2,13 @@\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n function Dashboard() {\n-  const [userName, setUserName] = useState()\n+  const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n-    setUser(null);\n+    setUserName(null);\n     \n };\n   return (\n     <div style={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1738853365081,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState } from \"react\";\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n-function Dashboard() {\n+function Dashboard({}) {\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n"
+                },
+                {
+                    "date": 1738856019894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import React, { useState } from \"react\";\n import Sidebar from \"./dasboardSidbar\";\n import DashboardWidgets from \"./dasboardSidbar\";\n \n-function Dashboard({}) {\n+function Dashboard({api}) {\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n-    setUserName(null);\n+    s\n     \n };\n   return (\n     <div style={{ display: \"flex\" }}>\n"
+                },
+                {
+                    "date": 1738856031200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n+    localStorage.\n     s\n     \n };\n   return (\n"
+                },
+                {
+                    "date": 1738856038027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n-    localStorage.\n+    localStorage.clear\n     s\n     \n };\n   return (\n"
+                },
+                {
+                    "date": 1738856044246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n-    localStorage.clear\n+    localStorage.clear();\n     s\n     \n };\n   return (\n"
+                },
+                {
+                    "date": 1738856049560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     localStorage.clear();\n-    s\n     \n+    \n };\n   return (\n     <div style={{ display: \"flex\" }}>\n       <Sidebar />\n"
+                },
+                {
+                    "date": 1738856095250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n+    \n     localStorage.clear();\n     \n     \n };\n"
+                },
+                {
+                    "date": 1738856108764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n-    \n+    lo\n     localStorage.clear();\n     \n     \n };\n"
+                },
+                {
+                    "date": 1738856115362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n-    lo\n+    lolo\n     localStorage.clear();\n     \n     \n };\n"
+                },
+                {
+                    "date": 1738856122800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n-    lolo\n+    localStorage.remove\n     localStorage.clear();\n     \n     \n };\n"
+                },
+                {
+                    "date": 1738856129218,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n-    localStorage.remove\n+    localStorage.removeItem()\n     localStorage.clear();\n     \n     \n };\n"
+                },
+                {
+                    "date": 1738856134671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const [userName, setUserName] = useState(null)\n   const handleLogout = () => {\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n-    localStorage.removeItem()\n+    localStorage.removeItem(\"username\")\n     localStorage.clear();\n     \n     \n };\n"
+                },
+                {
+                    "date": 1738856733750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,11 +8,11 @@\n     localStorage.removeItem(\"token\");\n     localStorage.removeItem(\"role\");\n     localStorage.removeItem(\"username\");\n     localStorage.clear();\n+    s\n     \n     \n-    \n };\n   return (\n     <div style={{ display: \"flex\" }}>\n       <Sidebar />\n"
+                },
+                {
+                    "date": 1738859995408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     <div style={{ display: \"flex\" }}>\n       <Sidebar />\n       <div style={{ flexGrow: 1, padding: \"20px\" }}>\n         <h2>Dashboard</h2>\n-        \n+        <a\n         <button onClick={handleLogout}>Logout</button>\n         <DashboardWidgets />\n       </div>\n     </div>\n"
+                }
+            ],
+            "date": 1738167556454,
+            "name": "Commit-0",
+            "content": "import { useState, useEffect } from \"react\";\nimport { Link, useLocation, useNavigate } from \"react-router-dom\";\nimport { toast } from \"react-toastify\";\n\n\nconst Dashboard = () => {\n    \n\n\n    const [custlist, custupdate] = useState([]);\n    const [haveedit, editchange] = useState(false);\n    const [haveview, viewchange] = useState(false);\n    const [haveadd, addchange] = useState(false);\n    const [haveremove, removechange] = useState(false);\n\n    const navigate = useNavigate();\n\n\n    useEffect(() => {\n        GetUserAccess();\n        loadcustomer();\n       \n    }, []);\n\n    const loadcustomer = () => {\n        fetch(\"http://localhost:4500/customer\").then(res => {\n            if (!res.ok) {\n                return false\n            }\n            return res.json();\n        }).then(res => {\n            custupdate(res)\n        });\n    }\n\n    const GetUserAccess = () => {\n        const userrole = sessionStorage.getItem('userrole') != null ? sessionStorage.getItem('userrole').toString() : '';\n        fetch(\"http://localhost:00/roleaccess?role=\" + userrole + \"&menu=customer\").then(res => {\n            if (!res.ok) {\n                navigate('/');\n            toast.warning('You are not authorized to access');\n                return false;\n            }\n            return res.json();\n        }).then(res => {\n            console.log(res);\n            if (res.length > 0) {\n                viewchange(true);\n                let userobj = res[0];\n                editchange(userobj.haveedit);\n                addchange(userobj.haveadd);\n                removechange(userobj.havedelete);\n            }else{\n                navigate('/');\n            toast.warning('You are not authorized to access');\n            }\n        })\n    }\n\n    const handleadd = () => {\n        if(haveadd){\n        toast.success('added')\n        }else{\n            toast.warning('You are not having access for add');\n        }\n    }\n    const handleedit = () => {\n        if(haveedit){\n        toast.success('edited')\n        }\n        else{\n            toast.warning('You are not having access for Edit');\n        }\n    }\n\n    const handleremove = () => {\n        if(haveremove){\n        toast.success('removed')\n        }else{\n            toast.warning('You are not having access for remove');\n        }\n    }\n\n    const SignOut = () =>{\n        sessionStorage.clear();\n    }\n\n    return (<>\n    <button onClick={SignOut}>signout</button>\n           <div className=\"container\">\n\n<div className=\"card\">\n    <div className=\"card-header\">\n        <h3>Customer Listing</h3>\n    </div>\n    <div className=\"card-body\">\n        <button onClick={handleadd} className=\"btn btn-success\">Add (+)</button>\n        <br></br>\n        <table className=\"table table-bordered\">\n            <thead className=\"bg-dark text-white\">\n                <tr>\n                    <th>Code</th>\n                    <th>Name</th>\n                    <th>Email</th>\n                    <th>Action</th>\n                </tr>\n            </thead>\n            <tbody>\n                {custlist &&\n                    custlist.map(item => (\n                        <tr key={item.code}>\n                            <td>{item.code}</td>\n                            <td>{item.name}</td>\n                            <td>{item.email}</td>\n                            <td>\n                                <button onClick={handleedit} className=\"btn btn-primary\">Edit</button> |\n                                <button onClick={handleremove} className=\"btn btn-danger\">Remove</button>\n                            </td>\n\n                        </tr>\n                    ))\n                }\n            </tbody>\n        </table>\n    </div>\n</div>\n</div>\n        \n        </>\n    );\n}\n\nexport default Dashboard;"
+        }
+    ]
+}

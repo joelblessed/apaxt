@@ -1,0 +1,82 @@
+{
+    "sourceFile": "src/authService.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1737561946828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737561954157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n // Simulated login function (replace with actual API request)\n export const login = async (username, password) => {\n   // Simulating an API response (replace with real backend call)\n-  if (username === 'adminuser' && password === 'password') {\n+  if (username === 'adminuser' && password === 'admin') {\n     const user = { username, token: 'fake-jwt-token' };\n     localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n     return user;\n   } else {\n"
+                },
+                {
+                    "date": 1737563415753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n // Simulated login function (replace with actual API request)\n export const login = async (username, password) => {\n   // Simulating an API response (replace with real backend call)\n-  if (username === 'adminuser' && password === 'admin') {\n+  if (username === '' && password === 'admin') {\n     const user = { username, token: 'fake-jwt-token' };\n     localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n     return user;\n   } else {\n"
+                },
+                {
+                    "date": 1737565639882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n // Simulated login function (replace with actual API request)\n export const login = async (username, password) => {\n   // Simulating an API response (replace with real backend call)\n-  if (username === '' && password === 'admin') {\n+  if () {\n     const user = { username, token: 'fake-jwt-token' };\n     localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n     return user;\n   } else {\n"
+                },
+                {
+                    "date": 1737565695946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n // Simulated login function (replace with actual API request)\n export const login = async (username, password) => {\n   // Simulating an API response (replace with real backend call)\n-  if () {\n+  if (username === '' && password === '') {\n     const user = { username, token: 'fake-jwt-token' };\n     localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n     return user;\n   } else {\n"
+                },
+                {
+                    "date": 1737566805095,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,10 @@\n     throw new Error('Invalid credentials');\n   }\n };\n \n+\n+\n // Logout function to remove user from local storage\n export const logout = () => {\n   localStorage.removeItem(AUTH_KEY);\n };\n"
+                },
+                {
+                    "date": 1737566850151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,32 @@\n     throw new Error('Invalid credentials');\n   }\n };\n \n+const API_URL = ';\n \n+// Login function using Fetch API\n+export const login = async (email, password) => {\n+  try {\n+    const response = await fetch(${API_URL}/login, {\n+      method: 'POST',\n+      headers: { 'Content-Type': 'application/json' },\n+      body: JSON.stringify({ email, password }),\n+    });\n \n+    if (!response.ok) {\n+      throw new Error('Login failed');\n+    }\n+\n+    const data = await response.json();\n+    localStorage.setItem('user', JSON.stringify(data));\n+\n+    return data;\n+  } catch (error) {\n+    throw new Error(error.message);\n+  }\n+}\n+\n // Logout function to remove user from local storage\n export const logout = () => {\n   localStorage.removeItem(AUTH_KEY);\n };\n"
+                },
+                {
+                    "date": 1737566856482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     throw new Error('Invalid credentials');\n   }\n };\n \n-const API_URL = ';\n+const API_URL = \"http://localhost:4500/user/\";\n \n // Login function using Fetch API\n export const login = async (email, password) => {\n   try {\n"
+                },
+                {
+                    "date": 1737566875958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,19 @@\n-// authService.js\n+// // authService.js\n \n-const AUTH_KEY = 'user'; // Key to store user data in localStorage\n+// const AUTH_KEY = 'user'; // Key to store user data in localStorage\n \n-// Simulated login function (replace with actual API request)\n-export const login = async (username, password) => {\n-  // Simulating an API response (replace with real backend call)\n-  if (username === '' && password === '') {\n-    const user = { username, token: 'fake-jwt-token' };\n-    localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n-    return user;\n-  } else {\n-    throw new Error('Invalid credentials');\n-  }\n-};\n+// // Simulated login function (replace with actual API request)\n+// export const login = async (username, password) => {\n+//   // Simulating an API response (replace with real backend call)\n+//   if (username === '' && password === '') {\n+//     const user = { username, token: 'fake-jwt-token' };\n+//     localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n+//     return user;\n+//   } else {\n+//     throw new Error('Invalid credentials');\n+//   }\n+// };\n \n const API_URL = \"http://localhost:4500/user/\";\n \n // Login function using Fetch API\n"
+                },
+                {
+                    "date": 1737566901184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n // Login function using Fetch API\n export const login = async (email, password) => {\n   try {\n-    const response = await fetch(${API_URL}/login, {\n+    const response = await fetch('${API_URL}/login, {\n       method: 'POST',\n       headers: { 'Content-Type': 'application/json' },\n       body: JSON.stringify({ email, password }),\n     });\n"
+                },
+                {
+                    "date": 1737566910383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n // Login function using Fetch API\n export const login = async (email, password) => {\n   try {\n-    const response = await fetch('${API_URL}/login, {\n+    const response = await fetch('${API_URL}/login;, {\n       method: 'POST',\n       headers: { 'Content-Type': 'application/json' },\n       body: JSON.stringify({ email, password }),\n     });\n"
+                },
+                {
+                    "date": 1737566941252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n // // authService.js\n \n-// const AUTH_KEY = 'user'; // Key to store user data in localStorage\n+ const AUTH_KEY = 'user'; // Key to store user data in localStorage\n \n // // Simulated login function (replace with actual API request)\n // export const login = async (username, password) => {\n //   // Simulating an API response (replace with real backend call)\n@@ -18,9 +18,9 @@\n \n // Login function using Fetch API\n export const login = async (email, password) => {\n   try {\n-    const response = await fetch('${API_URL}/login;, {\n+    const response = await fetch('${API_URL}/login', {\n       method: 'POST',\n       headers: { 'Content-Type': 'application/json' },\n       body: JSON.stringify({ email, password }),\n     });\n"
+                },
+                {
+                    "date": 1737567074352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n // // authService.js\n \n- const AUTH_KEY = 'user'; // Key to store user data in localStorage\n+// const AUTH_KEY = 'user'; // Key to store user data in localStorage\n \n // // Simulated login function (replace with actual API request)\n // export const login = async (username, password) => {\n //   // Simulating an API response (replace with real backend call)\n"
+                },
+                {
+                    "date": 1737567081438,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,26 +1,26 @@\n-// // authService.js\n+// authService.js\n \n-// const AUTH_KEY = 'user'; // Key to store user data in localStorage\n+const AUTH_KEY = 'user'; // Key to store user data in localStorage\n \n-// // Simulated login function (replace with actual API request)\n-// export const login = async (username, password) => {\n-//   // Simulating an API response (replace with real backend call)\n-//   if (username === '' && password === '') {\n-//     const user = { username, token: 'fake-jwt-token' };\n-//     localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n-//     return user;\n-//   } else {\n-//     throw new Error('Invalid credentials');\n-//   }\n-// };\n+// Simulated login function (replace with actual API request)\n+export const login = async (username, password) => {\n+  // Simulating an API response (replace with real backend call)\n+  if (username === '' && password === '') {\n+    const user = { username, token: 'fake-jwt-token' };\n+    localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n+    return user;\n+  } else {\n+    throw new Error('Invalid credentials');\n+  }\n+};\n \n-const API_URL = \"http://localhost:4500/user/\";\n+const API_URL = 'https://your-backend.com/api/auth';\n \n // Login function using Fetch API\n export const login = async (email, password) => {\n   try {\n-    const response = await fetch('${API_URL}/login', {\n+    const response = await fetch(${API_URL}/login, {\n       method: 'POST',\n       headers: { 'Content-Type': 'application/json' },\n       body: JSON.stringify({ email, password }),\n     });\n"
+                },
+                {
+                    "date": 1737567105368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,41 +4,19 @@\n \n // Simulated login function (replace with actual API request)\n export const login = async (username, password) => {\n   // Simulating an API response (replace with real backend call)\n-  if (username === '' && password === '') {\n+  if (username ===  && password === '') {\n     const user = { username, token: 'fake-jwt-token' };\n     localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n     return user;\n   } else {\n     throw new Error('Invalid credentials');\n   }\n };\n \n-const API_URL = 'https://your-backend.com/api/auth';\n \n-// Login function using Fetch API\n-export const login = async (email, password) => {\n-  try {\n-    const response = await fetch(${API_URL}/login, {\n-      method: 'POST',\n-      headers: { 'Content-Type': 'application/json' },\n-      body: JSON.stringify({ email, password }),\n-    });\n \n-    if (!response.ok) {\n-      throw new Error('Login failed');\n-    }\n-\n-    const data = await response.json();\n-    localStorage.setItem('user', JSON.stringify(data));\n-\n-    return data;\n-  } catch (error) {\n-    throw new Error(error.message);\n-  }\n-}\n-\n // Logout function to remove user from local storage\n export const logout = () => {\n   localStorage.removeItem(AUTH_KEY);\n };\n"
+                },
+                {
+                    "date": 1737567117571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n // Simulated login function (replace with actual API request)\n export const login = async (username, password) => {\n   // Simulating an API response (replace with real backend call)\n-  if (username ===  && password === '') {\n+  if (username === '' && password === '') {\n     const user = { username, token: 'fake-jwt-token' };\n     localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n     return user;\n   } else {\n"
+                },
+                {
+                    "date": 1737571778075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,33 +1,33 @@\n-// authService.js\n+// // authService.js\n \n-const AUTH_KEY = 'user'; // Key to store user data in localStorage\n+// const AUTH_KEY = 'user'; // Key to store user data in localStorage\n \n-// Simulated login function (replace with actual API request)\n-export const login = async (username, password) => {\n-  // Simulating an API response (replace with real backend call)\n-  if (username === '' && password === '') {\n-    const user = { username, token: 'fake-jwt-token' };\n-    localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n-    return user;\n-  } else {\n-    throw new Error('Invalid credentials');\n-  }\n-};\n+// // Simulated login function (replace with actual API request)\n+// export const login = async (username, password) => {\n+//   // Simulating an API response (replace with real backend call)\n+//   if (username === '' && password === '') {\n+//     const user = { username, token: 'fake-jwt-token' };\n+//     localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n+//     return user;\n+//   } else {\n+//     throw new Error('Invalid credentials');\n+//   }\n+// };\n \n \n \n-// Logout function to remove user from local storage\n-export const logout = () => {\n\\ No newline at end of file\n-  localStorage.removeItem(AUTH_KEY);\n-};\n+// // Logout function to remove user from local storage\n+// export const logout = () => {\n+//   localStorage.removeItem(AUTH_KEY);\n+// };\n \n-// Function to get the current logged-in user\n-export const getCurrentUser = () => {\n-  const user = localStorage.getItem(AUTH_KEY);\n-  return user ? JSON.parse(user) : null;\n-};\n+// // Function to get the current logged-in user\n+// export const getCurrentUser = () => {\n+//   const user = localStorage.getItem(AUTH_KEY);\n+//   return user ? JSON.parse(user) : null;\n+// };\n \n-// Function to check if user is authenticated\n-export const isAuthenticated = () => {\n-  return !!getCurrentUser(); // Returns true if user exists, false otherwise\n-};\n+// // Function to check if user is authenticated\n+// export const isAuthenticated = () => {\n+//   return !!getCurrentUser(); // Returns true if user exists, false otherwise\n+// };\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1737561946828,
+            "name": "Commit-0",
+            "content": "// authService.js\n\nconst AUTH_KEY = 'user'; // Key to store user data in localStorage\n\n// Simulated login function (replace with actual API request)\nexport const login = async (username, password) => {\n  // Simulating an API response (replace with real backend call)\n  if (username === 'adminuser' && password === 'password') {\n    const user = { username, token: 'fake-jwt-token' };\n    localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n    return user;\n  } else {\n    throw new Error('Invalid credentials');\n  }\n};\n\n// Logout function to remove user from local storage\nexport const logout = () => {\n  localStorage.removeItem(AUTH_KEY);\n};\n\n// Function to get the current logged-in user\nexport const getCurrentUser = () => {\n  const user = localStorage.getItem(AUTH_KEY);\n  return user ? JSON.parse(user) : null;\n};\n\n// Function to check if user is authenticated\nexport const isAuthenticated = () => {\n  return !!getCurrentUser(); // Returns true if user exists, false otherwise\n};"
+        }
+    ]
+}

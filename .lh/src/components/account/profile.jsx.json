@@ -1,0 +1,162 @@
+{
+    "sourceFile": "src/components/account/profile.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 36,
+            "patches": [
+                {
+                    "date": 1740128845549,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740128929794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useEffect, useState } from \"react\";\n \n-const  = ({api}) => {\n+const Profile = ({api}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n \n   useEffect(() => {\n@@ -25,8 +25,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => setUser(data))\n+      localStorage.setItem(\"user\", data);\n       .catch((error) => setError(error.message));\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n@@ -41,5 +42,5 @@\n     </div>\n   );\n };\n \n-export default ;\n\\ No newline at end of file\n+export default Profile;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740128942289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => setUser(data))\n-      localStorage.setItem(\"user\", data);\n+       localStorage.setItem(\"user\", data);\n       .catch((error) => setError(error.message));\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n"
+                },
+                {
+                    "date": 1740128948310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,10 +24,10 @@\n           throw new Error(\"Failed to fetch user data\");\n         }\n         return response.json();\n       })\n-      .then((data) => setUser(data))\n-       localStorage.setItem(\"user\", data);\n+      .then((data) => setUser(data)  localStorage.setItem(\"user\", data);)\n+      \n       .catch((error) => setError(error.message));\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n"
+                },
+                {
+                    "date": 1740128960750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n           throw new Error(\"Failed to fetch user data\");\n         }\n         return response.json();\n       })\n-      .then((data) => setUser(data)  localStorage.setItem(\"user\", data);)\n+      .then((data) => setUser(data),  localStorage.setItem(\"user\", data);)\n       \n       .catch((error) => setError(error.message));\n   }, []);\n \n"
+                },
+                {
+                    "date": 1740128967170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n           throw new Error(\"Failed to fetch user data\");\n         }\n         return response.json();\n       })\n-      .then((data) => setUser(data),  localStorage.setItem(\"user\", data);)\n+      .then((data) => setUser(data),  localStorage.setItem(\"user\", data))\n       \n       .catch((error) => setError(error.message));\n   }, []);\n \n"
+                },
+                {
+                    "date": 1740129162799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,10 +24,9 @@\n           throw new Error(\"Failed to fetch user data\");\n         }\n         return response.json();\n       })\n-      .then((data) => setUser(data),  localStorage.setItem(\"user\", data))\n-      \n+      .then((data) => setUser(data))\n       .catch((error) => setError(error.message));\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n"
+                },
+                {
+                    "date": 1740129168024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useEffect, useState } from \"react\";\n \n-const Profile = ({api}) => {\n+const Prod = ({api}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n \n   useEffect(() => {\n@@ -41,5 +41,5 @@\n     </div>\n   );\n };\n \n-export default Profile;\n\\ No newline at end of file\n+export default Prod;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740131996912,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useEffect, useState } from \"react\";\n \n-const Prod = ({api}) => {\n+const Profile = ({api}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n \n   useEffect(() => {\n@@ -24,9 +24,9 @@\n           throw new Error(\"Failed to fetch user data\");\n         }\n         return response.json();\n       })\n-      .then((data) => setUser(data))\n+      .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n       .catch((error) => setError(error.message));\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n@@ -41,5 +41,5 @@\n     </div>\n   );\n };\n \n-export default Prod;\n\\ No newline at end of file\n+export default Profile;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740143459622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useEffect, useState } from \"react\";\n \n-const Profile = ({api}) => {\n+const Profile = ({api han}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n \n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1740143470222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useEffect, useState } from \"react\";\n \n-const Profile = ({api han}) => {\n+const Profile = ({api, handleLogin}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n \n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1740143501054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n+      \n       .catch((error) => setError(error.message));\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n"
+                },
+                {
+                    "date": 1740144128148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,46 @@\n+import { useEffect, useState } from \"react\";\n+\n+const Profile = ({api, handleLogin}) => {\n+  const [user, setUser] = useState(null);\n+  const [error, setError] = useState(null);\n+\n+  useEffect(() => {\n+    const token = localStorage.getItem(\"token\");\n+\n+    if (!token) {\n+      setError(\"No token found\");\n+      return;\n+    }\n+\n+    fetch(`${api}/profile`, {\n+      method: \"GET\",\n+      headers: {\n+        \"Content-Type\": \"application/json\",\n+        Authorization: `Bearer ${token}`, // Add token in the headers\n+      },\n+    })\n+      .then((response) => {\n+        if (!response.ok) {\n+          throw new Error(\"Failed to fetch user data\");\n+        }\n+        return response.json();\n+      })\n+      .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n+      handleLogin(localStorage.getItem(\"username\");)\n+      .catch((error) => setError(error.message));\n+  }, []);\n+\n+  if (error) return <p>Error: {error}</p>;\n+  if (!user) return <p>Loading...</p>;\n+\n+  return (\n+    <div style={{marginTop:\"100px\"}}>\n+      {error}\n+      <h2>Welcome, {user.userName}</h2>\n+      <p>Email: {user.email}</p>\n+      {user.phone}\n+    </div>\n+  );\n+};\n+\n+export default Profile;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740144136328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      handleLogin(localStorage.getItem(\"username\");)\n+      handleLogin(localStorage.getItem(\"userData\"))\n       .catch((error) => setError(error.message));\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n@@ -42,51 +42,5 @@\n     </div>\n   );\n };\n \n-export default Profile;\n-import { useEffect, useState } from \"react\";\n-\n-const Profile = ({api, handleLogin}) => {\n-  const [user, setUser] = useState(null);\n-  const [error, setError] = useState(null);\n-\n-  useEffect(() => {\n-    const token = localStorage.getItem(\"token\");\n-\n-    if (!token) {\n-      setError(\"No token found\");\n-      return;\n-    }\n-\n-    fetch(`${api}/profile`, {\n-      method: \"GET\",\n-      headers: {\n-        \"Content-Type\": \"application/json\",\n-        Authorization: `Bearer ${token}`, // Add token in the headers\n-      },\n-    })\n-      .then((response) => {\n-        if (!response.ok) {\n-          throw new Error(\"Failed to fetch user data\");\n-        }\n-        return response.json();\n-      })\n-      .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      \n-      .catch((error) => setError(error.message));\n-  }, []);\n-\n-  if (error) return <p>Error: {error}</p>;\n-  if (!user) return <p>Loading...</p>;\n-\n-  return (\n-    <div style={{marginTop:\"100px\"}}>\n-      {error}\n-      <h2>Welcome, {user.userName}</h2>\n-      <p>Email: {user.email}</p>\n-      {user.phone}\n-    </div>\n-  );\n-};\n-\n export default Profile;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740144291656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      handleLogin(localStorage.getItem(\"userData\"))\n+     \n       .catch((error) => setError(error.message));\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n"
+                },
+                {
+                    "date": 1740144845615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,14 @@\n \n   useEffect(() => {\n     const token = localStorage.getItem(\"token\");\n \n+    useEffect(()=>{\n+  if(localStorage.getItem(\"userData\").length >0 ){\n+    handleLogin()\n+  }\n+})\n+\n     if (!token) {\n       setError(\"No token found\");\n       return;\n     }\n@@ -25,9 +31,8 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-     \n       .catch((error) => setError(error.message));\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n"
+                },
+                {
+                    "date": 1740144896934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useEffect, useState } from \"react\";\n \n-const Profile = ({api, handleLogin}) => {\n+const Profile = ({api, }) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n \n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1740144909072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { useEffect, useState } from \"react\";\n \n-const Profile = ({api, }) => {\n+const Profile = ({api, handleLogin}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n \n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1740145011954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,18 +2,14 @@\n \n const Profile = ({api, handleLogin}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n+  \n \n   useEffect(() => {\n     const token = localStorage.getItem(\"token\");\n \n-    useEffect(()=>{\n-  if(localStorage.getItem(\"userData\").length >0 ){\n-    handleLogin()\n-  }\n-})\n-\n+ \n     if (!token) {\n       setError(\"No token found\");\n       return;\n     }\n"
+                },
+                {
+                    "date": 1740145052835,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,13 @@\n const Profile = ({api, handleLogin}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n   \n+  useEffect(()=>{\n+    if(localStorage.getItem(\"userData\").length >0 ){\n+      handleLogin()\n+    }\n+  })\n \n   useEffect(() => {\n     const token = localStorage.getItem(\"token\");\n \n"
+                },
+                {
+                    "date": 1740145148456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,11 @@\n \n const Profile = ({api, handleLogin}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n-  \n+\n   useEffect(()=>{\n-    if(localStorage.getItem(\"userData\").length >0 ){\n+    if(localStorage.getItem(\"user\").length > 0 ){\n       handleLogin()\n     }\n   })\n \n"
+                },
+                {
+                    "date": 1740145169662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,14 +3,8 @@\n const Profile = ({api, handleLogin}) => {\n   const [user, setUser] = useState(null);\n   const [error, setError] = useState(null);\n \n-  useEffect(()=>{\n-    if(localStorage.getItem(\"user\").length > 0 ){\n-      handleLogin()\n-    }\n-  })\n-\n   useEffect(() => {\n     const token = localStorage.getItem(\"token\");\n \n  \n"
+                },
+                {
+                    "date": 1740145182489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,9 @@\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n       .catch((error) => setError(error.message));\n+      \n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n   if (!user) return <p>Loading...</p>;\n"
+                },
+                {
+                    "date": 1740145205799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,10 +26,11 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n+      \n       .catch((error) => setError(error.message));\n-      \n+\n   }, []);\n \n   if (error) return <p>Error: {error}</p>;\n   if (!user) return <p>Loading...</p>;\n"
+                },
+                {
+                    "date": 1740145214255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      \n+      handleLogin\n       .catch((error) => setError(error.message));\n \n   }, []);\n \n"
+                },
+                {
+                    "date": 1740145393457,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      handleLogin\n+      handleLogin(localStorage.getItem(\"username\");)\n       .catch((error) => setError(error.message));\n \n   }, []);\n \n"
+                },
+                {
+                    "date": 1740145401948,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      handleLogin(localStorage.getItem(\"username\");)\n+      handleLogin(localStorage.getItem(\"user\"))\n       .catch((error) => setError(error.message));\n \n   }, []);\n \n"
+                },
+                {
+                    "date": 1740145407502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      handleLogin(localStorage.getItem(\"user\"))\n+      handleLogin(localStorage.getItem(\"userd\"))\n       .catch((error) => setError(error.message));\n \n   }, []);\n \n"
+                },
+                {
+                    "date": 1740145412753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      handleLogin(localStorage.getItem(\"userd\"))\n+      handleLogin(localStorage.getItem(\"userata\"))\n       .catch((error) => setError(error.message));\n \n   }, []);\n \n"
+                },
+                {
+                    "date": 1740151092343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      handleLogin(localStorage.getItem(\"userata\"))\n+      handleLogin(localStorage.getItem(\"userData\"))\n       .catch((error) => setError(error.message));\n \n   }, []);\n \n@@ -39,8 +39,9 @@\n     <div style={{marginTop:\"100px\"}}>\n       {error}\n       <h2>Welcome, {user.userName}</h2>\n       <p>Email: {user.email}</p>\n+      \n       {user.phone}\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1740151098109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     <div style={{marginTop:\"100px\"}}>\n       {error}\n       <h2>Welcome, {user.userName}</h2>\n       <p>Email: {user.email}</p>\n-      \n+      <\n       {user.phone}\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1740151103187,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     <div style={{marginTop:\"100px\"}}>\n       {error}\n       <h2>Welcome, {user.userName}</h2>\n       <p>Email: {user.email}</p>\n-      <\n+      <button></button>\n       {user.phone}\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1740151111007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     <div style={{marginTop:\"100px\"}}>\n       {error}\n       <h2>Welcome, {user.userName}</h2>\n       <p>Email: {user.email}</p>\n-      <button></button>\n+      <button>gli</button>\n       {user.phone}\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1740151128984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         }\n         return response.json();\n       })\n       .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n-      handleLogin(localStorage.getItem(\"userData\"))\n+   \n       .catch((error) => setError(error.message));\n \n   }, []);\n \n@@ -39,9 +39,9 @@\n     <div style={{marginTop:\"100px\"}}>\n       {error}\n       <h2>Welcome, {user.userName}</h2>\n       <p>Email: {user.email}</p>\n-      <button>gli</button>\n+      <button>glivk</button>\n       {user.phone}\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1740151137165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     <div style={{marginTop:\"100px\"}}>\n       {error}\n       <h2>Welcome, {user.userName}</h2>\n       <p>Email: {user.email}</p>\n-      <button>glivk</button>\n+      <button >glivk</button>\n       {user.phone}\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1740151142296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     <div style={{marginTop:\"100px\"}}>\n       {error}\n       <h2>Welcome, {user.userName}</h2>\n       <p>Email: {user.email}</p>\n-      <button onclisk>glivk</button>\n+      <button onclis>glivk</button>\n       {user.phone}\n     </div>\n   );\n };\n"
+                },
+                {
+                    "date": 1740151643075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,49 @@\n+import { useEffect, useState } from \"react\";\n+\n+const Profile = ({api, handleLogin}) => {\n+  const [user, setUser] = useState(null);\n+  const [error, setError] = useState(null);\n+\n+  useEffect(() => {\n+    const token = localStorage.getItem(\"token\");\n+\n+ \n+    if (!token) {\n+      setError(\"No token found\");\n+      return;\n+    }\n+\n+    fetch(`${api}/profile`, {\n+      method: \"GET\",\n+      headers: {\n+        \"Content-Type\": \"application/json\",\n+        Authorization: `Bearer ${token}`, // Add token in the headers\n+      },\n+    })\n+      .then((response) => {\n+        if (!response.ok) {\n+          throw new Error(\"Failed to fetch user data\");\n+        }\n+        return response.json();\n+      })\n+      .then((data) => {setUser(data); localStorage.setItem(\"userData\",JSON.stringify(data)); console.log(  localStorage.getItem(\"userData\")) ;})\n+   \n+      .catch((error) => setError(error.message));\n+\n+  }, []);\n+\n+  if (error) return <p>Error: {error}</p>;\n+  if (!user) return <p>Loading...</p>;\n+\n+  return (\n+    <div style={{marginTop:\"100px\"}}>\n+      {error}\n+      <h2>Welcome, {user.userName}</h2>\n+      <p>Email: {user.email}</p>\n+      <button onClick={handleLogin()}>glivk</button>\n+      {user.phone}\n+    </div>\n+  );\n+};\n+\n+export default Profile;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1740128845549,
+            "name": "Commit-0",
+            "content": "import { useEffect, useState } from \"react\";\n\nconst  = ({api}) => {\n  const [user, setUser] = useState(null);\n  const [error, setError] = useState(null);\n\n  useEffect(() => {\n    const token = localStorage.getItem(\"token\");\n\n    if (!token) {\n      setError(\"No token found\");\n      return;\n    }\n\n    fetch(`${api}/profile`, {\n      method: \"GET\",\n      headers: {\n        \"Content-Type\": \"application/json\",\n        Authorization: `Bearer ${token}`, // Add token in the headers\n      },\n    })\n      .then((response) => {\n        if (!response.ok) {\n          throw new Error(\"Failed to fetch user data\");\n        }\n        return response.json();\n      })\n      .then((data) => setUser(data))\n      .catch((error) => setError(error.message));\n  }, []);\n\n  if (error) return <p>Error: {error}</p>;\n  if (!user) return <p>Loading...</p>;\n\n  return (\n    <div style={{marginTop:\"100px\"}}>\n      {error}\n      <h2>Welcome, {user.userName}</h2>\n      <p>Email: {user.email}</p>\n      {user.phone}\n    </div>\n  );\n};\n\nexport default ;"
+        }
+    ]
+}

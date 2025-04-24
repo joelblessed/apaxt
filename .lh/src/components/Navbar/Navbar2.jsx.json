@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/Navbar/Navbar2.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1736970737245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1736970874162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React, { useState } from \"react\";\n-import \"./Navbar.css\";\n+import \"./Navbar3.css\";\n \n function Navbar() {\n     const [isMenuOpen, setIsMenuOpen] = useState(false);\n \n"
+                }
+            ],
+            "date": 1736970737245,
+            "name": "Commit-0",
+            "content": "import React, { useState } from \"react\";\nimport \"./Navbar.css\";\n\nfunction Navbar() {\n    const [isMenuOpen, setIsMenuOpen] = useState(false);\n\n    const toggleMenu = () => {\n        setIsMenuOpen(!isMenuOpen);\n    };\n\n    return (\n        <nav className=\"navbar\">\n            <div className=\"desktop-links\">\n                <ul>\n                    <li>Home</li>\n                    <li>About</li>\n                    <li>Services</li>\n                    <li>Contact</li>\n                </ul>\n            </div>\n            <div className=\"mobile-navbar\">\n                <button className=\"menu-toggle\" onClick={toggleMenu}>\n                    {isMenuOpen ? \"✖\" : \"☰\"}\n                </button>\n                {isMenuOpen && (\n                    <ul>\n                        <li>Home</li>\n                        <li>About</li>\n                        <li>Services</li>\n                        <li>Contact</li>\n                    </ul>\n                )}\n            </div>\n        </nav>\n    );\n}\n\nexport default Navbar;"
+        }
+    ]
+}

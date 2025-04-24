@@ -1,0 +1,122 @@
+{
+    "sourceFile": "src/components/account/signIN.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 26,
+            "patches": [
+                {
+                    "date": 1741085574839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743507786186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n   outline: none;\n }\n \n .password-input-container {\n-  position: relative;\n+ \n   width: 100%;\n }\n \n .password-toggle-button {\n"
+                },
+                {
+                    "date": 1743512123026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n+  \n }\n \n .signin-container h2 {\n   margin-bottom: 20px;\n"
+                },
+                {
+                    "date": 1743512130213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,11 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  \n+  @media screen {\n+    \n+  }\n }\n \n .signin-container h2 {\n   margin-bottom: 20px;\n"
+                },
+                {
+                    "date": 1743512136317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  @media screen {\n+  @media q {\n     \n   }\n }\n \n"
+                },
+                {
+                    "date": 1743512147840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  @media q {\n+  @media screen {\n     \n   }\n }\n \n"
+                },
+                {
+                    "date": 1743512197225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  @media screen {\n+\n     \n   }\n }\n \n"
+                },
+                {
+                    "date": 1743512206403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,11 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-\n+  @media (max-width: 768px) {\n+    margintop: 200px;\n+  }\n     \n   }\n }\n \n"
+                },
+                {
+                    "date": 1743512219534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,14 +6,14 @@\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n   @media (max-width: 768px) {\n-    margintop: 200px;\n+    marginTop: 200px;\n   }\n     \n   }\n-}\n \n+\n .signin-container h2 {\n   margin-bottom: 20px;\n   color: #333;\n }\n"
+                },
+                {
+                    "date": 1743512240841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  @media (max-width: 768px) {\n+  @media s (max-width: 768px) {\n     marginTop: 200px;\n   }\n     \n   }\n"
+                },
+                {
+                    "date": 1743512247951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  @media s (max-width: 768px) {\n+  @media querry (max-width: 768px) {\n     marginTop: 200px;\n   }\n     \n   }\n"
+                },
+                {
+                    "date": 1743512253180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  @media querry (max-width: 768px) {\n+  @media s (max-width: 768px) {\n     marginTop: 200px;\n   }\n     \n   }\n"
+                },
+                {
+                    "date": 1743512260537,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  @media s (max-width: 768px) {\n+  @media sreee (max-width: 768px) {\n     marginTop: 200px;\n   }\n     \n   }\n"
+                },
+                {
+                    "date": 1743512267433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  @media sreee (max-width: 768px) {\n+  @media  (max-width: 768px) {\n     marginTop: 200px;\n   }\n     \n   }\n"
+                },
+                {
+                    "date": 1743516026029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,11 +5,9 @@\n   background-color: #ffffff;\n   border-radius: 8px;\n   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n   text-align: center;\n-  @media  (max-width: 768px) {\n-    marginTop: 200px;\n-  }\n+\n     \n   }\n \n \n"
+                },
+                {
+                    "date": 1743516032544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,5 +75,10 @@\n .error-message {\n   color: red;\n   font-size: 14px;\n   margin-top: 10px;\n+}\n+\n+\n+@media  (max-width: 768px) {\n+  marginTop: 200px;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743516037861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,6 +79,6 @@\n }\n \n \n @media  (max-width: 768px) {\n-  marginTop: 200px;\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743516068748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,6 +79,6 @@\n }\n \n \n @media  (max-width: 768px) {\n-\n+   .si\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743516078150,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,6 +79,8 @@\n }\n \n \n @media  (max-width: 768px) {\n-   .si\n+   .signin-container{\n+    ma\n+   }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743516085007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,7 +80,7 @@\n \n \n @media  (max-width: 768px) {\n    .signin-container{\n-    ma\n+    margin-top: 150;\n    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743516128138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,7 +80,7 @@\n \n \n @media  (max-width: 768px) {\n    .signin-container{\n-    margin-top: 150;\n+    margin-top: 550px;\n    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743516138308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,7 +80,7 @@\n \n \n @media  (max-width: 768px) {\n    .signin-container{\n-    margin-top: 550px;\n+    margin-top: 200px;\n    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743611591232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n   outline: none;\n }\n \n .password-input-container {\n- \n+  position: relative;\n   width: 100%;\n }\n \n .password-toggle-button {\n"
+                },
+                {
+                    "date": 1743611597561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,9 @@\n \n .password-input-container {\n   position: relative;\n   width: 100%;\n+  z\n }\n \n .password-toggle-button {\n   position: absolute;\n"
+                },
+                {
+                    "date": 1743611606011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n \n .password-input-container {\n   position: relative;\n   width: 100%;\n-  z\n+  z-index: 1;\n }\n \n .password-toggle-button {\n   position: absolute;\n"
+                },
+                {
+                    "date": 1743611632183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n \n .password-input-container {\n   position: relative;\n   width: 100%;\n-  z-index: 1;\n+  z-index: ;\n }\n \n .password-toggle-button {\n   position: absolute;\n"
+                },
+                {
+                    "date": 1743611660179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n \n .password-input-container {\n   position: relative;\n   width: 100%;\n-  z-index: ;\n+  z-index: 1;\n }\n \n .password-toggle-button {\n   position: absolute;\n"
+                }
+            ],
+            "date": 1741085574839,
+            "name": "Commit-0",
+            "content": ".signin-container {\n  max-width: 400px;\n  margin: 50px auto;\n  padding: 20px;\n  background-color: #ffffff;\n  border-radius: 8px;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n  text-align: center;\n}\n\n.signin-container h2 {\n  margin-bottom: 20px;\n  color: #333;\n}\n\n.signin-form {\n  display: flex;\n  flex-direction: column;\n  gap: 15px;\n}\n\n.signin-form input {\n  padding: 10px;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  font-size: 16px;\n  width: 100%;\n  box-sizing: border-box;\n}\n\n.signin-form input:focus {\n  border-color: #007bff;\n  outline: none;\n}\n\n.password-input-container {\n  position: relative;\n  width: 100%;\n}\n\n.password-toggle-button {\n  position: absolute;\n  right: 10px;\n  top: 50%;\n  transform: translateY(-50%);\n  background: none;\n  border: none;\n  cursor: pointer;\n  color: #007bff;\n  font-size: 14px;\n}\n\n.password-toggle-button:hover {\n  color: #0056b3;\n}\n\n.signin-form button[type=\"submit\"] {\n  padding: 10px;\n  background-color: #007bff;\n  color: white;\n  border: none;\n  border-radius: 4px;\n  font-size: 16px;\n  cursor: pointer;\n  transition: background-color 0.3s ease;\n}\n\n.signin-form button[type=\"submit\"]:hover {\n  background-color: #0056b3;\n}\n\n.error-message {\n  color: red;\n  font-size: 14px;\n  margin-top: 10px;\n}"
+        }
+    ]
+}

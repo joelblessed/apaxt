@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/account/signUP.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741086103450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742731907357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-.signup-container {\n+/* .signup-container {\n     margin-top: 90px;\n     display: flex;\n     justify-content: center;\n     align-items: center;\n@@ -128,5 +128,5 @@\n   \n   .custom-country-input input:focus {\n     border-color: #007bff;\n     outline: none;\n-  }\n\\ No newline at end of file\n+  } */\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742732014663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-/* .signup-container {\n+.signup-container {\n     margin-top: 90px;\n     display: flex;\n     justify-content: center;\n     align-items: center;\n@@ -128,5 +128,5 @@\n   \n   .custom-country-input input:focus {\n     border-color: #007bff;\n     outline: none;\n-  } */\n\\ No newline at end of file\n+  }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1741086103450,
+            "name": "Commit-0",
+            "content": ".signup-container {\n    margin-top: 90px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n  \n  .signup-card {\n    width: 100%;\n    max-width: 800px;\n    background-color: #ffffff;\n    border-radius: 8px;\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n    padding: 20px;\n  }\n  \n  .signup-card-header {\n    text-align: center;\n    margin-bottom: 20px;\n  }\n  \n  .signup-card-header h1 {\n    font-size: 24px;\n    color: #333;\n  }\n  \n  .signup-card-body {\n    display: flex;\n    flex-direction: column;\n    gap: 15px;\n  }\n  \n  .form-group {\n    display: flex;\n    flex-direction: column;\n    gap: 5px;\n  }\n  \n  .form-group label {\n    font-size: 14px;\n    color: #555;\n  }\n  \n  .form-group input,\n  .form-group select,\n  .form-group textarea {\n    padding: 10px;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    font-size: 14px;\n    width: 100%;\n    box-sizing: border-box;\n  }\n  \n  .form-group input:focus,\n  .form-group select:focus,\n  .form-group textarea:focus {\n    border-color: #007bff;\n    outline: none;\n  }\n  \n  .form-group textarea {\n    resize: vertical;\n    min-height: 100px;\n  }\n  \n  .radio-group {\n    display: flex;\n    gap: 10px;\n    align-items: center;\n  }\n  \n  .radio-group label {\n    margin-right: 10px;\n  }\n  \n  .signup-card-footer {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-top: 20px;\n  }\n  \n  .signup-card-footer button {\n    padding: 10px 20px;\n    background-color: #007bff;\n    color: white;\n    border: none;\n    border-radius: 4px;\n    font-size: 14px;\n    cursor: pointer;\n    transition: background-color 0.3s ease;\n  }\n  \n  .signup-card-footer button:hover {\n    background-color: #0056b3;\n  }\n  \n  .signup-card-footer p {\n    margin: 0;\n    font-size: 14px;\n    color: #555;\n  }\n  \n  .signup-card-footer a {\n    text-decoration: none;\n    color: #007bff;\n    font-size: 14px;\n  }\n  \n  .signup-card-footer a:hover {\n    text-decoration: underline;\n  }\n  \n  .custom-country-input {\n    position: relative;\n    margin-top: 10px;\n  }\n  \n  .custom-country-input input {\n    width: 100%;\n    padding: 10px;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    font-size: 14px;\n    box-sizing: border-box;\n  }\n  \n  .custom-country-input input:focus {\n    border-color: #007bff;\n    outline: none;\n  }"
+        }
+    ]
+}

@@ -1,0 +1,394 @@
+{
+    "sourceFile": "src/components/Cart/checkout.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 94,
+            "patches": [
+                {
+                    "date": 1737552547121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737552613702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-mport React, { useState, useEffect } from 'react';\n+import React, { useState, useEffect } from 'react';\n \n const Checkout = () => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n"
+                },
+                {
+                    "date": 1737552635494,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       });\n \n       // Clear cart from database (assuming all items are checked out)\n       for (const item of cart) {\n-        await fetch(http://localhost:3000/cart/${item.id}, {\n+        await fetch(http://localhost:3000/cart/${item.id}`, {\n           method: 'DELETE',\n         });\n       }\n \n"
+                },
+                {
+                    "date": 1737552641063,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       });\n \n       // Clear cart from database (assuming all items are checked out)\n       for (const item of cart) {\n-        await fetch(http://localhost:3000/cart/${item.id}`, {\n+        await fetch(`http://localhost:3000/cart/${item.id}`, {\n           method: 'DELETE',\n         });\n       }\n \n"
+                },
+                {
+                    "date": 1737552702186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const [successMessage, setSuccessMessage] = useState('');\n \n   // Fetch cart items from the mock database\n   useEffect(() => {\n-    fetch('http://localhost:3000/cart')\n+    fetch('http://localhost:4000/cart')\n       .then(response => response.json())\n       .then(data => setCart(data))\n       .catch(error => console.error('Error fetching cart:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1737552709016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n       // Simulate sending cart data to an API (replace with real checkout logic)\n-      await fetch('http://localhost:3000/orders', {\n+      await fetch('http://localhost:000/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n         body: JSON.stringify({ cart }),\n       });\n"
+                },
+                {
+                    "date": 1737552716434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n       // Simulate sending cart data to an API (replace with real checkout logic)\n-      await fetch('http://localhost:000/orders', {\n+      await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n         body: JSON.stringify({ cart }),\n       });\n"
+                },
+                {
+                    "date": 1737552730852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       });\n \n       // Clear cart from database (assuming all items are checked out)\n       for (const item of cart) {\n-        await fetch(`http://localhost:3000/cart/${item.id}`, {\n+        await fetch(`http://localhost:4000/cart/${item.id}`, {\n           method: 'DELETE',\n         });\n       }\n \n"
+                },
+                {
+                    "date": 1737995436119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,27 @@\n   };\n \n   // Handle checkout process\n   const handleCheckout = async () => {\n-    setLoading(true);\n+    setLoa                       \n+    ┌──(akainu㉿localhost)-[~]\n+    └─$                   CheckOut\n+    <button className=\"btn btn-warning\" onClick={handleCheckOut}>\n+                      CheckOut\n+                      </button>CheckOut: command not found\n+                                                                                    \n+    ┌──(akainu㉿localhost)-[~]\n+    └─$                   </button>~<button className=\"btn btn-warning\" onClick={handleCheckOut}>\n+    zsh: parse error near `\\n'\n+                                                                                    \n+    ┌──(akainu㉿localhost)-[~]\n+    └─$                   CheckOut\n+    CheckOut: command not found\n+                                                                                    \n+    ┌──(akainu㉿localhost)-[~]\n+    └─$                   </button>\n+    \n+    ding(true);\n     try {\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n"
+                },
+                {
+                    "date": 1737995631262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import React, { useState, useEffect } from 'react';\n \n+\n const Checkout = () => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n@@ -19,27 +20,9 @@\n   };\n \n   // Handle checkout process\n   const handleCheckout = async () => {\n-    setLoa                       \n-    ┌──(akainu㉿localhost)-[~]\n-    └─$                   CheckOut\n-    <button className=\"btn btn-warning\" onClick={handleCheckOut}>\n-                      CheckOut\n-                      </button>CheckOut: command not found\n-                                                                                    \n-    ┌──(akainu㉿localhost)-[~]\n-    └─$                   </button>~<button className=\"btn btn-warning\" onClick={handleCheckOut}>\n-    zsh: parse error near `\\n'\n-                                                                                    \n-    ┌──(akainu㉿localhost)-[~]\n-    └─$                   CheckOut\n-    CheckOut: command not found\n-                                                                                    \n-    ┌──(akainu㉿localhost)-[~]\n-    └─$                   </button>\n-    \n-    ding(true);\n+    setLoading(true);\n     try {\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n"
+                },
+                {
+                    "date": 1737995648747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,12 @@\n import React, { useState, useEffect } from 'react';\n+import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-\n const Checkout = () => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n+  \n \n   // Fetch cart items from the mock database\n   useEffect(() => {\n     fetch('http://localhost:4000/cart')\n"
+                },
+                {
+                    "date": 1737995691010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n const Checkout = () => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n-  \n+  const navigate = useNavigate();\n \n   // Fetch cart items from the mock database\n   useEffect(() => {\n     fetch('http://localhost:4000/cart')\n"
+                },
+                {
+                    "date": 1737995720034,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n   // Calculate total price of items in the cart\n   const calculateTotal = () => {\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n-\n+   \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n"
+                },
+                {
+                    "date": 1737995747651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n+      \n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n"
+                },
+                {
+                    "date": 1737995753057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n-      \n+      navigate\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n"
+                },
+                {
+                    "date": 1737995760816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n-      navigate\n+      navigate(\"?\")\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n"
+                },
+                {
+                    "date": 1737995769802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n-      navigate(\"?\")\n+      navigate(\"/p\")\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n"
+                },
+                {
+                    "date": 1737995777343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n-      navigate(\"/p\")\n+      navigate(\"/payment\")\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n"
+                },
+                {
+                    "date": 1737995816101,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n-      navigate(\"/payment\")\n+      navigate(\"/ayment\")\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n"
+                },
+                {
+                    "date": 1737996079105,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n-      navigate(\"/ayment\")\n+      \n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n"
+                },
+                {
+                    "date": 1737996503607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={handleCheckout} disabled={loading || cart.length === 0}>\n+      <button onClick={} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1737996509291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={} disabled={loading || cart.length === 0}>\n+      <button onClick={hanleP} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1737996514970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={hanleP} disabled={loading || cart.length === 0}>\n+      <button onClick={hanlePayment} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1737996524734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,9 @@\n   // Calculate total price of items in the cart\n   const calculateTotal = () => {\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n+  \n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n"
+                },
+                {
+                    "date": 1737996533106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,10 @@\n   // Calculate total price of items in the cart\n   const calculateTotal = () => {\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n-  \n+\n+  const handle\n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n"
+                },
+                {
+                    "date": 1737996543348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n   const calculateTotal = () => {\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n-  const handle\n+  const handlePayment \n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n"
+                },
+                {
+                    "date": 1737996549051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n   const calculateTotal = () => {\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n-  const handlePayment \n+  const handlePayment =()\n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n"
+                },
+                {
+                    "date": 1737996565119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,11 @@\n   const calculateTotal = () => {\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n-  const handlePayment =()\n+  const handlePayment =()=>{\n+\n+  }\n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n@@ -66,9 +68,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={hanlePayment} disabled={loading || cart.length === 0}>\n+      <button onClick={handlePayment} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1737996605897,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState, useEffect } from 'react';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = () => {\n+const Checkout = ({}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1737996613456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState, useEffect } from 'react';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({}) => {\n+const Checkout = ({payment}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1737996622838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,81 @@\n+import React, { useState, useEffect } from 'react';\n+import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n+\n+const Checkout = ({payment}) => {\n+  const [cart, setCart] = useState([]);\n+  const [loading, setLoading] = useState(false);\n+  const [successMessage, setSuccessMessage] = useState('');\n+  const navigate = useNavigate();\n+\n+  // Fetch cart items from the mock database\n+  useEffect(() => {\n+    fetch('http://localhost:4000/cart')\n+      .then(response => response.json())\n+      .then(data => setCart(data))\n+      .catch(error => console.error('Error fetching cart:', error));\n+  }, []);\n+\n+  // Calculate total price of items in the cart\n+  const calculateTotal = () => {\n+    return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n+  };\n+\n+  const handlePayment =()=>{\n+     \n+  }\n+   \n+  // Handle checkout process\n+  const handleCheckout = async () => {\n+    setLoading(true);\n+    try {\n+      \n+      // Simulate sending cart data to an API (replace with real checkout logic)\n+      await fetch('http://localhost:2500/orders', {\n+        method: 'POST',\n+        headers: { 'Content-Type': 'application/json' },\n+        body: JSON.stringify({ cart }),\n+      });\n+\n+      // Clear cart from database (assuming all items are checked out)\n+      for (const item of cart) {\n+        await fetch(`http://localhost:4000/cart/${item.id}`, {\n+          method: 'DELETE',\n+        });\n+      }\n+\n+      // Clear local state\n+      setCart([]);\n+      setSuccessMessage('Order placed successfully!');\n+    } catch (error) {\n+      console.error('Error during checkout:', error);\n+      setSuccessMessage('Checkout failed. Please try again.');\n+    } finally {\n+      setLoading(false);\n+    }\n+  };\n+\n+  return (\n+    <div>\n+      <h2>Checkout</h2>\n+      {cart.length === 0 ? <p>Your cart is empty.</p> : (\n+        <ul>\n+          {cart.map((item) => (\n+            <li key={item.id}>\n+              {item.name} - Quantity: {item.quantity} - Price: ${item.price}\n+            </li>\n+          ))}\n+        </ul>\n+      )}\n+      \n+      <h3>Total: ${calculateTotal()}</h3>\n+      \n+      <button onClick={handlePayment} disabled={loading || cart.length === 0}>\n+        {loading ? 'Processing...' : 'Checkout'}\n+      </button>\n+\n+      {successMessage && <p>{successMessage}</p>}\n+    </div>\n+  );\n+};\n+\n+export default Checkout;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737996628120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n   const handlePayment =()=>{\n-     \n+     payment\n   }\n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n@@ -77,86 +77,5 @@\n     </div>\n   );\n };\n \n-export default Checkout;\n-import React, { useState, useEffect } from 'react';\n-import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n-\n-const Checkout = ({payment}) => {\n-  const [cart, setCart] = useState([]);\n-  const [loading, setLoading] = useState(false);\n-  const [successMessage, setSuccessMessage] = useState('');\n-  const navigate = useNavigate();\n-\n-  // Fetch cart items from the mock database\n-  useEffect(() => {\n-    fetch('http://localhost:4000/cart')\n-      .then(response => response.json())\n-      .then(data => setCart(data))\n-      .catch(error => console.error('Error fetching cart:', error));\n-  }, []);\n-\n-  // Calculate total price of items in the cart\n-  const calculateTotal = () => {\n-    return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n-  };\n-\n-  const handlePayment =()=>{\n-\n-  }\n-   \n-  // Handle checkout process\n-  const handleCheckout = async () => {\n-    setLoading(true);\n-    try {\n-      \n-      // Simulate sending cart data to an API (replace with real checkout logic)\n-      await fetch('http://localhost:2500/orders', {\n-        method: 'POST',\n-        headers: { 'Content-Type': 'application/json' },\n-        body: JSON.stringify({ cart }),\n-      });\n-\n-      // Clear cart from database (assuming all items are checked out)\n-      for (const item of cart) {\n-        await fetch(`http://localhost:4000/cart/${item.id}`, {\n-          method: 'DELETE',\n-        });\n-      }\n-\n-      // Clear local state\n-      setCart([]);\n-      setSuccessMessage('Order placed successfully!');\n-    } catch (error) {\n-      console.error('Error during checkout:', error);\n-      setSuccessMessage('Checkout failed. Please try again.');\n-    } finally {\n-      setLoading(false);\n-    }\n-  };\n-\n-  return (\n-    <div>\n-      <h2>Checkout</h2>\n-      {cart.length === 0 ? <p>Your cart is empty.</p> : (\n-        <ul>\n-          {cart.map((item) => (\n-            <li key={item.id}>\n-              {item.name} - Quantity: {item.quantity} - Price: ${item.price}\n-            </li>\n-          ))}\n-        </ul>\n-      )}\n-      \n-      <h3>Total: ${calculateTotal()}</h3>\n-      \n-      <button onClick={handlePayment} disabled={loading || cart.length === 0}>\n-        {loading ? 'Processing...' : 'Checkout'}\n-      </button>\n-\n-      {successMessage && <p>{successMessage}</p>}\n-    </div>\n-  );\n-};\n-\n export default Checkout;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737996635820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n   const handlePayment =()=>{\n-     payment\n+     payment()\n   }\n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n"
+                },
+                {
+                    "date": 1737997033199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import React, { useState, useEffect } from 'react';\n+\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n const Checkout = ({payment}) => {\n   const [cart, setCart] = useState([]);\n"
+                },
+                {
+                    "date": 1737997039267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import React, { useState, useEffect } from 'react';\n-\n+import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n const Checkout = ({payment}) => {\n   const [cart, setCart] = useState([]);\n"
+                },
+                {
+                    "date": 1737997050483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n   const handlePayment =()=>{\n+    \n      payment()\n   }\n    \n   // Handle checkout process\n"
+                },
+                {
+                    "date": 1737997055683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n   const handlePayment =()=>{\n-    \n+    navigate\n      payment()\n   }\n    \n   // Handle checkout process\n"
+                },
+                {
+                    "date": 1737997061148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n   const handlePayment =()=>{\n-    navigate\n+    navigate('')\n      payment()\n   }\n    \n   // Handle checkout process\n"
+                },
+                {
+                    "date": 1737997068046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n   const handlePayment =()=>{\n-    navigate('')\n+    navigate('./Payment')\n      payment()\n   }\n    \n   // Handle checkout process\n"
+                },
+                {
+                    "date": 1737997332589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n   const handlePayment =()=>{\n-    navigate('./Payment')\n+    navigate('/Payment')\n      payment()\n   }\n    \n   // Handle checkout process\n"
+                },
+                {
+                    "date": 1737997503132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({payment}) => {\n+const Checkout = ({payment, }) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1737997511679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({payment, }) => {\n+const Checkout = ({payment, ca}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1737997520677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({payment, ca}) => {\n+const Checkout = ({payment}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1737999511754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({payment}) => {\n+const Checkout = ({}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1738000587627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({}) => {\n+const Checkout = ({calculat}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1738000592827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({calculat}) => {\n+const Checkout = () => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1738000607702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   };\n \n   const handlePayment =()=>{\n     navigate('/Payment')\n-     payment()\n+     \n   }\n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n"
+                },
+                {
+                    "date": 1738001354762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,12 @@\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n-\n+  const handleProductClick = (product) => {\n+    setSelectedProduct(product);\n+    navigate(\"/selectedProduct\")\n+  };\n   // Fetch cart items from the mock database\n   useEffect(() => {\n     fetch('http://localhost:4000/cart')\n       .then(response => response.json())\n"
+                },
+                {
+                    "date": 1738001371107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,11 @@\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n+\n   const handleProductClick = (product) => {\n-    setSelectedProduct(product);\n+    set(product);\n     navigate(\"/selectedProduct\")\n   };\n   // Fetch cart items from the mock database\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1738001381930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,16 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = () => {\n+const Checkout = ({}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n \n   const handleProductClick = (product) => {\n-    set(product);\n+    setc(product);\n     navigate(\"/selectedProduct\")\n   };\n   // Fetch cart items from the mock database\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1738001390463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({}) => {\n+const Checkout = ({setCa;}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1738001400415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({setCa;}) => {\n+const Checkout = ({setCalculated}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1738001405800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({setCalculated}) => {\n+const Checkout = ({setCalculateTota}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1738001417646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,16 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({setCalculateTota}) => {\n+const Checkout = ({setCalculateTotal}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n \n   const handleProductClick = (product) => {\n-    setc(product);\n+    s(product);\n     navigate(\"/selectedProduct\")\n   };\n   // Fetch cart items from the mock database\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1738001439290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,10 @@\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n \n   const handleProductClick = (product) => {\n-    s(product);\n-    navigate(\"/selectedProduct\")\n+    setCalculateTotal(product);\n+   \n   };\n   // Fetch cart items from the mock database\n   useEffect(() => {\n     fetch('http://localhost:4000/cart')\n"
+                },
+                {
+                    "date": 1738001447667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n \n   const handleProductClick = (product) => {\n-    setCalculateTotal(product);\n+    setCalculateTotal(p);\n    \n   };\n   // Fetch cart items from the mock database\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1738001480000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n \n   const handleProductClick = (product) => {\n-    setCalculateTotal(p);\n+  \n    \n   };\n   // Fetch cart items from the mock database\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1738001493389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,12 +7,9 @@\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n \n-  const handleProductClick = (product) => {\n-  \n-   \n-  };\n+ \n   // Fetch cart items from the mock database\n   useEffect(() => {\n     fetch('http://localhost:4000/cart')\n       .then(response => response.json())\n@@ -25,8 +22,9 @@\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n   const handlePayment =()=>{\n+    \n     navigate('/Payment')\n      \n   }\n    \n"
+                },
+                {
+                    "date": 1738004617457,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,12 +22,21 @@\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n   const handlePayment =()=>{\n-    \n+    setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n      \n   }\n+\n+\n+  useEffect(() => {\n+    let username = sessionStorage.getItem(\"username\");\n+    if (username === \"\" || username === null) {\n+    } else {\n+      displayusernameupdate(username);\n+    }\n+  });\n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n"
+                },
+                {
+                    "date": 1738004627564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,13 +29,9 @@\n   }\n \n \n   useEffect(() => {\n-    let username = sessionStorage.getItem(\"username\");\n-    if (username === \"\" || username === null) {\n-    } else {\n-      displayusernameupdate(username);\n-    }\n+   \n   });\n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n"
+                },
+                {
+                    "date": 1738004639675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,9 @@\n   }\n \n \n   useEffect(() => {\n+    \n    \n   });\n    \n   // Handle checkout process\n"
+                },
+                {
+                    "date": 1738004651364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,17 +21,18 @@\n   const calculateTotal = () => {\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n-  const handlePayment =()=>{\n-    setCalculateTotal(calculateTotal);\n-    navigate('/Payment')\n+  // const handlePayment =()=>{\n+  //   setCalculateTotal(calculateTotal);\n+  //   navigate('/Payment')\n      \n-  }\n+  // }\n \n \n   useEffect(() => {\n-    \n+    setCalculateTotal(calculateTotal);\n+    navigate('/Payment')\n    \n   });\n    \n   // Handle checkout process\n"
+                },
+                {
+                    "date": 1738004677122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,9 +79,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={handlePayment} disabled={loading || cart.length === 0}>\n+      <button onClick={} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1738004694347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -79,9 +79,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={} disabled={loading || cart.length === 0}>\n+      <button onClick={handle} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1738004784005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,13 +21,13 @@\n   const calculateTotal = () => {\n     return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n   };\n \n-  // const handlePayment =()=>{\n-  //   setCalculateTotal(calculateTotal);\n-  //   navigate('/Payment')\n+  const handlePayment =()=>{\n+    setCalculateTotal(calculateTotal);\n+    navigate('/Payment')\n      \n-  // }\n+  }\n \n \n   useEffect(() => {\n     setCalculateTotal(calculateTotal);\n@@ -79,9 +79,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={handle} disabled={loading || cart.length === 0}>\n+      <button onClick={handleCheckout} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1738004789915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,14 +28,10 @@\n      \n   }\n \n \n-  useEffect(() => {\n-    setCalculateTotal(calculateTotal);\n-    navigate('/Payment')\n+\n    \n-  });\n-   \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n"
+                },
+                {
+                    "date": 1738004838556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,8 @@\n     navigate('/Payment')\n      \n   }\n \n-\n-\n    \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n@@ -75,9 +73,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={handleCheckout} disabled={loading || cart.length === 0}>\n+      <button onClick={handle} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1738004866214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={handle} disabled={loading || cart.length === 0}>\n+      <button onClick={handleP} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1738004872075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={handleP} disabled={loading || cart.length === 0}>\n+      <button onClick={handlePa} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1738004946036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n+    \n      \n   }\n \n    \n@@ -73,9 +74,9 @@\n       )}\n       \n       <h3>Total: ${calculateTotal()}</h3>\n       \n-      <button onClick={handlePa} disabled={loading || cart.length === 0}>\n+      <button onClick={handlePayment} disabled={loading || cart.length === 0}>\n         {loading ? 'Processing...' : 'Checkout'}\n       </button>\n \n       {successMessage && <p>{successMessage}</p>}\n"
+                },
+                {
+                    "date": 1738004953086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n-    \n+    handleCheckout\n      \n   }\n \n    \n"
+                },
+                {
+                    "date": 1738004963219,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n-    handleCheckout\n+    handleCheckout()\n      \n   }\n \n    \n"
+                },
+                {
+                    "date": 1738005011411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n-    handleCheckout()\n+    sethandleCheckout()\n      \n   }\n \n    \n"
+                },
+                {
+                    "date": 1738005023143,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,87 @@\n+import React, { useState, useEffect } from 'react';\n+import Payment from '../Payment/Payment';\n+import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n+\n+const Checkout = ({setCalculateTotal}) => {\n+  const [cart, setCart] = useState([]);\n+  const [loading, setLoading] = useState(false);\n+  const [successMessage, setSuccessMessage] = useState('');\n+  const navigate = useNavigate();\n+\n+ \n+  // Fetch cart items from the mock database\n+  useEffect(() => {\n+    fetch('http://localhost:4000/cart')\n+      .then(response => response.json())\n+      .then(data => setCart(data))\n+      .catch(error => console.error('Error fetching cart:', error));\n+  }, []);\n+\n+  // Calculate total price of items in the cart\n+  const calculateTotal = () => {\n+    return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n+  };\n+\n+  const handlePayment =()=>{\n+    setCalculateTotal(calculateTotal);\n+    navigate('/Payment')\n+    setchandleCheckout()\n+     \n+  }\n+\n+   \n+  // Handle checkout process\n+  const handleCheckout = async () => {\n+    setLoading(true);\n+    try {\n+      \n+      // Simulate sending cart data to an API (replace with real checkout logic)\n+      await fetch('http://localhost:2500/orders', {\n+        method: 'POST',\n+        headers: { 'Content-Type': 'application/json' },\n+        body: JSON.stringify({ cart }),\n+      });\n+\n+      // Clear cart from database (assuming all items are checked out)\n+      for (const item of cart) {\n+        await fetch(`http://localhost:4000/cart/${item.id}`, {\n+          method: 'DELETE',\n+        });\n+      }\n+\n+      // Clear local state\n+      setCart([]);\n+      setSuccessMessage('Order placed successfully!');\n+    } catch (error) {\n+      console.error('Error during checkout:', error);\n+      setSuccessMessage('Checkout failed. Please try again.');\n+    } finally {\n+      setLoading(false);\n+    }\n+  };\n+\n+  return (\n+    <div>\n+      <h2>Checkout</h2>\n+      {cart.length === 0 ? <p>Your cart is empty.</p> : (\n+        <ul>\n+          {cart.map((item) => (\n+            <li key={item.id}>\n+              {item.name} - Quantity: {item.quantity} - Price: ${item.price}\n+            </li>\n+          ))}\n+        </ul>\n+      )}\n+      \n+      <h3>Total: ${calculateTotal()}</h3>\n+      \n+      <button onClick={handlePayment} disabled={loading || cart.length === 0}>\n+        {loading ? 'Processing...' : 'Checkout'}\n+      </button>\n+\n+      {successMessage && <p>{successMessage}</p>}\n+    </div>\n+  );\n+};\n+\n+export default Checkout;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1738005029440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n-    setchandleCheckout()\n+    setCheckhandleCheckout()\n      \n   }\n \n    \n@@ -83,92 +83,5 @@\n     </div>\n   );\n };\n \n-export default Checkout;\n-import React, { useState, useEffect } from 'react';\n-import Payment from '../Payment/Payment';\n-import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n-\n-const Checkout = ({setCalculateTotal}) => {\n-  const [cart, setCart] = useState([]);\n-  const [loading, setLoading] = useState(false);\n-  const [successMessage, setSuccessMessage] = useState('');\n-  const navigate = useNavigate();\n-\n- \n-  // Fetch cart items from the mock database\n-  useEffect(() => {\n-    fetch('http://localhost:4000/cart')\n-      .then(response => response.json())\n-      .then(data => setCart(data))\n-      .catch(error => console.error('Error fetching cart:', error));\n-  }, []);\n-\n-  // Calculate total price of items in the cart\n-  const calculateTotal = () => {\n-    return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n-  };\n-\n-  const handlePayment =()=>{\n-    setCalculateTotal(calculateTotal);\n-    navigate('/Payment')\n-    sethandleCheckout()\n-     \n-  }\n-\n-   \n-  // Handle checkout process\n-  const handleCheckout = async () => {\n-    setLoading(true);\n-    try {\n-      \n-      // Simulate sending cart data to an API (replace with real checkout logic)\n-      await fetch('http://localhost:2500/orders', {\n-        method: 'POST',\n-        headers: { 'Content-Type': 'application/json' },\n-        body: JSON.stringify({ cart }),\n-      });\n-\n-      // Clear cart from database (assuming all items are checked out)\n-      for (const item of cart) {\n-        await fetch(`http://localhost:4000/cart/${item.id}`, {\n-          method: 'DELETE',\n-        });\n-      }\n-\n-      // Clear local state\n-      setCart([]);\n-      setSuccessMessage('Order placed successfully!');\n-    } catch (error) {\n-      console.error('Error during checkout:', error);\n-      setSuccessMessage('Checkout failed. Please try again.');\n-    } finally {\n-      setLoading(false);\n-    }\n-  };\n-\n-  return (\n-    <div>\n-      <h2>Checkout</h2>\n-      {cart.length === 0 ? <p>Your cart is empty.</p> : (\n-        <ul>\n-          {cart.map((item) => (\n-            <li key={item.id}>\n-              {item.name} - Quantity: {item.quantity} - Price: ${item.price}\n-            </li>\n-          ))}\n-        </ul>\n-      )}\n-      \n-      <h3>Total: ${calculateTotal()}</h3>\n-      \n-      <button onClick={handlePayment} disabled={loading || cart.length === 0}>\n-        {loading ? 'Processing...' : 'Checkout'}\n-      </button>\n-\n-      {successMessage && <p>{successMessage}</p>}\n-    </div>\n-  );\n-};\n-\n export default Checkout;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1738005037654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n-    setCheckhandleCheckout()\n+    setCheckOut9handleCheckout()\n      \n   }\n \n    \n"
+                },
+                {
+                    "date": 1738005043473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n-    setCheckOut9handleCheckout()\n+    setCheckOut(handleCheckout())\n      \n   }\n \n    \n"
+                },
+                {
+                    "date": 1738005066250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({setCalculateTotal}) => {\n+const Checkout = ({setCalculateTotal, }) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1738005078639,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useState, useEffect } from 'react';\n import Payment from '../Payment/Payment';\n import { Link, NavLink, useLocation, useNavigate } from \"react-router-dom\";\n \n-const Checkout = ({setCalculateTotal, }) => {\n+const Checkout = ({setCalculateTotal, setCheckOut}) => {\n   const [cart, setCart] = useState([]);\n   const [loading, setLoading] = useState(false);\n   const [successMessage, setSuccessMessage] = useState('');\n   const navigate = useNavigate();\n@@ -24,9 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n-    setCheckOut(handleCheckout())\n+    setCheckOut(handleCheckout)\n      \n   }\n \n    \n"
+                },
+                {
+                    "date": 1738005088759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n-    setCheckOut(handleCheckout)\n+    setCheckOut(handleCheckout*)\n      \n   }\n \n    \n"
+                },
+                {
+                    "date": 1738005094898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \n   const handlePayment =()=>{\n     setCalculateTotal(calculateTotal);\n     navigate('/Payment')\n-    setCheckOut(handleCheckout*)\n+    setCheckOut(handleCheckout())\n      \n   }\n \n    \n"
+                },
+                {
+                    "date": 1738005979578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,14 @@\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n-      \n+      const [formData, setFormData] = useState({\n+        name: \"\",\n+        category: \"\",\n+        status: \"\",\n+        like: 0,\n+      });\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n"
+                },
+                {
+                    "date": 1738006003530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,14 +33,9 @@\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n-      const [formData, setFormData] = useState({\n-        name: \"\",\n-        category: \"\",\n-        status: \"\",\n-        like: 0,\n-      });\n+      \n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n"
+                },
+                {
+                    "date": 1738006024424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,14 @@\n     setCheckOut(handleCheckout())\n      \n   }\n \n-   \n+  const [formData, setFormData] = useState({\n+    name: \"\",\n+    category: \"\",\n+    status: \"\",\n+    like: 0,\n+  });\n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n"
+                },
+                {
+                    "date": 1738006037906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n-        body: JSON.stringify({ cart }),\n+        body: JSON.stringify({ cart, }),\n       });\n \n       // Clear cart from database (assuming all items are checked out)\n       for (const item of cart) {\n"
+                },
+                {
+                    "date": 1738006045428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n-        body: JSON.stringify({ cart, }),\n+        body: JSON.stringify({ cart,for }),\n       });\n \n       // Clear cart from database (assuming all items are checked out)\n       for (const item of cart) {\n"
+                },
+                {
+                    "date": 1738006519778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n     setCheckOut(handleCheckout())\n      \n   }\n \n-  const [formData, setFormData] = useState({\n+  const [formData, setFormData] = useState({cart\n     name: \"\",\n     category: \"\",\n     status: \"\",\n     like: 0,\n@@ -43,9 +43,9 @@\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n-        body: JSON.stringify({ cart,for }),\n+        body: JSON.stringify({ cart,formData }),\n       });\n \n       // Clear cart from database (assuming all items are checked out)\n       for (const item of cart) {\n"
+                },
+                {
+                    "date": 1738006528295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n     setCheckOut(handleCheckout())\n      \n   }\n \n-  const [formData, setFormData] = useState({cart\n+  const [formData, setFormData] = useState({cart,\n     name: \"\",\n     category: \"\",\n     status: \"\",\n     like: 0,\n"
+                },
+                {
+                    "date": 1738006536684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n       // Simulate sending cart data to an API (replace with real checkout logic)\n       await fetch('http://localhost:2500/orders', {\n         method: 'POST',\n         headers: { 'Content-Type': 'application/json' },\n-        body: JSON.stringify({ cart,formData }),\n+        body: JSON.stringify({formData }),\n       });\n \n       // Clear cart from database (assuming all items are checked out)\n       for (const item of cart) {\n"
+                },
+                {
+                    "date": 1738006555585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n      \n   }\n \n   const [formData, setFormData] = useState({cart,\n-    name: \"\",\n+    name: \"joel\",\n     category: \"\",\n     status: \"\",\n     like: 0,\n   });\n"
+                },
+                {
+                    "date": 1738006653441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n     setCheckOut(handleCheckout())\n      \n   }\n \n-  const [formData, setFormData] = useState({cart,\n+  const [formData, setFormData] = useState({cart\n     name: \"joel\",\n     category: \"\",\n     status: \"\",\n     like: 0,\n"
+                },
+                {
+                    "date": 1738006679759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n     setCheckOut(handleCheckout())\n      \n   }\n \n-  const [formData, setFormData] = useState({cart\n+  const [formData, setFormData] = useState({cart[]\n     name: \"joel\",\n     category: \"\",\n     status: \"\",\n     like: 0,\n"
+                },
+                {
+                    "date": 1738006691636,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n     setCheckOut(handleCheckout())\n      \n   }\n \n-  const [formData, setFormData] = useState({cart[]\n+  const [formData, setFormData] = useState({cart[,\n     name: \"joel\",\n     category: \"\",\n     status: \"\",\n     like: 0,\n"
+                },
+                {
+                    "date": 1738006704029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n     setCheckOut(handleCheckout())\n      \n   }\n \n-  const [formData, setFormData] = useState({cart{,\n+  const [formData, setFormData] = useState({cart,\n     name: \"joel\",\n     category: \"\",\n     status: \"\",\n     like: 0,\n"
+                },
+                {
+                    "date": 1738007211933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,9 @@\n     setCheckOut(handleCheckout())\n      \n   }\n  \n+  \n   // Handle checkout process\n   const handleCheckout = async () => {\n     setLoading(true);\n     try {\n"
+                }
+            ],
+            "date": 1737552547121,
+            "name": "Commit-0",
+            "content": "mport React, { useState, useEffect } from 'react';\n\nconst Checkout = () => {\n  const [cart, setCart] = useState([]);\n  const [loading, setLoading] = useState(false);\n  const [successMessage, setSuccessMessage] = useState('');\n\n  // Fetch cart items from the mock database\n  useEffect(() => {\n    fetch('http://localhost:3000/cart')\n      .then(response => response.json())\n      .then(data => setCart(data))\n      .catch(error => console.error('Error fetching cart:', error));\n  }, []);\n\n  // Calculate total price of items in the cart\n  const calculateTotal = () => {\n    return cart.reduce((total, item) => total + item.quantity * item.price, 0).toFixed(2);\n  };\n\n  // Handle checkout process\n  const handleCheckout = async () => {\n    setLoading(true);\n    try {\n      // Simulate sending cart data to an API (replace with real checkout logic)\n      await fetch('http://localhost:3000/orders', {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify({ cart }),\n      });\n\n      // Clear cart from database (assuming all items are checked out)\n      for (const item of cart) {\n        await fetch(http://localhost:3000/cart/${item.id}, {\n          method: 'DELETE',\n        });\n      }\n\n      // Clear local state\n      setCart([]);\n      setSuccessMessage('Order placed successfully!');\n    } catch (error) {\n      console.error('Error during checkout:', error);\n      setSuccessMessage('Checkout failed. Please try again.');\n    } finally {\n      setLoading(false);\n    }\n  };\n\n  return (\n    <div>\n      <h2>Checkout</h2>\n      {cart.length === 0 ? <p>Your cart is empty.</p> : (\n        <ul>\n          {cart.map((item) => (\n            <li key={item.id}>\n              {item.name} - Quantity: {item.quantity} - Price: ${item.price}\n            </li>\n          ))}\n        </ul>\n      )}\n      \n      <h3>Total: ${calculateTotal()}</h3>\n      \n      <button onClick={handleCheckout} disabled={loading || cart.length === 0}>\n        {loading ? 'Processing...' : 'Checkout'}\n      </button>\n\n      {successMessage && <p>{successMessage}</p>}\n    </div>\n  );\n};\n\nexport default Checkout;"
+        }
+    ]
+}

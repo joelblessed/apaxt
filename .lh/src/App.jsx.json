@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/App.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741792893701,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741792893701,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\nimport { BrowserRouter as Router, Route, Routes } from \"react-router-dom\";\nimport Checkout from \"./components/Cart/checkout\";\nimport MerchantDashboard from \"./components/Dashboard/MerchantDashboard\";\n// ...existing code...\n\nfunction App() {\n  return (\n    <Router>\n      <Routes>\n        <Route path=\"/checkout\" element={<Checkout />} />\n        <Route path=\"/dashboard\" element={<MerchantDashboard api=\"http://your-api-url.com\" />} />\n        {/* ...existing routes... */}\n      </Routes>\n    </Router>\n  );\n}\n\nexport default App;"
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+/* dashboard.css */
+.dashboard {
+    padding: 20px;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .user-profile,
+  .account-settings,
+  .product-preview,
+  .sales-records {
+    margin-bottom: 20px;
+  }
+  
+  .profile-picture img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profile-picture input {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .product-preview ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .product-preview li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .sales-records table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .sales-records th,
+  .sales-records td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .sales-records th {
+    background-color: #f4f4f4;
+  }

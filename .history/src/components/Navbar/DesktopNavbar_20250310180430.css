@@ -1,0 +1,166 @@
+/* .navbar {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* NavList */
+  .nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* NavItem */
+  .nav-item {
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .nav-item:hover {
+    transform: scale(1.1);
+  }
+  
+  /* NavLogo */
+  .nav-logo {
+    font-size: 64px;
+    font-weight: bold;
+    color: red;
+  }
+  
+  /* SearchBox */
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: #f1f1f1;
+    border-radius: 5px;
+    padding: 5px;
+    width: 250px;
+  }
+  
+  .search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 5px;
+    flex: 1;
+  }
+  
+  .search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .search-button:hover {
+    transform: scale(1.2);
+  }
+  
+  /* NavLink */
+  .nav-link {
+    text-decoration: none;
+    color: red;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 10px 15px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    color: #ff6600;
+  }
+  
+  /* CartContainer */
+  .cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  
+  .cart-badge {
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    animation: bounce 0.5s ease-in-out;
+  }
+  
+  /* AccountContainer */
+  .account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .account-name {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #333;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .account-container:hover .account-name {
+    opacity: 1;
+  }
+  
+  /* Select */
+  .select {
+    color: red;
+    border: none;
+    background: none;
+  }
+  
+  .select:hover,
+  .select.active {
+    color: #ff6600;
+  }
+  
+  /* Option */
+  .option {
+    color: red;
+  }
+  
+  .option:hover,
+  .option.active {
+    color: #ff6600;
+  }
+  
+  /* Keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  } */

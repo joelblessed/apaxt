@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/account/AuthContext.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1738182626159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1738182626159,
+            "name": "Commit-0",
+            "content": "import { createContext, useState, useEffect } from \"react\";\n\nexport const AuthContext = createContext();\n\nexport const AuthProvider = ({ children }) => {\n  const [user, setUser] = useState(null);\n\n  useEffect(() => {\n    const token = localStorage.getItem(\"token\");\n    const role = localStorage.getItem(\"role\");\n    if (token && role) {\n      setUser({ token, role });\n    }\n  }, []);\n\n  const login = (token, role) => {\n    localStorage.setItem(\"token\", token);\n    localStorage.setItem(\"role\", role);\n    setUser({ token, role });\n  };\n\n  const logout = () => {\n    localStorage.removeItem(\"token\");\n    localStorage.removeItem(\"role\");\n    setUser(null);\n  };\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n};"
+        }
+    ]
+}

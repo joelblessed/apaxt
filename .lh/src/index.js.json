@@ -1,0 +1,194 @@
+{
+    "sourceFile": "src/index.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 44,
+            "patches": [
+                {
+                    "date": 1737555333001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737555339990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n+import \n \n-\n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <React.StrictMode>\n     <App />\n"
+                },
+                {
+                    "date": 1737555347130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import \n+import {Authen}\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <React.StrictMode>\n"
+                },
+                {
+                    "date": 1737555353836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import {Authen}\n+import { AuthContex } from './components/Authentication';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <React.StrictMode>\n"
+                },
+                {
+                    "date": 1737555360140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthContex } from './components/Authentication';\n+import {Auth}\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <React.StrictMode>\n"
+                },
+                {
+                    "date": 1737555374887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,15 +2,15 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import {Auth}\n+import { AuthProvider } from './components/Authentication';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <React.StrictMode>\n+  <>\n     <App />\n-  </React.StrictMode>\n+  </>\n );\n \n // If you want to start measuring performance in your app, pass a function\n // to log results (for example: reportWebVitals(console.log))\n"
+                },
+                {
+                    "date": 1737555380492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,11 @@\n import { AuthProvider } from './components/Authentication';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <>\n+  <AuthProvider>\n     <App />\n-  </>\n+  </AuthProvider>\n );\n \n // If you want to start measuring performance in your app, pass a function\n // to log results (for example: reportWebVitals(console.log))\n"
+                },
+                {
+                    "date": 1737559488470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './components/Authentication';\n+import { AuthProvider } from './';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737559494002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './';\n+import { AuthProvider } from './Au';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737559500222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './Au';\n+import { AuthProvider } from './AuthCo';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737560214433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './AuthCo';\n+import { AuthProvider } from './';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737560227250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './';\n+import { AuthProvider } from './A';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737560233265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './A';\n+import { AuthProvider } from './Authent';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737560290473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './Authent';\n+import { AuthProvider } from './Autht';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737560296010,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './Autht';\n+import { AuthProvider } from './At';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737560306262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './At';\n+import { AuthProvider } from './';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737560314423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './';\n+import { AuthProvider } from './authC';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737560737409,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './authC';\n+import { AuthProvider } from './uthContext';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737560742710,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './uthContext';\n+import { AuthProvider } from './AuthContext';\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737561079876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from './AuthContext';\n+import { AuthProvider } from ;\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737561087486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from ;\n+import { AuthProvider } from \"./authContext\";\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <AuthProvider>\n"
+                },
+                {
+                    "date": 1737571199884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,9 @@\n import { AuthProvider } from \"./authContext\";\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <AuthProvider>\n-    <App />\n-  </AuthProvider>\n+\n );\n \n // If you want to start measuring performance in your app, pass a function\n // to log results (for example: reportWebVitals(console.log))\n"
+                },
+                {
+                    "date": 1737571207335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,11 @@\n import { AuthProvider } from \"./authContext\";\n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-\n+  <React.StrictMode>\n+  <App />\n+</React.StrictMode>\n );\n \n // If you want to start measuring performance in your app, pass a function\n // to log results (for example: reportWebVitals(console.log))\n"
+                },
+                {
+                    "date": 1737571252255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n import reportWebVitals from './reportWebVitals';\n-import { AuthProvider } from \"./authContext\";\n \n+\n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <React.StrictMode>\n   <App />\n"
+                },
+                {
+                    "date": 1739392206918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import React from 'react';\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n+\n import reportWebVitals from './reportWebVitals';\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n"
+                },
+                {
+                    "date": 1739392236993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,17 @@\n import React from 'react';\n import ReactDOM from 'react-dom/client';\n import './index.css';\n import App from './App';\n-\n+import ReactDom from \"react-dom\";\n+import { Provider } from \"react-redux\";\n+import store from \"./store\";\n import reportWebVitals from './reportWebVitals';\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <React.StrictMode>\n+  >\n   <App />\n </React.StrictMode>\n );\n \n"
+                },
+                {
+                    "date": 1739392243265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  >\n+  <Pro>\n   <App />\n </React.StrictMode>\n );\n \n"
+                },
+                {
+                    "date": 1739392250762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <Pro>\n+  <Provider store>\n   <App />\n </React.StrictMode>\n );\n \n"
+                },
+                {
+                    "date": 1739392257933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <Provider store>\n+  <Provider store={()}>\n   <App />\n </React.StrictMode>\n );\n \n"
+                },
+                {
+                    "date": 1739392264633,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <Provider store={()}>\n+  <Provider store={store}>\n   <App />\n </React.StrictMode>\n );\n \n"
+                },
+                {
+                    "date": 1739392271166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <Provider store={store}>\n   <App />\n-</React.StrictMode>\n+</>\n );\n \n // If you want to start measuring performance in your app, pass a function\n // to log results (for example: reportWebVitals(console.log))\n"
+                },
+                {
+                    "date": 1742402221949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,15 +5,16 @@\n import ReactDom from \"react-dom\";\n import { Provider } from \"react-redux\";\n import store from \"./store\";\n import reportWebVitals from './reportWebVitals';\n+import \"./components/translations/i18n\";\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n   <Provider store={store}>\n   <App />\n-</>\n+</Provider>\n );\n \n // If you want to start measuring performance in your app, pass a function\n // to log results (for example: reportWebVitals(console.log))\n"
+                },
+                {
+                    "date": 1743617513842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import App from './App';\n import ReactDom from \"react-dom\";\n import { Provider } from \"react-redux\";\n import store from \"./store\";\n+\n import reportWebVitals from './reportWebVitals';\n import \"./components/translations/i18n\";\n \n \n"
+                },
+                {
+                    "date": 1743617526845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import App from './App';\n import ReactDom from \"react-dom\";\n import { Provider } from \"react-redux\";\n import store from \"./store\";\n-\n+import stre\n import reportWebVitals from './reportWebVitals';\n import \"./components/translations/i18n\";\n \n \n"
+                },
+                {
+                    "date": 1743617643854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import App from './App';\n import ReactDom from \"react-dom\";\n import { Provider } from \"react-redux\";\n import store from \"./store\";\n-import stre\n+import wishstore from './wishListStore';\n import reportWebVitals from './reportWebVitals';\n import \"./components/translations/i18n\";\n \n \n"
+                },
+                {
+                    "date": 1743617652648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,16 +4,16 @@\n import App from './App';\n import ReactDom from \"react-dom\";\n import { Provider } from \"react-redux\";\n import store from \"./store\";\n-import wishstore from './wishListStore';\n+import wishliststore from './wishListStore';\n import reportWebVitals from './reportWebVitals';\n import \"./components/translations/i18n\";\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <Provider store={store}>\n+  <Provider store={store} >\n   <App />\n </Provider>\n );\n \n"
+                },
+                {
+                    "date": 1743617658622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <Provider store={store} >\n+  <Provider store={store} wishliststore={}>\n   <App />\n </Provider>\n );\n \n"
+                },
+                {
+                    "date": 1743617665652,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <Provider store={store} wishliststore={}>\n+  <Provider store={store} wishliststore={wishliststore}>\n   <App />\n </Provider>\n );\n \n"
+                },
+                {
+                    "date": 1743622660188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import App from './App';\n import ReactDom from \"react-dom\";\n import { Provider } from \"react-redux\";\n import store from \"./store\";\n-import wishliststore from './wishListStore';\n+\n import reportWebVitals from './reportWebVitals';\n import \"./components/translations/i18n\";\n \n \n"
+                },
+                {
+                    "date": 1743623429855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <Provider store={store} wishliststore={wishliststore}>\n+  <Provider store={store} >\n   <App />\n </Provider>\n );\n \n"
+                },
+                {
+                    "date": 1743675340953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import App from './App';\n import ReactDom from \"react-dom\";\n import { Provider } from \"react-redux\";\n import store from \"./store\";\n-\n+import \n import reportWebVitals from './reportWebVitals';\n import \"./components/translations/i18n\";\n \n \n"
+                },
+                {
+                    "date": 1743675351491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import App from './App';\n import ReactDom from \"react-dom\";\n import { Provider } from \"react-redux\";\n import store from \"./store\";\n-import \n+import wstore from\n import reportWebVitals from './reportWebVitals';\n import \"./components/translations/i18n\";\n \n \n"
+                },
+                {
+                    "date": 1743675357891,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import App from './App';\n import ReactDom from \"react-dom\";\n import { Provider } from \"react-redux\";\n import store from \"./store\";\n-import wstore from\n+import wstore from \"./\"\n import reportWebVitals from './reportWebVitals';\n import \"./components/translations/i18n\";\n \n \n"
+                },
+                {
+                    "date": 1743675370092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n \n \n const root = ReactDOM.createRoot(document.getElementById('root'));\n root.render(\n-  <Provider store={store}  >\n+  <Provider store={store} store={store} >\n   <App />\n </Provider>\n );\n \n"
+                },
+                {
+                    "date": 1743675547767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+import React from 'react';\n+import ReactDOM from 'react-dom/client';\n+import './index.css';\n+import App from './App';\n+import ReactDom from \"react-dom\";\n+import { Provider } from \"react-redux\";\n+import store from \"./store\";\n+import wstore from \"./wStore\"\n+import reportWebVitals from './reportWebVitals';\n+import \"./components/translations/i18n\";\n+\n+\n+const root = ReactDOM.createRoot(document.getElementById('root'));\n+root.render(\n+  <Provider store={store}  >\n+  <App />\n+</Provider>\n+);\n+\n+// If you want to start measuring performance in your app, pass a function\n+// to log results (for example: reportWebVitals(console.log))\n+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals\n+reportWebVitals();\n"
+                }
+            ],
+            "date": 1737555333001,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport './index.css';\nimport App from './App';\nimport reportWebVitals from './reportWebVitals';\n\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>\n);\n\n// If you want to start measuring performance in your app, pass a function\n// to log results (for example: reportWebVitals(console.log))\n// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals\nreportWebVitals();\n"
+        }
+    ]
+}

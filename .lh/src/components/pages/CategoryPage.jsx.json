@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/pages/CategoryPage.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1739456988499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1739457000876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-mport React, { useState, useEffect } from \"react\";\n+import React, { useState, useEffect } from \"react\";\n import { useParams, Link } from \"react-router-dom\";\n \n const CategoryPage = () => {\n   const { categoryName } = useParams();\n"
+                }
+            ],
+            "date": 1739456988499,
+            "name": "Commit-0",
+            "content": "mport React, { useState, useEffect } from \"react\";\nimport { useParams, Link } from \"react-router-dom\";\n\nconst CategoryPage = () => {\n  const { categoryName } = useParams();\n  const [products, setProducts] = useState([]);\n\n  useEffect(() => {\n    fetch(\"http://localhost:5000/products\")\n      .then((res) => res.json())\n      .then((data) => {\n        const filteredProducts = data.filter((product) => product.category === categoryName);\n        setProducts(filteredProducts);\n      })\n      .catch((error) => console.error(\"Error fetching products:\", error));\n  }, [categoryName]);\n\n  return (\n    <div style={styles.container}>\n      <h1>{categoryName}</h1>\n      <div style={styles.productsGrid}>\n        {products.map((product) => (\n          <div key={product.id} style={styles.productBox}>\n            <img src={product.image} alt={product.name} style={styles.image} />\n            <p>{product.name}</p>\n          </div>\n        ))}\n      </div>\n      <Link to=\"/\" style={styles.backButton}>Back</Link>\n    </div>\n  );\n};\n\nconst styles = {\n  container: { width: \"80%\", margin: \"auto\", textAlign: \"center\" },\n  productsGrid: { display: \"flex\", flexWrap: \"wrap\", gap: \"10px\", justifyContent: \"center\" },\n  productBox: {\n    width: \"120px\",\n    height: \"150px\",\n    backgroundColor: \"lightgray\",\n    display: \"flex\",\n    flexDirection: \"column\",\n    justifyContent: \"center\",\n    alignItems: \"center\",\n    borderRadius: \"8px\",\n  },\n  image: { width: \"80px\", height: \"80px\", objectFit: \"cover\" },\n  backButton: {\n    display: \"inline-block\",\n    marginTop: \"20px\",\n    padding: \"8px 15px\",\n    backgroundColor: \"red\",\n    color: \"white\",\n    textDecoration: \"none\",\n    borderRadius: \"5px\",\n  },\n};\n\nexport default CategoryPage;"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/components/pages/Test.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1739452892479,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1739453170450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,16 +1,16 @@\n .box-container {\n-    display: flex;\n-    flex-direction: row;\n-    align-items: center;\n-  }\n-  \n-  .box {\n-    width: 50px;\n-    height: 50px;\n-    background-color: lightblue;\n-    margin: 5px;\n-  }\n-  \n-  .last-box {\n-    margin-left: auto; /* Move the last box to the right */\n-  }\n\\ No newline at end of file\n+  display: flex;\n+  flex-direction: row;\n+  align-items: center;\n+}\n+\n+.box {\n+  width: 50px;\n+  height: 50px;\n+  background-color: lightblue;\n+  margin: 5px;\n+}\n+\n+.last-box {\n+  margin-left: auto; /* Move the last box to the right */\n+}\n"
+                },
+                {
+                    "date": 1739453583638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-.box-container {\n+.boxt-container {\n   display: flex;\n   flex-direction: row;\n   align-items: center;\n }\n"
+                },
+                {
+                    "date": 1739453636336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-.boxt-container {\n+.boxty-container {\n   display: flex;\n   flex-direction: row;\n   align-items: center;\n }\n"
+                },
+                {
+                    "date": 1739453668687,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-.boxty-container {\n+.boxtycontainer {\n   display: flex;\n   flex-direction: row;\n   align-items: center;\n }\n"
+                },
+                {
+                    "date": 1739454026975,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,6 @@\n-.boxtycontainer {\n-  display: flex;\n-  flex-direction: row;\n-  align-items: center;\n-}\n \n+\n .box {\n   width: 50px;\n   height: 50px;\n   background-color: lightblue;\n"
+                },
+                {
+                    "date": 1741795164552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +0,0 @@\n-\n-\n-.box {\n-  width: 50px;\n-  height: 50px;\n-  background-color: lightblue;\n-  margin: 5px;\n-}\n-\n-.last-box {\n-  margin-left: auto; /* Move the last box to the right */\n-}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741857980739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,5 +38,46 @@\n   // Save the updated products back to db.json\n   fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));\n \n   res.json({ message: \"Product updated successfully!\", product: updatedProduct });\n+});// Route to handle product update by ID\n+router.put(\"/update/:id\", upload.array(\"images\", 11), (req, res) => {\n+  const productId = parseInt(req.params.id);\n+  const updatedData = req.body;\n+  const files = req.files;\n+\n+  // Read the existing products from db.json\n+  const dbPath = path.join(__dirname, \"./jsonFiles/db.json\");\n+  let db = { products: [] };\n+\n+  if (fs.existsSync(dbPath)) {\n+    db = JSON.parse(fs.readFileSync(dbPath, \"utf-8\"));\n+  }\n+\n+  // Find the product by ID\n+  const productIndex = db.products.findIndex((product) => product.id === productId);\n+\n+  if (productIndex === -1) {\n+    return res.status(404).json({ message: \"Product not found\" });\n+  }\n+\n+  // Update the product details\n+  const updatedProduct = {\n+    ...db.products[productIndex],\n+    ...updatedData,\n+    price: parseFloat(updatedData.price),\n+    quantity: parseInt(updatedData.quantity),\n+    numberInStock: parseInt(updatedData.numberInStock),\n+    discount: parseFloat(updatedData.discount),\n+    likes: parseInt(updatedData.likes),\n+    brand: JSON.parse(updatedData.brand),\n+    location: JSON.parse(updatedData.location),\n+    images: files.length > 0 ? files.map((file) => `/images/${file.filename}`) : db.products[productIndex].images,\n+  };\n+\n+  db.products[productIndex] = updatedProduct;\n+\n+  // Save the updated products back to db.json\n+  fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));\n+\n+  res.json({ message: \"Product updated successfully!\", product: updatedProduct });\n });\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1739452892479,
+            "name": "Commit-0",
+            "content": ".box-container {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n  }\n  \n  .box {\n    width: 50px;\n    height: 50px;\n    background-color: lightblue;\n    margin: 5px;\n  }\n  \n  .last-box {\n    margin-left: auto; /* Move the last box to the right */\n  }"
+        }
+    ]
+}

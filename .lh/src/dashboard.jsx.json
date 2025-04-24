@@ -1,0 +1,62 @@
+{
+    "sourceFile": "src/dashboard.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1737109913742,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737109922292,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,11 @@\n+import React from 'react'\n+\n+const Dashboard = () => {\n+  return (\n+    <div>\n+      \n+    </div>\n+  )\n+}\n+\n+export default D\n"
+                },
+                {
+                    "date": 1737109928766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,5 @@\n     </div>\n   )\n }\n \n-export default D\n-rafc\n\\ No newline at end of file\n+export default Dashboard\n"
+                },
+                {
+                    "date": 1737109935496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n const Dashboard = () => {\n   return (\n     <div>\n-      \n+      <\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737109948814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n const Dashboard = () => {\n   return (\n     <div>\n-      <\n+      <h1>da</h1>\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737112294289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,10 @@\n \n const Dashboard = () => {\n   return (\n     <div>\n-      <h1>da</h1>\n+      <h1>dashboard</h1>\n+      \n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737112303456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const Dashboard = () => {\n   return (\n     <div>\n       <h1>dashboard</h1>\n-      \n+      <\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737112317983,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const Dashboard = () => {\n   return (\n     <div>\n       <h1>dashboard</h1>\n-      <\n+      <button>sig</button>\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737112324361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const Dashboard = () => {\n   return (\n     <div>\n       <h1>dashboard</h1>\n-      <button>sig</button>\n+      <button>sign </button>\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737112332349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const Dashboard = () => {\n   return (\n     <div>\n       <h1>dashboard</h1>\n-      <button>sign </button>\n+      <button oncli>sign out</button>\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737112337686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const Dashboard = () => {\n   return (\n     <div>\n       <h1>dashboard</h1>\n-      <button oncli>sign out</button>\n+      <button onClick={signout}>sign out</button>\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737112345018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React from 'react'\n \n-const Dashboard = () => {\n+const Dashboard = ({sign}) => {\n   return (\n     <div>\n       <h1>dashboard</h1>\n       <button onClick={signout}>sign out</button>\n"
+                }
+            ],
+            "date": 1737109913742,
+            "name": "Commit-0",
+            "content": "rafc"
+        }
+    ]
+}

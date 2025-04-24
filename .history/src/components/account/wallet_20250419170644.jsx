@@ -1,0 +1,31 @@
+import React, { useState, useContext, useEffect } from "react";
+
+const Wallet = ({ u }) => {
+  const referralCode = user.referralCode;
+  const referralLink = `https://apaxt.netlify.app/signUp?ref=${referralCode}`;
+console.log( user)
+  return (
+    <>
+      <h3>Your Referral Code: {referralCode}</h3>
+
+      <div style={{ display: "flex", gap: "20px" }}>
+        <div>
+          <a href={referralLink} target="_blank" rel="noopener noreferrer">
+            {referralLink}
+          </a>
+        </div>
+        <div>
+          <button onClick={() => navigator.clipboard.writeText(referralLink)}>
+            Copy Referral Link
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3>Wallet Balance: {user.wallet}</h3>
+      </div>
+    </>
+  );
+};
+
+export default Wallet;

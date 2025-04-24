@@ -1,0 +1,50 @@
+{
+    "sourceFile": "src/AuthContext Cart.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1740133680486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740133687856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-mport { createContext, useContext, useEffect, useState } from \"react\";\n+import { createContext, useContext, useEffect, useState } from \"react\";\n import { useDispatch } from \"react-redux\";\n import { syncCartWithServer } from \"./cartSlice\";\n \n const AuthContext = createContext();\n"
+                },
+                {
+                    "date": 1740133697809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   const signIn = async (userData) => {\n     setUser(userData);\n \n     // Fetch user cart from backend\n-    const response = await fetch(/cart.json?userId=${userData.id});\n+    const response = await fetch(`/cart.json?userId=${userData.id});\n     const userCart = await response.json();\n \n     // Merge localStorage cart with server cart\n     const localCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n"
+                },
+                {
+                    "date": 1740133702921,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   const signIn = async (userData) => {\n     setUser(userData);\n \n     // Fetch user cart from backend\n-    const response = await fetch(`/cart.json?userId=${userData.id});\n+    const response = await fetch(`/cart.json?userId=${userData.id}`);\n     const userCart = await response.json();\n \n     // Merge localStorage cart with server cart\n     const localCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n"
+                },
+                {
+                    "date": 1740133709835,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     dispatch(syncCartWithServer(mergedCart));\n     localStorage.setItem(\"cart\", JSON.stringify(mergedCart));\n \n     // Save updated cart to backend\n-    await fetch(/cart.json, {\n+    await fetch(`/cart.json, {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ userId: userData.id, cart: mergedCart }),\n     });\n"
+                },
+                {
+                    "date": 1740135583873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   const signIn = async (userData) => {\n     setUser(userData);\n \n     // Fetch user cart from backend\n-    const response = await fetch(`/cart.json?userId=${userData.id}`);\n+    const response = await fetch(`/cart${userData.id}`);\n     const userCart = await response.json();\n \n     // Merge localStorage cart with server cart\n     const localCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n@@ -23,9 +23,9 @@\n     dispatch(syncCartWithServer(mergedCart));\n     localStorage.setItem(\"cart\", JSON.stringify(mergedCart));\n \n     // Save updated cart to backend\n-    await fetch(`/cart.json, {\n+    await fetch(`/cart.json`, {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ userId: userData.id, cart: mergedCart }),\n     });\n"
+                },
+                {
+                    "date": 1740135605170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   const signIn = async (userData) => {\n     setUser(userData);\n \n     // Fetch user cart from backend\n-    const response = await fetch(`/cart${userData.id}`);\n+    const response = await fetch(`/cart/${userData.id}`);\n     const userCart = await response.json();\n \n     // Merge localStorage cart with server cart\n     const localCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n@@ -23,9 +23,9 @@\n     dispatch(syncCartWithServer(mergedCart));\n     localStorage.setItem(\"cart\", JSON.stringify(mergedCart));\n \n     // Save updated cart to backend\n-    await fetch(`/cart.json`, {\n+    await fetch(, {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ userId: userData.id, cart: mergedCart }),\n     });\n"
+                },
+                {
+                    "date": 1740135612799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     dispatch(syncCartWithServer(mergedCart));\n     localStorage.setItem(\"cart\", JSON.stringify(mergedCart));\n \n     // Save updated cart to backend\n-    await fetch(, {\n+    await fetch(\" http://localhost:5000\", {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ userId: userData.id, cart: mergedCart }),\n     });\n"
+                },
+                {
+                    "date": 1740135617982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     dispatch(syncCartWithServer(mergedCart));\n     localStorage.setItem(\"cart\", JSON.stringify(mergedCart));\n \n     // Save updated cart to backend\n-    await fetch(\" http://localhost:5000\", {\n+    await fetch(\" http://localhost:5000/addT\", {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ userId: userData.id, cart: mergedCart }),\n     });\n"
+                }
+            ],
+            "date": 1740133680486,
+            "name": "Commit-0",
+            "content": "mport { createContext, useContext, useEffect, useState } from \"react\";\nimport { useDispatch } from \"react-redux\";\nimport { syncCartWithServer } from \"./cartSlice\";\n\nconst AuthContext = createContext();\n\nexport const AuthProvider = ({ children }) => {\n  const [user, setUser] = useState(null);\n  const dispatch = useDispatch();\n\n  const signIn = async (userData) => {\n    setUser(userData);\n\n    // Fetch user cart from backend\n    const response = await fetch(/cart.json?userId=${userData.id});\n    const userCart = await response.json();\n\n    // Merge localStorage cart with server cart\n    const localCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n    const mergedCart = [...new Set([...userCart, ...localCart])];\n\n    // Sync with Redux and server\n    dispatch(syncCartWithServer(mergedCart));\n    localStorage.setItem(\"cart\", JSON.stringify(mergedCart));\n\n    // Save updated cart to backend\n    await fetch(/cart.json, {\n      method: \"POST\",\n      headers: { \"Content-Type\": \"application/json\" },\n      body: JSON.stringify({ userId: userData.id, cart: mergedCart }),\n    });\n  };\n\n  return (\n    <AuthContext.Provider value={{ user, signIn }}>\n      {children}\n    </AuthContext.Provider>\n  );\n};\n\nexport const useAuth = () => useContext(AuthContext);"
+        }
+    ]
+}

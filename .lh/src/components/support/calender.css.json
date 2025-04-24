@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/support/calender.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1743610134739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743610420651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n   }\n   \n   .custom-datepicker-calendar .react-datepicker__current-month,\n   .custom-datepicker-calendar .react-datepicker-time__header {\n-    color: #fff;\n+    color: #ba0e0e;\n   }\n   \n   /* Customize day styles */\n   .custom-datepicker-calendar .react-datepicker__day {\n"
+                }
+            ],
+            "date": 1743610134738,
+            "name": "Commit-0",
+            "content": "/* Style the input field */\n.custom-datepicker-input {\n    border: 2px solid #4CAF50;\n    border-radius: 4px;\n    padding: 8px;\n    font-size: 16px;\n    width: 100%;\n  }\n  \n  /* Style the calendar popup */\n  .custom-datepicker-calendar {\n    border: 1px solid #4CAF50;\n  }\n  \n  /* Customize header background and text in the calendar */\n  .custom-datepicker-calendar .react-datepicker__header {\n    background-color: #4CAF50;\n    border-bottom: none;\n  }\n  \n  .custom-datepicker-calendar .react-datepicker__current-month,\n  .custom-datepicker-calendar .react-datepicker-time__header {\n    color: #fff;\n  }\n  \n  /* Customize day styles */\n  .custom-datepicker-calendar .react-datepicker__day {\n    border-radius: 50%;\n  }\n  \n  .custom-datepicker-calendar .react-datepicker__day--selected {\n    background-color: #4CAF50;\n    color: white;\n  }"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+.brand-section {
+    margin-bottom: 30px;
+  }
+  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .product-box {
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .product-box img {
+    width: 100%;
+    height: auto;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }

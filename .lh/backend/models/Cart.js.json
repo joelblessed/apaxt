@@ -1,0 +1,18 @@
+{
+    "sourceFile": "backend/models/Cart.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741891254568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741891254568,
+            "name": "Commit-0",
+            "content": "const mongoose = require('mongoose');\n\nconst itemSchema = new mongoose.Schema({\n  productId: String,\n  quantity: { type: Number, default: 1 },\n});\n\nconst cartSchema = new mongoose.Schema({\n  userId: String,\n  items: [itemSchema],\n});\n\nconst Cart = mongoose.model('Cart', cartSchema);\n\nmodule.exports = Cart;"
+        }
+    ]
+}

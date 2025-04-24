@@ -1,0 +1,170 @@
+{
+    "sourceFile": "src/components/translations/fr/translation.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 38,
+            "patches": [
+                {
+                    "date": 1742399602074,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742399609020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-\"\"\n\\ No newline at end of file\n+\"sea\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399614594,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-\"sea\"\n\\ No newline at end of file\n+\"search\":\"\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399628941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,2 @@\n-\"search\":\"\"\n\\ No newline at end of file\n+\"search\":\"Rechercher\",\n+\"searchPlaceholder\":\"Rechercher un utilisateur\",\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399636060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n \"search\":\"Rechercher\",\n-\"searchPlaceholder\":\"Rechercher un utilisateur\",\n\\ No newline at end of file\n+\"searchPlaceholder\":\"Rechercher un utilisateur\",\n+\"searchResults\":\"Résultats de la recherche\",\n+\"searchNoResults\":\"Aucun résultat trouvé\",\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399668498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +0,0 @@\n-\"search\":\"Rechercher\",\n-\"searchPlaceholder\":\"Rechercher un utilisateur\",\n-\"searchResults\":\"Résultats de la recherche\",\n-\"searchNoResults\":\"Aucun résultat trouvé\",\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399677156,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,3 @@\n+{\n+    search\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399684172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n {\n-    search\n+    \"search\":\"Rechercher\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399692689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,4 @@\n {\n     \"search\":\"Rechercher\",\n+    \"home\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399697788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n {\n     \"search\":\"Rechercher\",\n-    \"home\"\n+    \"home\":\"Accueil\",\n+    \"about\":\"À propos\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399703790,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,8 @@\n {\n     \"search\":\"Rechercher\",\n     \"home\":\"Accueil\",\n     \"about\":\"À propos\",\n+    \"contact\":\"Contact\",\n+    \"login\":\"Connexion\",\n+    \"logout\":\"Déconnexion\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399709505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,8 @@\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"logout\":\"Déconnexion\",\n+    \"register\":\"Inscription\",\n+    \"profile\":\"Profil\",\n+    \"settings\":\"Paramètres\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399716657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,5 +7,7 @@\n     \"logout\":\"Déconnexion\",\n     \"register\":\"Inscription\",\n     \"profile\":\"Profil\",\n     \"settings\":\"Paramètres\",\n+    \"language\":\"Langue\",\n+    \"dark\":\"Sombre\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399721839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,5 +9,8 @@\n     \"profile\":\"Profil\",\n     \"settings\":\"Paramètres\",\n     \"language\":\"Langue\",\n     \"dark\":\"Sombre\",\n+    \"light\":\"Clair\",\n+    \"theme\":\"Thème\",\n+    \"email\":\"Email\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399727654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,5 +12,8 @@\n     \"dark\":\"Sombre\",\n     \"light\":\"Clair\",\n     \"theme\":\"Thème\",\n     \"email\":\"Email\",\n+    \"password\":\"Mot de passe\",\n+    \"confirm\":\"Confirmer\",\n+    \"forgot\":\"Mot de passe oublié\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399744323,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,17 +3,6 @@\n     \"home\":\"Accueil\",\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n-    \"logout\":\"Déconnexion\",\n-    \"register\":\"Inscription\",\n-    \"profile\":\"Profil\",\n-    \"settings\":\"Paramètres\",\n-    \"language\":\"Langue\",\n-    \"dark\":\"Sombre\",\n-    \"light\":\"Clair\",\n-    \"theme\":\"Thème\",\n-    \"email\":\"Email\",\n-    \"password\":\"Mot de passe\",\n-    \"confirm\":\"Confirmer\",\n-    \"forgot\":\"Mot de passe oublié\",\n+   \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399750312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n     \"home\":\"Accueil\",\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n-   \n+    \"\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399756238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n     \"home\":\"Accueil\",\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n-    \"\"\n+    \"products\":\"Produits\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399761420,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,6 @@\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"products\":\"Produits\",\n+    \"\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399767422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,6 @@\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"products\":\"Produits\",\n-    \"\"\n+    \"category\":\"Catégorie\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399773324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,5 +5,8 @@\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"products\":\"Produits\",\n     \"category\":\"Catégorie\",\n+    \"price\":\"Prix\",\n+    \"brand\":\"Marque\",\n+    \"color\":\"Couleur\",\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399778963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,5 +8,7 @@\n     \"category\":\"Catégorie\",\n     \"price\":\"Prix\",\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n+    \"size\":\"Taille\",\n+    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399785477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,6 @@\n     \"price\":\"Prix\",\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n-    \n+    \"\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399795651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,6 @@\n     \"price\":\"Prix\",\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n-    \"\"\n+    \"des\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742399804793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,6 @@\n     \"price\":\"Prix\",\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n-    \"des\"\n+    \"description\":\"Description\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742403800411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n {\n     \"search\":\"Rechercher\",\n     \"home\":\"Accueil\",\n+    \n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"products\":\"Produits\",\n"
+                },
+                {
+                    "date": 1742403805500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n {\n     \"search\":\"Rechercher\",\n     \"home\":\"Accueil\",\n-    \n+    \"Ho\"\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"products\":\"Produits\",\n"
+                },
+                {
+                    "date": 1742403818810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n {\n     \"search\":\"Rechercher\",\n     \"home\":\"Accueil\",\n-    \"Ho\"\n+    \"Home\":\"A\"\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"products\":\"Produits\",\n"
+                },
+                {
+                    "date": 1742403824396,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n {\n     \"search\":\"Rechercher\",\n-    \"home\":\"Accueil\",\n-    \"Home\":\"A\"\n+    \"home\":\"ccueil\",\n+    \"Home\":\"Accueil\"\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"products\":\"Produits\",\n"
+                },
+                {
+                    "date": 1742403829618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n {\n     \"search\":\"Rechercher\",\n-    \"home\":\"ccueil\",\n-    \"Home\":\"Accueil\"\n+    \"home\":\"accueil\",\n+    \"Home\":\"Accueil\",\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"products\":\"Produits\",\n"
+                },
+                {
+                    "date": 1742403882163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n     \"products\":\"Produits\",\n-    \"category\":\"Catégorie\",\n+    \"Category\":\"Catégorie\",\n     \"price\":\"Prix\",\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n"
+                },
+                {
+                    "date": 1742403917450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n     \"Home\":\"Accueil\",\n     \"about\":\"À propos\",\n     \"contact\":\"Contact\",\n     \"login\":\"Connexion\",\n-    \"products\":\"Produits\",\n+    \"Products\":\"Produits\",\n     \"Category\":\"Catégorie\",\n     \"price\":\"Prix\",\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n"
+                },
+                {
+                    "date": 1742405397014,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,5 +11,6 @@\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n     \"description\":\"Description\"\n+    \"toggle_language\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742405404122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,6 +11,6 @@\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n     \"description\":\"Description\"\n-    \"toggle_language\"\n+    \"toggle_language\":\"\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742405421965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,7 +10,7 @@\n     \"price\":\"Prix\",\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n-    \"description\":\"Description\"\n-    \"toggle_language\":\"\"\n+    \"description\":\"Description\",\n+    \"toggle_language\":\"P\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742405454465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,6 +11,6 @@\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n     \"description\":\"Description\",\n-    \"toggle_language\":\"P\"\n+    \"toggle_la\":\"P\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742405465692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,6 +11,6 @@\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n     \"description\":\"Description\",\n-    \"toggle_la\":\"P\"\n+    \"F\":\"P\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742405474497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,6 +11,6 @@\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n     \"description\":\"Description\",\n-    \"French\":\"\"\n+    \"French\":\"Fra\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1742405608867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,6 +11,6 @@\n     \"brand\":\"Marque\",\n     \"color\":\"Couleur\",\n     \"size\":\"Taille\",\n     \"description\":\"Description\",\n-    \"Fra\":\"\"\n+    \"Fran\":\"\"\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1742399602074,
+            "name": "Commit-0",
+            "content": "\"\""
+        }
+    ]
+}

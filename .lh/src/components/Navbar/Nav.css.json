@@ -1,0 +1,110 @@
+{
+    "sourceFile": "src/components/Navbar/Nav.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 23,
+            "patches": [
+                {
+                    "date": 1736953952281,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1736953959137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-* General styles */\n+/* General styles */\n body {\n     margin: 0;\n     font-family: Arial, sans-serif;\n }\n"
+                },
+                {
+                    "date": 1736954135828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,5 +53,5 @@\n }\n \n .sidebar.open ~ .content {\n     margin-left: 250px;\n-}\n\\ No newline at end of file\n+}\n"
+                },
+                {
+                    "date": 1736954146930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-/* General styles */\n+* General styles */\n body {\n     margin: 0;\n     font-family: Arial, sans-serif;\n }\n@@ -54,4 +54,5 @@\n \n .sidebar.open ~ .content {\n     margin-left: 250px;\n }\n+\n"
+                },
+                {
+                    "date": 1736954427535,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,58 +1,67 @@\n-* General styles */\n+/* General Styles */\n body {\n     margin: 0;\n     font-family: Arial, sans-serif;\n }\n \n-.toggle-btn {\n-    position: fixed;\n-    top: 10px;\n-    left: 10px;\n-    z-index: 1000;\n-    background-color: #007bff;\n-    color: white;\n-    border: none;\n-    padding: 10px 15px;\n-    border-radius: 5px;\n-    cursor: pointer;\n-}\n-\n-/* Sidebar styles */\n-.sidebar {\n-    position: fixed;\n-    top: 0;\n-    left: 0;\n-    width: 250px;\n-    height: 100%;\n+.navbar {\n+    display: flex;\n+    justify-content: space-between;\n+    align-items: center;\n     background-color: #333;\n     color: white;\n-    padding: 20px;\n-    transform: translateX(-100%);\n-    transition: transform 0.3s ease;\n+    padding: 10px 20px;\n+    position: relative;\n }\n \n-.sidebar.open {\n-    transform: translateX(0);\n+.navbar-logo h1 {\n+    margin: 0;\n }\n \n-.sidebar ul {\n-    list-style-type: none;\n-    padding: 0;\n+.navbar-links {\n+    display: flex;\n+    gap: 20px;\n }\n \n-.sidebar ul li {\n-    margin: 15px 0;\n-    cursor: pointer;\n+.navbar-links a {\n+    color: white;\n+    text-decoration: none;\n+    padding: 5px 10px;\n }\n \n-/* Main content */\n-.content {\n-    margin-left: 0;\n-    padding: 20px;\n-    transition: margin-left 0.3s ease;\n+.navbar-links a:hover {\n+    background-color: #555;\n+    border-radius: 5px;\n }\n \n-.sidebar.open ~ .content {\n-    margin-left: 250px;\n+/* Menu Toggle Button */\n+.menu-toggle {\n+    display: none;\n+    background: none;\n+    color: white;\n+    font-size: 24px;\n+    border: none;\n+    cursor: pointer;\n }\n \n+/* Responsive Styles */\n+@media (max-width: 768px) {\n+    .navbar-links {\n+        display: none;\n+        flex-direction: column;\n+        position: absolute;\n+        top: 100%;\n+        right: 0;\n+        background-color: #333;\n+        width: 100%;\n+        text-align: center;\n+    }\n+\n+    .navbar-links.active {\n+        display: flex;\n+    }\n+\n+    .menu-toggle {\n+        display: block;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1736954470797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n     cursor: pointer;\n }\n \n /* Responsive Styles */\n-@media (max-width: 768px) {\n+@media (max-width: 760px) {\n     .navbar-links {\n         display: none;\n         flex-direction: column;\n         position: absolute;\n"
+                },
+                {
+                    "date": 1736956743037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     justify-content: space-between;\n     align-items: center;\n     background-color: #333;\n     color: white;\n-    padding: 10px 20px;\n+    padding: 0px 20px;\n     position: relative;\n }\n \n .navbar-logo h1 {\n"
+                },
+                {
+                    "date": 1736956760743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     justify-content: space-between;\n     align-items: center;\n     background-color: #333;\n     color: white;\n-    padding: 0px 20px;\n+    padding: 0px 0px;\n     position: relative;\n }\n \n .navbar-logo h1 {\n@@ -25,9 +25,9 @@\n \n .navbar-links a {\n     color: white;\n     text-decoration: none;\n-    padding: 5px 10px;\n+    padding: 5px 0px;\n }\n \n .navbar-links a:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736956769813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n .navbar-links a {\n     color: white;\n     text-decoration: none;\n-    padding: 5px 0px;\n+    padding: 0px 0px;\n }\n \n .navbar-links a:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736956836938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n     background-color: #333;\n     color: white;\n     padding: 0px 0px;\n     position: relative;\n+    ba\n }\n \n .navbar-logo h1 {\n     margin: 0;\n"
+                },
+                {
+                    "date": 1736956858480,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     background-color: #333;\n     color: white;\n     padding: 0px 0px;\n     position: relative;\n-    ba\n+    ;\n }\n \n .navbar-logo h1 {\n     margin: 0;\n"
+                },
+                {
+                    "date": 1736956956728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,9 @@\n .navbar-links a {\n     color: white;\n     text-decoration: none;\n     padding: 0px 0px;\n+    ba\n }\n \n .navbar-links a:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736956992038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,10 @@\n .navbar-links a {\n     color: white;\n     text-decoration: none;\n     padding: 0px 0px;\n-    ba\n+    background-color: red;\n+    \n }\n \n .navbar-links a:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736956997990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n     color: white;\n     text-decoration: none;\n     padding: 0px 0px;\n     background-color: red;\n-    \n+    margin: auto;\n }\n \n .navbar-links a:hover {\n     background-color: #555;\n"
+                },
+                {
+                    "date": 1736960059462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         text-align: center;\n     }\n \n     .navbar-links.active {\n-        display: flex;\n+        display: ;\n     }\n \n     .menu-toggle {\n         display: block;\n"
+                },
+                {
+                    "date": 1736960073373,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,9 @@\n         text-align: center;\n     }\n \n     .navbar-links.active {\n-        display: ;\n+        display: flex;\n     }\n \n     .menu-toggle {\n         display: block;\n"
+                },
+                {
+                    "date": 1736960085816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n         top: 100%;\n         right: 0;\n         background-color: #333;\n         width: 100%;\n-        text-align: center;\n+        text-align: ;\n     }\n \n     .navbar-links.active {\n         display: flex;\n"
+                },
+                {
+                    "date": 1736960101727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n         top: 100%;\n         right: 0;\n         background-color: #333;\n         width: 100%;\n-        text-align: ;\n+        text-align: left;\n     }\n \n     .navbar-links.active {\n         display: flex;\n"
+                },
+                {
+                    "date": 1736960107979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n         top: 100%;\n         right: 0;\n         background-color: #333;\n         width: 100%;\n-        text-align: left;\n+        text-align: right;\n     }\n \n     .navbar-links.active {\n         display: flex;\n"
+                },
+                {
+                    "date": 1736960131904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n         top: 100%;\n         right: 0;\n         background-color: #333;\n         width: 100%;\n-        text-align: right;\n+        text-align: left;\n     }\n \n     .navbar-links.active {\n         display: flex;\n"
+                },
+                {
+                    "date": 1736960174126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n         position: absolute;\n         top: 100%;\n         right: 0;\n         background-color: #333;\n-        width: 100%;\n+        width: 10%;\n         text-align: left;\n     }\n \n     .navbar-links.active {\n"
+                },
+                {
+                    "date": 1736960181945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n         position: absolute;\n         top: 100%;\n         right: 0;\n         background-color: #333;\n-        width: 10%;\n+        width: 40%;\n         text-align: left;\n     }\n \n     .navbar-links.active {\n"
+                },
+                {
+                    "date": 1736960200007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n         position: absolute;\n         top: 100%;\n         right: 0;\n         background-color: #333;\n-        width: 40%;\n+        width: 20%;\n         text-align: left;\n     }\n \n     .navbar-links.active {\n"
+                },
+                {
+                    "date": 1736960248807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,7 +64,7 @@\n         display: flex;\n     }\n \n     .menu-toggle {\n-        display: ;\n+        display: f;\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1736953952281,
+            "name": "Commit-0",
+            "content": "* General styles */\nbody {\n    margin: 0;\n    font-family: Arial, sans-serif;\n}\n\n.toggle-btn {\n    position: fixed;\n    top: 10px;\n    left: 10px;\n    z-index: 1000;\n    background-color: #007bff;\n    color: white;\n    border: none;\n    padding: 10px 15px;\n    border-radius: 5px;\n    cursor: pointer;\n}\n\n/* Sidebar styles */\n.sidebar {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 250px;\n    height: 100%;\n    background-color: #333;\n    color: white;\n    padding: 20px;\n    transform: translateX(-100%);\n    transition: transform 0.3s ease;\n}\n\n.sidebar.open {\n    transform: translateX(0);\n}\n\n.sidebar ul {\n    list-style-type: none;\n    padding: 0;\n}\n\n.sidebar ul li {\n    margin: 15px 0;\n    cursor: pointer;\n}\n\n/* Main content */\n.content {\n    margin-left: 0;\n    padding: 20px;\n    transition: margin-left 0.3s ease;\n}\n\n.sidebar.open ~ .content {\n    margin-left: 250px;\n}"
+        }
+    ]
+}

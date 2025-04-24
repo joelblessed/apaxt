@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/account/dasboardSidbar.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1738185068632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1738185279266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React from \"react\";\n import { Link } from \"react-router-dom\";\n import { useContext } from \"react\";\n-import { AuthContext } from \"./AuthContext\";\n+import { AuthContext } from \"\";\n \n function Sidebar() {\n   const { user, logout } = useContext(AuthContext);\n \n"
+                },
+                {
+                    "date": 1738185287619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React from \"react\";\n import { Link } from \"react-router-dom\";\n import { useContext } from \"react\";\n-import { AuthContext } from \"\";\n+import { AuthContext } from \"../.\";\n \n function Sidebar() {\n   const { user, logout } = useContext(AuthContext);\n \n"
+                }
+            ],
+            "date": 1738185068632,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\nimport { Link } from \"react-router-dom\";\nimport { useContext } from \"react\";\nimport { AuthContext } from \"./AuthContext\";\n\nfunction Sidebar() {\n  const { user, logout } = useContext(AuthContext);\n\n  return (\n    <div style={{ width: \"200px\", background: \"#333\", color: \"#fff\", height: \"100vh\", padding: \"20px\" }}>\n      <h3>Dashboard</h3>\n      <ul style={{ listStyle: \"none\", padding: 0 }}>\n        <li><Link to=\"/dashboard\" style={{ color: \"#fff\", textDecoration: \"none\" }}>Home</Link></li>\n        {user?.role === \"admin\" && (\n          <li><Link to=\"/admin\" style={{ color: \"#fff\", textDecoration: \"none\" }}>Admin Panel</Link></li>\n        )}\n        <li><button onClick={logout} style={{ color: \"#fff\", background: \"none\", border: \"none\", cursor: \"pointer\" }}>Logout</button></li>\n      </ul>\n    </div>\n  );\n}\n\nexport default Sidebar"
+        }
+    ]
+}

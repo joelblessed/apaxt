@@ -1,0 +1,110 @@
+{
+    "sourceFile": "src/components/pages/logs.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 23,
+            "patches": [
+                {
+                    "date": 1744995474529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1744995480101,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,11 @@\n+import React from 'react'\n+\n+const logs = () => {\n+  return (\n+    <div>\n+      \n+    </div>\n+  )\n+}\n+\n+export default logs\n"
+                },
+                {
+                    "date": 1744995487615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n import React from 'react'\n \n-const logs = () => {\n+const Logs = () => {\n   return (\n     <div>\n       \n     </div>\n   )\n }\n \n-export default logs\n+export default Logs\n"
+                },
+                {
+                    "date": 1744995518061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,12 @@\n import React from 'react'\n \n const Logs = () => {\n+\n+  fetch('http://localhost:5000/logs/2')\n+  .then(response => response.json())\n+  .then(data => console.log('User logs:', data))\n+  .catch(error => console.error('Error fetching logs:', error));\n   return (\n     <div>\n       \n     </div>\n"
+                },
+                {
+                    "date": 1744995534296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from 'react'\n \n const Logs = () => {\n \n-  fetch('http://localhost:5000/logs/2')\n+  fetch('http://localhost:5000/logs/2'),\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n"
+                },
+                {
+                    "date": 1744995542913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,14 @@\n import React from 'react'\n \n const Logs = () => {\n \n-  fetch('http://localhost:5000/logs/2'),\n+  fetch('http://localhost:5000/logs/2'), {\n+    method: 'GET',\n+    headers: {\n+      'Content-Type': 'application/json'\n+    },\n+  }\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n"
+                },
+                {
+                    "date": 1744995554636,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,14 @@\n     headers: {\n       'Content-Type': 'application/json'\n     },\n   }\n+  .then(response => {\n+    if (!response.ok) {\n+      throw new Error('Network response was not ok');\n+    }\n+    return response.json();\n+  })\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n"
+                },
+                {
+                    "date": 1744995571120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,10 @@\n       throw new Error('Network response was not ok');\n     }\n     return response.json();\n   })\n+  .then(data => console.log('User logs:', data))\n+  .catch(error => console.error('Error fetching logs:', error));\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n"
+                },
+                {
+                    "date": 1744995609743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,9 @@\n       throw new Error('Network response was not ok');\n     }\n     return response.json();\n   })\n-  .then(data => console.log('User logs:', data))\n-  .catch(error => console.error('Error fetching logs:', error));\n+  \n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n"
+                },
+                {
+                    "date": 1744995660393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n import React from 'react'\n \n const Logs = () => {\n \n+  const lo\n+\n   fetch('http://localhost:5000/logs/2'), {\n     method: 'GET',\n     headers: {\n       'Content-Type': 'application/json'\n"
+                },
+                {
+                    "date": 1744995666624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from 'react'\n \n const Logs = () => {\n \n-  const lo\n+  const [logs]\n \n   fetch('http://localhost:5000/logs/2'), {\n     method: 'GET',\n     headers: {\n"
+                },
+                {
+                    "date": 1744995676413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n-import React from 'react'\n+import {}React from 'react'\n \n const Logs = () => {\n \n-  const [logs]\n+  const [logs, setLogs] = useState([]);\n \n   fetch('http://localhost:5000/logs/2'), {\n     method: 'GET',\n     headers: {\n"
+                },
+                {
+                    "date": 1744995685666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import {}React from 'react'\n+import { useState } from \"react\"; from 'react'\n \n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n"
+                },
+                {
+                    "date": 1744995703940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { useState } from \"react\"; from 'react'\n+import { useState } frreact\"; from 'react'\n \n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n"
+                },
+                {
+                    "date": 1744995709133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { useState } frreact\"; from 'react'\n+import { useState } reac from 'react'\n \n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n"
+                },
+                {
+                    "date": 1744995721642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { useState } reac from 'react'\n+import { useState }, react from 'react'\n \n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n"
+                },
+                {
+                    "date": 1744995731128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { useState }, react from 'react'\n+import { useState }, rea from 'react'\n \n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n"
+                },
+                {
+                    "date": 1744995739745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { useState }, rea from 'react'\n+import { useState } fro 'react'\n \n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n"
+                },
+                {
+                    "date": 1744995751354,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { useState } fro 'react'\n+import react { useState } from 'react'\n \n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n"
+                },
+                {
+                    "date": 1744995784750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import react { useState } from 'react'\n+import react, { useState } from 'react'\n \n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n@@ -17,9 +17,9 @@\n     return response.json();\n   })\n   \n   .then(response => response.json())\n-  .then(data => console.log('User logs:', data))\n+  .then(data => s('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1744995797162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     return response.json();\n   })\n   \n   .then(response => response.json())\n-  .then(data => s('User logs:', data))\n+  .then(data => setLogs( data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n     <div>\n       \n"
+                },
+                {
+                    "date": 1744995824435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,12 +17,12 @@\n     return response.json();\n   })\n   \n   .then(response => response.json())\n-  .then(data => setLogs( data))\n+  .then(data => setLogs(data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n-    <div>\n+    <div> \n       \n     </div>\n   )\n }\n"
+                },
+                {
+                    "date": 1744995832763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     return response.json();\n   })\n   \n   .then(response => response.json())\n-  .then(data => setLogs(data))\n+  .then(data => setLogs(data), )\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n     <div> \n       \n"
+                },
+                {
+                    "date": 1744995838420,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     return response.json();\n   })\n   \n   .then(response => response.json())\n-  .then(data => setLogs(data), )\n+  .then(data => setLogs(data), console)\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n     <div> \n       \n"
+                }
+            ],
+            "date": 1744995474529,
+            "name": "Commit-0",
+            "content": ""
+        }
+    ]
+}

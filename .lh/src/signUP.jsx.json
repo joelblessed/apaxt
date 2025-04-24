@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/signUP.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1737104561431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737104567364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,11 @@\n-ra\n\\ No newline at end of file\n+import React from 'react'\n+\n+const ignUP = () => {\n+  return (\n+    <div>\n+      \n+    </div>\n+  )\n+}\n+\n+export default ignUP\n"
+                },
+                {
+                    "date": 1737104573286,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n import React from 'react'\n \n-const ignUP = () => {\n+const Sign = () => {\n   return (\n     <div>\n       \n     </div>\n   )\n }\n \n-export default ignUP\n+export default Sign\n"
+                },
+                {
+                    "date": 1737104593938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n import React from 'react'\n \n-const Sign = () => {\n+const Signup = () => {\n   return (\n     <div>\n-      \n+      A\n     </div>\n   )\n }\n \n-export default Sign\n+export default Signup\n"
+                },
+                {
+                    "date": 1737104602920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n const Signup = () => {\n   return (\n     <div>\n-      A\n+      <a>sing</a>\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737104610960,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,10 @@\n \n const Signup = () => {\n   return (\n     <div>\n-      <a>sing</a>\n+      <a>singIn</a>\n+      <\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737104616082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const Signup = () => {\n   return (\n     <div>\n       <a>singIn</a>\n-      <a>sign</a>\n+      <a>signU</a>\n     </div>\n   )\n }\n \n"
+                },
+                {
+                    "date": 1737105118406,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,21 @@\n+import React from \"react\";\n+import { useNavigate } from \"react-router-dom\";\n+\n+function SignIn({ onSignIn }) {\n+  const navigate = useNavigate();\n+\n+  const handleLogin = () => {\n+    // Simulate a login process\n+    onSignIn(); // Update authentication state\n+    navigate(\"/dashboard\"); // Navigate to dashboard after login\n+  };\n+\n+  return (\n+    <div>\n+      <h1>Sign In</h1>\n+      <button onClick={handleLogin}>Sign In</button>\n+    </div>\n+  );\n+}\n+\n+export default SignIn\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1737104561431,
+            "name": "Commit-0",
+            "content": "ra"
+        }
+    ]
+}

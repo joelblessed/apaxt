@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/cartContext.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1739959313907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740598547002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,24 +1,24 @@\n-// CartContext.js\n-import React, { createContext, useContext, useState } from 'react';\n+// // CartContext.js\n+// import React, { createContext, useContext, useState } from 'react';\n \n-const CartContext = createContext();\n+// const CartContext = createContext();\n \n-export const CartProvider = ({ children }) => {\n-  const [cart, setCart] = useState([]);\n+// export const CartProvider = ({ children }) => {\n+//   const [cart, setCart] = useState([]);\n \n-  const addToCart = (product) => {\n-    setCart((prevCart) => [...prevCart, product]);\n-  };\n+//   const addToCart = (product) => {\n+//     setCart((prevCart) => [...prevCart, product]);\n+//   };\n \n-  const clearCart = () => {\n-    setCart([]);\n-  };\n+//   const clearCart = () => {\n\\ No newline at end of file\n+//     setCart([]);\n+//   };\n \n-  return (\n-    <CartContext.Provider value={{ cart, addToCart, clearCart }}>\n-      {children}\n-    </CartContext.Provider>\n-  );\n-};\n+//   return (\n+//     <CartContext.Provider value={{ cart, addToCart, clearCart }}>\n+//       {children}\n+//     </CartContext.Provider>\n+//   );\n+// };\n \n-export const useCart = () => useContext(CartContext);\n+// export const useCart = () => useContext(CartContext);\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1739959313907,
+            "name": "Commit-0",
+            "content": "// CartContext.js\nimport React, { createContext, useContext, useState } from 'react';\n\nconst CartContext = createContext();\n\nexport const CartProvider = ({ children }) => {\n  const [cart, setCart] = useState([]);\n\n  const addToCart = (product) => {\n    setCart((prevCart) => [...prevCart, product]);\n  };\n\n  const clearCart = () => {\n    setCart([]);\n  };\n\n  return (\n    <CartContext.Provider value={{ cart, addToCart, clearCart }}>\n      {children}\n    </CartContext.Provider>\n  );\n};\n\nexport const useCart = () => useContext(CartContext);"
+        }
+    ]
+}

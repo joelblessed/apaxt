@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/authContext.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1737561653022,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737571787899,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,36 +1,36 @@\n-import React, { createContext, useState, useEffect } from 'react';\n-import { getCurrentUser, login, logout } from './authService';\n+// import React, { createContext, useState, useEffect } from 'react';\n+// import { getCurrentUser, login, logout } from './authService';\n \n-export const AuthContext = createContext();\n+// export const AuthContext = createContext();\n \n-export const AuthProvider = ({ children }) => {\n-  const [user, setUser] = useState(null);\n+// export const AuthProvider = ({ children }) => {\n+//   const [user, setUser] = useState(null);\n \n-  // Load user data on app start\n-  useEffect(() => {\n-    const loggedUser = getCurrentUser();\n-    if (loggedUser) setUser(loggedUser);\n-  }, []);\n+//   // Load user data on app start\n+//   useEffect(() => {\n+//     const loggedUser = getCurrentUser();\n+//     if (loggedUser) setUser(loggedUser);\n+//   }, []);\n \n-  // Login handler\n-  const handleLogin = async (username, password) => {\n-    try {\n-      const loggedUser = await login(username, password);\n-      setUser(loggedUser);\n-    } catch (error) {\n-      throw error;\n-    }\n-  };\n+//   // Login handler\n+//   const handleLogin = async (username, password) => {\n+//     try {\n\\ No newline at end of file\n+//       const loggedUser = await login(username, password);\n+//       setUser(loggedUser);\n+//     } catch (error) {\n+//       throw error;\n+//     }\n+//   };\n \n-  // Logout handler\n-  const handleLogout = () => {\n-    logout();\n-    setUser(null);\n-  };\n+//   // Logout handler\n+//   const handleLogout = () => {\n+//     logout();\n+//     setUser(null);\n+//   };\n \n-  return (\n-    <AuthContext.Provider value={{ user, handleLogin, handleLogout }}>\n-      {children}\n-    </AuthContext.Provider>\n-  );\n-};\n+//   return (\n+//     <AuthContext.Provider value={{ user, handleLogin, handleLogout }}>\n+//       {children}\n+//     </AuthContext.Provider>\n+//   );\n+// };\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1737561653022,
+            "name": "Commit-0",
+            "content": "import React, { createContext, useState, useEffect } from 'react';\nimport { getCurrentUser, login, logout } from './authService';\n\nexport const AuthContext = createContext();\n\nexport const AuthProvider = ({ children }) => {\n  const [user, setUser] = useState(null);\n\n  // Load user data on app start\n  useEffect(() => {\n    const loggedUser = getCurrentUser();\n    if (loggedUser) setUser(loggedUser);\n  }, []);\n\n  // Login handler\n  const handleLogin = async (username, password) => {\n    try {\n      const loggedUser = await login(username, password);\n      setUser(loggedUser);\n    } catch (error) {\n      throw error;\n    }\n  };\n\n  // Logout handler\n  const handleLogout = () => {\n    logout();\n    setUser(null);\n  };\n\n  return (\n    <AuthContext.Provider value={{ user, handleLogin, handleLogout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n};"
+        }
+    ]
+}

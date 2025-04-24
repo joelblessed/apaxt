@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/wishlistThunks.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1743676793625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743676806895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n     if (token && guestWishlist.length > 0) {\n       try {\n         const response = await api.post('/wishlist/sync', \n           { productIds: guestWishlist },\n-          { headers: { Authorization: Bearer ${token} } }\n+          { headers: { Authorization: `Bearer ${token} } }\n         );\n         dispatch(wishlistSyncComplete(response.data));\n         localStorage.removeItem('guestWishlist');\n       } catch (err) {\n"
+                },
+                {
+                    "date": 1743676824861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     try {\n       const token = getState().auth.token;\n       if (token) {\n         const response = await api.get('/wishlist', {\n-          headers: { Authorization: Bearer ${token} }\n+          headers: { Authorization: `Bearer ${token} }\n         });\n         dispatch(wishlistLoaded(response.data));\n       } else {\n         const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist')) || [];\n@@ -32,9 +32,9 @@\n     if (token && guestWishlist.length > 0) {\n       try {\n         const response = await api.post('/wishlist/sync', \n           { productIds: guestWishlist },\n-          { headers: { Authorization: `Bearer ${token} } }\n+          { headers: { Authorization: `Bearer ${token}` } }\n         );\n         dispatch(wishlistSyncComplete(response.data));\n         localStorage.removeItem('guestWishlist');\n       } catch (err) {\n"
+                },
+                {
+                    "date": 1743677168261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,17 +4,17 @@\n     wishlistLoaded,\n     guestWishlistLoaded,\n     wishlistSyncComplete\n   } from './wishlistSlice';\n-  import { api } from '../../app/api';\n+//   import { api } from '../../app/api';\n   \n   export const fetchWishlist = () => async (dispatch, getState) => {\n     dispatch(wishlistLoading());\n     try {\n       const token = getState().auth.token;\n       if (token) {\n         const response = await api.get('/wishlist', {\n-          headers: { Authorization: `Bearer ${token} }\n+          headers: { Authorization: `Bearer ${token}` }\n         });\n         dispatch(wishlistLoaded(response.data));\n       } else {\n         const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist')) || [];\n"
+                },
+                {
+                    "date": 1743677176642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,11 @@\n     guestWishlistLoaded,\n     wishlistSyncComplete\n   } from './wishlistSlice';\n //   import { api } from '../../app/api';\n+\n+const api = 'http://localhost:5000/api';\n+\n   \n   export const fetchWishlist = () => async (dispatch, getState) => {\n     dispatch(wishlistLoading());\n     try {\n"
+                },
+                {
+                    "date": 1743677231141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     wishlistSyncComplete\n   } from './wishlistSlice';\n //   import { api } from '../../app/api';\n \n-const api = 'http://localhost:5000/api';\n+const api = 'http://localhost:5000/';\n \n   \n   export const fetchWishlist = () => async (dispatch, getState) => {\n     dispatch(wishlistLoading());\n"
+                },
+                {
+                    "date": 1743678006413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     wishlistSyncComplete\n   } from './wishlistSlice';\n //   import { api } from '../../app/api';\n \n-const api = 'http://localhost:5000/';\n+const api = 'http://localhost:5000';\n \n   \n   export const fetchWishlist = () => async (dispatch, getState) => {\n     dispatch(wishlistLoading());\n"
+                }
+            ],
+            "date": 1743676793625,
+            "name": "Commit-0",
+            "content": "// features/wishlistThunks.js\nimport { \n    wishlistLoading,\n    wishlistLoaded,\n    guestWishlistLoaded,\n    wishlistSyncComplete\n  } from './wishlistSlice';\n  import { api } from '../../app/api';\n  \n  export const fetchWishlist = () => async (dispatch, getState) => {\n    dispatch(wishlistLoading());\n    try {\n      const token = getState().auth.token;\n      if (token) {\n        const response = await api.get('/wishlist', {\n          headers: { Authorization: Bearer ${token} }\n        });\n        dispatch(wishlistLoaded(response.data));\n      } else {\n        const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist')) || [];\n        dispatch(guestWishlistLoaded(guestWishlist));\n      }\n    } catch (err) {\n      console.error('Failed to fetch wishlist:', err);\n    }\n  };\n  \n  export const syncWishlist = () => async (dispatch, getState) => {\n    const { token } = getState().auth;\n    const guestWishlist = getState().wishlist.guestItems;\n    \n    if (token && guestWishlist.length > 0) {\n      try {\n        const response = await api.post('/wishlist/sync', \n          { productIds: guestWishlist },\n          { headers: { Authorization: Bearer ${token} } }\n        );\n        dispatch(wishlistSyncComplete(response.data));\n        localStorage.removeItem('guestWishlist');\n      } catch (err) {\n        console.error('Failed to sync wishlist:', err);\n      }\n    }\n  };"
+        }
+    ]
+}

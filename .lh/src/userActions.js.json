@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/userActions.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1740603334805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740603358844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,22 @@\n+import { UPDATE_PROFILE_PICTURE, SET_USER } from \"./types\";\n+\n+const API_URL = \"http://localhost:5000/user\";\n+\n+export const updateProfilePicture = (userId, formData) => async (dispatch) => {\n+    try {\n+        const response = await fetch(`${API_URL}/${userId}/upload, {\n+            method: \"POST\",\n+            body: formData,\n+        });\n+\n+        if (!response.ok) throw new Error(\"Failed to upload image\");\n+\n+        const data = await response.json();\n+        dispatch({ type: UPDATE_PROFILE_PICTURE, payload: data.imageUrl });\n+\n+        // Update user info\n+        dispatch({ type: SET_USER, payload: data.user });\n+    } catch (error) {\n+        console.error(\"Error updating profile picture:\", error);\n+    }\n+};\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740603374458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const API_URL = \"http://localhost:5000/user\";\n \n export const updateProfilePicture = (userId, formData) => async (dispatch) => {\n     try {\n-        const response = await fetch(`${API_URL}/${userId}/upload, {\n+        const response = await fetch(`${API_URL}/${userId}/upload1, {\n             method: \"POST\",\n             body: formData,\n         });\n \n@@ -18,27 +18,5 @@\n         dispatch({ type: SET_USER, payload: data.user });\n     } catch (error) {\n         console.error(\"Error updating profile picture:\", error);\n     }\n-};\n-import { UPDATE_PROFILE_PICTURE, SET_USER } from \"./types\";\n-\n-const API_URL = \"http://localhost:5000/user\";\n-\n-export const updateProfilePicture = (userId, formData) => async (dispatch) => {\n-    try {\n-        const response = await fetch(${API_URL}/${userId}/upload, {\n-            method: \"POST\",\n-            body: formData,\n-        });\n-\n-        if (!response.ok) throw new Error(\"Failed to upload image\");\n-\n-        const data = await response.json();\n-        dispatch({ type: UPDATE_PROFILE_PICTURE, payload: data.imageUrl });\n-\n-        // Update user info\n-        dispatch({ type: SET_USER, payload: data.user });\n-    } catch (error) {\n-        console.error(\"Error updating profile picture:\", error);\n-    }\n };\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1740603334805,
+            "name": "Commit-0",
+            "content": "import { UPDATE_PROFILE_PICTURE, SET_USER } from \"./types\";\n\nconst API_URL = \"http://localhost:5000/user\";\n\nexport const updateProfilePicture = (userId, formData) => async (dispatch) => {\n    try {\n        const response = await fetch(${API_URL}/${userId}/upload, {\n            method: \"POST\",\n            body: formData,\n        });\n\n        if (!response.ok) throw new Error(\"Failed to upload image\");\n\n        const data = await response.json();\n        dispatch({ type: UPDATE_PROFILE_PICTURE, payload: data.imageUrl });\n\n        // Update user info\n        dispatch({ type: SET_USER, payload: data.user });\n    } catch (error) {\n        console.error(\"Error updating profile picture:\", error);\n    }\n};"
+        }
+    ]
+}

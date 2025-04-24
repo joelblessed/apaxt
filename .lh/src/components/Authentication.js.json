@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/components/Authentication.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1737555263925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737559291841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,36 +0,0 @@\n-import React, { createContext, useState, useEffect } from 'react';\n-\n-// Create authentication context\n-export const AuthContext = createContext();\n-\n-// Authentication provider component\n-export const AuthProvider = ({ children }) => {\n-  // State to store user data\n-  const [user, setUser] = useState(null);\n-\n-  // Load user from localStorage when app starts\n-  useEffect(() => {\n-    const savedUser = localStorage.getItem('user');\n-    if (savedUser) {\n-      setUser(JSON.parse(savedUser));\n-    }\n-  }, []);\n-\n-  // Function to handle user login\n-  const login = (userData) => {\n-    setUser(userData);\n-    localStorage.setItem('user', JSON.stringify(userData)); // Persist user session\n-  };\n-\n-  // Function to handle user logout\n-  const logout = () => {\n-    setUser(null);\n-    localStorage.removeItem('user'); // Remove user session\n-  };\n-\n-  return (\n-    <AuthContext.Provider value={{ user, login, logout }}>\n-      {children}\n-    </AuthContext.Provider>\n-  );\n-}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737559408755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,36 @@\n+import React, { createContext, useState, useEffect } from 'react';\n+\n+// Create authentication context\n+export const AuthContext = createContext();\n+\n+// Authentication provider component\n+export const AuthProvider = ({ children }) => {\n+  // State to store user data\n+  const [user, setUser] = useState(null);\n+\n+  // Load user from localStorage when app starts\n+  useEffect(() => {\n+    const savedUser = localStorage.getItem('user');\n+    if (savedUser) {\n+      setUser(JSON.parse(savedUser));\n+    }\n+  }, []);\n+\n+  // Function to handle user login\n+  const login = (userData) => {\n+    setUser(userData);\n+    localStorage.setItem('user', JSON.stringify(userData)); // Persist user session\n+  };\n+\n+  // Function to handle user logout\n+  const logout = () => {\n+    setUser(null);\n+    localStorage.removeItem('user'); // Remove user session\n+  };\n+\n+  return (\n+    <AuthContext.Provider value={{ user, login, logout }}>\n+      {children}\n+    </AuthContext.Provider>\n+  );\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1737559415390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,5 +32,6 @@\n     <AuthContext.Provider value={{ user, login, logout }}>\n       {children}\n     </AuthContext.Provider>\n   );\n-}\n\\ No newline at end of file\n+}\n+\n"
+                },
+                {
+                    "date": 1737559425358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,4 +34,37 @@\n     </AuthContext.Provider>\n   );\n }\n \n+\n+\n+// authService.js\n+\n+const AUTH_KEY = 'user'; // Key to store user data in localStorage\n+\n+// Simulated login function (replace with actual API request)\n+export const login = async (username, password) => {\n+  // Simulating an API response (replace with real backend call)\n+  if (username === 'admin' && password === 'password') {\n+    const user = { username, token: 'fake-jwt-token' };\n+    localStorage.setItem(AUTH_KEY, JSON.stringify(user));\n+    return user;\n+  } else {\n+    throw new Error('Invalid credentials');\n+  }\n+};\n+\n+// Logout function to remove user from local storage\n+export const logout = () => {\n+  localStorage.removeItem(AUTH_KEY);\n+};\n+\n+// Function to get the current logged-in user\n+export const getCurrentUser = () => {\n+  const user = localStorage.getItem(AUTH_KEY);\n+  return user ? JSON.parse(user) : null;\n+};\n+\n+// Function to check if user is authenticated\n+export const isAuthenticated = () => {\n+  return !!getCurrentUser(); // Returns true if user exists, false otherwise\n+};\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1737555263925,
+            "name": "Commit-0",
+            "content": "import React, { createContext, useState, useEffect } from 'react';\n\n// Create authentication context\nexport const AuthContext = createContext();\n\n// Authentication provider component\nexport const AuthProvider = ({ children }) => {\n  // State to store user data\n  const [user, setUser] = useState(null);\n\n  // Load user from localStorage when app starts\n  useEffect(() => {\n    const savedUser = localStorage.getItem('user');\n    if (savedUser) {\n      setUser(JSON.parse(savedUser));\n    }\n  }, []);\n\n  // Function to handle user login\n  const login = (userData) => {\n    setUser(userData);\n    localStorage.setItem('user', JSON.stringify(userData)); // Persist user session\n  };\n\n  // Function to handle user logout\n  const logout = () => {\n    setUser(null);\n    localStorage.removeItem('user'); // Remove user session\n  };\n\n  return (\n    <AuthContext.Provider value={{ user, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}"
+        }
+    ]
+}

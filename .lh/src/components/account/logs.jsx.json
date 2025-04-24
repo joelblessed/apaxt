@@ -1,0 +1,126 @@
+{
+    "sourceFile": "src/components/account/logs.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 27,
+            "patches": [
+                {
+                    "date": 1744996075627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1744996089587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     return response.json();\n   })\n   \n   .then(response => response.json())\n-  .then(data => setLogs(data))\n+  .then(data => setLogs(data), console.log(data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n     <div> \n       \n"
+                },
+                {
+                    "date": 1744996180896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,23 +3,11 @@\n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n \n-  fetch('http://localhost:5000/logs/2'), {\n-    method: 'GET',\n-    headers: {\n-      'Content-Type': 'application/json'\n-    },\n-  }\n-  .then(response => {\n-    if (!response.ok) {\n-      throw new Error('Network response was not ok');\n-    }\n-    return response.json();\n-  })\n-  \n+  fetch('http://localhost:5000/logs/user123')\n   .then(response => response.json())\n-  .then(data => setLogs(data), console.log(data))\n+  .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n     <div> \n       \n"
+                },
+                {
+                    "date": 1744996194276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n \n-  fetch('http://localhost:5000/logs/user123')\n+  fetch('http://localhost:5000/logs/u23')\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n"
+                },
+                {
+                    "date": 1744996202250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n \n-  fetch('http://localhost:5000/logs/u23')\n+  fetch('http://localhost:5000/logs/2'),\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n"
+                },
+                {
+                    "date": 1744996221436,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,14 @@\n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n \n-  fetch('http://localhost:5000/logs/2'),\n+  fetch('http://localhost:5000/logs/2'),{\n+    method: 'GET',\n+    headers: {\n+      'Content-Type': 'application/json'\n+    }\n+  }\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n"
+                },
+                {
+                    "date": 1744996234005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,14 @@\n     headers: {\n       'Content-Type': 'application/json'\n     }\n   }\n+  .then(response => {\n+    if (!response.ok) {\n+      throw new Error('Network response was not ok');\n+    }\n+    return response.json();\n+  })\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n"
+                },
+                {
+                    "date": 1744996241295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,31 @@\n+import react, { useState } from 'react'\n+\n+const Logs = () => {\n+\n+  const [logs, setLogs] = useState([]);\n+\n+  fetch('http://localhost:5000/logs/2'),{\n+    method: 'GET',\n+    headers: {\n+      'Content-Type': 'application/json'\n+    }\n+  }\n+  .then(response => {\n+    if (!response.ok) {\n+      throw new Error('Network response was not ok');\n+    }\n+    return response.json();\n+  })\n+  .then(data => setLogs(data))\n+  .catch(error => console.error('Error fetching logs:', error));\n+  .then(response => response.json())\n+  .then(data => console.log('User logs:', data))\n+  .catch(error => console.error('Error fetching logs:', error));\n+  return (\n+    <div> \n+      \n+    </div>\n+  )\n+}\n+\n+export default Logs\n"
+                },
+                {
+                    "date": 1744996275089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,41 +17,9 @@\n     return response.json();\n   })\n   .then(data => setLogs(data))\n   .catch(error => console.error('Error fetching logs:', error));\n-  .then(response => response.json())\n-  .then(data => console.log('User logs:', data))\n-  .catch(error => console.error('Error fetching logs:', error));\n-  return (\n-    <div> \n-      \n-    </div>\n-  )\n-}\n \n-export default Logs\n-import react, { useState } from 'react'\n-\n-const Logs = () => {\n-\n-  const [logs, setLogs] = useState([]);\n-\n-  fetch('http://localhost:5000/logs/2'),{\n-    method: 'GET',\n-    headers: {\n-      'Content-Type': 'application/json'\n-    }\n-  }\n-  .then(response => {\n-    if (!response.ok) {\n-      throw new Error('Network response was not ok');\n-    }\n-    return response.json();\n-  })\n-  .then(response => response.json())\n-  .then(data => console.log('User logs:', data))\n-  .catch(error => console.error('Error fetching logs:', error));\n-  return (\n     <div> \n       \n     </div>\n   )\n"
+                },
+                {
+                    "date": 1744996287877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     return response.json();\n   })\n   .then(data => setLogs(data))\n   .catch(error => console.error('Error fetching logs:', error));\n-\n+}\n     <div> \n       \n     </div>\n   )\n"
+                },
+                {
+                    "date": 1744996334532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,11 +15,12 @@\n       throw new Error('Network response was not ok');\n     }\n     return response.json();\n   })\n-  .then(data => setLogs(data))\n+  .then(response => response.json())\n+  .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n-}\n+  return (\n     <div> \n       \n     </div>\n   )\n"
+                },
+                {
+                    "date": 1744996343029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n \n+  \n   fetch('http://localhost:5000/logs/2'),{\n     method: 'GET',\n     headers: {\n       'Content-Type': 'application/json'\n@@ -15,10 +16,9 @@\n       throw new Error('Network response was not ok');\n     }\n     return response.json();\n   })\n-  .then(response => response.json())\n-  .then(data => console.log('User logs:', data))\n+  .then(data => setLogs(data))\n   .catch(error => console.error('Error fetching logs:', error));\n   return (\n     <div> \n       \n"
+                },
+                {
+                    "date": 1744996386989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,23 +3,10 @@\n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n \n-  \n-  fetch('http://localhost:5000/logs/2'),{\n-    method: 'GET',\n-    headers: {\n-      'Content-Type': 'application/json'\n-    }\n-  }\n-  .then(response => {\n-    if (!response.ok) {\n-      throw new Error('Network response was not ok');\n-    }\n-    return response.json();\n-  })\n-  .then(data => setLogs(data))\n-  .catch(error => console.error('Error fetching logs:', error));\n+\n+\n   return (\n     <div> \n       \n     </div>\n"
+                },
+                {
+                    "date": 1744996393328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,12 @@\n const Logs = () => {\n \n   const [logs, setLogs] = useState([]);\n \n+useEffect(() => {\n+  \n+}, []);\n \n-\n   return (\n     <div> \n       \n     </div>\n"
+                },
+                {
+                    "date": 1744996421575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,23 @@\n \n   const [logs, setLogs] = useState([]);\n \n useEffect(() => {\n-  \n+    \n+  fetch('http://localhost:5000/logs/2'),{\n+    method: 'GET',\n+    headers: {\n+      'Content-Type': 'application/json'\n+    }\n+  }\n+  .then(response => {\n+    if (!response.ok) {\n+      throw new Error('Network response was not ok');\n+    }\n+    return response.json();\n+  })\n+  .then(data => setLogs(red))\n+  .catch(error => console.error('Error fetching logs:', error));\n }, []);\n \n   return (\n     <div> \n"
+                },
+                {
+                    "date": 1744996594232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,32 +0,0 @@\n-import react, { useState } from 'react'\n-\n-const Logs = () => {\n-\n-  const [logs, setLogs] = useState([]);\n-\n-useEffect(() => {\n-    \n-  fetch('http://localhost:5000/logs/2'),{\n-    method: 'GET',\n-    headers: {\n-      'Content-Type': 'application/json'\n-    }\n-  }\n-  .then(response => {\n-    if (!response.ok) {\n-      throw new Error('Network response was not ok');\n-    }\n-    return response.json();\n-  })\n-  .then(data => setLogs(red))\n-  .catch(error => console.error('Error fetching logs:', error));\n-}, []);\n-\n-  return (\n-    <div> \n-      \n-    </div>\n-  )\n-}\n-\n-export default Logs\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1744996605991,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-\n+rafc\n"
+                },
+                {
+                    "date": 1744996611911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-rafc\n+ra\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1744996622224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,11 @@\n-ra\n\\ No newline at end of file\n+import React from 'react'\n+\n+const Logs = () => {\n+  return (\n+    <div>\n+      \n+    </div>\n+  )\n+}\n+\n+export default Logs\n"
+                },
+                {
+                    "date": 1744996628741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n import React from 'react'\n \n const Logs = () => {\n+  use\n   return (\n     <div>\n       \n     </div>\n"
+                },
+                {
+                    "date": 1744996635465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n-import React from 'react'\n+import React, { useEffect } from 'react'\n \n const Logs = () => {\n-  use\n+  useEffect(() => {\n+    fetch('http://localhost:5000/logs/user123')\n+  .then(response => response.json())\n+  .then(data => console.log('User logs:', data))\n+  .catch(error => console.error('Error fetching logs:', error));\n   return (\n     <div>\n       \n     </div>\n"
+                },
+                {
+                    "date": 1744996642051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n     fetch('http://localhost:5000/logs/user123')\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n+  }\n   return (\n     <div>\n       \n     </div>\n"
+                },
+                {
+                    "date": 1744996658789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,14 @@\n import React, { useEffect } from 'react'\n \n-const Logs = () => {\n+const Logs = ({api}) => {\n   useEffect(() => {\n     fetch('http://localhost:5000/logs/user123')\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   }\n+  , [])\n   return (\n     <div>\n       \n     </div>\n"
+                },
+                {
+                    "date": 1744996664933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useEffect } from 'react'\n \n const Logs = ({api}) => {\n   useEffect(() => {\n-    fetch('http://localhost:5000/logs/user123')\n+    fetch('/logs/user123')\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   }\n"
+                },
+                {
+                    "date": 1744996673552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useEffect } from 'react'\n \n const Logs = ({api}) => {\n   useEffect(() => {\n-    fetch('/logs/user123')\n+    fetch(`${/logs/user123')\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   }\n"
+                },
+                {
+                    "date": 1744996680007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useEffect } from 'react'\n \n const Logs = ({api}) => {\n   useEffect(() => {\n-    fetch(`${/logs/user123')\n+    fetch(`${api}/logs/user123')\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   }\n"
+                },
+                {
+                    "date": 1744996688750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React, { useEffect } from 'react'\n \n const Logs = ({api}) => {\n   useEffect(() => {\n-    fetch(`${api}/logs/use3')\n+    fetch(`${api}/logs/us3')\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   }\n"
+                },
+                {
+                    "date": 1744996717677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,13 @@\n         'Content-Type': 'application/json'\n       }\n     })\n   .then(response => {\n+    if (!response.ok) {\n+      throw new Error('Network response was not ok');\n+    }\n+    return response.json();\n+  }\n   .then(response => response.json())\n   .then(data => console.log('User logs:', data))\n   .catch(error => console.error('Error fetching logs:', error));\n   }\n"
+                }
+            ],
+            "date": 1744996075627,
+            "name": "Commit-0",
+            "content": "import react, { useState } from 'react'\n\nconst Logs = () => {\n\n  const [logs, setLogs] = useState([]);\n\n  fetch('http://localhost:5000/logs/2'), {\n    method: 'GET',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n  }\n  .then(response => {\n    if (!response.ok) {\n      throw new Error('Network response was not ok');\n    }\n    return response.json();\n  })\n  \n  .then(response => response.json())\n  .then(data => setLogs(data))\n  .catch(error => console.error('Error fetching logs:', error));\n  return (\n    <div> \n      \n    </div>\n  )\n}\n\nexport default Logs\n"
+        }
+    ]
+}

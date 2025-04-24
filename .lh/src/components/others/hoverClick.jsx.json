@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/others/hoverClick.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1742542882344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1742542882344,
+            "name": "Commit-0",
+            "content": "import React, { useEffect, useRef } from \"react\";\n\nconst Test = () => {\n  const buttonRef = useRef(null);\n\n  useEffect(() => {\n    const handleHover = () => {\n      if (buttonRef.current) {\n        buttonRef.current.dispatchEvent(new MouseEvent(\"click\", { bubbles: true }));\n      }\n    };\n\n    const div = document.getElementById(\"hover-area\");\n    if (div) {\n      div.addEventListener(\"mouseenter\", handleHover);\n    }\n\n    return () => {\n      if (div) {\n        div.removeEventListener(\"mouseenter\", handleHover);\n      }\n    };\n  }, []);\n\n  return (\n    <div id=\"hover-area\" style={{ padding: \"20px\", border: \"1px solid black\" , background:\"black\", width:\"20px\" }}>\n      <button ref={buttonRef} onClick={() => alert(\"Clicked!\")}>Click Me</button>\n    </div>\n  );\n};\n\nexport default Test;"
+        }
+    ]
+}

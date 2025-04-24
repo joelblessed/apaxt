@@ -1,0 +1,294 @@
+{
+    "sourceFile": "src/components/Payment/Payment.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 69,
+            "patches": [
+                {
+                    "date": 1737997769305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737997875313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = (c) => {\n+const Payment = (calculateTotal) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n@@ -55,9 +55,9 @@\n     }\n     \n \n \n-    const [amount, setAmount] = useState(\"\")\n+    const [amount, ] = useState(\"\")\n     const [phone, setNumber] = useState(\"\")\n     const [message, setMessage] = useState(\"\")\n  async function Data (e) {\n         \n"
+                },
+                {
+                    "date": 1737997905348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = (calculateTotal) => {\n+const Payment = (calculateTotal}) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n@@ -55,9 +55,9 @@\n     }\n     \n \n \n-    const [amount, ] = useState(\"\")\n+    const [amount, calculateTotal] = useState(\"\")\n     const [phone, setNumber] = useState(\"\")\n     const [message, setMessage] = useState(\"\")\n  async function Data (e) {\n         \n"
+                },
+                {
+                    "date": 1737997945494,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = (calculateTotal}) => {\n+const Payment = ({calculateTotal}) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n@@ -55,9 +55,9 @@\n     }\n     \n \n \n-    const [amount, calculateTotal] = useState(\"\")\n+    const [amount, calculateTotal] = useState()\n     const [phone, setNumber] = useState(\"\")\n     const [message, setMessage] = useState(\"\")\n  async function Data (e) {\n         \n"
+                },
+                {
+                    "date": 1737997955979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n     }\n     \n \n \n-    const [amount, calculateTotal] = useState()\n+    const [amount, ] = useState()\n     const [phone, setNumber] = useState(\"\")\n     const [message, setMessage] = useState(\"\")\n  async function Data (e) {\n         \n"
+                },
+                {
+                    "date": 1737998032893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <input type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}/>\n+        < type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}/>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998038256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        < type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}/>\n+        <label type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}/>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998043903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}/>\n+        <label type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}/label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998069989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}/label>\n+        <label type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}></label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998081276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}></label>\n+        <label ></label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998087215,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label ></label>\n+        <label>A</label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998094420,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label>A</label>\n+        <label></label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998099765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label></label>\n+        <label>{}</label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998127186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n     }\n     \n \n \n-    const [amount, ] = useState()\n+    const [amount, calculateTotal] = useState()\n     const [phone, setNumber] = useState(\"\")\n     const [message, setMessage] = useState(\"\")\n  async function Data (e) {\n         \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label>{}</label>\n+        <label>{amount}</label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998149682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n     }\n     \n \n \n-    const [amount, calculateTotal] = useState()\n+    // const [amount, calculateTotal] = useState()\n     const [phone, setNumber] = useState(\"\")\n     const [message, setMessage] = useState(\"\")\n  async function Data (e) {\n         \n"
+                },
+                {
+                    "date": 1737998162287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = ({calculateTotal}) => {\n+const Payment = ({}) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n"
+                },
+                {
+                    "date": 1737998167754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = ({}) => {\n+const Payment = ({amount}) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n"
+                },
+                {
+                    "date": 1737998358321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label>{amount}</label>\n+        <label> t{amount}</label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998363943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label> t{amount}</label>\n+        <label> total{amount}</label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998517165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label> total{amount}</label>\n+        <label> total:{54678amount}</label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998528977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label> total:{54678amount}</label>\n+        <label> total:{amount}</label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1737998562426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n     }\n     \n \n \n-    // const [amount, calculateTotal] = useState()\n+    const [amount, calculateTotal] = useState()\n     const [phone, setNumber] = useState(\"\")\n     const [message, setMessage] = useState(\"\")\n  async function Data (e) {\n         \n"
+                },
+                {
+                    "date": 1737998582913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = ({amount}) => {\n+const Payment = () => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n"
+                },
+                {
+                    "date": 1737998663623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = () => {\n+const Payment = (c) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n"
+                },
+                {
+                    "date": 1737998685128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = (c) => {\n+const Payment = (calculateTotal}) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n"
+                },
+                {
+                    "date": 1737998690880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = (calculateTotal}) => {\n+const Payment = ({calculateTotal}) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n"
+                },
+                {
+                    "date": 1737998720082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n     }\n     \n \n \n-    const [amount, calculateTotal] = useState()\n+    // const [amount, calculateTotal] = useState()\n     const [phone, setNumber] = useState(\"\")\n     const [message, setMessage] = useState(\"\")\n  async function Data (e) {\n         \n"
+                },
+                {
+                    "date": 1737998729265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = ({calculateTotal}) => {\n+const Payment = (}) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n"
+                },
+                {
+                    "date": 1737998746106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = (}) => {\n+const Payment = (amount}) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n"
+                },
+                {
+                    "date": 1738000794359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useState } from 'react'\n \n-const Payment = (amount}) => {\n+const Payment = ({amount}) => {\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n@@ -112,9 +112,9 @@\n         <h1>{amount}</h1>\n          <div class=\"payment-form\">\n         <h2>MoMo Payment</h2>\n         <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label> total:{amount}</label>\n+        <label>total:{amount}</label>\n         <button  onClick={ Data }>Pay Now</button>\n         <p>\n         {message}\n         </p>\n"
+                },
+                {
+                    "date": 1738004159551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,8 +95,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n+                \n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738004164998,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,9 +95,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                \n+                n\n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738004170875,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,9 +95,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                n\n+                navigate\n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738004177059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,9 +95,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                navigate\n+                Navigate(\"?\")\n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738004183260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,9 +95,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                Navigate(\"?\")\n+                Navigate(\"/chech\")\n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738004209206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,9 +95,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                Navigate(\"/chech\")\n+                avigate(\"/chechout\")\n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738004235513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import React, { useState } from 'react'\n+import { Link, useNavigate } from \"react-router-dom\";\n \n const Payment = ({amount}) => {\n \n     \n@@ -95,9 +96,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                avigate(\"/chechout\")\n+                navigate(\"/chechout\")\n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738004283928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import React, { useState } from 'react'\n import { Link, useNavigate } from \"react-router-dom\";\n \n const Payment = ({amount}) => {\n+    const navigate = useNavigate();\n \n     \n     async function createApiUser() {\n         console.log('Creating API user...');\n"
+                },
+                {
+                    "date": 1738004311233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                navigate(\"/chechout\")\n+                navigate(\"/checout\")\n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738005457780,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,10 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                navigate(\"/checout\")\n+                navigate(\"/checkout\")\n+                \n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738005468196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from 'react'\n import { Link, useNavigate } from \"react-router-dom\";\n \n-const Payment = ({amount}) => {\n+const Payment = ({amount,}) => {\n     const navigate = useNavigate();\n \n     \n     async function createApiUser() {\n@@ -98,9 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 navigate(\"/checkout\")\n-                \n+\n             } else {\n                 setMessage('Payment failed.');\n             }\n         } catch (error) {\n"
+                },
+                {
+                    "date": 1738005475273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from 'react'\n import { Link, useNavigate } from \"react-router-dom\";\n \n-const Payment = ({amount,}) => {\n+const Payment = ({amount,chec}) => {\n     const navigate = useNavigate();\n \n     \n     async function createApiUser() {\n"
+                },
+                {
+                    "date": 1738005500264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from 'react'\n import { Link, useNavigate } from \"react-router-dom\";\n \n-const Payment = ({amount,chec}) => {\n+const Payment = ({amount,checkout}) => {\n     const navigate = useNavigate();\n \n     \n     async function createApiUser() {\n@@ -98,8 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 navigate(\"/checkout\")\n+                \n \n             } else {\n                 setMessage('Payment failed.');\n             }\n"
+                },
+                {
+                    "date": 1738005518861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 navigate(\"/checkout\")\n-                \n+                checkout()\n \n             } else {\n                 setMessage('Payment failed.');\n             }\n"
+                },
+                {
+                    "date": 1738008384141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,8 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n+                \n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738008395044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                \n+                setPayment\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738008402607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPayment\n+                setPaymentStatus()\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738008409933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus()\n+                setPaymentStatus(set)\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738008456809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus(set)\n+                setPaymentStatus()\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738008482209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from 'react'\n import { Link, useNavigate } from \"react-router-dom\";\n \n-const Payment = ({amount,checkout}) => {\n+const Payment = ({amount,checkout,}) => {\n     const navigate = useNavigate();\n \n     \n     async function createApiUser() {\n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus()\n+                setPaymentStatus(message)\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738009102787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from 'react'\n import { Link, useNavigate } from \"react-router-dom\";\n \n-const Payment = ({amount,checkout,}) => {\n+const Payment = ({amount,checkout,setPaymentStatus}) => {\n     const navigate = useNavigate();\n \n     \n     async function createApiUser() {\n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus(message)\n+                setPaymentStatus()\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738009110110,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus()\n+                setPaymentStatus(\"\")\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738009620854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus(\"\")\n+                setPaymentStatus()\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738011099779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,10 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus()\n+                setPaymentStatus(message)\n+                \n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738011106192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 setPaymentStatus(message)\n-                \n+                setNub\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738011111968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 setPaymentStatus(message)\n-                setNub\n+                setNumber\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738011120125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 setPaymentStatus(message)\n-                setNumber\n+                setNumber{}\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738011136171,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus(message)\n+                setPaymentStatus(message\n                 setNumber{}\n                 navigate(\"/checkout\")\n                 checkout()\n \n"
+                },
+                {
+                    "date": 1738011143467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus(message\n+                setPaymentStatus{message}\n                 setNumber{}\n                 navigate(\"/checkout\")\n                 checkout()\n \n"
+                },
+                {
+                    "date": 1738011157668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,134 @@\n+import React, { useState } from 'react'\n+import { Link, useNavigate } from \"react-router-dom\";\n+\n+const Payment = ({amount,checkout,setPaymentStatus}) => {\n+    const navigate = useNavigate();\n+\n+    \n+    async function createApiUser() {\n+        console.log('Creating API user...');\n+        // Add the logic to create an API user\n+        // You should replace the URL with your server's endpoint for creating an API user\n+        // This is a sample logic\n+        const response = await fetch('http://localhost:3001/create-api-user', {\n+            method: 'POST',\n+            headers: { 'Content-Type': 'application/json' }\n+        });\n+        return response.json();\n+    }\n+    \n+    async function getCreatedUser(userId) {\n+        console.log('Retrieving created user...');\n+        const response = await fetch(`http://localhost:3001/get-created-user/${userId}`);\n+        return response.json();\n+    }\n+    \n+    async function retrieveApiKey(userId) {\n+        console.log('Retrieving API key...');\n+        const response = await fetch(`http://localhost:3001/retrieve-api-key/${userId}`, {\n+            method: 'POST',\n+            headers: { 'Content-Type': 'application/json' }\n+        });\n+        return response.json();\n+    }\n+    \n+    async function generateApiToken(userId, apiKey) {\n+        console.log('Generating MoMo token...');\n+        const response = await fetch('http://localhost:3001/generate-api-token', {\n+            method: 'POST',\n+            headers: { 'Content-Type': 'application/json' },\n+            body: JSON.stringify({ userId, apiKey })\n+        });\n+        return response.json();\n+    }\n+    \n+    async function requestToPay(phone, amount, momoTokenId) {\n+        console.log('Making payment request...');\n+        console.log('MoMo Token: ', JSON.stringify(momoTokenId));\n+        const response = await fetch('http://localhost:3001/request-to-pay', {\n+            method: 'POST',\n+            headers: {\n+                'Content-Type': 'application/json',\n+                'Authorization': `Bearer ${momoTokenId}`\n+            },\n+            body: JSON.stringify({ phone, total: amount, momoTokenId })\n+        });\n+        return response.json();\n+    }\n+    \n+\n+\n+    // const [amount, calculateTotal] = useState()\n+    const [phone, setNumber] = useState(\"\")\n+    const [message, setMessage] = useState(\"\")\n+ async function Data (e) {\n+        \n+       \n+        \n+    \n+        if (!phone || !amount) {\n+            setMessage('Please enter both phone number and amount.');\n+            return;\n+        }\n+    \n+        try {\n+            // Step 1: Create API User\n+            const userCreationResponse = await createApiUser();\n+            const userId = userCreationResponse.userId;\n+            console.log('user id: ', userId);\n+    \n+            // Step 2: Retrieve Created User\n+            await getCreatedUser(userId);\n+    \n+            // Step 3: Retrieve API Key\n+            const apiKeyResponse = await retrieveApiKey(userId);\n+            const apiKey = apiKeyResponse.apiKey;\n+            console.log('user api key: ', apiKey);\n+    \n+            // Step 4: Generate MoMo Token\n+            const tokenResponse = await generateApiToken(userId, apiKey);\n+            const momoTokenId = tokenResponse.access_token;\n+            console.log('momo token: ', momoTokenId);\n+    \n+            // Step 5: Make Payment Request\n+            const paymentResponse = await requestToPay(phone, amount, momoTokenId);\n+    \n+            console.log('Payment Reference id: ', paymentResponse.paymentRefId);\n+            console.log('externalId: ', paymentResponse.externalId);\n+    \n+            if (paymentResponse.success) {\n+                setMessage('Payment successful!');\n+                setPaymentStatus(message)\n+                setNumber{}\n+                navigate(\"/checkout\")\n+                checkout()\n+\n+            } else {\n+                setMessage('Payment failed.');\n+            }\n+        } catch (error) {\n+            console.error('An error occurred:', error);\n+            setMessage('An error occurred while processing the payment.');\n+        }\n+    };\n+\n+    \n+  return (\n+    <div>\n+        <h1>{phone}</h1>\n+        <h1>{amount}</h1>\n+         <div class=\"payment-form\">\n+        <h2>MoMo Payment</h2>\n+        <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n+        <label>total:{amount}</label>\n+        <button  onClick={ Data }>Pay Now</button>\n+        <p>\n+        {message}\n+        </p>\n+    </div>\n+      \n+    </div>\n+  )\n+}\n+\n+export default Payment\n"
+                },
+                {
+                    "date": 1738011163402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 setPaymentStatus(message)\n-                setNumber{}\n+                setNumber\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n@@ -131,138 +131,4 @@\n   )\n }\n \n export default Payment\n-import React, { useState } from 'react'\n-import { Link, useNavigate } from \"react-router-dom\";\n-\n-const Payment = ({amount,checkout,setPaymentStatus}) => {\n-    const navigate = useNavigate();\n-\n-    \n-    async function createApiUser() {\n-        console.log('Creating API user...');\n-        // Add the logic to create an API user\n-        // You should replace the URL with your server's endpoint for creating an API user\n-        // This is a sample logic\n-        const response = await fetch('http://localhost:3001/create-api-user', {\n-            method: 'POST',\n-            headers: { 'Content-Type': 'application/json' }\n-        });\n-        return response.json();\n-    }\n-    \n-    async function getCreatedUser(userId) {\n-        console.log('Retrieving created user...');\n-        const response = await fetch(`http://localhost:3001/get-created-user/${userId}`);\n-        return response.json();\n-    }\n-    \n-    async function retrieveApiKey(userId) {\n-        console.log('Retrieving API key...');\n-        const response = await fetch(`http://localhost:3001/retrieve-api-key/${userId}`, {\n-            method: 'POST',\n-            headers: { 'Content-Type': 'application/json' }\n-        });\n-        return response.json();\n-    }\n-    \n-    async function generateApiToken(userId, apiKey) {\n-        console.log('Generating MoMo token...');\n-        const response = await fetch('http://localhost:3001/generate-api-token', {\n-            method: 'POST',\n-            headers: { 'Content-Type': 'application/json' },\n-            body: JSON.stringify({ userId, apiKey })\n-        });\n-        return response.json();\n-    }\n-    \n-    async function requestToPay(phone, amount, momoTokenId) {\n-        console.log('Making payment request...');\n-        console.log('MoMo Token: ', JSON.stringify(momoTokenId));\n-        const response = await fetch('http://localhost:3001/request-to-pay', {\n-            method: 'POST',\n-            headers: {\n-                'Content-Type': 'application/json',\n-                'Authorization': `Bearer ${momoTokenId}`\n-            },\n-            body: JSON.stringify({ phone, total: amount, momoTokenId })\n-        });\n-        return response.json();\n-    }\n-    \n-\n-\n-    // const [amount, calculateTotal] = useState()\n-    const [phone, setNumber] = useState(\"\")\n-    const [message, setMessage] = useState(\"\")\n- async function Data (e) {\n-        \n-       \n-        \n-    \n-        if (!phone || !amount) {\n-            setMessage('Please enter both phone number and amount.');\n-            return;\n-        }\n-    \n-        try {\n-            // Step 1: Create API User\n-            const userCreationResponse = await createApiUser();\n-            const userId = userCreationResponse.userId;\n-            console.log('user id: ', userId);\n-    \n-            // Step 2: Retrieve Created User\n-            await getCreatedUser(userId);\n-    \n-            // Step 3: Retrieve API Key\n-            const apiKeyResponse = await retrieveApiKey(userId);\n-            const apiKey = apiKeyResponse.apiKey;\n-            console.log('user api key: ', apiKey);\n-    \n-            // Step 4: Generate MoMo Token\n-            const tokenResponse = await generateApiToken(userId, apiKey);\n-            const momoTokenId = tokenResponse.access_token;\n-            console.log('momo token: ', momoTokenId);\n-    \n-            // Step 5: Make Payment Request\n-            const paymentResponse = await requestToPay(phone, amount, momoTokenId);\n-    \n-            console.log('Payment Reference id: ', paymentResponse.paymentRefId);\n-            console.log('externalId: ', paymentResponse.externalId);\n-    \n-            if (paymentResponse.success) {\n-                setMessage('Payment successful!');\n-                setPaymentStatus{message}\n-                setNumber{}\n-                navigate(\"/checkout\")\n-                checkout()\n-\n-            } else {\n-                setMessage('Payment failed.');\n-            }\n-        } catch (error) {\n-            console.error('An error occurred:', error);\n-            setMessage('An error occurred while processing the payment.');\n-        }\n-    };\n-\n-    \n-  return (\n-    <div>\n-        <h1>{phone}</h1>\n-        <h1>{amount}</h1>\n-         <div class=\"payment-form\">\n-        <h2>MoMo Payment</h2>\n-        <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n-        <label>total:{amount}</label>\n-        <button  onClick={ Data }>Pay Now</button>\n-        <p>\n-        {message}\n-        </p>\n-    </div>\n-      \n-    </div>\n-  )\n-}\n-\n-export default Payment\n"
+                },
+                {
+                    "date": 1738011183730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 setPaymentStatus(message)\n-                setNumber\n+                setNumber(s)\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738011206454,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 setPaymentStatus(message)\n-                setNumber(s)\n+                setPhoneNumber()\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738011212512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n                 setPaymentStatus(message)\n-                setPhoneNumber()\n+                setPhoneNumber(phone)\n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738011224082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from 'react'\n import { Link, useNavigate } from \"react-router-dom\";\n \n-const Payment = ({amount,checkout,setPaymentStatus}) => {\n+const Payment = ({amount,checkout,setPaymentStatus,s}) => {\n     const navigate = useNavigate();\n \n     \n     async function createApiUser() {\n"
+                },
+                {
+                    "date": 1738012401245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useState } from 'react'\n import { Link, useNavigate } from \"react-router-dom\";\n \n-const Payment = ({amount,checkout,setPaymentStatus,s}) => {\n+const Payment = ({amount,checkout,setPaymentStatus,setPhoneNumber}) => {\n     const navigate = useNavigate();\n \n     \n     async function createApiUser() {\n@@ -97,10 +97,9 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-                setPaymentStatus(message)\n-                setPhoneNumber(phone)\n+              \n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738012418151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,8 @@\n             console.log('externalId: ', paymentResponse.externalId);\n     \n             if (paymentResponse.success) {\n                 setMessage('Payment successful!');\n-              \n                 navigate(\"/checkout\")\n                 checkout()\n \n             } else {\n"
+                },
+                {
+                    "date": 1738012424575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -108,9 +108,9 @@\n             console.error('An error occurred:', error);\n             setMessage('An error occurred while processing the payment.');\n         }\n     };\n-\n+const handle\n     \n   return (\n     <div>\n         <h1>{phone}</h1>\n"
+                },
+                {
+                    "date": 1738012431083,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -108,9 +108,9 @@\n             console.error('An error occurred:', error);\n             setMessage('An error occurred while processing the payment.');\n         }\n     };\n-const handlebuttons \n+const handlebuttons =\n     \n   return (\n     <div>\n         <h1>{phone}</h1>\n"
+                },
+                {
+                    "date": 1738014676632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -111,9 +111,9 @@\n         }\n     };\n const handlebuttons =()=>{\n     setPaymentStatus(message)\n-    setPhoneNumber()\n+    setPhoneNumber(s)\n     setPaymentId(paymentRefId)\n }\n     \n   return (\n"
+                }
+            ],
+            "date": 1737997769305,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react'\n\nconst Payment = (c) => {\n\n    \n    async function createApiUser() {\n        console.log('Creating API user...');\n        // Add the logic to create an API user\n        // You should replace the URL with your server's endpoint for creating an API user\n        // This is a sample logic\n        const response = await fetch('http://localhost:3001/create-api-user', {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' }\n        });\n        return response.json();\n    }\n    \n    async function getCreatedUser(userId) {\n        console.log('Retrieving created user...');\n        const response = await fetch(`http://localhost:3001/get-created-user/${userId}`);\n        return response.json();\n    }\n    \n    async function retrieveApiKey(userId) {\n        console.log('Retrieving API key...');\n        const response = await fetch(`http://localhost:3001/retrieve-api-key/${userId}`, {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' }\n        });\n        return response.json();\n    }\n    \n    async function generateApiToken(userId, apiKey) {\n        console.log('Generating MoMo token...');\n        const response = await fetch('http://localhost:3001/generate-api-token', {\n            method: 'POST',\n            headers: { 'Content-Type': 'application/json' },\n            body: JSON.stringify({ userId, apiKey })\n        });\n        return response.json();\n    }\n    \n    async function requestToPay(phone, amount, momoTokenId) {\n        console.log('Making payment request...');\n        console.log('MoMo Token: ', JSON.stringify(momoTokenId));\n        const response = await fetch('http://localhost:3001/request-to-pay', {\n            method: 'POST',\n            headers: {\n                'Content-Type': 'application/json',\n                'Authorization': `Bearer ${momoTokenId}`\n            },\n            body: JSON.stringify({ phone, total: amount, momoTokenId })\n        });\n        return response.json();\n    }\n    \n\n\n    const [amount, setAmount] = useState(\"\")\n    const [phone, setNumber] = useState(\"\")\n    const [message, setMessage] = useState(\"\")\n async function Data (e) {\n        \n       \n        \n    \n        if (!phone || !amount) {\n            setMessage('Please enter both phone number and amount.');\n            return;\n        }\n    \n        try {\n            // Step 1: Create API User\n            const userCreationResponse = await createApiUser();\n            const userId = userCreationResponse.userId;\n            console.log('user id: ', userId);\n    \n            // Step 2: Retrieve Created User\n            await getCreatedUser(userId);\n    \n            // Step 3: Retrieve API Key\n            const apiKeyResponse = await retrieveApiKey(userId);\n            const apiKey = apiKeyResponse.apiKey;\n            console.log('user api key: ', apiKey);\n    \n            // Step 4: Generate MoMo Token\n            const tokenResponse = await generateApiToken(userId, apiKey);\n            const momoTokenId = tokenResponse.access_token;\n            console.log('momo token: ', momoTokenId);\n    \n            // Step 5: Make Payment Request\n            const paymentResponse = await requestToPay(phone, amount, momoTokenId);\n    \n            console.log('Payment Reference id: ', paymentResponse.paymentRefId);\n            console.log('externalId: ', paymentResponse.externalId);\n    \n            if (paymentResponse.success) {\n                setMessage('Payment successful!');\n            } else {\n                setMessage('Payment failed.');\n            }\n        } catch (error) {\n            console.error('An error occurred:', error);\n            setMessage('An error occurred while processing the payment.');\n        }\n    };\n\n    \n  return (\n    <div>\n        <h1>{phone}</h1>\n        <h1>{amount}</h1>\n         <div class=\"payment-form\">\n        <h2>MoMo Payment</h2>\n        <input type=\"number\" placeholder=\"Phone Number\" onChange={(e) => setNumber(e.target.value)} />\n        <input type=\"number\"  placeholder=\"Amount\" onChange={(e) => setAmount(e.target.value)}/>\n        <button  onClick={ Data }>Pay Now</button>\n        <p>\n        {message}\n        </p>\n    </div>\n      \n    </div>\n  )\n}\n\nexport default Payment\n"
+        }
+    ]
+}

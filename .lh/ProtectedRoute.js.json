@@ -1,0 +1,22 @@
+{
+    "sourceFile": "ProtectedRoute.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1738183202059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1738183220008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,14 @@\n-src/components/account/ProtectedRoute.js src/components/account/AuthContext.js\n\\ No newline at end of file\n+import { useContext } from \"react\";\n+import { Navigate } from \"react-router-dom\";\n+import { AuthContext } from \"./AuthContext\";\n+\n+const ProtectedRoute = ({ children, allowedRoles }) => {\n+  const { user } = useContext(AuthContext);\n+\n+  if (!user) return <Navigate to=\"/login\" />;\n+  if (!allowedRoles.includes(user.role)) return <Navigate to=\"/unauthorized\" />;\n+\n+  return children;\n+};\n+\n+export default ProtectedRoute\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1738183202059,
+            "name": "Commit-0",
+            "content": "src/components/account/ProtectedRoute.js src/components/account/AuthContext.js"
+        }
+    ]
+}

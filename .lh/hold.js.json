@@ -1,0 +1,26 @@
+{
+    "sourceFile": "hold.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1738079847530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1738079861727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,6 +36,6 @@\n });\n server.use(router);\n \n // Listen ports requests\n-server.listen(`8080, () => {\n-  console.log('JSON Server is running');\n\\ No newline at end of file\n+server.listen(8080, () => {\n+  console.log('JSON Server is running')};\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1738079875911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,5 +37,5 @@\n server.use(router);\n \n // Listen ports requests\n server.listen(8080, () => {\n-  console.log('JSON Server is running')};\n\\ No newline at end of file\n+  console.log('JSON Server is running')})};\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1738079847530,
+            "name": "Commit-0",
+            "content": "const jsonServer = require('json-server');\nconst multer = require('multer');\n\n// Configure API rest for default settings\nconst server = jsonServer.create();\nconst router = jsonServer.router('./db.json');\nconst middlewares = jsonServer.defaults();\nserver.use(jsonServer.bodyParser);\nserver.use(middlewares);\n\n//Configure the multer service\nconst storage = multer.diskStorage({\n  destination: function (req, file, cb) {\n    cb(null, './public/uploads'); // Folder where the images will be stored\n  },\n  filename: function (req, file, cb) {\n    cb(null, file.originalname); // File name\n  },\n\n});\nconst upload = multer({ storage: storage });\n\n//Configure routes for upload images\nserver.post('/gallery', upload.single('image'), (req, res) => {\n  const file = req.file;\n  const url = `http://localhost:5000/images/${file.originalname}`;\n  const image = {\n    id: Date.now(),\n    img: url,\n    name: req.body.name,\n    message: req.body.message,\n\n  };\n  router.db.get('images').push(image).write();\n  res.json(image);\n});\nserver.use(router);\n\n// Listen ports requests\nserver.listen(`8080, () => {\n  console.log('JSON Server is running');"
+        }
+    ]
+}

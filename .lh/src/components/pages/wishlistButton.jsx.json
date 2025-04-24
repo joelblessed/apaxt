@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/pages/wishlistButton.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1743769924344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743769933727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   const ts = \"test\";\n   useEffect(() => {\n     dispatch(fetchWishlist(userId));\n   }, [dispatch, userId]);\n-console.log(produ)\n+console.log(produc)\n   useEffect(() => {\n     // Filter products in the frontend\n     const filtered = \n       WishlistArray.includes(product.id.toString())\n"
+                }
+            ],
+            "date": 1743769924344,
+            "name": "Commit-0",
+            "content": "import React, { useEffect, useState } from \"react\";\nimport { useDispatch, useSelector } from \"react-redux\";\nimport { fetchWishlist,addToWishlist, removeFromWishlist } from \"../../wishlistSlice\";\nimport DesktopCards from \"./ProductCards/desktopCards\";\nimport Box from \"./boxes\";\n\nconst WishlistButton = ({ product, highlightText }) => {\n  const dispatch = useDispatch();\n  const [wishlistProducts, setWishlistProducts] = useState([]);\n  const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n  const wishlist = useSelector((state) => state.wishlist.items);\n  const WishlistArray = wishlist.map((productId) => productId.toString());\n  const ts = \"test\";\n  useEffect(() => {\n    dispatch(fetchWishlist(userId));\n  }, [dispatch, userId]);\nconsole\n  useEffect(() => {\n    // Filter products in the frontend\n    const filtered = \n      WishlistArray.includes(product.id.toString())\n    \n    setWishlistProducts(filtered);\n  }, [wishlist]); // Runs when products are fetched\n\n  const isInWishList = WishlistArray.includes(product.id.toString())\n const handleWishlistToggle =()=>{\n  if(isInWishList){\n    dispatch(removeFromWishlist({productId: product.id, userId}))\n  }\n  else{\n    dispatch(addToWishlist({productId: product.id, userId}))\n\n  }\n }\n  return (\n    <div>\n      \n      <button onClick={handleWishlistToggle}>{isInWishList ? \"Remove\":\"Add\"}</button>\n      \n    </div>\n  );\n};\n\nexport default WishlistButton;\n"
+        }
+    ]
+}

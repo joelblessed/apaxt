@@ -1,0 +1,16 @@
+.boxty-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.box {
+  width: 50px;
+  height: 50px;
+  background-color: lightblue;
+  margin: 5px;
+}
+
+.last-box {
+  margin-left: auto; /* Move the last box to the right */
+}

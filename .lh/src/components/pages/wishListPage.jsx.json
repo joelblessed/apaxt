@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/components/pages/wishListPage.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1743750462674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743750471825,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,11 @@\n-f\n\\ No newline at end of file\n+import React from 'react'\n+\n+const ishListPage = () => {\n+  return (\n+    <div>\n+      \n+    </div>\n+  )\n+}\n+\n+export default ishListPage\n"
+                },
+                {
+                    "date": 1743750481111,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,40 @@\n+import React, { useEffect, useState } from \"react\";\n+import { useDispatch, useSelector } from \"react-redux\";\n+import { fetchWishlist, removeFromWishlist } from \"../../wishlistSlice\";\n+import Box from \"./boxes\";\n+\n+const WishlistPage = ({ filteredProducts, highlightText }) => {\n+  const dispatch = useDispatch();\n+  const [wishlistProducts, setWishlistProducts] = useState([]);\n+  const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n+  const wishlist = useSelector((state) => state.wishlist.items);\n+  const test = wishlist.map((productId) => productId.toString());\n+  useEffect(() => {\n+    dispatch(fetchWishlist(userId));\n+  }, [dispatch, userId]);\n+\n+  console.log(test);\n+\n+  useEffect(() => {\n+    // Filter products in the frontend\n+    const filtered = filteredProducts.filter((product) =>\n+      test.includes(product.id.toString())\n+    );\n+    setWishlistProducts(filtered);\n+  },[wishlist]); // Runs when products are fetched\n+\n+  return (\n+    <div>\n+      <h2>My Wishlist</h2>\n+      {wishlist.length === 0 ? (\n+        <p>No products in wishlist.</p>\n+      ) : (\n+        <div>\n+          <Box Mobject={wishlistProducts} Dobject={wishlistProducts} highlightText={highlightText}/>\n+        </div>\n+      )}\n+    </div>\n+  );\n+};\n+\n+export default WishlistPage;\n"
+                },
+                {
+                    "date": 1744899454876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   useEffect(() => {\n     dispatch(fetchWishlist(userId));\n   }, [dispatch, userId]);\n \n-  console.log(test);\n+ \n \n   useEffect(() => {\n     // Filter products in the frontend\n     const filtered = filteredProducts.filter((product) =>\n@@ -37,15 +37,4 @@\n   );\n };\n \n export default WishlistPage;\n-import React from 'react'\n-\n-const ishListPage = () => {\n-  return (\n-    <div>\n-      \n-    </div>\n-  )\n-}\n-\n-export default ishListPage\n"
+                },
+                {
+                    "date": 1744899463522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   const dispatch = useDispatch();\n   const [wishlistProducts, setWishlistProducts] = useState([]);\n   const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n   const wishlist = useSelector((state) => state.wishlist.items);\n-  const test = wishlist.map((productId) => productId.toString());\n+  const whis = wishlist.map((productId) => productId.toString());\n   useEffect(() => {\n     dispatch(fetchWishlist(userId));\n   }, [dispatch, userId]);\n \n"
+                },
+                {
+                    "date": 1744899469307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   const dispatch = useDispatch();\n   const [wishlistProducts, setWishlistProducts] = useState([]);\n   const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n   const wishlist = useSelector((state) => state.wishlist.items);\n-  const whis = wishlist.map((productId) => productId.toString());\n+  const w = wishlist.map((productId) => productId.toString());\n   useEffect(() => {\n     dispatch(fetchWishlist(userId));\n   }, [dispatch, userId]);\n \n"
+                },
+                {
+                    "date": 1744899476937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   const dispatch = useDispatch();\n   const [wishlistProducts, setWishlistProducts] = useState([]);\n   const userId = localStorage.getItem(\"userId\") || \"guest\"; // Check if user is logged in\n   const wishlist = useSelector((state) => state.wishlist.items);\n-  const w = wishlist.map((productId) => productId.toString());\n+  const  = wishlist.map((productId) => productId.toString());\n   useEffect(() => {\n     dispatch(fetchWishlist(userId));\n   }, [dispatch, userId]);\n \n"
+                },
+                {
+                    "date": 1744899487285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n   useEffect(() => {\n     // Filter products in the frontend\n     const filtered = filteredProducts.filter((product) =>\n-      .includes(product.id.toString())\n+      Wl.includes(product.id.toString())\n     );\n     setWishlistProducts(filtered);\n   },[wishlist]); // Runs when products are fetched\n \n"
+                }
+            ],
+            "date": 1743750462674,
+            "name": "Commit-0",
+            "content": "f"
+        }
+    ]
+}

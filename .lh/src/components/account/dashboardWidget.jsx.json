@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/account/dashboardWidget.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1738185128569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1738185128569,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\nimport { Bar } from \"react-chartjs-2\";\n\nfunction DashboardWidgets() {\n  const data = {\n    labels: [\"Users\", \"Orders\", \"Revenue\"],\n    datasets: [\n      {\n        label: \"Stats\",\n        data: [100, 200, 300],\n        backgroundColor: [\"blue\", \"green\", \"orange\"],\n      },\n    ],\n  };\n\n  return (\n    <div>\n      <h3>Statistics</h3>\n      <Bar data={data} />\n    </div>\n  );\n}\n\nexport default DashboardWidgets"
+        }
+    ]
+}

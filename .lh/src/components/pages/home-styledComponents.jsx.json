@@ -1,0 +1,54 @@
+{
+    "sourceFile": "src/components/pages/home-styledComponents.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1743447142215,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743447149364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n export const ScrollWrapper = styled.div`\n   display: flex;\n   gap: 10px;\n-  transform: ${({ translateX }) => translateX(-${translateX}px)};\n+  transform: ${({ translateX }) => `translateX(-${translateX}px)};\n   transition: transform 0.5s ease-in-out;\n `;\n \n export const Box = styled.div`\n"
+                },
+                {
+                    "date": 1743447156446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n export const ScrollWrapper = styled.div`\n   display: flex;\n   gap: 10px;\n-  transform: ${({ translateX }) => `translateX(-${translateX}px)};\n+  transform: ${({ translateX }) => `translateX(-${translateX}px)}`;\n   transition: transform 0.5s ease-in-out;\n `;\n \n export const Box = styled.div`\n"
+                },
+                {
+                    "date": 1743447163663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n export const ScrollWrapper = styled.div`\n   display: flex;\n   gap: 10px;\n-  transform: ${({ translateX }) => `translateX(-${translateX}px)}`;\n+  transform: ${({ translateX }) => `translateX(-${translateX}px)`};\n   transition: transform 0.5s ease-in-out;\n `;\n \n export const Box = styled.div`\n"
+                },
+                {
+                    "date": 1743447542005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+\n export const Section = styled.div`\n   display: flex;\n   align-items: center;\n   gap: 10px;\n"
+                },
+                {
+                    "date": 1743447548628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+import styled from \"styled-components\";\n \n export const Section = styled.div`\n   display: flex;\n   align-items: center;\n"
+                },
+                {
+                    "date": 1743447740919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,14 @@\n import styled from \"styled-components\";\n \n+export const Container = styled.div`\n+  display: flex;\n+  flex-direction: column;\n+  align-items: center;\n+  gap: 20px;\n+  padding: 20px;\n+`;\n+\n export const Section = styled.div`\n   display: flex;\n   align-items: center;\n   gap: 10px;\n@@ -15,9 +23,9 @@\n \n export const ScrollWrapper = styled.div`\n   display: flex;\n   gap: 10px;\n-  transform: ${({ translateX }) => `translateX(-${translateX}px)`};\n+  transform: ${({ translateX }) => translateX(-${translateX}px)};\n   transition: transform 0.5s ease-in-out;\n `;\n \n export const Box = styled.div`\n"
+                },
+                {
+                    "date": 1743447752560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n \n export const ScrollWrapper = styled.div`\n   display: flex;\n   gap: 10px;\n-  transform: ${({ translateX }) => translateX(-${translateX}px)};\n+  transform: ${({ translateX }) => `translateX(-${translateX}px)};\n   transition: transform 0.5s ease-in-out;\n `;\n \n export const Box = styled.div`\n"
+                },
+                {
+                    "date": 1743448011207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,63 +0,0 @@\n-import styled from \"styled-components\";\n-\n-export const Container = styled.div`\n-  display: flex;\n-  flex-direction: column;\n-  align-items: center;\n-  gap: 20px;\n-  padding: 20px;\n-`;\n-\n-export const Section = styled.div`\n-  display: flex;\n-  align-items: center;\n-  gap: 10px;\n-  width: 100%;\n-  justify-content: center;\n-`;\n-\n-export const ScrollContainer = styled.div`\n-  overflow: hidden;\n-  width: 1300px;\n-`;\n-\n-export const ScrollWrapper = styled.div`\n-  display: flex;\n-  gap: 10px;\n-  transform: ${({ translateX }) => `translateX(-${translateX}px)`};\n-  transition: transform 0.5s ease-in-out;\n-`;\n-\n-export const Box = styled.div`\n-  width: 150px;\n-  height: 150px;\n-  background: lightblue;\n-  display: flex;\n-  align-items: center;\n-  justify-content: center;\n-  border-radius: 5px;\n-  flex-shrink: 0;\n-  cursor: pointer;\n-  font-weight: bold;\n-  font-size: 20px;\n-  color: white;\n-  transition: 0.3s;\n-  \n-  &:hover {\n-    background: #007bff;\n-  }\n-`;\n-\n-export const NavButton = styled.button`\n-  padding: 10px;\n-  cursor: pointer;\n-  background: orange;\n-  border: none;\n-  font-size: 18px;\n-  border-radius: 5px;\n-  transition: 0.3s;\n-\n-  &:hover {\n-    background: darkorange;\n-  }\n-`;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743448170048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,80 @@\n+import styled from \"styled-components\";\n+\n+export const Container = styled.div`\n+  display: flex;\n+  flex-direction: column;\n+  align-items: center;\n+  gap: 20px;\n+  margin-op:100px;\n+  padding: 20px;\n+`;\n+\n+export const Section = styled.div`\n+  display: flex;\n+  align-items: center;\n+  gap: 10px;\n+  width: 100%;\n+  justify-content: center;\n+`;\n+\n+export const ScrollContainer = styled.div`\n+  overflow: hidden;\n+  width: 100%;\n+  max-width: 1300px;\n+\n+  @media (max-width: 768px) {\n+    max-width: 90%;\n+  }\n+`;\n+\n+export const ScrollWrapper = styled.div`\n+  display: flex;\n+  gap: 10px;\n+  transform: ${({ translateX }) => `translateX(-${translateX}px)`};\n+  transition: transform 0.5s ease-in-out;\n+`;\n+\n+export const Box = styled.div`\n+  width: 150px;\n+  height: 150px;\n+  background: lightblue;\n+  display: flex;\n+  align-items: center;\n+  justify-content: center;\n+  border-radius: 5px;\n+  flex-shrink: 0;\n+  cursor: pointer;\n+  font-weight: bold;\n+  font-size: 20px;\n+  color: white;\n+  transition: 0.3s;\n+  \n+  &:hover {\n+    background: #007bff;\n+  }\n+\n+  @media (max-width: 768px) {\n+    width: 120px;\n+    height: 120px;\n+    font-size: 16px;\n+  }\n+`;\n+\n+export const NavButton = styled.button`\n+  padding: 10px;\n+  cursor: pointer;\n+  background: orange;\n+  border: none;\n+  font-size: 18px;\n+  border-radius: 5px;\n+  transition: 0.3s;\n+\n+  &:hover {\n+    background: darkorange;\n+  }\n+\n+  @media (max-width: 768px) {\n+    font-size: 16px;\n+    padding: 8px;\n+  }\n+`;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1743447142215,
+            "name": "Commit-0",
+            "content": "export const Section = styled.div`\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  justify-content: center;\n`;\n\nexport const ScrollContainer = styled.div`\n  overflow: hidden;\n  width: 1300px;\n`;\n\nexport const ScrollWrapper = styled.div`\n  display: flex;\n  gap: 10px;\n  transform: ${({ translateX }) => translateX(-${translateX}px)};\n  transition: transform 0.5s ease-in-out;\n`;\n\nexport const Box = styled.div`\n  width: 150px;\n  height: 150px;\n  background: lightblue;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 5px;\n  flex-shrink: 0;\n  cursor: pointer;\n  font-weight: bold;\n  font-size: 20px;\n  color: white;\n  transition: 0.3s;\n  \n  &:hover {\n    background: #007bff;\n  }\n`;\n\nexport const NavButton = styled.button`\n  padding: 10px;\n  cursor: pointer;\n  background: orange;\n  border: none;\n  font-size: 18px;\n  border-radius: 5px;\n  transition: 0.3s;\n\n  &:hover {\n    background: darkorange;\n  }\n`;"
+        }
+    ]
+}

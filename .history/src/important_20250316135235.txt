@@ -1,0 +1,476 @@
+import { setCart, addToCart, removeFromCart, clearCart } from "./cartSlice";
+
+const API_URL = "http://localhost:3001/cart";
+
+// *Add to Cart Before Login (Saves in LocalStorage)*
+export const addToCartBeforeLogin = (product) => (dispatch, getState) => {
+    dispatch(addToCart(product));
+    localStorage.setItem("cart", JSON.stringify(getState().cart.items));
+};
+
+// *Load Cart After Login (Merge Local with Server)*
+export const loadCartAfterLogin = () => async (dispatch) => {
+    const token = localStorage.getItem("token");
+    let localCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    try {
+        // Fetch user cart from the server
+        const response = await fetch(API_URL, {
+            method: "GET",
+            headers: { "Authorization": `Bearer ${token}` },
+        });
+
+        let userCart = response.ok ? await response.json() : { cart: [] };
+
+        // Merge Local Cart & Server Cart (Remove Duplicates)
+        const mergedCart = [...new Map([...localCart, ...userCart.cart].map(item => [item.id, item])).values()];
+
+        dispatch(setCart(mergedCart));
+
+        // Save merged cart to the server
+        await fetch(`${API_URL}/merge`, {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ localCart }),
+        });
+
+        // Clear local cart after merging
+        localStorage.removeItem("cart");
+    } catch (error) {
+        console.error("Error fetching cart:", error);
+    }
+};
+
+// *Add to Cart After Login*
+export const addToCartAPI = (product) => async (dispatch) => {
+    const token = localStorage.getItem("token");
+
+    dispatch(addToCart(product));
+
+    try {
+        await fetch(API_URL, {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ product }),
+        });
+    } catch (error) {
+        console.error("Error adding product to cart:", error);
+    }
+};
+
+// *Remove Item from Cart*
+export const removeFromCartAPI = (productId) => async (dispatch, getState) => {
+    const token = localStorage.getItem("token");
+
+    dispatch(removeFromCart(productId));
+
+    try {
+        await fetch(`${API_URL}/${productId}`, {
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${token}` },
+        });
+    } catch (error) {
+        console.error("Error removing product from cart:", error);
+    }
+};
+
+// *Clear Cart (Logout)*
+export const clearCartOnLogout = () => async (dispatch) => {
+    const token = localStorage.getItem("token");
+
+    dispatch(clearCart());
+
+    try {
+        await fetch(API_URL, {
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${token}` },
+        });
+    } catch (error) {
+        console.error("Error clearing cart:", error);
+    }
+};
+
+
+
+
+
+
+
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const fs = require("fs");
+const bodyParser = require("body-parser");
+require("dotenv").config();
+
+const app = express();
+const PORT = 3001;
+const CART_DB = "./cart.json";
+const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
+
+app.use(cors());
+app.use(bodyParser.json());
+
+// Read cart data
+const readCartDB = () => {
+    try {
+        const data = fs.readFileSync(CART_DB, "utf8");
+        return JSON.parse(data);
+    } catch (error) {
+        console.error("Error reading cart database:", error);
+        return {};
+    }
+};
+
+// Write cart data
+const writeCartDB = (data) => {
+    fs.writeFileSync(CART_DB, JSON.stringify(data, null, 2));
+};
+
+// Middleware: Verify Token
+const verifyToken = (req, res, next) => {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.userId = decoded.userId;
+        next();
+    } catch (error) {
+        res.status(401).json({ message: "Invalid token" });
+    }
+};
+
+// *1. Get User Cart*
+app.get("/cart", verifyToken, (req, res) => {
+    const db = readCartDB();
+    const userCart = db[req.userId] || [];
+    res.json({ cart: userCart });
+});
+
+// *2. Add to Cart*
+app.post("/cart", verifyToken, (req, res) => {
+    const { product } = req.body;
+    if (!product) return res.status(400).json({ message: "Product is required" });
+
+    let db = readCartDB();
+    let userCart = db[req.userId] || [];
+
+    // Prevent duplicate products
+    if (!userCart.find(item => item.id === product.id)) {
+        userCart.push(product);
+        db[req.userId] = userCart;
+        writeCartDB(db);
+    }
+
+    res.json({ message: "Product added to cart", cart: userCart });
+});
+
+// *3. Remove from Cart*
+app.delete("/cart/:productId", verifyToken, (req, res) => {
+    const { productId } = req.params;
+    let db = readCartDB();
+    let userCart = db[req.userId] || [];
+
+    userCart = userCart.filter(item => item.id !== productId);
+    db[req.userId] = userCart;
+    writeCartDB(db);
+
+    res.json({ message: "Product removed from cart", cart: userCart });
+});
+
+// *4. Merge Local Cart with Server Cart*
+app.post("/cart/merge", verifyToken, (req, res) => {
+    const { localCart } = req.body;
+    let db = readCartDB();
+    let userCart = db[req.userId] || [];
+
+    // Merge local cart and server cart (remove duplicates)
+    const mergedCart = [...new Map([...localCart, ...userCart].map(item => [item.id, item])).values()];
+    db[req.userId] = mergedCart;
+    writeCartDB(db);
+
+    res.json({ message: "Cart merged successfully", cart: mergedCart });
+});
+
+// *5. Clear Cart (Logout)*
+app.delete("/cart", verifyToken, (req, res) => {
+    let db = readCartDB();
+    db[req.userId] = [];
+    writeCartDB(db);
+    res.json({ message: "Cart cleared" });
+});
+
+// *Start Server*
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+ });
+
+
+
+
+
+ import { createSlice } from "@reduxjs/toolkit";
+
+const cartSlice = createSlice({
+    name: "cart",
+    initialState: {
+        items: [],
+    },
+    reducers: {
+        setCart: (state, action) => {
+            state.items = action.payload;
+        },
+        addToCart: (state, action) => {
+            state.items.push(action.payload);
+            localStorage.setItem("cart", JSON.stringify(state.items)); // Save to localStorage
+        },
+        removeFromCart: (state, action) => {
+            state.items = state.items.filter(item => item.id !== action.payload);
+            localStorage.setItem("cart", JSON.stringify(state.items));
+        },
+        clearCart: (state) => {
+            state.items = [];
+            localStorage.removeItem("cart");
+        }
+    }
+});
+
+export const { setCart, addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export default cartSlice.reducer;
+
+
+
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+
+// Styled components
+const DashboardContainer = styled.div`
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const Section = styled.div`
+  margin-bottom: 20px;
+`;
+
+const Title = styled.h2`
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+`;
+
+const Info = styled.p`
+  font-size: 1rem;
+  color: #666;
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+`;
+
+const TableHeader = styled.th`
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: 1px solid #ddd;
+`;
+
+const TableCell = styled.td`
+  padding: 10px;
+  border: 1px solid #ddd;
+`;
+
+const MerchantDashboard = ({ api }) => {
+  const [userInfo, setUserInfo] = useState({});
+  const [products, setProducts] = useState([]);
+  const [soldProducts, setSoldProducts] = useState([]);
+  const [wallet, setWallet] = useState(0);
+
+  useEffect(() => {
+    fetchUserInfo();
+    fetchProducts();
+    fetchSoldProducts();
+    fetchWallet();
+  }, []);
+
+  const fetchUserInfo = async () => {
+    const username = sessionStorage.getItem("username");
+    const response = await fetch(`${api}/users/${username}`);
+    const data = await response.json();
+    setUserInfo(data);
+  };
+
+  const fetchProducts = async () => {
+    const response = await fetch(`${api}/products`);
+    const data = await response.json();
+    setProducts(data);
+  };
+
+  const fetchSoldProducts = async () => {
+    const response = await fetch(`${api}/sold-products`);
+    const data = await response.json();
+    setSoldProducts(data);
+  };
+
+  const fetchWallet = async () => {
+    const response = await fetch(`${api}/wallet`);
+    const data = await response.json();
+    setWallet(data.balance);
+  };
+
+  return (
+    <DashboardContainer>
+      <Section>
+        <Title>User Info</Title>
+        <Info>Username: {userInfo.username}</Info>
+        <Info>Email: {userInfo.email}</Info>
+      </Section>
+
+      <Section>
+        <Title>Products</Title>
+        <Table>
+          <thead>
+            <tr>
+              <TableHeader>Name</TableHeader>
+              <TableHeader>Price</TableHeader>
+              <TableHeader>Stock</TableHeader>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => (
+              <tr key={product.id}>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>${product.price}</TableCell>
+                <TableCell>{product.stock}</TableCell>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Section>
+
+      <Section>
+        <Title>Sold Products</Title>
+        <Table>
+          <thead>
+            <tr>
+              <TableHeader>Name</TableHeader>
+              <TableHeader>Price</TableHeader>
+              <TableHeader>Quantity</TableHeader>
+            </tr>
+          </thead>
+          <tbody>
+            {soldProducts.map((product) => (
+              <tr key={product.id}>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>${product.price}</TableCell>
+                <TableCell>{product.quantity}</TableCell>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Section>
+
+      <Section>
+        <Title>Wallet</Title>
+        <Info>Balance: ${wallet}</Info>
+      </Section>
+    </DashboardContainer>
+  );
+};
+
+export default MerchantDashboard;
+
+
+
+
+
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("brand", JSON.stringify(brand));
+    formData.append("category", category);
+    formData.append("price", price);
+    formData.append("quantity", quantity);
+    formData.append("numberInStock", numberInStock);
+    formData.append("owner", owner);
+    formData.append("weight", weight);
+    formData.append("ownerId", ownerId);
+    formData.append("color", color);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("description", description);
+    formData.append("status", status);
+    formData.append("address", address);
+    formData.append("likes", likes);
+    formData.append("city", city);
+    formData.append("location", JSON.stringify(location));
+    formData.append("postedOn", postedOn);
+
+    images.forEach((file, index) => {
+      formData.append("images", file);
+    });
+
+    try {
+      const response = await fetch(`${api}/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        alert("Product uploaded successfully!");
+        // Reset form
+        setName("");
+        setBrand([{ id: Date.now(), name: "", image: "" }]);
+        setCategory("");
+        setPrice("");
+        setImages([]);
+        setQuantity(1);
+        setNumberInStock(0);
+        setOwner("");
+        setweight(0)
+        setPhoneNumber("");
+        setDescription("");
+        setStatus("");
+        setAddress("");
+        setLikes(0);
+        setCity("");
+        setColor("");
+        setownerId("");
+        setLocation([
+          { id: Date.now(), location: "", latitude: "", longitude: "" },
+        ]);
+        setPostedOn(
+          new Date().toLocaleString("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })
+        );
+      } else {
+        alert("Failed to upload product.");
+      }
+    } catch (error) {
+      console.error("Error uploading product:", error);
+    }
+  };

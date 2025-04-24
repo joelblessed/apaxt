@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/components/pages/productsByOwner.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1742137398662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742137405594,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { useEffect, useState } from \"react\";\n \n const ProductsByOwner = () => {\n   const [products, setProducts] = useState([]);\n-\n+const owner\n   useEffect(() => {\n     fetch(`http://localhost:5000/products/${ownerId}`)\n       .then((res) => res.json())\n       .then((data) => setProducts(data))\n"
+                },
+                {
+                    "date": 1742137415717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { useEffect, useState } from \"react\";\n \n const ProductsByOwner = () => {\n   const [products, setProducts] = useState([]);\n-const ownerId = loc\n+const ownerId = local\n   useEffect(() => {\n     fetch(`http://localhost:5000/products/${ownerId}`)\n       .then((res) => res.json())\n       .then((data) => setProducts(data))\n"
+                },
+                {
+                    "date": 1742139241879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   const [products, setProducts] = useState([]);\n // const ownerId = localStorage.getItem(\"userId\"); \n const ownerId = 2; // Hardcoded for testing\n   useEffect(() => {\n-    fetch(`$/${ownerId}`)\n+    fetch(`${/${ownerId}`)\n       .then((res) => res.json())\n       .then((data) => setProducts(data))\n       .catch((error) => console.error(\"Error fetching products:\", error));\n   }, [ownerId]);\n"
+                }
+            ],
+            "date": 1742137398662,
+            "name": "Commit-0",
+            "content": "import { useEffect, useState } from \"react\";\n\nconst ProductsByOwner = () => {\n  const [products, setProducts] = useState([]);\n\n  useEffect(() => {\n    fetch(`http://localhost:5000/products/${ownerId}`)\n      .then((res) => res.json())\n      .then((data) => setProducts(data))\n      .catch((error) => console.error(\"Error fetching products:\", error));\n  }, [ownerId]);\n\n  return (\n    <div>\n      <h2>Products by Owner {ownerId}</h2>\n      <ul>\n        {products.map((product) => (\n          <li key={product.id}>\n            <h3>{product.name}</h3>\n            <p>Price: {product.price}</p>\n            <p>Category: {product.category}</p>\n            <p>Owner: {product.owner}</p>\n            <p>City: {product.city}</p>\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n};\n\nexport default ProductsByOwner;"
+        }
+    ]
+}

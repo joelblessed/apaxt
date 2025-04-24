@@ -1,0 +1,161 @@
+.navbar {
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  /* Menu Toggle */
+  .menu-toggle {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .menu-toggle:hover {
+    color: #f19e39;
+  }
+  
+  /* Logo */
+  .logo {
+    font-size: 50px;
+    font-weight: bold;
+    color: red;
+  }
+  
+  /* Search Container */
+  .search-container {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .search-input {
+    border: none;
+    background: transparent;
+    padding: 5px;
+    outline: none;
+    width: 100px;
+  }
+  
+  .search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Cart Icon Container */
+  .cart-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Account Container */
+  .account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 4px; /* Add space between image and username */
+  }
+  
+  /* Mobile Menu */
+  .mobile-menu {
+    list-style: none;
+    background: #fff;
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    width: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: none;
+    animation: slideDown 0.3s ease-in-out;
+  }
+  
+  .mobile-menu.open {
+    display: block;
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .mobile-menu li {
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  .mobile-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .mobile-menu a:hover {
+    color: #f19e39;
+  }
+  
+  /* NavLink Styles */
+  .nav-link {
+    color: red;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  
+  /* Select Dropdown */
+  .select-dropdown {
+    width: 20%;
+    color: red;
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  /* Option Styles */
+  .option {
+    background: red;
+    color: white;
+  }

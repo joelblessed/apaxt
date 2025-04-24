@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/wishListSlice.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1743672616619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1743672616619,
+            "name": "Commit-0",
+            "content": "import { useState, useEffect } from 'react';\nimport { \n  fetchWishlist, \n  addToWishlist, \n  removeFromWishlist,\n  syncWishlist\n} from '../../wishListActions';\n\nexport const useWishlist = (user) => {\n  const [wishlist, setWishlist] = useState([]);\n  const [deviceId] = useState(() => {\n    return localStorage.getItem('deviceId') || `device_${Math.random().toString(36).substr(2, 9)}`;\n  });\n\n  useEffect(() => {\n    localStorage.setItem('deviceId', deviceId);\n  }, [deviceId]);\n\n  useEffect(() => {\n    const loadWishlist = async () => {\n      if (user?.token) {\n        const data = await fetchWishlist(user.token);\n        setWishlist(data);\n      }\n    };\n    loadWishlist();\n  }, [user]);\n\n  const toggleWishlistItem = async (productId) => {\n    const isInWishlist = wishlist.includes(productId);\n    \n    if (isInWishlist) {\n      if (user?.token) {\n        await removeFromWishlist(productId, user.token);\n      }\n      setWishlist(wishlist.filter(id => id !== productId));\n    } else {\n      if (user?.token) {\n        await addToWishlist(productId, user.token);\n      } else {\n        await addToWishlist(productId, null, deviceId);\n      }\n      setWishlist([...wishlist, productId]);\n    }\n  };\n\n  const syncWishlists = async () => {\n    if (user?.token) {\n      const guestWishlist = JSON.parse(localStorage.getItem('guestWishlist')) || [];\n      if (guestWishlist.length > 0) {\n        const { wishlist: mergedWishlist } = await syncWishlist(\n          guestWishlist, \n          deviceId, \n          user.token\n        );\n        setWishlist(mergedWishlist);\n        localStorage.removeItem('guestWishlist');\n      }\n    }\n  };\n\n  return { wishlist, toggleWishlistItem, syncWishlists, deviceId };\n};"
+        }
+    ]
+}

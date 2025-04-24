@@ -1,0 +1,194 @@
+{
+    "sourceFile": "src/components/pages/productSelection.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 44,
+            "patches": [
+                {
+                    "date": 1738880240264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1738880249335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,11 @@\n-raf\n\\ No newline at end of file\n+import React from 'react'\n+\n+const ProductSelection = () => {\n+  return (\n+    <div>\n+      \n+    </div>\n+  )\n+}\n+\n+export default ProductSelection\n"
+                },
+                {
+                    "date": 1738880279919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,63 @@\n-import React from 'react'\n+import React, { useEffect, useState } from \"react\";\n \n-const ProductSelection = () => {\n+const ProductsList = () => {\n+  const [products, setProducts] = useState([]);\n+\n+  // Fetch products from the JSON server when the component mounts\n+  useEffect(() => {\n+    fetch(\"http://localhost:3001/products\")\n+      .then((response) => response.json())\n+      .then((data) => setProducts(data))\n+      .catch((error) => console.error(\"Error fetching products:\", error));\n+  }, []);\n+\n+  // Toggle the selection state of a product\n+  const toggleSelection = (id, currentSelection) => {\n+    // Update the product on the server using PATCH\n+    fetch(http://localhost:3001/products/${id}, {\n+      method: \"PATCH\",\n+      headers: {\n+        \"Content-Type\": \"application/json\",\n+      },\n+      body: JSON.stringify({ isSelected: !currentSelection }),\n+    })\n+      .then((response) => response.json())\n+      .then((updatedProduct) => {\n+        // Update the local state to reflect the change\n+        setProducts((prevProducts) =>\n+          prevProducts.map((product) =>\n+            product.id === id ? updatedProduct : product\n+          )\n+        );\n+      })\n+      .catch((error) => console.error(\"Error updating product:\", error));\n+  };\n+\n   return (\n-    <div>\n-      \n+    <div style={{ padding: \"20px\" }}>\n+      <h1>Products</h1>\n+      {products.map((product) => (\n+        <div\n+          key={product.id}\n+          style={{\n+            border: \"1px solid #ccc\",\n+            padding: \"10px\",\n+            marginBottom: \"10px\",\n+            borderRadius: \"4px\",\n+          }}\n+        >\n+          <h2>{product.title}</h2>\n+          <p>{product.description}</p>\n+          <p>\n+            <strong>Selected:</strong> {product.isSelected ? \"Yes\" : \"No\"}\n+          </p>\n+          <button onClick={() => toggleSelection(product.id, product.isSelected)}>\n+            {product.isSelected ? \"Unselect\" : \"Select\"}\n+          </button>\n+        </div>\n+      ))}\n     </div>\n-  )\n-}\n+  );\n+};\n \n-export default ProductSelection\n+export default ProductsList;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1738880302174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(http://localhost:3001/products/${id}, {\n+    fetch(`http://localhost:3001/products/${id}, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n"
+                },
+                {
+                    "date": 1738880321635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(`http://localhost:3001/products/${id}, {\n+    fetch(`http://localhost:3001/products/${id}`, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n"
+                },
+                {
+                    "date": 1738880346512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n-    fetch(\"http://localhost:3001/products\")\n+    fetch(/products\")\n       .then((response) => response.json())\n       .then((data) => setProducts(data))\n       .catch((error) => console.error(\"Error fetching products:\", error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738880352240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n-    fetch(/products\")\n+    fetch(`$/products\")\n       .then((response) => response.json())\n       .then((data) => setProducts(data))\n       .catch((error) => console.error(\"Error fetching products:\", error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738880357696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n-    fetch(`$/products\")\n+    fetch(`${}/products\")\n       .then((response) => response.json())\n       .then((data) => setProducts(data))\n       .catch((error) => console.error(\"Error fetching products:\", error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738880376504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n import React, { useEffect, useState } from \"react\";\n \n-const ProductsList = () => {\n+const ProductsList = ({}) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n-    fetch(`${}/products\")\n+    fetch(`${api}/products\")\n       .then((response) => response.json())\n       .then((data) => setProducts(data))\n       .catch((error) => console.error(\"Error fetching products:\", error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738880399269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n import React, { useEffect, useState } from \"react\";\n \n-const ProductsList = ({}) => {\n+const ProductsList = ({api}) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n-    fetch(`${api}/products\")\n+    fetch(`${api}/products`)\n       .then((response) => response.json())\n       .then((data) => setProducts(data))\n       .catch((error) => console.error(\"Error fetching products:\", error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738880419497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(`http://localhost:3001/products/${id}`, {\n+    fetch(`/products/${id}`, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n"
+                },
+                {
+                    "date": 1738880425044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(`/products/${id}`, {\n+    fetch(`${/products/${id}`, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n"
+                },
+                {
+                    "date": 1738880499886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect, useState } from \"react\";\n \n-const ProductsList = ({api}) => {\n+const  = ({api}) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n@@ -13,9 +13,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(`${/products/${id}`, {\n+    fetch(`${api}/products/${id}`, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n@@ -59,5 +59,5 @@\n     </div>\n   );\n };\n \n-export default ProductsList;\n\\ No newline at end of file\n+export default ;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1738880507253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect, useState } from \"react\";\n \n-const  = ({api}) => {\n+const Product = ({api}) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n@@ -59,5 +59,5 @@\n     </div>\n   );\n };\n \n-export default ;\n\\ No newline at end of file\n+export default Product;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1738880513007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect, useState } from \"react\";\n \n-const Product = ({api}) => {\n+const Product = ({ api }) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n@@ -50,14 +50,16 @@\n           <p>{product.description}</p>\n           <p>\n             <strong>Selected:</strong> {product.isSelected ? \"Yes\" : \"No\"}\n           </p>\n-          <button onClick={() => toggleSelection(product.id, product.isSelected)}>\n+          <button\n+            onClick={() => toggleSelection(product.id, product.isSelected)}\n+          >\n             {product.isSelected ? \"Unselect\" : \"Select\"}\n           </button>\n         </div>\n       ))}\n     </div>\n   );\n\\ No newline at end of file\n };\n \n-export default Product;\n+export default Product;\n"
+                },
+                {
+                    "date": 1738880522087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect, useState } from \"react\";\n \n-const Product = ({ api }) => {\n+const ProductSele = ({ api }) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n@@ -61,5 +61,5 @@\n     </div>\n   );\n };\n \n-export default Product;\n\\ No newline at end of file\n+export default ProductSele;\n"
+                },
+                {
+                    "date": 1738880832653,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect, useState } from \"react\";\n \n-const ProductSele = ({ api }) => {\n+const ProductSelect = ({ api }) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n@@ -61,5 +61,5 @@\n     </div>\n   );\n };\n \n-export default ProductSele;\n+export default ProductSelecttion;\n"
+                },
+                {
+                    "date": 1738880837749,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,5 +61,5 @@\n     </div>\n   );\n };\n \n-export default ProductSelecttion;\n+export default ProductSelection;\n"
+                },
+                {
+                    "date": 1738880852848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect, useState } from \"react\";\n \n-const ProductSelect = ({ api }) => {\n+const ProductSelection = ({ api }) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1738880957204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n             marginBottom: \"10px\",\n             borderRadius: \"4px\",\n           }}\n         >\n-          <h2>{product.title}</h2>\n+          <h2>{product.}</h2>\n           <p>{product.description}</p>\n           <p>\n             <strong>Selected:</strong> {product.isSelected ? \"Yes\" : \"No\"}\n           </p>\n"
+                },
+                {
+                    "date": 1738881031463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,12 +45,12 @@\n             marginBottom: \"10px\",\n             borderRadius: \"4px\",\n           }}\n         >\n-          <h2>{product.}</h2>\n+          <h2>{product.name}</h2>\n           <p>{product.description}</p>\n           <p>\n-            <strong>Selected:</strong> {product.isSelected ? \"Yes\" : \"No\"}\n+            <strong>testSelected:</strong> {product.isSelected ? \"Yes\" : \"No\"}\n           </p>\n           <button\n             onClick={() => toggleSelection(product.id, product.isSelected)}\n           >\n"
+                },
+                {
+                    "date": 1738881843797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n   };\n \n   return (\n     <div style={{ padding: \"20px\" }}>\n-      <h1>Products</h1>\n+      <h1>Productstyd</h1>\n       {products.map((product) => (\n         <div\n           key={product.id}\n           style={{\n"
+                },
+                {
+                    "date": 1738883463804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(`${api}/products/${id}`, {\n+    fetch(`${api}/products${id}`, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n"
+                },
+                {
+                    "date": 1738883481518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(`${api}/products${id}`, {\n+    fetch(`${api}/products/${id}`, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n"
+                },
+                {
+                    "date": 1738931394520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,64 +2,5 @@\n \n const ProductSelection = ({ api }) => {\n   const [products, setProducts] = useState([]);\n \n-  // Fetch products from the JSON server when the component mounts\n-  useEffect(() => {\n-    fetch(`${api}/products`)\n-      .then((response) => response.json())\n-      .then((data) => setProducts(data))\n-      .catch((error) => console.error(\"Error fetching products:\", error));\n-  }, []);\n-\n-  // Toggle the selection state of a product\n-  const toggleSelection = (id, currentSelection) => {\n-    // Update the product on the server using PATCH\n-    fetch(`${api}/products/${id}`, {\n-      method: \"PATCH\",\n-      headers: {\n-        \"Content-Type\": \"application/json\",\n-      },\n-      body: JSON.stringify({ isSelected: !currentSelection }),\n-    })\n-      .then((response) => response.json())\n-      .then((updatedProduct) => {\n-        // Update the local state to reflect the change\n-        setProducts((prevProducts) =>\n-          prevProducts.map((product) =>\n-            product.id === id ? updatedProduct : product\n-          )\n-        );\n-      })\n-      .catch((error) => console.error(\"Error updating product:\", error));\n-  };\n-\n-  return (\n-    <div style={{ padding: \"20px\" }}>\n-      <h1>Productstyd</h1>\n-      {products.map((product) => (\n-        <div\n-          key={product.id}\n-          style={{\n-            border: \"1px solid #ccc\",\n-            padding: \"10px\",\n-            marginBottom: \"10px\",\n-            borderRadius: \"4px\",\n-          }}\n-        >\n-          <h2>{product.name}</h2>\n-          <p>{product.description}</p>\n-          <p>\n-            <strong>testSelected:</strong> {product.isSelected ? \"Yes\" : \"No\"}\n-          </p>\n-          <button\n-            onClick={() => toggleSelection(product.id, product.isSelected)}\n-          >\n-            {product.isSelected ? \"Unselect\" : \"Select\"}\n-          </button>\n-        </div>\n-      ))}\n-    </div>\n-  );\n-};\n-\n export default ProductSelection;\n"
+                },
+                {
+                    "date": 1738931399830,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,86 @@\n import React, { useEffect, useState } from \"react\";\n \n const ProductSelection = ({ api }) => {\n   const [products, setProducts] = useState([]);\n+  const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n+  // Fetch products from db.json\n+  useEffect(() => {\n+    fetch('/db.json')\n+      .then((response) => response.json())\n+      .then((data) => setProducts(data.products))\n+      .catch((error) => console.error('Error fetching products:', error));\n+  }, []);\n+\n+  // Toggle product selection\n+  const toggleSelection = (productId) => {\n+    setSelectedProducts((prevSelected) =>\n+      prevSelected.includes(productId)\n+        ? prevSelected.filter((id) => id !== productId) // Unselect\n+        : [...prevSelected, productId] // Select\n+    );\n+  };\n+\n+  if (products.length === 0) {\n+    return <div>Loading...</div>;\n+  }\n+\n+  return (\n+    <div style={styles.productList}>\n+      {products.map((product) => (\n+        <div\n+          key={product.id}\n+          style={{\n+            ...styles.productCard,\n+            border: selectedProducts.includes(product.id)\n+              ? '2px solid blue'\n+              : '1px solid #ccc',\n+          }}\n+          onClick={() => toggleSelection(product.id)}\n+        >\n+          <img src={product.image} alt={product.name} style={styles.productImage} />\n+          <h3>{product.name}</h3>\n+          <p>${product.price.toFixed(2)}</p>\n+        </div>\n+      ))}\n+\n+      {/* Display selected products */}\n+      <div style={styles.selectedProducts}>\n+        <h2>Selected Products</h2>\n+        {selectedProducts.map((id) => {\n+          const product = products.find((p) => p.id === id);\n+          return <div key={product.id}>{product.name}</div>;\n+        })}\n+      </div>\n+    </div>\n+  );\n+};\n+\n+// Styles\n+const styles = {\n+  productList: {\n+    display: 'flex',\n+    flexWrap: 'wrap',\n+    gap: '20px',\n+    padding: '20px',\n+  },\n+  productCard: {\n+    border: '1px solid #ccc',\n+    borderRadius: '8px',\n+    padding: '16px',\n+    width: '200px',\n+    textAlign: 'center',\n+    cursor: 'pointer',\n+  },\n+  productImage: {\n+    width: '100%',\n+    height: 'auto',\n+    borderRadius: '8px',\n+  },\n+  selectedProducts: {\n+    marginTop: '20px',\n+    padding: '20px',\n+    borderTop: '1px solid #ccc',\n+  },\n+};\n export default ProductSelection;\n"
+                },
+                {
+                    "date": 1738931419756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch('/db.json')\n+    fetch('')\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931428003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch('')\n+    fetch(`$`)\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931434543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch(`$`)\n+    fetch(`${api}`)\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931455347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch(`${api}`)\n+    fetch(`${api}product`)\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931625972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch(`${api}product`)\n+    fetch(`${api}/products`)\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931718190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch(`${api}/products`)\n+    fetch(`${api}/product`)\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931751506,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch(`${api}/product`)\n+    fetch(/product`)\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931758084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch(/product`)\n+    fetch('' http://localhost:5000/product`)\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931763380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch('' http://localhost:5000/product`)\n+    fetch(' http://localhost:5000/product')\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931785200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   useEffect(() => {\n-    fetch(' http://localhost:5000/product')\n+    fetch(' http://localhost:5000/products')\n       .then((response) => response.json())\n       .then((data) => setProducts(data.products))\n       .catch((error) => console.error('Error fetching products:', error));\n   }, []);\n"
+                },
+                {
+                    "date": 1738931861077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,14 +4,14 @@\n   const [products, setProducts] = useState([]);\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n-  useEffect(() => {\n-    fetch(' http://localhost:5000/products')\n-      .then((response) => response.json())\n-      .then((data) => setProducts(data.products))\n-      .catch((error) => console.error('Error fetching products:', error));\n-  }, []);\n+  // useEffect(() => {\n+  //   fetch(' http://localhost:5000/products')\n+  //     .then((response) => response.json())\n+  //     .then((data) => setProducts(data.products))\n+  //     .catch((error) => console.error('Error fetching products:', error));\n+  // }, []);\n \n   // Toggle product selection\n   const toggleSelection = (productId) => {\n     setSelectedProducts((prevSelected) =>\n"
+                },
+                {
+                    "date": 1738931869640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useEffect, useState } from \"react\";\n \n const ProductSelection = ({ api }) => {\n-  const [products, setProducts] = useState([]);\n+  const [products, setProducts] = useState();\n   const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n \n   // Fetch products from db.json\n   // useEffect(() => {\n"
+                },
+                {
+                    "date": 1738931923280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,86 +1,65 @@\n import React, { useEffect, useState } from \"react\";\n \n const ProductSelection = ({ api }) => {\n-  const [products, setProducts] = useState();\n-  const [selectedProducts, setSelectedProducts] = useState([]); // Track selected products\n+  const [products, setProducts] = useState([]);\n \n-  // Fetch products from db.json\n-  // useEffect(() => {\n-  //   fetch(' http://localhost:5000/products')\n-  //     .then((response) => response.json())\n-  //     .then((data) => setProducts(data.products))\n-  //     .catch((error) => console.error('Error fetching products:', error));\n-  // }, []);\n+  // Fetch products from the JSON server when the component mounts\n+  useEffect(() => {\n+    fetch(`${api}/products`)\n+      .then((response) => response.json())\n+      .then((data) => setProducts(data))\n+      .catch((error) => console.error(\"Error fetching products:\", error));\n+  }, []);\n \n-  // Toggle product selection\n-  const toggleSelection = (productId) => {\n-    setSelectedProducts((prevSelected) =>\n-      prevSelected.includes(productId)\n-        ? prevSelected.filter((id) => id !== productId) // Unselect\n-        : [...prevSelected, productId] // Select\n-    );\n+  // Toggle the selection state of a product\n+  const toggleSelection = (id, currentSelection) => {\n+    // Update the product on the server using PATCH\n+    fetch(`${api}/products/${id}`, {\n+      method: \"PATCH\",\n+      headers: {\n+        \"Content-Type\": \"application/json\",\n+      },\n+      body: JSON.stringify({ isSelected: !currentSelection }),\n+    })\n+      .then((response) => response.json())\n+      .then((updatedProduct) => {\n+        // Update the local state to reflect the change\n+        setProducts((prevProducts) =>\n+          prevProducts.map((product) =>\n+            product.id === id ? updatedProduct : product\n+          )\n+        );\n+      })\n+      .catch((error) => console.error(\"Error updating product:\", error));\n   };\n \n-  if (products.length === 0) {\n-    return <div>Loading...</div>;\n-  }\n-\n   return (\n-    <div style={styles.productList}>\n+    <div style={{ padding: \"20px\" }}>\n+      <h1>Productstyd</h1>\n       {products.map((product) => (\n         <div\n           key={product.id}\n           style={{\n-            ...styles.productCard,\n-            border: selectedProducts.includes(product.id)\n-              ? '2px solid blue'\n-              : '1px solid #ccc',\n+            border: \"1px solid #ccc\",\n+            padding: \"10px\",\n+            marginBottom: \"10px\",\n+            borderRadius: \"4px\",\n           }}\n-          onClick={() => toggleSelection(product.id)}\n         >\n-          <img src={product.image} alt={product.name} style={styles.productImage} />\n-          <h3>{product.name}</h3>\n-          <p>${product.price.toFixed(2)}</p>\n+          <h2>{product.name}</h2>\n+          <p>{product.description}</p>\n+          <p>\n+            <strong>testSelected:</strong> {product.isSelected ? \"Yes\" : \"No\"}\n+          </p>\n+          <button\n+            onClick={() => toggleSelection(product.id, product.isSelected)}\n+          >\n+            {product.isSelected ? \"Unselect\" : \"Select\"}\n+          </button>\n         </div>\n       ))}\n-\n-      {/* Display selected products */}\n-      <div style={styles.selectedProducts}>\n-        <h2>Selected Products</h2>\n-        {selectedProducts.map((id) => {\n-          const product = products.find((p) => p.id === id);\n-          return <div key={product.id}>{product.name}</div>;\n-        })}\n-      </div>\n     </div>\n   );\n };\n \n-// Styles\n-const styles = {\n-  productList: {\n-    display: 'flex',\n-    flexWrap: 'wrap',\n-    gap: '20px',\n-    padding: '20px',\n-  },\n-  productCard: {\n-    border: '1px solid #ccc',\n-    borderRadius: '8px',\n-    padding: '16px',\n-    width: '200px',\n-    textAlign: 'center',\n-    cursor: 'pointer',\n-  },\n-  productImage: {\n-    width: '100%',\n-    height: 'auto',\n-    borderRadius: '8px',\n-  },\n-  selectedProducts: {\n-    marginTop: '20px',\n-    padding: '20px',\n-    borderTop: '1px solid #ccc',\n-  },\n-};\n export default ProductSelection;\n"
+                },
+                {
+                    "date": 1738931931895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,14 +3,14 @@\n const ProductSelection = ({ api }) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n-  useEffect(() => {\n-    fetch(`${api}/products`)\n-      .then((response) => response.json())\n-      .then((data) => setProducts(data))\n-      .catch((error) => console.error(\"Error fetching products:\", error));\n-  }, []);\n+  // useEffect(() => {\n+  //   fetch(`${api}/products`)\n+  //     .then((response) => response.json())\n+  //     .then((data) => setProducts(data))\n+  //     .catch((error) => console.error(\"Error fetching products:\", error));\n+  // }, []);\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n"
+                },
+                {
+                    "date": 1738931938598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import React, { useEffect, useState } from \"react\";\n \n-const ProductSelection = ({ api }) => {\n+const ProductSelection = ({ api, filteredProducts}) => {\n   const [products, setProducts] = useState([]);\n \n   // Fetch products from the JSON server when the component mounts\n   // useEffect(() => {\n"
+                },
+                {
+                    "date": 1738931946120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import React, { useEffect, useState } from \"react\";\n \n const ProductSelection = ({ api, filteredProducts}) => {\n-  const [products, setProducts] = useState([]);\n+  const [products, setProducts] = useState(filteredProducts);\n \n   // Fetch products from the JSON server when the component mounts\n   // useEffect(() => {\n   //   fetch(`${api}/products`)\n"
+                },
+                {
+                    "date": 1738935963486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(`${api}/products/${id}`, {\n+    fetch(`${api}/upproducts/${id}`, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n"
+                },
+                {
+                    "date": 1738935968818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(`${api}/upproducts/${id}`, {\n+    fetch(`${api}/updateproducts/${id}`, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n"
+                },
+                {
+                    "date": 1740509948472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,7 @@\n import React, { useEffect, useState } from \"react\";\n+import { useSelector, useDispatch } from \"react-redux\";\n+import { addToCartBeforeLogin, addToCartAPI } from \"../../cartAction\";\n \n const ProductSelection = ({ api, filteredProducts}) => {\n   const [products, setProducts] = useState(filteredProducts);\n \n@@ -13,9 +15,9 @@\n \n   // Toggle the selection state of a product\n   const toggleSelection = (id, currentSelection) => {\n     // Update the product on the server using PATCH\n-    fetch(`${api}/updateproducts/${id}`, {\n+    fetch(`${api}/updateProducts/${id}`, {\n       method: \"PATCH\",\n       headers: {\n         \"Content-Type\": \"application/json\",\n       },\n"
+                }
+            ],
+            "date": 1738880240264,
+            "name": "Commit-0",
+            "content": "raf"
+        }
+    ]
+}

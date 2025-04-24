@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/components/signIN.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1737196224142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1737200891684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,22 @@\n .login-container {\n-    width: 300px;\n+    max-width: 400px;\n     margin: 50px auto;\n     padding: 20px;\n-    border: 1px solid #ccc;\n+    border: 1px solid #ddd;\n     border-radius: 8px;\n-    text-align: center;\n+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n   }\n   .login-container input {\n     width: 100%;\n     padding: 8px;\n-    margin: 10px 0;\n+    margin: 8px 0;\n   }\n   .login-container button {\n-    padding: 10px 15px;\n+    width: 100%;\n+    padding: 10px;\n     background-color: #007bff;\n     color: white;\n     border: none;\n-    border-radius: 5px;\n+    border-radius: 4px;\n     cursor: pointer;\n   }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1737196224142,
+            "name": "Commit-0",
+            "content": ".login-container {\n    width: 300px;\n    margin: 50px auto;\n    padding: 20px;\n    border: 1px solid #ccc;\n    border-radius: 8px;\n    text-align: center;\n  }\n  .login-container input {\n    width: 100%;\n    padding: 8px;\n    margin: 10px 0;\n  }\n  .login-container button {\n    padding: 10px 15px;\n    background-color: #007bff;\n    color: white;\n    border: none;\n    border-radius: 5px;\n    cursor: pointer;\n  }"
+        }
+    ]
+}

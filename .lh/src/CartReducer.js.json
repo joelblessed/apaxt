@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/CartReducer.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1739958489190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741891105911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,24 @@\n         case \"ADD_TO_CART\":\n             return { ...state, items: [...state.items, action.payload] };\n         case \"SET_CART\":\n             return { ...state, items: action.payload };\n+        case \"INCREMENT_QUANTITY\":\n+            return {\n+                ...state,\n+                items: state.items.map(item =>\n+                    item.id === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item\n+                )\n+            };\n+        case \"DECREMENT_QUANTITY\":\n+            return {\n+                ...state,\n+                items: state.items.map(item =>\n+                    item.id === action.payload.id && item.quantity > 1\n+                        ? { ...item, quantity: item.quantity - 1 }\n+                        : item\n+                )\n+            };\n         default:\n             return state;\n     }\n };\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1739958489190,
+            "name": "Commit-0",
+            "content": "const initialState = {\n    items: JSON.parse(localStorage.getItem(\"cart\")) || []\n};\n\nexport const cartReducer = (state = initialState, action) => {\n    switch (action.type) {\n        case \"ADD_TO_CART\":\n            return { ...state, items: [...state.items, action.payload] };\n        case \"SET_CART\":\n            return { ...state, items: action.payload };\n        default:\n            return state;\n    }\n};"
+        }
+    ]
+}

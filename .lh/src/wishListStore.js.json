@@ -1,0 +1,54 @@
+{
+    "sourceFile": "src/wishListStore.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1743617467496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743617593575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { configureStore } from \"@reduxjs/toolkit\";\n-import wishlistReducer from \"./wishlistReducer\"; // Import the reducer\n+import wishlistReducer from \"./wishListReducer\"; // Import the reducer\n \n-const store = configureStore({\n+const wstore = configureStore({\n   reducer: {\n     wishlist: wishlistReducer, // Add wishlist to Redux state\n   },\n });\n"
+                },
+                {
+                    "date": 1743617603683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import { configureStore } from \"@reduxjs/toolkit\";\n import wishlistReducer from \"./wishListReducer\"; // Import the reducer\n \n-const wstore = configureStore({\n+const wlstore = configureStore({\n   reducer: {\n     wishlist: wishlistReducer, // Add wishlist to Redux state\n   },\n });\n \n\\ No newline at end of file\n-export default store;\n+export default wlstore;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743617613017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { configureStore } from \"@reduxjs/toolkit\";\n import wishlistReducer from \"./wishListReducer\"; // Import the reducer\n \n-const wlstore = configureStore({\n+const whishlstore = configureStore({\n   reducer: {\n     wishlist: wishlistReducer, // Add wishlist to Redux state\n   },\n });\n"
+                },
+                {
+                    "date": 1743617621935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import { configureStore } from \"@reduxjs/toolkit\";\n import wishlistReducer from \"./wishListReducer\"; // Import the reducer\n \n-const whishlstore = configureStore({\n+const whishliststore = configureStore({\n   reducer: {\n     wishlist: wishlistReducer, // Add wishlist to Redux state\n   },\n });\n \n\\ No newline at end of file\n-export default wlstore;\n+export default whishlstore;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743623078628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import { configureStore } from \"@reduxjs/toolkit\";\n-import wishlistReducer from \"./wishListReducer\"; // Import the reducer\n+import wishlistReducer from \"./wishlistReducer\"; // Import the reducer\n \n-const whishliststore = configureStore({\n+const store = configureStore({\n   reducer: {\n     wishlist: wishlistReducer, // Add wishlist to Redux state\n   },\n });\n\\ No newline at end of file\n \n-export default whishlstore;\n+export default store\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743623093957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { configureStore } from \"@reduxjs/toolkit\";\n import wishlistReducer from \"./wishlistReducer\"; // Import the reducer\n \n-const store = configureStore({\n+const wisstore = configureStore({\n   reducer: {\n     wishlist: wishlistReducer, // Add wishlist to Redux state\n   },\n });\n"
+                },
+                {
+                    "date": 1743623099784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import { configureStore } from \"@reduxjs/toolkit\";\n import wishlistReducer from \"./wishlistReducer\"; // Import the reducer\n \n-const wisstore = configureStore({\n+const wishliststore = configureStore({\n   reducer: {\n     wishlist: wishlistReducer, // Add wishlist to Redux state\n   },\n });\n"
+                },
+                {
+                    "date": 1743623107451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,5 +6,5 @@\n     wishlist: wishlistReducer, // Add wishlist to Redux state\n   },\n });\n \n-export default store\n\\ No newline at end of file\n+export default wishstore\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743623178058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import { configureStore } from \"@reduxjs/toolkit\";\n-import wishlistReducer from \"./wishlistReducer\"; // Import the reducer\n+import wishlistReducer from \"./wishistReducer\"; // Import the reducer\n \n const wishliststore = configureStore({\n   reducer: {\n     wishlist: wishlistReducer, // Add wishlist to Redux state\n   },\n });\n \n\\ No newline at end of file\n-export default wishstore\n+export default wishliststore\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1743617467496,
+            "name": "Commit-0",
+            "content": "import { configureStore } from \"@reduxjs/toolkit\";\nimport wishlistReducer from \"./wishlistReducer\"; // Import the reducer\n\nconst store = configureStore({\n  reducer: {\n    wishlist: wishlistReducer, // Add wishlist to Redux state\n  },\n});\n\nexport default store;"
+        }
+    ]
+}

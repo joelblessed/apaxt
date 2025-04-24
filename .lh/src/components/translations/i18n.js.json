@@ -1,0 +1,42 @@
+{
+    "sourceFile": "src/components/translations/i18n.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1742400035487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742400043687,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import i18n from \"i18next\";\n import { initReactI18next } from \"react-i18next\";\n-import translationEN from \".en/translation.json\";\n+import translationEN from \"./translation.json\";\n import translationFR from \"./translations/fr/translation.json\";\n import translationES from \"./translations/es/translation.json\";\n \n // Resources for translations\n"
+                },
+                {
+                    "date": 1742400052907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import i18n from \"i18next\";\n import { initReactI18next } from \"react-i18next\";\n-import translationEN from \"./translation.json\";\n+import translationEN from \"./en/translation.json\";\n import translationFR from \"./translations/fr/translation.json\";\n import translationES from \"./translations/es/translation.json\";\n \n // Resources for translations\n"
+                },
+                {
+                    "date": 1742400067130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n import i18n from \"i18next\";\n import { initReactI18next } from \"react-i18next\";\n import translationEN from \"./en/translation.json\";\n-import translationFR from \"./translations/fr/translation.json\";\n+import translationFR from \"./fr/translation.json\";\n import translationES from \"./translations/es/translation.json\";\n \n // Resources for translations\n const resources = {\n"
+                },
+                {
+                    "date": 1742400075774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import i18n from \"i18next\";\n import { initReactI18next } from \"react-i18next\";\n import translationEN from \"./en/translation.json\";\n import translationFR from \"./fr/translation.json\";\n-import translationES from \"./translations/es/translation.json\";\n \n+\n // Resources for translations\n const resources = {\n   en: {\n     translation: translationEN,\n"
+                },
+                {
+                    "date": 1742400094103,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,11 +11,9 @@\n   },\n   fr: {\n     translation: translationFR,\n   },\n-  es: {\n-    translation: translationES,\n-  },\n+\n };\n \n i18n.use(initReactI18next).init({\n   resources,\n"
+                },
+                {
+                    "date": 1742401323796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import i18n from \"i18next\";\n import { initReactI18next } from \"react-i18next\";\n-import translationEN from \".\";\n+import translationEN from \"./\";\n import translationFR from \"./fr/translation.json\";\n \n \n // Resources for translations\n"
+                }
+            ],
+            "date": 1742400035487,
+            "name": "Commit-0",
+            "content": "import i18n from \"i18next\";\nimport { initReactI18next } from \"react-i18next\";\nimport translationEN from \".en/translation.json\";\nimport translationFR from \"./translations/fr/translation.json\";\nimport translationES from \"./translations/es/translation.json\";\n\n// Resources for translations\nconst resources = {\n  en: {\n    translation: translationEN,\n  },\n  fr: {\n    translation: translationFR,\n  },\n  es: {\n    translation: translationES,\n  },\n};\n\ni18n.use(initReactI18next).init({\n  resources,\n  lng: \"en\", // Default language\n  fallbackLng: \"en\", // Fallback language if translation is missing\n  interpolation: {\n    escapeValue: false, // React already escapes values\n  },\n});\n\nexport default i18n;"
+        }
+    ]
+}

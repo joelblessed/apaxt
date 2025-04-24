@@ -1,0 +1,58 @@
+{
+    "sourceFile": "src/components/account/dashboardStyles.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1743496261357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743497420503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,9 @@\n   padding: 16px;\n   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);\n \n   @media (min-width: 768px) {\n+  \n     width: 240px;\n     height: 100vh;\n   }\n `;\n"
+                },
+                {
+                    "date": 1743497426247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n   padding: 16px;\n   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);\n \n   @media (min-width: 768px) {\n-  \n+  margin-top\n     width: 240px;\n     height: 100vh;\n   }\n `;\n"
+                },
+                {
+                    "date": 1743497432858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n   padding: 16px;\n   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);\n \n   @media (min-width: 768px) {\n-  margin-top\n+  margin-top:100px;\n     width: 240px;\n     height: 100vh;\n   }\n `;\n"
+                },
+                {
+                    "date": 1743497458789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n   padding: 16px;\n   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);\n \n   @media (min-width: 768px) {\n-  margin-top:100px;\n+\n     width: 240px;\n     height: 100vh;\n   }\n `;\n"
+                },
+                {
+                    "date": 1743497533586,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,9 @@\n   flex-direction: column;\n \n   @media (min-width: 768px) {\n     flex-direction: row;\n+      margin-top:300px;\n   }\n `;\n \n export const Sidebar = styled.div`\n"
+                },
+                {
+                    "date": 1743497603920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,8 +32,9 @@\n       margin-top:300px;\n   }\n `;\n \n+\n export const Sidebar = styled.div`\n   width: 100%;\n   background-color: #f4f4f4;\n   padding: 16px;\n"
+                },
+                {
+                    "date": 1743497612616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,8 +30,12 @@\n   @media (min-width: 768px) {\n     flex-direction: row;\n       margin-top:300px;\n   }\n+       @media (max-width: 768px) {\n+    flex-direction: row;\n+      margin-top:300px;\n+  }\n `;\n \n \n export const Sidebar = styled.div`\n"
+                },
+                {
+                    "date": 1743497618599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n     flex-direction: row;\n       margin-top:300px;\n   }\n        @media (max-width: 768px) {\n-    flex-direction: row;\n+  \n       margin-top:300px;\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1743497639363,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n     \n   }\n        @media (max-width: 768px) {\n   \n-      margin-top:300px;\n+      margin-top:100px;\n   }\n `;\n \n \n"
+                },
+                {
+                    "date": 1743499136559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,165 @@\n+import styled from \"styled-components\";\n+import { Link } from \"react-router-dom\";\n+\n+// Shared Styles\n+export const Card = styled.div`\n+  background-color: #fff;\n+  wi\n+  padding: 16px;\n+  border-radius: 8px;\n+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n+  margin-bottom: 16px;\n+`;\n+\n+export const Grid = styled.div`\n+  display: grid;\n+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n+  gap: 16px;\n+`;\n+\n+export const Header = styled.h1`\n+  font-size: 24px;\n+  font-weight: bold;\n+  margin-bottom: 16px;\n+`;\n+\n+// Dashboard Layout\n+export const DashboardContainer = styled.div`\n+  display: flex;\n+  flex-direction: column;\n+\n+  @media (min-width: 768px) {\n+    flex-direction: row;\n+    \n+  }\n+       @media (max-width: 768px) {\n+  \n+      margin-top:100px;\n+  }\n+`;\n+\n+\n+export const Sidebar = styled.div`\n+  width: 100%;\n+  background-color: #f4f4f4;\n+  padding: 16px;\n+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);\n+\n+  @media (min-width: 768px) {\n+\n+    width: 240px;\n+    height: 100vh;\n+  }\n+`;\n+\n+export const MainContent = styled.div`\n+  flex-grow: 1;\n+  padding: 16px;\n+  background-color: #fff;\n+`;\n+\n+export const NavLink = styled(Link)`\n+  text-decoration: none;\n+  color: #333;\n+  display: block;\n+  padding: 8px 16px;\n+  margin: 8px 0;\n+  border-radius: 4px;\n+  background-color: #e0e0e0;\n+  transition: background-color 0.3s;\n+\n+  &:hover {\n+    background-color: #ccc;\n+  }\n+`;\n+\n+export const LogoutButton = styled.button`\n+  width: 100%;\n+  padding: 8px 16px;\n+  margin: 8px 0;\n+  border-radius: 4px;\n+  background-color: #ff4444;\n+  color: #fff;\n+  border: none;\n+  cursor: pointer;\n+  transition: background-color 0.3s;\n+\n+  &:hover {\n+    background-color: #cc0000;\n+  }\n+`;\n+\n+// Profile Styles\n+export const ProfileContainer = styled.div`\n+  max-width: 1000px;\n+  margin: 0 auto;\n+  padding: 20px;\n+  border: 1px solid #ccc;\n+  border-radius: 8px;\n+  background-color: #f9f9f9;\n+`;\n+\n+export const ProfileImage = styled.img`\n+  width: 150px;\n+  height: 150px;\n+  border-radius: 50%;\n+  margin-bottom: 20px;\n+`;\n+\n+export const EditButton = styled(Link)`\n+  border: 1px solid green;\n+  padding: 10px;\n+  border-radius: 10px;\n+  color: green;\n+  font-size: 15px;\n+  font-weight: bold;\n+  text-decoration: none;\n+  display: inline-block;\n+  margin-right: 10px;\n+`;\n+\n+export const DeleteButton = styled.button`\n+  border: 1px solid red;\n+  background: none;\n+  padding: 10px;\n+  border-radius: 10px;\n+  color: red;\n+  font-size: 15px;\n+  font-weight: bold;\n+  cursor: pointer;\n+`;\n+\n+// Edit Profile Picture Styles\n+export const EditProfileForm = styled.form`\n+  display: flex;\n+  flex-direction: column;\n+  align-items: center;\n+  max-width: 400px;\n+  margin: 0 auto;\n+  padding: 20px;\n+`;\n+\n+export const FormLabel = styled.label`\n+  margin-bottom: 10px;\n+  font-weight: bold;\n+`;\n+\n+export const FormButton = styled.button`\n+  padding: 10px 20px;\n+  border-radius: 4px;\n+  border: none;\n+  background-color: #007bff;\n+  color: #fff;\n+  cursor: pointer;\n+`;\n+\n+// Analytics Styles\n+export const ChartPlaceholder = styled.div`\n+  height: 400px;\n+  background-color: #f4f4f4;\n+  display: flex;\n+  align-items: center;\n+  justify-content: center;\n+  border-radius: 8px;\n+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n+`;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1743496261357,
+            "name": "Commit-0",
+            "content": "import styled from \"styled-components\";\nimport { Link } from \"react-router-dom\";\n\n// Shared Styles\nexport const Card = styled.div`\n  background-color: #fff;\n  padding: 16px;\n  border-radius: 8px;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  margin-bottom: 16px;\n`;\n\nexport const Grid = styled.div`\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n  gap: 16px;\n`;\n\nexport const Header = styled.h1`\n  font-size: 24px;\n  font-weight: bold;\n  margin-bottom: 16px;\n`;\n\n// Dashboard Layout\nexport const DashboardContainer = styled.div`\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n  }\n`;\n\nexport const Sidebar = styled.div`\n  width: 100%;\n  background-color: #f4f4f4;\n  padding: 16px;\n  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);\n\n  @media (min-width: 768px) {\n    width: 240px;\n    height: 100vh;\n  }\n`;\n\nexport const MainContent = styled.div`\n  flex-grow: 1;\n  padding: 16px;\n  background-color: #fff;\n`;\n\nexport const NavLink = styled(Link)`\n  text-decoration: none;\n  color: #333;\n  display: block;\n  padding: 8px 16px;\n  margin: 8px 0;\n  border-radius: 4px;\n  background-color: #e0e0e0;\n  transition: background-color 0.3s;\n\n  &:hover {\n    background-color: #ccc;\n  }\n`;\n\nexport const LogoutButton = styled.button`\n  width: 100%;\n  padding: 8px 16px;\n  margin: 8px 0;\n  border-radius: 4px;\n  background-color: #ff4444;\n  color: #fff;\n  border: none;\n  cursor: pointer;\n  transition: background-color 0.3s;\n\n  &:hover {\n    background-color: #cc0000;\n  }\n`;\n\n// Profile Styles\nexport const ProfileContainer = styled.div`\n  max-width: 1000px;\n  margin: 0 auto;\n  padding: 20px;\n  border: 1px solid #ccc;\n  border-radius: 8px;\n  background-color: #f9f9f9;\n`;\n\nexport const ProfileImage = styled.img`\n  width: 150px;\n  height: 150px;\n  border-radius: 50%;\n  margin-bottom: 20px;\n`;\n\nexport const EditButton = styled(Link)`\n  border: 1px solid green;\n  padding: 10px;\n  border-radius: 10px;\n  color: green;\n  font-size: 15px;\n  font-weight: bold;\n  text-decoration: none;\n  display: inline-block;\n  margin-right: 10px;\n`;\n\nexport const DeleteButton = styled.button`\n  border: 1px solid red;\n  background: none;\n  padding: 10px;\n  border-radius: 10px;\n  color: red;\n  font-size: 15px;\n  font-weight: bold;\n  cursor: pointer;\n`;\n\n// Edit Profile Picture Styles\nexport const EditProfileForm = styled.form`\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  max-width: 400px;\n  margin: 0 auto;\n  padding: 20px;\n`;\n\nexport const FormLabel = styled.label`\n  margin-bottom: 10px;\n  font-weight: bold;\n`;\n\nexport const FormButton = styled.button`\n  padding: 10px 20px;\n  border-radius: 4px;\n  border: none;\n  background-color: #007bff;\n  color: #fff;\n  cursor: pointer;\n`;\n\n// Analytics Styles\nexport const ChartPlaceholder = styled.div`\n  height: 400px;\n  background-color: #f4f4f4;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 8px;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n`;"
+        }
+    ]
+}

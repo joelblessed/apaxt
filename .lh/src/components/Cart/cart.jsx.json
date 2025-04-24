@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/components/Cart/cart.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1740135268984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740139554658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,12 @@\n import { useSelector } from \"react-redux\";\n \n const Cart = () => {\n   const cartItems = useSelector((state) => state.cart.items);\n+  useEffect(() => {\n+    const savedCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n+    setCart(savedCart);\n+  }, []);\n \n   return (\n     <div>\n       <h2>Your Cart</h2>\n"
+                },
+                {
+                    "date": 1740139566798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from \"react\";\n import { useSelector } from \"react-redux\";\n \n const Cart = () => {\n-  const cartItems = useSelector((state) => state.cart.items);\n+  \n   useEffect(() => {\n     const savedCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n     setCart(savedCart);\n   }, []);\n"
+                },
+                {
+                    "date": 1740139575343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from \"react\";\n import { useSelector } from \"react-redux\";\n \n const Cart = () => {\n-  \n+const cart\n   useEffect(() => {\n     const savedCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n     setCart(savedCart);\n   }, []);\n"
+                },
+                {
+                    "date": 1740139580762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from \"react\";\n import { useSelector } from \"react-redux\";\n \n const Cart = () => {\n-const cart\n+const []\n   useEffect(() => {\n     const savedCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n     setCart(savedCart);\n   }, []);\n"
+                },
+                {
+                    "date": 1740139586635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from \"react\";\n import { useSelector } from \"react-redux\";\n \n const Cart = () => {\n-const []\n+const [cart, setCart]\n   useEffect(() => {\n     const savedCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n     setCart(savedCart);\n   }, []);\n"
+                },
+                {
+                    "date": 1740139593029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from \"react\";\n import { useSelector } from \"react-redux\";\n \n const Cart = () => {\n-const [cart, setCart] = \n+const [cart, setCart] = u\n   useEffect(() => {\n     const savedCart = JSON.parse(localStorage.getItem(\"cart\")) || [];\n     setCart(savedCart);\n   }, []);\n"
+                },
+                {
+                    "date": 1740140196710,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     setCart(savedCart);\n   }, []);\n \n   return (\n-    <div style={{marginTop}}>\n+    <div style={{marginTop:\" 90\"}}>\n       <h2>Your Cart</h2>\n       {cartItems.length === 0 ? <p>Cart is empty</p> : \n         cartItems.map((item) => (\n           <div key={item.id}>\n"
+                }
+            ],
+            "date": 1740135268984,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\nimport { useSelector } from \"react-redux\";\n\nconst Cart = () => {\n  const cartItems = useSelector((state) => state.cart.items);\n\n  return (\n    <div>\n      <h2>Your Cart</h2>\n      {cartItems.length === 0 ? <p>Cart is empty</p> : \n        cartItems.map((item) => (\n          <div key={item.id}>\n            <h4>{item.name}</h4>\n            <p>Price: ${item.price}</p>\n          </div>\n        ))\n      }\n    </div>\n  );\n};\n\nexport default Cart"
+        }
+    ]
+}

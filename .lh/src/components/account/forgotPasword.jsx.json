@@ -1,0 +1,54 @@
+{
+    "sourceFile": "src/components/account/forgotPasword.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1738194629746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1738194642813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleForgotPassword = async (e) => {\n     e.preventDefault();\n \n-    const response = await fetch(\"http://localhost:3001/forgot-password\", {\n+    const response = await fetch(\"http://localhost:3/forgot-password\", {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ email }),\n     });\n"
+                },
+                {
+                    "date": 1738244125919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleForgotPassword = async (e) => {\n     e.preventDefault();\n \n-    const response = await fetch(\"http://localhost:3/forgot-password\", {\n+    const response = await fetch(`/forgot-password\", {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ email }),\n     });\n"
+                },
+                {
+                    "date": 1738244135111,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleForgotPassword = async (e) => {\n     e.preventDefault();\n \n-    const response = await fetch(`/forgot-password\", {\n+    const response = await fetch(`${/forgot-password`, {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ email }),\n     });\n"
+                },
+                {
+                    "date": 1738244155087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import React, { useState } from \"react\";\n \n-function ForgotPassword() {\n+function ForgotPassword({}) {\n   const [email, setEmail] = useState(\"\");\n   const [message, setMessage] = useState(\"\");\n \n   const handleForgotPassword = async (e) => {\n     e.preventDefault();\n \n-    const response = await fetch(`${/forgot-password`, {\n+    const response = await fetch(`${api}/forgot-password`, {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ email }),\n     });\n"
+                },
+                {
+                    "date": 1738244173117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import React, { useState } from \"react\";\n \n-function ForgotPassword({}) {\n+function ForgotPassword() {\n   const [email, setEmail] = useState(\"\");\n   const [message, setMessage] = useState(\"\");\n \n   const handleForgotPassword = async (e) => {\n     e.preventDefault();\n \n-    const response = await fetch(`${api}/forgot-password`, {\n+    const response = await fetch(`/forgot-password`, {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ email }),\n     });\n"
+                },
+                {
+                    "date": 1738244183827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import React, { useState } from \"react\";\n \n-function ForgotPassword() {\n+function ForgotPassword({}) {\n   const [email, setEmail] = useState(\"\");\n   const [message, setMessage] = useState(\"\");\n \n   const handleForgotPassword = async (e) => {\n     e.preventDefault();\n \n-    const response = await fetch(`/forgot-password`, {\n+    const response = await fetch(\"http://localhost:5000/forgot-password\", {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ email }),\n     });\n"
+                },
+                {
+                    "date": 1738244196135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import React, { useState } from \"react\";\n \n-function ForgotPassword({}) {\n+function ForgotPassword({api}) {\n   const [email, setEmail] = useState(\"\");\n   const [message, setMessage] = useState(\"\");\n \n   const handleForgotPassword = async (e) => {\n     e.preventDefault();\n \n-    const response = await fetch(\"http://localhost:5000/forgot-password\", {\n+    const response = await fetch(\"/forgot-password\", {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ email }),\n     });\n"
+                },
+                {
+                    "date": 1738244204203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleForgotPassword = async (e) => {\n     e.preventDefault();\n \n-    const response = await fetch(\"/forgot-password\", {\n+    const response = await fetch(`$/forgot-password`, {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ email }),\n     });\n"
+                },
+                {
+                    "date": 1738244209316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   const handleForgotPassword = async (e) => {\n     e.preventDefault();\n \n-    const response = await fetch(`$/forgot-password`, {\n+    const response = await fetch(`${ap}/forgot-password`, {\n       method: \"POST\",\n       headers: { \"Content-Type\": \"application/json\" },\n       body: JSON.stringify({ email }),\n     });\n"
+                }
+            ],
+            "date": 1738194629746,
+            "name": "Commit-0",
+            "content": "import React, { useState } from \"react\";\n\nfunction ForgotPassword() {\n  const [email, setEmail] = useState(\"\");\n  const [message, setMessage] = useState(\"\");\n\n  const handleForgotPassword = async (e) => {\n    e.preventDefault();\n\n    const response = await fetch(\"http://localhost:3001/forgot-password\", {\n      method: \"POST\",\n      headers: { \"Content-Type\": \"application/json\" },\n      body: JSON.stringify({ email }),\n    });\n\n    const data = await response.json();\n    setMessage(data.message);\n  };\n\n  return (\n    <div>\n      <h2>Forgot Password</h2>\n      <form onSubmit={handleForgotPassword}>\n        <input type=\"email\" placeholder=\"Enter your email\" value={email} onChange={(e) => setEmail(e.target.value)} required />\n        <button type=\"submit\">Send Reset Link</button>\n      </form>\n      <p>{message}</p>\n    </div>\n  );\n}\n\nexport default ForgotPassword"
+        }
+    ]
+}
