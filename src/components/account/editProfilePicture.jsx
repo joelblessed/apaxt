@@ -5,9 +5,11 @@ import "./ProfileImageUpload.css";
 
 const EditProfilePicture = ({ api }) => {
   const { user } = useContext(AuthContext);
+  const [User, setUser] = useState([])
+  const token = localStorage.getItem("token");
 
   const [profileImage, setProfileImage] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -18,15 +20,14 @@ const EditProfilePicture = ({ api }) => {
     const fetchProfileImage = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/users/${userId}`
+          `http://localhost:5000/api/profile/${userId}` // Fixed endpoint
         );
         if (!response.ok) throw new Error("Failed to fetch profile");
 
         const data = await response.json();
-        if (data.success && data.data.profileImage) {
-          setProfileImage(data.data.profileImage);
+        if (data.profile_image) { // Fixed to match backend response
+          setProfileImage(data.profile_image);
         }
-        console.log("p", data.data.profileImage);
       } catch (err) {
         console.error("Error fetching profile:", err);
       }
@@ -55,60 +56,68 @@ const EditProfilePicture = ({ api }) => {
       return;
     }
 
-    setSelectedFile(file);
+    setSelectedFiles(file);
   };
 
-  const handleUpload = async () => {
-    if (!selectedFile) {
-      setError("Please select an image first");
-      return;
-    }
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    if (isLoading) return;
 
     setIsLoading(true);
     setError("");
     setSuccess("");
 
-    const formData = new FormData();
-    formData.append("profileImage", selectedFile);
-
     try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        `http://localhost:5000/api/users/${userId}/profile-image`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
-      );
+      // Update profile info
+      const updateProfileResponse = await fetch(`${api}/profile/update`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ ...User, id: userId }),
+      });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Upload failed");
+      if (!updateProfileResponse.ok) {
+        throw new Error(`Profile update failed: ${updateProfileResponse.statusText}`);
       }
 
-      const result = await response.json();
-      setProfileImage(result.data.profileImage);
-      setSuccess("Profile image updated successfully!");
-      setSelectedFile(null);
-    } catch (err) {
-      setError(err.message || "Failed to update profile picture");
+      // Upload profile image if a file is selected
+      if (selectedFiles) {
+        const formData = new FormData();
+        formData.append("profileImage", selectedFiles);
+
+        const uploadImageResponse = await fetch(`${api}/profile/update-image/${userId}`, {
+          method: "PUT",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+        });
+
+        if (!uploadImageResponse.ok) {
+          throw new Error(`Image upload failed: ${uploadImageResponse.statusText}`);
+        }
+
+        const imgResponse = await uploadImageResponse.json();
+        setProfileImage(imgResponse.user.profile_image); // Update profile image state
+      }
+
+      setSuccess("Profile updated successfully!");
+      setSelectedFiles(null); // Reset file input
+    } catch (error) {
+      console.error("Error during upload:", error.message);
+      setError(error.message || "An error occurred. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
-
-  console.log("gender", user.gender);
 
   return (
     <div className="profile-image-upload-container">
       <div className="image-preview-container">
         <img
           src={
-            selectedFile
-              ? URL.createObjectURL(selectedFile)
+            selectedFiles
+              ? URL.createObjectURL(selectedFiles)
               : profileImage
               ? profileImage
               : user.gender === "male"
@@ -134,19 +143,19 @@ const EditProfilePicture = ({ api }) => {
           Choose Image
         </label>
 
-        {selectedFile && (
+        {selectedFiles && (
           <div className="file-info">
-            <span>{selectedFile.name}</span>
-            <span>{Math.round(selectedFile.size / 1024)} KB</span>
+            <span>{selectedFiles.name}</span>
+            <span>{Math.round(selectedFiles.size / 1024)} KB</span>
           </div>
         )}
 
         <button
           type="button"
           onClick={handleUpload}
-          disabled={!selectedFile || isLoading}
+          disabled={!selectedFiles || isLoading}
           className={`upload-button ${
-            !selectedFile || isLoading ? "disabled" : ""
+            !selectedFiles || isLoading ? "disabled" : ""
           }`}
         >
           {isLoading ? (

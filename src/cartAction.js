@@ -45,7 +45,7 @@ export const loadCartAfterLogin = () => async (dispatch) => {
         // Clear local cart after merging
 
         
-        // localStorage.removeItem("cart");
+        localStorage.removeItem("cart");
     } catch (error) {
         console.error("Error fetching cart:", error);
     }

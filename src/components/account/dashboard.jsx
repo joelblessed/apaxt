@@ -105,10 +105,11 @@ const mockOrders = [
 //   { id: 2, name: "Jane Smith", email: "jane@example.com" },
 // ];
 
-const Dashboard = ({ api, user, error, ownersProducts, changeLanguage }) => {
+const Dashboard = ({ api, user, error, changeLanguage }) => {
   const [orders, setOrders] = useState(mockOrders);
   const [users, setUsers] = useState([]);
   const { logout } = useContext(AuthContext);
+  const [ownersProducts, setOwnersProducts] = useState([])
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const ownerId = localStorage.getItem("userId");
@@ -119,12 +120,30 @@ const Dashboard = ({ api, user, error, ownersProducts, changeLanguage }) => {
     setIsSidebarVisible(!isSidebarVisible);
   };
 
+
+  useEffect(() => {
+    fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
+      .then((response) => response.json())
+      .then((data) => {
+        const products = data.products; // Extract products from the response
+
+        const filteredProducts = products.filter(
+          (product) => product.owner_id === 1
+        );
+        setOwnersProducts(filteredProducts);
+
+      
+      })
+      .catch((error) => console.error("Error fetching products:", error));
+  }, []);
+
+
   // Delete product by ID
   const handleDelete = (id) => {
     fetch(`${api}/deleteProduct/${id}`, { method: "DELETE" })
       .then((res) => {
         if (res.ok) {
-          setProducts(products.filter((product) => product.id !== id)); // Remove from state
+          setOwnersProducts(ownersProducts.filter((product) => product.id !== id)); // Remove from state
         } else {
           console.error("Error deleting product");
         }

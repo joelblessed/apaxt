@@ -6,7 +6,8 @@ const FormUpload = ({ api }) => {
   const [formData, setFormData] = useState({
     name: "",
     brand: [{ id: Date.now(), name: "", image: "" }],
-    category: "cat",
+    category: "category",
+    subcategory: "",
     price: 0,
     quantity: 1,
     numberInStock: 0,
@@ -18,26 +19,47 @@ const FormUpload = ({ api }) => {
     address: "",
     city: "",
     size: "sm",
-    wallet:97,
+    wallet: 97,
     likes: 10,
-    location: [{ id: Date.now(), location: "", latitude: "", longitude: "" }]
+    location: [{ id: Date.now(), location: "", latitude: "", longitude: "" }],
   });
 
   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState(["cat","shoes","clothes"]);
+  const [categories, setCategories] = useState();
   const [success, setSuccess] = useState(false);
+
+  const category = [
+    {
+      id: 1,
+      name: "Electronics",
+      subcategories: [
+        { id: 1, name: "phone" },
+        { id: 2, name: "TV" },
+        { id: 3, name: "Laptops" },
+      ],
+    },
+    {
+      id: 2,
+      name: "Fashion",
+      subcategories: [
+        { id: 1, name: "Men" },
+        { id: 2, name: "Women" },
+        { id: 3, name: "Children" },
+      ],
+    },
+  ];
 
   // Initialize form with user data from localStorage
   useEffect(() => {
     const username = localStorage.getItem("username");
     const userId = localStorage.getItem("userId");
-    
-    setFormData(prev => ({
+
+    setFormData((prev) => ({
       ...prev,
-      owner: username || "kfffffffffff",
-      ownerId: userId || "3"
+      owner: username,
+      ownerId: userId,
     }));
 
     // Fetch categories from API
@@ -56,7 +78,7 @@ const FormUpload = ({ api }) => {
 
   // Handle brand updates
   const handleBrandChange = (index, field, value) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const updatedBrands = [...prev.brand];
       updatedBrands[index][field] = value;
       return { ...prev, brand: updatedBrands };
@@ -65,16 +87,16 @@ const FormUpload = ({ api }) => {
 
   // Add/remove brands
   const addBrand = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      brand: [...prev.brand, { id: Date.now(), name: "", image: "" }]
+      brand: [...prev.brand, { id: Date.now(), name: "", image: "" }],
     }));
   };
 
   const removeBrand = (index) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      brand: prev.brand.filter((_, i) => i !== index)
+      brand: prev.brand.filter((_, i) => i !== index),
     }));
   };
 
@@ -84,43 +106,56 @@ const FormUpload = ({ api }) => {
     if (files.length === 0) return;
 
     const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-    const invalidFiles = files.some(file => !allowedTypes.includes(file.type));
+    const invalidFiles = files.some(
+      (file) => !allowedTypes.includes(file.type)
+    );
 
     if (invalidFiles) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        images: "Only JPG, JPEG, and PNG formats allowed"
+        images: "Only JPG, JPEG, and PNG formats allowed",
       }));
       return;
     }
 
     setImages(files);
-    setErrors(prev => ({ ...prev, images: "" }));
+    setErrors((prev) => ({ ...prev, images: "" }));
   };
 
   // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   // Form Validation
   const validateForm = () => {
     const validationErrors = {};
-    const { 
-      name, brand, category, price, numberInStock, 
-      phoneNumber, description, status, address, city,
-      weight, color
+    const {
+      name,
+      brand,
+      category,
+      price,
+      numberInStock,
+      phoneNumber,
+      description,
+      status,
+      address,
+      city,
+      weight,
+      color,
     } = formData;
 
     if (!name) validationErrors.name = "Product name is required";
-    if (!weight || weight <= 0) validationErrors.weight = "Valid weight is required";
+    if (!weight || weight <= 0)
+      validationErrors.weight = "Valid weight is required";
     if (!color) validationErrors.color = "Product color is required";
     if (!category) validationErrors.category = "Category is required";
-    if (!price || isNaN(price) || price <= 0) validationErrors.price = "Valid price is required";
+    if (!price || isNaN(price) || price <= 0)
+      validationErrors.price = "Valid price is required";
     if (!numberInStock || isNaN(numberInStock) || numberInStock < 0) {
       validationErrors.numberInStock = "Valid stock quantity is required";
     }
@@ -129,8 +164,10 @@ const FormUpload = ({ api }) => {
     }
     if (!status) validationErrors.status = "Status is required";
     if (!description) validationErrors.description = "Description is required";
-    if (brand.some(b => !b.name)) validationErrors.brand = "Brand details must be complete";
-    if (images.length === 0) validationErrors.images = "At least one image is required";
+    if (brand.some((b) => !b.name))
+      validationErrors.brand = "Brand details must be complete";
+    if (images.length === 0)
+      validationErrors.images = "At least one image is required";
     if (!address) validationErrors.address = "Address is required";
     if (!city) validationErrors.city = "City is required";
 
@@ -146,10 +183,10 @@ const FormUpload = ({ api }) => {
     setLoading(true);
 
     const formDataToSend = new FormData();
-    
+
     // Append all form data
     Object.entries(formData).forEach(([key, value]) => {
-      if (key === 'brand' || key === 'location') {
+      if (key === "brand" || key === "location") {
         // Ensure proper JSON formatting
         formDataToSend.append(key, JSON.stringify(value));
       } else {
@@ -158,8 +195,8 @@ const FormUpload = ({ api }) => {
     });
 
     // Append images
-    images.forEach(file => {
-      formDataToSend.append('images', file);
+    images.forEach((file) => {
+      formDataToSend.append("images", file);
     });
 
     try {
@@ -174,12 +211,14 @@ const FormUpload = ({ api }) => {
 
       const result = await response.json();
       setSuccess(true);
-      
+
       // Reset form on success
       setFormData({
         name: "",
         brand: [{ id: Date.now(), name: "", image: "" }],
         category: "",
+        subcategory: "",
+
         price: "",
         quantity: 1,
         numberInStock: 0,
@@ -191,12 +230,13 @@ const FormUpload = ({ api }) => {
         address: "",
         city: "",
         likes: 0,
-        location: [{ id: Date.now(), location: "", latitude: "", longitude: "" }],
+        location: [
+          { id: Date.now(), location: "", latitude: "", longitude: "" },
+        ],
         owner: localStorage.getItem("username") || "",
-        ownerId: localStorage.getItem("userId") || ""
+        ownerId: localStorage.getItem("userId") || "",
       });
       setImages([]);
-
     } catch (error) {
       console.error("Error uploading product:", error);
       alert(`Failed to upload product: ${error.message}`);
@@ -217,11 +257,9 @@ const FormUpload = ({ api }) => {
     <div className="form-container">
       <h2>Upload Product</h2>
       {success && (
-        <div className="success-message">
-          Product uploaded successfully!
-        </div>
+        <div className="success-message">Product uploaded successfully!</div>
       )}
-      
+
       <form onSubmit={handleSubmit}>
         {/* Product Name */}
         <div className="form-group">
@@ -244,12 +282,14 @@ const FormUpload = ({ api }) => {
               <input
                 type="text"
                 value={b.name}
-                onChange={(e) => handleBrandChange(index, "name", e.target.value)}
+                onChange={(e) =>
+                  handleBrandChange(index, "name", e.target.value)
+                }
                 placeholder="Brand name"
               />
               {formData.brand.length > 1 && (
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => removeBrand(index)}
                   className="remove-brand-btn"
                 >
@@ -258,30 +298,46 @@ const FormUpload = ({ api }) => {
               )}
             </div>
           ))}
-          <button 
-            type="button" 
-            onClick={addBrand}
-            className="add-brand-btn"
-          >
+          <button type="button" onClick={addBrand} className="add-brand-btn">
             + Add Brand
           </button>
           {errors.brand && <span className="error">{errors.brand}</span>}
         </div>
 
-        {/* Category Selection */}
+        {/* Category Dropdown */}
+
         <div className="form-group">
-          <label>Category *</label>
+          <label>Category</label>
           <select
             name="category"
             value={formData.category}
             onChange={handleChange}
           >
             <option value="">Select Category</option>
-            {categories.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
+            {category.map((cat) => (
+              <option key={cat.id} value={cat.name}>
+                {cat.name}
+              </option>
             ))}
           </select>
-          {errors.category && <span className="error">{errors.category}</span>}
+
+          {/* Subcategory Dropdown */}
+          {formData.category && (
+            <select
+              name="subcategory"
+              value={formData.subcategory}
+              onChange={handleChange}
+            >
+              <option value="">Select Subcategory</option>
+              {category
+                .find((cat) => cat.name === formData.category)
+                ?.subcategories.map((sub) => (
+                  <option key={sub.id} value={sub.name}>
+                    {sub.name}
+                  </option>
+                ))}
+            </select>
+          )}
         </div>
 
         {/* Price */}
@@ -310,9 +366,23 @@ const FormUpload = ({ api }) => {
             placeholder="0"
             min="0"
           />
-          {errors.numberInStock && <span className="error">{errors.numberInStock}</span>}
+          {errors.numberInStock && (
+            <span className="error">{errors.numberInStock}</span>
+          )}
         </div>
-
+     {/* size */}
+     <div className="form-group">
+          <label>Size *</label>
+          <input
+            type="text"
+            name="size"
+            value={formData.size}
+            onChange={handleChange}
+            placeholder="0"
+            min="0"
+          />
+         
+        </div>
         {/* Phone Number */}
         <div className="form-group">
           <label>Phone Number *</label>
@@ -323,7 +393,9 @@ const FormUpload = ({ api }) => {
             onChange={handleChange}
             placeholder="e.g., 677331862"
           />
-          {errors.phoneNumber && <span className="error">{errors.phoneNumber}</span>}
+          {errors.phoneNumber && (
+            <span className="error">{errors.phoneNumber}</span>
+          )}
         </div>
 
         {/* Color */}
@@ -364,17 +436,15 @@ const FormUpload = ({ api }) => {
             placeholder="Detailed product description"
             rows="4"
           />
-          {errors.description && <span className="error">{errors.description}</span>}
+          {errors.description && (
+            <span className="error">{errors.description}</span>
+          )}
         </div>
 
         {/* Status */}
         <div className="form-group">
           <label>Status *</label>
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-          >
+          <select name="status" value={formData.status} onChange={handleChange}>
             <option value="">Select Status</option>
             <option value="New">New</option>
             <option value="Used">Used</option>
@@ -420,7 +490,7 @@ const FormUpload = ({ api }) => {
             // className="file-input"
           />
           {errors.images && <span className="error">{errors.images}</span>}
-          
+
           {/* Preview uploaded images */}
           {images.length > 0 && (
             <div className="image-previews">
@@ -437,13 +507,13 @@ const FormUpload = ({ api }) => {
         </div>
 
         {/* Submit Button */}
-        <button 
-          style={{ width: "100px" }} 
-          type="submit" 
-          disabled={loading} 
+        <button
+          style={{ width: "100px" }}
+          type="submit"
+          disabled={loading}
           className="submit-btn"
         >
-          {loading ? 'Uploading...' : 'Upload Product'}
+          {loading ? "Uploading..." : "Upload Product"}
         </button>
       </form>
     </div>

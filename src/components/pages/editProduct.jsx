@@ -7,6 +7,7 @@ const EditProduct = ({ api }) => {
   const { id } = useParams();
 
   // Individual states for each product property
+  const [product, setProduct] = useState([]);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
@@ -46,7 +47,8 @@ const EditProduct = ({ api }) => {
         setLocation(data.location || []);
         setPostedOn(data.posted_on || new Date().toISOString());
         setImages(data.images || []);
-        setSelectedImages(data.images || []); // Set fetched images as selected by default
+        setSelectedImages(data.images || []); // Count fetched images as selected
+        setProduct(data || []);
       } catch (error) {
         console.error("Error fetching product:", error);
       }

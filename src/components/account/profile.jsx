@@ -60,7 +60,7 @@ const Profile = ({ api,  }) => {
       <h2>{t("User Profile")}</h2>
       <div>
         {imageError ? ( // Fix typo in state variable usage
-          <NavLink to="/deditProfilePicture">
+          <NavLink to="/deditProfile">
             <ProfileImage
               src={
                 User.gender === "male"
@@ -71,7 +71,7 @@ const Profile = ({ api,  }) => {
             />
           </NavLink>
         ) : (
-          <NavLink to="/deditProfilePicture">
+          <NavLink to="/deditProfile">
             <ProfileImage
               src={User.profileImage}
               alt=""
@@ -109,3 +109,9 @@ const Profile = ({ api,  }) => {
 
 
 export default Profile;
+
+  
+
+     
+   
+   

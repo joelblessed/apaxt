@@ -212,7 +212,7 @@ function App() {
         setBrands(uniqueBrands);
       })
       .catch((error) => console.error("Error fetching products:", error));
-  }, []);
+  }, [userId]);
 
   const mobilefilteredProducts =
     category === "All"
