@@ -65,6 +65,7 @@ function SignIn({ api, handleLogin, add }) {
       handleWishlistmerge(data.id);
       navigate("/dashboard");
    
+      console.log("token",data.token)
     } catch (err) {
       setError(err.message || "Login failed");
     }

@@ -17,11 +17,11 @@ export const categoryOptions = {
   6: "0px 0px 10px 1px violet",
 };
 export const categoryShadow = {
-  farm: 1,
-  computer: 2,
+  Electronics: 1,
+  Music: 2,
   Clothing: 3,
-  accesseries: 4,
-  other: 5,
+  Fashion: 4,
+  Furniture: 5,
 };
 export const CloseButton = styled.button`
   &:hover{

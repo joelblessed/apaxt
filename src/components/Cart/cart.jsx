@@ -5,8 +5,7 @@ import {
   loadCartAfterLogin, 
   removeFromCartAPI, 
   clearCartOnLogout, 
-  incrementProductQuantity, 
-  decrementProductQuantity 
+  updateCartItemQuantity
 
 } from "../../cartAction";
 import { useNavigate, Link } from "react-router-dom";
@@ -157,8 +156,7 @@ const NoImage = styled.p`
   margin-right: 1rem;
   color: #999;
 `;
-
-const Cart = ({ api, highlightText, product, searchTerm }) => {
+const Cart = ({ api, highlightText, searchTerm }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.items);
@@ -177,16 +175,23 @@ const Cart = ({ api, highlightText, product, searchTerm }) => {
     }
   }, [dispatch, token]);
 
+  const handleIncreaseQuantity = (productId, currentQuantity) => {
+    dispatch(updateCartItemQuantity(productId, currentQuantity));
+  };
+
+  const handleDecreaseQuantity = (productId, currentQuantity) => {
+    dispatch(updateCartItemQuantity(productId, currentQuantity));
+  };
+
   return (
     <CartContainer>
       {cart.length === 0 ? (
-
-        <EmptyMessage>TheCart is Empty</EmptyMessage>
+        <EmptyMessage>The cart is empty</EmptyMessage>
       ) : (
         <ItemsContainer>
           {cart.map((product) => (
             <CartItem key={product.id}>
-              {product.images.length > 0 ? (
+              {product.images?.length > 0 ? (
                 <ItemImage
                   src={product.images[0]}
                   alt={product.name}
@@ -207,13 +212,13 @@ const Cart = ({ api, highlightText, product, searchTerm }) => {
                 <QuantityControls>
                   <Quantity>{product.quantity}</Quantity>
                   <Button
-                    onClick={() => dispatch(incrementProductQuantity(product.id))}
+                    onClick={() => handleIncreaseQuantity(product.id, product.quantity)}
                     disabled={product.quantity >= product.numberInStock}
                   >
                     +
                   </Button>
                   <Button
-                    onClick={() => dispatch(decrementProductQuantity(product.id))}
+                    onClick={() => handleDecreaseQuantity(product.id, product.quantity)}
                     disabled={product.quantity <= 1}
                   >
                     -

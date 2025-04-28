@@ -44,6 +44,7 @@ const DesktopCards = ({
   mBoxWidth,
   mBoxMarginRight,
   imagekey,
+  addToCartBeforeLogin,
   
 }) => {
   const { t, i18n } = useTranslation();
