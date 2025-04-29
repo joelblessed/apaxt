@@ -169,19 +169,25 @@ const Cart = ({ api, highlightText, searchTerm }) => {
     }
   }, [dispatch, token]);
 
-  useEffect(() => {
-    if (token) {
-      dispatch(loadCartAfterLogin());
-    }
-  }, [dispatch, token]);
 
-  const handleIncreaseQuantity = (productId, currentQuantity) => {
-    dispatch(updateCartItemQuantity(productId, currentQuantity));
+  const handleIncreaseQuantity = (productId, action) => {
+    dispatch(updateCartItemQuantity(productId, action));
   };
 
-  const handleDecreaseQuantity = (productId, currentQuantity) => {
-    dispatch(updateCartItemQuantity(productId, currentQuantity));
+  const handleDecreaseQuantity = (productId, action) => {
+    dispatch(updateCartItemQuantity(productId, action));
   };
+
+
+const fetchAnew = () =>{
+  if (token) {
+    dispatch(loadCartAfterLogin());
+  }
+
+}
+   
+
+
 
   return (
     <CartContainer>
@@ -202,29 +208,25 @@ const Cart = ({ api, highlightText, searchTerm }) => {
               <ItemDetails>
                 <ItemDescription>{product.desc}</ItemDescription>
                 <ItemName>
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: highlightText(product.name, searchTerm),
-                    }}
-                  ></span>
+                  {product.name}
                 </ItemName>
                 <ItemPrice>Price: CFA {product.price}</ItemPrice>
                 <QuantityControls>
                   <Quantity>{product.quantity}</Quantity>
                   <Button
-                    onClick={() => handleIncreaseQuantity(product.id, product.quantity)}
-                    disabled={product.quantity >= product.numberInStock}
+                    onClick={() => {handleIncreaseQuantity(product.product_id, "increment"); fetchAnew()}}
+                    disabled={product.quantity >= product.number_in_stock}
                   >
                     +
                   </Button>
                   <Button
-                    onClick={() => handleDecreaseQuantity(product.id, product.quantity)}
+                    onClick={() => {handleDecreaseQuantity(product.product_id, "decrement"); fetchAnew()}}
                     disabled={product.quantity <= 1}
                   >
                     -
                   </Button>
                   <DeleteButton
-                    onClick={() => dispatch(removeFromCartAPI(product.id))}
+                    onClick={() => {dispatch(removeFromCartAPI(product.product_id)); fetchAnew()}}
                   >
                     X
                   </DeleteButton>

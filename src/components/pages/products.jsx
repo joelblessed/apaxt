@@ -31,6 +31,7 @@ const Products = ({
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const [category, setCategory] = useState("All");
+  const token = localStorage.getItem("token")
 
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
@@ -101,14 +102,15 @@ const Products = ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
           userId: userId,
-          productId: product.id,
+          productId: 19
         }),
       })
         .then((response) => response.json())
-        .then((data) => console.log("Viewed product saved:", data))
+        .then((data) => alert("Viewed product saved:", data))
         .catch((error) => console.error("Error:", error));
     },
     [SelectedProduct, navigate]

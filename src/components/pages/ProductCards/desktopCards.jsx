@@ -49,7 +49,7 @@ const DesktopCards = ({
 }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch(); // Function to check screen size
-
+const token = localStorage.getItem("token")
 
   // const filtered = Dobject.filter(
   //   (product) => category === "All" || product.category === category
@@ -64,7 +64,8 @@ const DesktopCards = ({
       const response = await fetch(`${api}/viewedProducts`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ userId, productId })
       });
@@ -74,9 +75,9 @@ const DesktopCards = ({
       }
   
       const result = await response.json();
-      alert('Viewed product logged:', result);
+      alert(' DViewed product logged:', result);
     } catch (error) {
-      alert('Error:', error.message);
+      alert('DError:', error.message);
     }
   };
 
@@ -263,7 +264,7 @@ const DesktopCards = ({
                     </div>
                   </BoxContainer>
                 )}
-               
+          
               </div>
               
             ))

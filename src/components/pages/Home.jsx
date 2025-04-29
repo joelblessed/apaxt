@@ -34,6 +34,7 @@ const Home = ({
   const [draggedIndex, setDraggedIndex] = useState(null);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token")
 
   const handleClick = (brand) => navigate(`/brand/${brand}`);
   const CathandleClick = (category) => navigate(`/category/${category}`);
@@ -84,7 +85,17 @@ const Home = ({
   
     (async () => {
       try {
-        const response = await fetch(`${api}/viewedProducts/${userId}`);
+        const response = await 
+        fetch(`${api}/viewedProducts/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+           
+          }
+        );
         if (!response.ok) throw new Error('Failed to fetch viewed products');
   
         const data = await response.json();

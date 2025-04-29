@@ -1,13 +1,17 @@
 import { setCart, addToCart, removeFromCart, clearCart, incrementQuantity, decrementQuantity } from "./cartSlice";
 import { api } from "./config";
+import { useState, useEffect, useCallback, useMemo } from "react";
+
 
 const API_URL = `${api}/cart`;
+const userId = localStorage.getItem("userId")
 
 // Helper function to handle API errors
 const handleApiError = (error, action) => {
   console.error(`Error ${action}:`, error);
   throw error;
 };
+
 
 // Add to Cart Before Login (Saves in LocalStorage)
 export const addToCartBeforeLogin = (product) => (dispatch, getState) => {
@@ -72,7 +76,7 @@ export const loadCartAfterLogin = () => async (dispatch) => {
       }
     });
 
-console.log("local",localCart)
+console.log("local",mergedCart)
     // 3. Update Redux state
     dispatch(setCart(mergedCart));
 
@@ -88,8 +92,8 @@ console.log("local",localCart)
       });
 
       if (mergeResponse.ok) {
-        alert('merge successful');
-        localStorage.removeItem("cart");
+        // alert('merge successful');
+        // localStorage.removeItem("cart");
       }else{
         alert("failed to merge");
         throw new Error("Failed to sync merged cart");
@@ -137,6 +141,7 @@ export const addToCartAPI = (product) => async (dispatch, getState) => {
     return dispatch(addToCartBeforeLogin(product));
   }
 
+  
   try {
     // Optimistic UI update
     const newItem = {
@@ -196,7 +201,9 @@ export const removeFromCartAPI = (productId) => async (dispatch, getState) => {
       },
     });
 
-    if (!response.ok) {
+    if (response.ok) {
+    //  alert("deleted successfuly")
+    }else{
       throw new Error("Failed to remove from cart");
     }
   } catch (error) {
@@ -207,13 +214,13 @@ export const removeFromCartAPI = (productId) => async (dispatch, getState) => {
 };
 
 // Enhanced Quantity Update
-export const updateCartItemQuantity = (productId, newQuantity) => async (dispatch, getState) => {
+export const updateCartItemQuantity = (productId, action) => async (dispatch, getState) => {
   const token = localStorage.getItem("token");
   const { cart } = getState();
 
   if (!token) {
     const localCart = cart.items.map(item => 
-      item.id === productId ? { ...item, quantity: newQuantity } : item
+      item.id === productId ? { ...item} : item
     );
     localStorage.setItem("cart", JSON.stringify(localCart));
     return dispatch(setCart(localCart));
@@ -221,21 +228,26 @@ export const updateCartItemQuantity = (productId, newQuantity) => async (dispatc
 
   try {
     // Optimistic UI update
-    const updatedCart = cart.items.map(item => 
-      item.id === productId ? { ...item, quantity: newQuantity } : item
-    );
+    const updatedCart = cart.items.map(item => {
+      if (item.id === productId) {
+        const newQty = action === 'increment' ? item.quantity + 1 : item.quantity - 1;
+        return { ...item, quantity: newQty };
+      }
+      return item;
+    });
     dispatch(setCart(updatedCart));
 
-    const response = await fetch(`${API_URL}/${productId}`, {
+    const response = await fetch(`${API_URL}/${productId}/${action}`, {
       method: "PUT",
       headers: { 
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       },
-      body: JSON.stringify({ quantity: newQuantity }),
     });
 
-    if (!response.ok) {
+    if (response.ok) {
+    // alert("cartment success")
+    }else{
       throw new Error("Failed to update quantity");
     }
   } catch (error) {

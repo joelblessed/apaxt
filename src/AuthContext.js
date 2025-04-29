@@ -98,6 +98,7 @@ export const AuthProvider = ({ children }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
         userId: id,
@@ -127,6 +128,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("cart");
     localStorage.removeItem("role");
     localStorage.removeItem("profileImage");
     localStorage.removeItem("gender");
@@ -149,6 +151,7 @@ export const AuthProvider = ({ children }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+         "Authorization": `Bearer ${user.token}`
       },
       body: JSON.stringify({
         userId: user?.userId, // Fix: Correct reference to userId
@@ -156,7 +159,7 @@ export const AuthProvider = ({ children }) => {
       }),
     })
       .then((response) => response.json())
-      .then((data) => console.log("Log created:", data))
+      .then((data) => alert("Log created:", data))
       .catch((error) => console.error("Error:", error));
   };
 
