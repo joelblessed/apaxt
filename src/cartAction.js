@@ -190,8 +190,7 @@ export const removeFromCartAPI = (productId) => async (dispatch, getState) => {
 
   try {
     // Optimistic UI update
-    const currentCart = cart.items.filter(item => item.id !== productId);
-    dispatch(setCart(currentCart));
+    dispatch(setCart(cart.items.filter(item => item.id !== productId)));
 
     const response = await fetch(`${API_URL}/${productId}`, {
       method: "DELETE",
@@ -201,62 +200,74 @@ export const removeFromCartAPI = (productId) => async (dispatch, getState) => {
       },
     });
 
-    if (response.ok) {
-    //  alert("deleted successfuly")
-    }else{
+    if (!response.ok) {
       throw new Error("Failed to remove from cart");
     }
+
+    // Fetch fresh cart from server after deletion to avoid inconsistencies
+    const updatedResponse = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    });
+
+    if (updatedResponse.ok) {
+      const updatedData = await updatedResponse.json();
+      const updatedCart = updatedData.items || updatedData.cart || [];
+      dispatch(setCart(updatedCart));
+    }
+
   } catch (error) {
     handleApiError(error, "removing from cart");
-    // Revert to previous cart state
-    dispatch(setCart(cart.items));
+    dispatch(setCart(cart.items)); // fallback to previous state
   }
 };
 
 // Enhanced Quantity Update
+let updateTimeout;
+
 export const updateCartItemQuantity = (productId, action) => async (dispatch, getState) => {
   const token = localStorage.getItem("token");
   const { cart } = getState();
 
-  if (!token) {
-    const localCart = cart.items.map(item => 
-      item.id === productId ? { ...item} : item
-    );
-    localStorage.setItem("cart", JSON.stringify(localCart));
-    return dispatch(setCart(localCart));
-  }
-
-  try {
-    // Optimistic UI update
-    const updatedCart = cart.items.map(item => {
-      if (item.id === productId) {
-        const newQty = action === 'increment' ? item.quantity + 1 : item.quantity - 1;
-        return { ...item, quantity: newQty };
-      }
-      return item;
-    });
-    dispatch(setCart(updatedCart));
-
-    const response = await fetch(`${API_URL}/${productId}/${action}`, {
-      method: "PUT",
-      headers: { 
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-    });
-
-    if (response.ok) {
-    // alert("cartment success")
-    }else{
-      throw new Error("Failed to update quantity");
+  // Optimistically update the UI
+  const updatedCart = cart.items.map(item => {
+    if (item.id === productId) {
+      const newQty = action === 'increment' ? item.quantity + 1 : Math.max(1, item.quantity - 1);
+      return { ...item, quantity: newQty };
     }
-  } catch (error) {
-    handleApiError(error, "updating quantity");
-    // Revert to previous cart state
-    dispatch(setCart(cart.items));
-  }
-};
+    return item;
+  });
 
+  dispatch(setCart(updatedCart));
+
+  if (!token) {
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    return;
+  }
+
+  // Debounce quantity update to reduce server requests
+  if (updateTimeout) clearTimeout(updateTimeout);
+
+  updateTimeout = setTimeout(async () => {
+    try {
+      const response = await fetch(`${API_URL}/${productId}/${action}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+      });
+
+      if (!response.ok) throw new Error("Failed to update quantity");
+    } catch (error) {
+      handleApiError(error, "updating quantity");
+      dispatch(setCart(cart.items)); // Revert if failed
+    }
+  }, 300); // Wait 300ms before making the request
+};
 // Clear Cart with proper handling
 export const clearCartAPI = () => async (dispatch, getState) => {
   const token = localStorage.getItem("token");

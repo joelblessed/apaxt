@@ -1,24 +1,30 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { api } from "./config";
 
 // Fetch Wishlist from API
 export const fetchWishlist = createAsyncThunk("wishlist/fetch", async (userId) => {
-    const response = await fetch(`http://localhost:5000/wishlist/${userId}`);
+    const response = await fetch(`${api}/wishlist/${userId}`);
     return response.json();
 });
 
 // Add to Wishlist
 export const addToWishlist = createAsyncThunk("addToWishlist", async ({ productId, userId }) => {
-    await fetch("http://localhost:5000/addToWishlist", {
+    await fetch(`${api}/addToWishlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId, userId }),
     });
+    // if (response.ok){
+    //     alert("added successfuly")
+    // }else{
+    //     alert("erro wl")
+    // }
     return productId;
 });
 
 // Remove from Wishlist
 export const removeFromWishlist = createAsyncThunk("removeFromWishlist", async ({ productId, userId }) => {
-    await fetch("http://localhost:5000/removeFromWishlist", {
+    await fetch(`${api}/removeFromWishlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId, userId }),

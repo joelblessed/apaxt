@@ -11,10 +11,17 @@ import Box from "./boxes";
 const WishlistButton = ({ product, highlightText }) => {
   const dispatch = useDispatch();
   const [wishlistProducts, setWishlistProducts] = useState([]);
-  const userId = localStorage.getItem("userId") || "guest"; // Check if user is logged in
+  const userId = localStorage.getItem("userId") || 0; // Check if user is logged in
   const wishlist = useSelector((state) => state.wishlist.items);
-  const WishlistArray = wishlist.map((productId) => productId.toString());
-  const ts = "test";
+  const [WishlistArray, setWishlistArray] = useState([]) 
+
+
+ useEffect(()=>{
+  if (wishlist.length>0){
+    const wlArray = wishlist.map((productId) => productId.toString());
+    setWishlistArray(wlArray)
+  }
+ }, [userId])
   useEffect(() => {
     dispatch(fetchWishlist(userId));
   }, [dispatch, userId]);

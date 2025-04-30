@@ -128,7 +128,6 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("cart");
     localStorage.removeItem("role");
     localStorage.removeItem("profileImage");
     localStorage.removeItem("gender");
@@ -162,6 +161,8 @@ export const AuthProvider = ({ children }) => {
       .then((data) => alert("Log created:", data))
       .catch((error) => console.error("Error:", error));
   };
+
+
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>

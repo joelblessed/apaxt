@@ -63,7 +63,9 @@ const Profile = ({ api,  }) => {
           <NavLink to="/deditProfile">
             <ProfileImage
               src={
-                User.gender === "male"
+                  User.ProfileImage
+                  ?User.ProfileImage
+                  :User.gender === "male"
                   ? "/images/svgviewer-man(2).svg"
                   : "/images/svgviewer-woman(3).svg"
               }

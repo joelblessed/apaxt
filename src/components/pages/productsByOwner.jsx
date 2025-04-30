@@ -346,7 +346,7 @@ const ProductsByOwner = ({
           </h4>
         )}
 
-        {generalProducts.length > 0 && (
+        {generalProducts.length > 0  &&(
           <div>
             <h4 style={{ textAlign: "center", marginTop: "40px" }}>
               Product other Sellers

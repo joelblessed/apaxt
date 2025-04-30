@@ -17,7 +17,7 @@ function SignIn({ api, handleLogin, add }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [theUser, setTheuser] = useState(localStorage.getItem("userId"))
   // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -40,6 +40,11 @@ function SignIn({ api, handleLogin, add }) {
         return;
       }
 
+    if (data.id !== theUser){
+        localStorage.removeItem("cart");
+    
+       }
+       
       login(
         data.token,
         data.role,
@@ -60,11 +65,12 @@ function SignIn({ api, handleLogin, add }) {
       
 
       );
+  
       localStorage.setItem("userId", data.id);
       dispatch(loadCartAfterLogin(data.id));
       handleWishlistmerge(data.id);
       navigate("/dashboard");
-   
+ 
       console.log("token",data.token)
     } catch (err) {
       setError(err.message || "Login failed");

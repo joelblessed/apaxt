@@ -6,7 +6,7 @@ import Box from "./boxes";
 const WishlistPage = ({ filteredProducts, highlightText }) => {
   const dispatch = useDispatch();
   const [wishlistProducts, setWishlistProducts] = useState([]);
-  const userId = localStorage.getItem("userId") || "guest"; // Check if user is logged in
+  const userId = localStorage.getItem("userId") || 0 // Check if user is logged in
   const wishlist = useSelector((state) => state.wishlist.items);
   const WL = wishlist.map((productId) => productId.toString());
   useEffect(() => {

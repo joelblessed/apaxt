@@ -179,7 +179,7 @@ function DesktopNavbar({
   handleProductSearch,
 }) {
   const { user } = useContext(AuthContext);
-  const [User, setUser] = useState(user || []);
+  const [User, setUser] = useState(  user ||[] );
   const { t } = useTranslation();
   const [imageError, setImageError] = useState(false);
   const [categoryName, setCategoryName] = useState("All Categories");
@@ -295,8 +295,8 @@ function DesktopNavbar({
                 </svg>
               ) : (
                 <img
-                  src={User.profileImage || "/public/images/svgviewer-output(1).svg"}
-                  alt="loading..."
+                  src={!User ? "/images/svgviewer-output(1).svg" : User.profileImage }
+                  alt=""
                   width="50"
                   height="50"
                   onError={() => setImageError(true)}

@@ -215,13 +215,13 @@ const fetchAnew = () =>{
                   <Quantity>{product.quantity}</Quantity>
                   <Button
                     onClick={() => {handleIncreaseQuantity(product.product_id, "increment"); fetchAnew()}}
-                    disabled={product.quantity >= product.number_in_stock}
+                    disabled={product.quantity === product.number_in_stock}
                   >
                     +
                   </Button>
                   <Button
                     onClick={() => {handleDecreaseQuantity(product.product_id, "decrement"); fetchAnew()}}
-                    disabled={product.quantity <= 1}
+                    disabled={product.quantity === 1}
                   >
                     -
                   </Button>

@@ -115,6 +115,7 @@ const Dashboard = ({ api, user, error, changeLanguage }) => {
   const ownerId = localStorage.getItem("userId");
   const { t } = useTranslation();
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const userId = Number( localStorage.getItem("userId"))
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
@@ -128,7 +129,7 @@ const Dashboard = ({ api, user, error, changeLanguage }) => {
         const products = data.products; // Extract products from the response
 
         const filteredProducts = products.filter(
-          (product) => product.owner_id === 1
+          (product) => product.owner_id === userId
         );
         setOwnersProducts(filteredProducts);
 
