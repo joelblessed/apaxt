@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from 'uuid';
 import {
   fetchWishlist,
   addToWishlist,
@@ -9,9 +10,19 @@ import DesktopCards from "./ProductCards/desktopCards";
 import Box from "./boxes";
 
 const WishlistButton = ({ product, highlightText }) => {
+
+  useEffect(() => {
+    let sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) {
+      sessionId = uuidv4();
+      localStorage.setItem('sessionId', sessionId);
+    }
+  }, []);
+
   const dispatch = useDispatch();
   const [wishlistProducts, setWishlistProducts] = useState([]);
-  const userId = localStorage.getItem("userId") || 0; // Check if user is logged in
+  const userId = localStorage.getItem("userId")|| null; 
+  const sessionId = localStorage.getItem('sessionId');
   const wishlist = useSelector((state) => state.wishlist.items);
   const [WishlistArray, setWishlistArray] = useState([]) 
 
@@ -35,9 +46,9 @@ const WishlistButton = ({ product, highlightText }) => {
   const isInWishList = WishlistArray.includes(product.id.toString());
   const handleWishlistToggle = () => {
     if (isInWishList) {
-      dispatch(removeFromWishlist({ productId: product.id, userId }));
+      dispatch(removeFromWishlist({ productId: product.id, userId, sessionId}));
     } else {
-      dispatch(addToWishlist({ productId: product.id, userId }));
+      dispatch(addToWishlist({ productId: product.id, userId , sessionId}));
     }
   };
 

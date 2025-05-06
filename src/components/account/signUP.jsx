@@ -10,7 +10,8 @@ const SignUP = ({ api }) => {
   // Form state with better initial values
   const [formData, setFormData] = useState({
     userName: "",
-    fullName: "",
+    firstName: "",
+    lastName: "",
     password: "",
     email: "",
     dateOfBirth: null,
@@ -46,11 +47,12 @@ const SignUP = ({ api }) => {
 
   // Validate form
   const validateForm = () => {
-    const { userName, fullName, email, password, dateOfBirth, city, address, phoneNumber } = formData;
+    const { userName, firstName,lastName, email, password, dateOfBirth, city, address, phoneNumber } = formData;
     const errors = [];
 
     if (!userName) errors.push("Username");
-    if (!fullName) errors.push("Full Name");
+    if (!firstName) errors.push("first Name");
+    if (!lastName) errors.push("last Name");
     if (!dateOfBirth) errors.push("Date of Birth");
     if (!city) errors.push("City");
     if (!address) errors.push("Address");
@@ -166,23 +168,36 @@ const SignUP = ({ api }) => {
         
         <form onSubmit={handleSubmit}>
           <div className="signup-card-body">
-            {/* Username */}
+        
+
+            {/* first Name */}
             <div className="form-group">
-              <label>User Name <span className="errmsg">*</span></label>
+              <label>First Name <span className="errmsg">*</span></label>
               <input
-                name="userName"
-                value={formData.userName}
+                name="firstName"
+                value={formData.firstName}
                 onChange={handleChange}
                 required
               />
             </div>
 
-            {/* Full Name */}
-            <div className="form-group">
-              <label>Full Name <span className="errmsg">*</span></label>
+             {/* last Name */}
+             <div className="form-group">
+              <label>Last Name <span className="errmsg">*</span></label>
               <input
-                name="fullName"
-                value={formData.fullName}
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+                {/* Username */}
+                <div className="form-group">
+              <label>User Name <span className="errmsg">*</span></label>
+              <input
+                name="userName"
+                value={formData.userName}
                 onChange={handleChange}
                 required
               />

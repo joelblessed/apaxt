@@ -80,17 +80,16 @@ function SignIn({ api, handleLogin, add }) {
   const userId = localStorage.getItem("userId");
 
   const handleWishlistmerge = async (userId) => {
-    localStorage.setItem("userId", userId); // Save user ID in local storage
-
-    // Call the API to merge guest wishlist with user wishlist
-    await fetch(`${api}/merge`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId }),
+    const sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) return;
+   await fetch(`${api}/wishlist/migrate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId, user_id: userId })
     });
-
-    // Fetch updated wishlist for logged-in user
-    dispatch(fetchWishlist(userId));
+    
+  
+    localStorage.removeItem('sessionId');
   };
 
   return (

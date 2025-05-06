@@ -156,7 +156,7 @@ const NoImage = styled.p`
   margin-right: 1rem;
   color: #999;
 `;
-const Cart = ({ api, highlightText, searchTerm }) => {
+const Cart = ({ api, highlightText, glofilteredProducts, searchTerm }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.items);
@@ -186,20 +186,20 @@ const fetchAnew = () =>{
 
 }
    
-
+// const filtered = glofilteredProducts.filter(product => viewedIds.includes(product.id));
 
 
   return (
     <CartContainer>
       {cart.length === 0 ? (
-        <EmptyMessage>The cart is empty</EmptyMessage>
+        <EmptyMessage>The cart is empty<button onClick={fetchAnew}>refresh</button></EmptyMessage>
       ) : (
         <ItemsContainer>
           {cart.map((product) => (
             <CartItem key={product.id}>
-              {product.images?.length > 0 ? (
+              {product ? (
                 <ItemImage
-                  src={product.images[0]}
+                  src={ glofilteredProducts.find(pro => pro.id === product.product_id)?.images[0] }
                   alt={product.name}
                 />
               ) : (

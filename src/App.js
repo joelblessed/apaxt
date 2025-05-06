@@ -612,6 +612,7 @@ function App() {
                 user={user}
                 searchTerm={searchTerm}
                 highlightText={highlightText}
+                glofilteredProducts={allProducts}
                 inwishlist={inwishlist}
               />
             }
@@ -649,6 +650,7 @@ function App() {
                   user={user}
                   setCalculateTotal={setCalculateTotal}
                   setCheckOut={setCheckOut}
+                  glofilteredProducts={allProducts}
                   paymentStatus={paymentStatus}
                   paymentNumber={phoneNumber}
                   paymentId={paymentId}

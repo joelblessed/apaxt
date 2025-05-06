@@ -18,8 +18,8 @@ export const categoryOptions = {
 };
 export const categoryShadow = {
   Electronics: 1,
-  Music: 2,
-  Clothing: 3,
+  Farm: 2,
+  Sport: 3,
   Fashion: 4,
   Furniture: 5,
 };

@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from "react";
 import "./formUpload.css";
-
+const userName = localStorage.getItem("userName")
+const userId = localStorage.getItem("userId")
 const FormUpload = ({ api }) => {
   // Form state
   const [formData, setFormData] = useState({
     name: "",
     brand: [{ id: Date.now(), name: "", image: "" }],
-    category: "category",
+    category: "",
     subcategory: "",
     price: 0,
     quantity: 1,
     numberInStock: 0,
+    discount:0,
     weight: 0,
+    unit_of_weight:"",
     color: "",
     phoneNumber: "",
     description: "",
     status: "",
     address: "",
     city: "",
-    size: "sm",
-    wallet: 97,
+    owner:"joel",
+    ownerId:userId,
+    size: 0,
+    unit_of_size:"",
     likes: 10,
     location: [{ id: Date.now(), location: "", latitude: "", longitude: "" }],
   });
@@ -147,11 +152,16 @@ const FormUpload = ({ api }) => {
       city,
       weight,
       color,
+      size,
+      unit_of_size,
+      unit_of_weight
     } = formData;
 
     if (!name) validationErrors.name = "Product name is required";
     if (!weight || weight <= 0)
       validationErrors.weight = "Valid weight is required";
+    if (!size || size <= 0)
+      validationErrors.size = "Valid size is required";
     if (!color) validationErrors.color = "Product color is required";
     if (!category) validationErrors.category = "Category is required";
     if (!price || isNaN(price) || price <= 0)
@@ -170,6 +180,8 @@ const FormUpload = ({ api }) => {
       validationErrors.images = "At least one image is required";
     if (!address) validationErrors.address = "Address is required";
     if (!city) validationErrors.city = "City is required";
+    if (!unit_of_size) validationErrors.unit_of_size = "put a unit of measurement";
+    if (!unit_of_weight) validationErrors.unit_of_weight = "put a unit of measurement";
 
     setErrors(validationErrors);
     return Object.keys(validationErrors).length === 0;
@@ -218,7 +230,8 @@ const FormUpload = ({ api }) => {
         brand: [{ id: Date.now(), name: "", image: "" }],
         category: "",
         subcategory: "",
-
+        unit_of_size:"",
+        unit_of_weight:"",
         price: "",
         quantity: 1,
         numberInStock: 0,
@@ -370,19 +383,7 @@ const FormUpload = ({ api }) => {
             <span className="error">{errors.numberInStock}</span>
           )}
         </div>
-     {/* size */}
-     <div className="form-group">
-          <label>Size *</label>
-          <input
-            type="text"
-            name="size"
-            value={formData.size}
-            onChange={handleChange}
-            placeholder="0"
-            min="0"
-          />
-         
-        </div>
+
         {/* Phone Number */}
         <div className="form-group">
           <label>Phone Number *</label>
@@ -411,9 +412,39 @@ const FormUpload = ({ api }) => {
           {errors.color && <span className="error">{errors.color}</span>}
         </div>
 
+        {/* size */}
+        <div className="form-group">
+          <label>Size*</label>
+          <input
+            type="number"
+            name="size"
+            value={formData.size}
+            onChange={handleChange}
+            placeholder="cm"
+            step="0.1"
+            min="0"
+          />
+          {errors.size && <span className="error">{errors.size}</span>}
+        </div>
+
+          {/* size */}
+          <div className="form-group">
+          <label>unit of Measurement *</label>
+          <input
+            type="text"
+            name="unit_of_size"
+            value={formData.unit_of_size}
+            onChange={handleChange}
+            placeholder="Product size"
+            step="0.1"
+            min="0"
+          />
+          {errors.unit_of_size && <span className="error">{errors.unit_of_size}</span>}
+        </div>
+
         {/* Weight */}
         <div className="form-group">
-          <label>Weight (kg) *</label>
+          <label>Weight *</label>
           <input
             type="number"
             name="weight"
@@ -424,6 +455,21 @@ const FormUpload = ({ api }) => {
             min="0"
           />
           {errors.weight && <span className="error">{errors.weight}</span>}
+        </div>
+
+     {/* Weight */}
+     <div className="form-group">
+          <label> unit of measurement *</label>
+          <input
+            type="text"
+            name="unit_of_weight"
+            value={formData.unit_of_weight}
+            onChange={handleChange}
+            placeholder="kg "
+            step="0.1"
+            min="0"
+          />
+          {errors.unit_of_weight && <span className="error">{errors.unit_of_weight}</span>}
         </div>
 
         {/* Description */}

@@ -115,7 +115,7 @@ const Dashboard = ({ api, user, error, changeLanguage }) => {
   const ownerId = localStorage.getItem("userId");
   const { t } = useTranslation();
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const userId = Number( localStorage.getItem("userId"))
+  const userId =  localStorage.getItem("userId");
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);

@@ -98,6 +98,7 @@ const Checkout = ({
   paymentStatus,
   paymentNumber,
   paymentId,
+  glofilteredProducts,
 }) => {
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
@@ -134,7 +135,7 @@ const Checkout = ({
   const calculateShippingFee = () => {
     const totalAmount = calculateTotalAmount();
     const totalWeight = cart.reduce(
-      (total, item) => total + item.weight * item.quantity,
+      (total, item) => total + glofilteredProducts.find(pro => pro.id === item.product_id)?.weight * item.quantity,
       0
     );
 
@@ -279,7 +280,7 @@ const Checkout = ({
             <CartItem key={item.id}>
               <CartDetails>
                 {item.name} - Quantity: {item.quantity} - Price: ${item.price} -
-                Weight: {item.weight}kg
+                Weight: {glofilteredProducts.find(pro => pro.id === item.product_id)?.weight}kg
               </CartDetails>
             </CartItem>
           ))}

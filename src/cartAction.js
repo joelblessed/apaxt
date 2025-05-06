@@ -274,7 +274,7 @@ export const clearCartAPI = () => async (dispatch, getState) => {
   const { cart } = getState();
 
   if (!token) {
-    localStorage.removeItem("cart");
+    // localStorage.removeItem("cart");
     return dispatch(clearCart());
   }
 
