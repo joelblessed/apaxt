@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 
-const Orders2 = () => {
+const Orders2 = ({api}) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
  
@@ -10,7 +10,7 @@ const Orders2 = () => {
   const token = localStorage.getItem("token")
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders/${userId}`, {
+    fetch(`${api}/orders/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -31,21 +31,29 @@ const Orders2 = () => {
             <th>Status</th>
             <th>Delivery Date</th>
             <th>Items</th>
+            <th>quantity</th>
           </tr>
         </thead>
         <tbody>
           {orders.map(order => (
             <tr key={order.id}>
               <td>{order.id}</td>
-              <td>{order.user.username} (ID: {order.user.userId})</td>
-              <td>{new Date(order.date).toLocaleString()}</td>
-              <td>${order.totalAmount.toFixed(2)}</td>
+              <td> (ID: {order.user_id})</td>
+              <td>{new Date(order.placed_at).toLocaleString()}</td>
+              <td>${order.total_amount}</td>
               <td>{order.status}</td>
               <td>{order.shipping.deliveryDate}</td>
               <td>
                 {order.cart.map(item => (
                   <div key={item.id}>
-                    {item.name} x{item.quantity}
+                    {item.name} 
+                  </div>
+                ))}
+              </td>
+              <td>
+              {order.cart.map(item => (
+                  <div key={item.id}>
+                    {item.quantity} 
                   </div>
                 ))}
               </td>

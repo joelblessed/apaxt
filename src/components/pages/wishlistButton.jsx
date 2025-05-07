@@ -47,8 +47,11 @@ const WishlistButton = ({ product, highlightText }) => {
   const handleWishlistToggle = () => {
     if (isInWishList) {
       dispatch(removeFromWishlist({ productId: product.id, userId, sessionId}));
+      dispatch(fetchWishlist(userId));
     } else {
       dispatch(addToWishlist({ productId: product.id, userId , sessionId}));
+      dispatch(fetchWishlist(userId));
+
     }
   };
 
@@ -70,11 +73,20 @@ const WishlistButton = ({ product, highlightText }) => {
     };
   }, [isInWishList, product.id, userId, dispatch]);
 
+
+
   return (
     <div>
       <button
         id={`wishlist-button-${product.id}`}
-        onClick={handleWishlistToggle}
+        onClick={ handleWishlistToggle}
+        style={{
+          backgroundColor: isInWishList ? "red" : "green",
+          color: "white",
+          border: "none",
+          padding: "10px 20px",
+          cursor: "pointer",
+        }}
       >
         {isInWishList ? "R" : "A"}
       </button>

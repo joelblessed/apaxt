@@ -103,7 +103,14 @@ const Checkout = ({
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const crt = cart.map((item) => ({
+    id: item.id,
+    name: item.name,
+    price: item.price,
+    quantity: item.quantity,
+    product_id: item.product_id,
+    cancledOrder: false,
+  }));
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [shippingLocation, setShippingLocation] = useState("local"); // 'local', 'national', 'international'
@@ -112,7 +119,9 @@ const Checkout = ({
   const [deliveryDate, setDeliveryDate] = useState("");
   const [isPickup, setIsPickup] = useState(false); // For self-pickup
   const [userInfo, setUserInfo] = useState({
-    username: localStorage.getItem("username"),
+    username: localStorage.getItem("userName"),
+    userId: localStorage.getItem("userId"),
+    paymentMethod: "cash",
     paymentNumber: paymentNumber,
     paymentStatus: paymentStatus,
     paymentId: paymentId,
@@ -135,7 +144,10 @@ const Checkout = ({
   const calculateShippingFee = () => {
     const totalAmount = calculateTotalAmount();
     const totalWeight = cart.reduce(
-      (total, item) => total + glofilteredProducts.find(pro => pro.id === item.product_id)?.weight * item.quantity,
+      (total, item) =>
+        total +
+        glofilteredProducts.find((pro) => pro.id === item.product_id)?.weight *
+          item.quantity,
       0
     );
 
@@ -188,8 +200,6 @@ const Checkout = ({
     setDeliveryDate(currentDate.toLocaleDateString()); // Format and set the delivery date
   };
 
-
- 
   // Handle checkout process
   const handleCheckout = async () => {
     if (!address) {
@@ -210,8 +220,10 @@ const Checkout = ({
       const orderData = {
         user: userInfo,
         date: formattedDate,
-        totalAmount: calculateTotalWithShipping(),
-        cart: cart,
+        totalAmount: calculateTotalWithShipping(), // Ensure totalAmount is calculated correctly
+        paymentMethod: "cash",
+        status: "pending",
+        cart:crt,
         shipping: {
           address,
           deliveryDate,
@@ -232,7 +244,6 @@ const Checkout = ({
       if (!response.ok) {
         throw new Error("Failed to place order.");
       }
-      
 
       // Clear local state and show success message
       setSuccessMessage("Order placed successfully!");
@@ -242,32 +253,26 @@ const Checkout = ({
       console.error("Error during checkout:", error);
       setSuccessMessage("Checkout failed. Please try again.");
     } finally {
-      
       setLoading(false);
     }
-    
   };
 
-
   const handleRewards = () => {
-
     fetch(`${api}/apply-reward`, {
       method: "POST",
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}` // Secure API call with JWT
+        Authorization: `Bearer ${token}`, // Secure API call with JWT
       },
-      body: JSON.stringify({ userId, amountPaid: calculateTotalWithShipping()})
+      body: JSON.stringify({
+        userId,
+        amountPaid: calculateTotalWithShipping(),
+      }),
     })
       .then((res) => res.json())
       .then((data) => alert(data.message))
       .catch((error) => console.error("Error applying reward:", error));
   };
-
-  
-
-  
-
 
   return (
     <CheckoutContainer>
@@ -280,7 +285,12 @@ const Checkout = ({
             <CartItem key={item.id}>
               <CartDetails>
                 {item.name} - Quantity: {item.quantity} - Price: ${item.price} -
-                Weight: {glofilteredProducts.find(pro => pro.id === item.product_id)?.weight}kg
+                Weight:{" "}
+                {
+                  glofilteredProducts.find((pro) => pro.id === item.product_id)
+                    ?.weight
+                }
+                kg
               </CartDetails>
             </CartItem>
           ))}
@@ -348,7 +358,13 @@ const Checkout = ({
         Total with Shipping: ${calculateTotalWithShipping()}
       </TotalAmount>
 
-      <Button onClick={()=>{handleCheckout(); handleRewards()}} disabled={loading || cart.length === 0 || address ===""}>
+      <Button
+        onClick={() => {
+          handleCheckout();
+          handleRewards();
+        }}
+        disabled={loading || cart.length === 0 || address === ""}
+      >
         {loading ? "Processing..." : "Checkout"}
       </Button>
 
@@ -357,7 +373,6 @@ const Checkout = ({
           {successMessage}
         </Message>
       )}
-  
     </CheckoutContainer>
   );
 };

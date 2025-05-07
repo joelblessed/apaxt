@@ -3,17 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchWishlist, removeFromWishlist } from "../../wishlistSlice";
 import Box from "./boxes";
 
-const WishlistPage = ({ filteredProducts, highlightText }) => {
+const WishlistPage = ({ filteredProducts, api, highlightText }) => {
   const dispatch = useDispatch();
   const [wishlistProducts, setWishlistProducts] = useState([]);
-  const userId = localStorage.getItem("userId") || 0 // Check if user is logged in
+  const userId = localStorage.getItem("userId") || ""; // Ensure userId is a string
   const wishlist = useSelector((state) => state.wishlist.items);
-  const WL = wishlist.map((productId) => productId.toString());
+  const WL = wishlist.length > 0 ? wishlist.map((productId) => productId.toString()) : [];
+
   useEffect(() => {
-    dispatch(fetchWishlist(userId));
+    if (userId.trim()) { // Validate userId is not empty or invalid
+      dispatch(fetchWishlist(userId));
+    } else {
+      console.error("User ID is missing or invalid.");
+    }
   }, [dispatch, userId]);
 
- 
+  console.log("wishlist", wishlist)
 
   useEffect(() => {
     // Filter products in the frontend
@@ -21,7 +26,7 @@ const WishlistPage = ({ filteredProducts, highlightText }) => {
       WL.includes(product.id.toString())
     );
     setWishlistProducts(filtered);
-  },[wishlist]); // Runs when products are fetched
+  },[wishlist, filteredProducts]); // Runs when products are fetched
 
   return (
     <div>

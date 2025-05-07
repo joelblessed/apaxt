@@ -426,10 +426,8 @@ function App() {
             path="/orders"
             element={
               <Orders
-                token={token}
-                userId={userId}
-                api={api}
-                allProfiles={allProfiles}
+              
+               
               />
             }
           />
@@ -635,6 +633,7 @@ function App() {
                   error={error}
                   ownersProducts={ownersProducts}
                   changeLanguage={changeLanguage}
+                  glofilteredProducts={allProducts}
                 />
               </ProtectedRoute>
             }

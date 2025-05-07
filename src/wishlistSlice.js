@@ -2,11 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "./config";
 
 // FETCH WISHLIST
-export const fetchWishlist = createAsyncThunk("wishlist/fetch", async ({ userId, sessionId }) => {
-    const query = new URLSearchParams({ user_id: userId || "", session_id: sessionId || "" }).toString();
-    const response = await fetch(`${api}/wishlist?${query}`);
+export const fetchWishlist = createAsyncThunk("wishlist/fetch", async (userId) => {
+    if (!userId) {
+        throw new Error("User ID is required to fetch wishlist");
+    }
+    const response = await fetch(`${api}/wishlist/${userId}`);
     const data = await response.json();
-    return data.wishlist; // should be array of { product_id, ... }
+    return data || []; // Return data directly, default to an empty array
 });
 
 // ADD TO WISHLIST
@@ -26,11 +28,11 @@ export const addToWishlist = createAsyncThunk("wishlist/add", async ({ productId
 });
 
 // REMOVE FROM WISHLIST
-export const removeFromWishlist = createAsyncThunk("wishlist/remove", async ({ productId, userId, sessionId }) => {
-    await fetch(`${api}/wishlist/item`, {
-        method: "DELETE",
+export const removeFromWishlist = createAsyncThunk("wishlist/remove", async ({ productId, userId, }) => {
+    await fetch(`${api}/removeFromWishlist`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product_id: productId, user_id: userId, session_id: sessionId }),
+        body: JSON.stringify({ productId, userId, }),
     });
     return productId;
 });
@@ -44,7 +46,7 @@ const wishlistSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchWishlist.fulfilled, (state, action) => {
-                state.items = action.payload;
+                state.items = action.payload || []; // Ensure state.items is always an array
             })
             .addCase(addToWishlist.fulfilled, (state, action) => {
                 if (!state.items.find(item => item.product_id === action.payload.product_id)) {

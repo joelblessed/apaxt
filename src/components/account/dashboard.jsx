@@ -6,8 +6,9 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Profile from "./profile";
 import Wallet from "./wallet";
-import  EditProfilePicture from "./editProfilePicture";
+import EditProfilePicture from "./editProfilePicture";
 import EditProfile from "./editProfile";
+import Orders from "../orders/orders"; // Add this import statement
 import {
   DashboardContainer,
   Sidebar,
@@ -64,11 +65,9 @@ const ResponsiveGrid = styled(Grid)`
   justify-content: center;
   align-items: center;
   margin-left: 0 auto;
-  
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
-    
   }
 
   @media (min-width: 1024px) {
@@ -105,22 +104,27 @@ const mockOrders = [
 //   { id: 2, name: "Jane Smith", email: "jane@example.com" },
 // ];
 
-const Dashboard = ({ api, user, error, changeLanguage }) => {
+const Dashboard = ({
+  api,
+  user,
+  error,
+  changeLanguage,
+  glofilteredProducts,
+}) => {
   const [orders, setOrders] = useState(mockOrders);
   const [users, setUsers] = useState([]);
   const { logout } = useContext(AuthContext);
-  const [ownersProducts, setOwnersProducts] = useState([])
+  const [ownersProducts, setOwnersProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const ownerId = localStorage.getItem("userId");
   const { t } = useTranslation();
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const userId =  localStorage.getItem("userId");
-
+  const userId = localStorage.getItem("userId");
+ 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
-
 
   useEffect(() => {
     fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
@@ -132,19 +136,18 @@ const Dashboard = ({ api, user, error, changeLanguage }) => {
           (product) => product.owner_id === userId
         );
         setOwnersProducts(filteredProducts);
-
-      
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
-
 
   // Delete product by ID
   const handleDelete = (id) => {
     fetch(`${api}/deleteProduct/${id}`, { method: "DELETE" })
       .then((res) => {
         if (res.ok) {
-          setOwnersProducts(ownersProducts.filter((product) => product.id !== id)); // Remove from state
+          setOwnersProducts(
+            ownersProducts.filter((product) => product.id !== id)
+          ); // Remove from state
         } else {
           console.error("Error deleting product");
         }
@@ -163,12 +166,22 @@ const Dashboard = ({ api, user, error, changeLanguage }) => {
       <ResponsiveSidebar isVisible={isSidebarVisible}>
         <h2 style={{ marginBottom: "16px" }}>{t("DashBoard")}</h2>
         <nav>
-          <NavLink onClick={toggleSidebar} to="/d">{t("DashBoard")}</NavLink>
-          <NavLink onClick={toggleSidebar} to="/dprofile">{t("Profile")}</NavLink>
-          <NavLink onClick={toggleSidebar} to="/dproducts">{t("Products")}</NavLink>
-          <NavLink onClick={toggleSidebar} to="/dorders">{t("Orders")}</NavLink>
+          <NavLink onClick={toggleSidebar} to="/d">
+            {t("DashBoard")}
+          </NavLink>
+          <NavLink onClick={toggleSidebar} to="/dprofile">
+            {t("Profile")}
+          </NavLink>
+          <NavLink onClick={toggleSidebar} to="/dproducts">
+            {t("Products")}
+          </NavLink>
+          <NavLink onClick={toggleSidebar} to="/dorders">
+            {t("Orders")}
+          </NavLink>
           {/* <NavLink to="/users">{t("Users")}</NavLink> */}
-          <NavLink onClick={toggleSidebar} to="/dwallet">{t("Wallet")}</NavLink>
+          <NavLink onClick={toggleSidebar} to="/dwallet">
+            {t("Wallet")}
+          </NavLink>
           {/* <NavLink to="/analytics">{t("Analytics")}</NavLink> */}
           <LogoutButton onClick={changeLanguage}>
             {t("Francaise")} {/* Display the toggle Button text */}
@@ -182,7 +195,14 @@ const Dashboard = ({ api, user, error, changeLanguage }) => {
         <Routes>
           <Route
             path="/d"
-            element={<Home products={products} orders={orders} ownersProducts={ownersProducts} users={users} />}
+            element={
+              <Home
+                products={products}
+                orders={orders}
+                ownersProducts={ownersProducts}
+                users={users}
+              />
+            }
           />
           <Route
             path="/dproducts"
@@ -205,16 +225,20 @@ const Dashboard = ({ api, user, error, changeLanguage }) => {
               />
             }
           />
-           <Route
-            path="/deditProfile"
+          <Route path="/deditProfile" element={<EditProfile api={api} />} />
+          <Route
+            path="/dorders"
             element={
-              <EditProfile
-              api={api}
+              <Orders
                
+                api={api}
+                glofilteredProducts={glofilteredProducts}
+                Card={Card}
+                ResponsiveGrid={ResponsiveGrid}
+                Header={Header}
               />
             }
           />
-          <Route path="/orders" element={<Orders orders={orders} />} />
           {/* <Route path="/users" element={<Users users={users} />} /> */}
           <Route
             path="/dwallet"
@@ -240,7 +264,7 @@ const Dashboard = ({ api, user, error, changeLanguage }) => {
 };
 
 // Home Component
-const Home = ({ products, orders,ownersProducts, users }) => {
+const Home = ({ products, orders, ownersProducts, users }) => {
   const { t } = useTranslation();
 
   return (
@@ -304,84 +328,29 @@ const Products = ({ ownersProducts, api, handleDelete }) => {
   );
 };
 
-// Orders Component
-const Orders = ({ orders }) => {
-  const { t } = useTranslation();
 
-  return (
-    <div>
-      <Header>{t("Orders Management")}</Header>
-      <ResponsiveGrid>
-        {orders.map((order) => (
-          <Card key={order.id}>
-            <h3>{order.product}</h3>
-            <p>
-              {t("Customer")}: {order.customer}
-            </p>
-            <p>
-              {t("Status")}: {order.status}
-            </p>
-          </Card>
-        ))}
-      </ResponsiveGrid>
-    </div>
-  );
-};
 
-// // Users Component
-// const Users = ({ users }) => {
-//   const { t } = useTranslation();
-
-//   return (
-//     <div>
-//       <Header>{t("User Management")}</Header>
-//       <ResponsiveGrid>
-//         {users.map((user) => (
-//           <Card key={user.id}>
-//             <h3>{user.name}</h3>
-//             <p>
-//               {t("Email")}: {user.email}
-//             </p>
-//           </Card>
-//         ))}
-//       </ResponsiveGrid>
-//     </div>
-//   );
-// };
-
-// // Analytics Component
-// const Analytics = () => {
-//   const { t } = useTranslation();
-
-//   return (
-//     <div>
-//       <Header>{t("Sales Analytics")}</Header>
-//       <ChartPlaceholder>
-//         <p>{t("Chart")}</p>
-//       </ChartPlaceholder>
-//     </div>
-//   );
-// };
 
 
 <div>
   <div>
-  <Wallet />  
+    <Wallet />
   </div>
- 
-  
-<div>
-<h3>Profile</h3>
-<Profile  />
-</div>
 
-<div>
-<EditProfilePicture/>
-</div>
-<div>
-<EditProfile/>
-</div>
-</div>
+  <div>
+    <h3>Profile</h3>
+    <Profile />
+  </div>
 
+  <div>
+    <EditProfilePicture />
+  </div>
+  <div>
+    <EditProfile />
+  </div>
+  <div>
+    <Orders/>
+  </div>
+</div>;
 
 export default Dashboard;
