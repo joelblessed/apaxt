@@ -1,7 +1,7 @@
 
-export const api = "https://apaxt2-api.onrender.com";
+export const api = "https://apaxt-api.onrender.com";
 // "http://localhost:5000",
-// https://apaxt2-api.onrender.com
+// https://apaxt-api.onrender.com
 
 
 // "typescript": "^5.8.2",
