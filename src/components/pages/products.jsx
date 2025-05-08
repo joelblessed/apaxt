@@ -65,7 +65,7 @@ const Products = ({
           setPage((prev) => prev + 1);
         }
       },
-      { rootMargin: "100px" }
+      { rootMargin: "200px" } // Adjust rootMargin for earlier triggering
     );
 
     const currentLoader = loaderRef?.current; // Add optional chaining to avoid errors
@@ -205,6 +205,7 @@ const Products = ({
         category={category}
         imageKey="image" // Add this prop to specify the key for image URLs
       />
+      {hasMore && <div ref={loaderRef} className="loader">Loading...</div>} {/* Loader for infinite scroll */}
     </div>
   );
 };

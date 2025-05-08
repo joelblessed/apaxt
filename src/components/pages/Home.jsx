@@ -100,9 +100,13 @@ const Home = ({
   
         const data = await response.json();
         const viewedIds = data.map(item => item.productId);
-        const filtered = glofilteredProducts.filter(product => viewedIds.includes(product.id));
-  
-        setViewed(filtered);
+        try {
+          const filtered = glofilteredProducts.filter(product => viewedIds.includes(product.id));
+          setViewed(filtered);
+        } catch (error) {
+          console.error('Error filtering viewed products:', error.message);
+          setViewed([]);
+        }
       } catch (error) {
         console.error('Error fetching viewed products:', error.message);
         setViewed([]);
@@ -246,7 +250,7 @@ const Home = ({
 
         <div>
           <CategoryBox
-            Mobject={products}
+            Mobject={products || []} // Fallback to an empty array if products is undefined
             Dobject={Dobject}
             Dobject1={Dobject1}
             loaderRef={loaderRef}

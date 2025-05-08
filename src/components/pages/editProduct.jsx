@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./formUpload.css";
+
 import { color } from "framer-motion";
 
 const EditProduct = ({ api }) => {
@@ -8,6 +8,8 @@ const EditProduct = ({ api }) => {
 
   // Individual states for each product property
   const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state for fetching
+  const [isSubmitting, setIsSubmitting] = useState(false); // New state for button loading
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
@@ -51,11 +53,17 @@ const EditProduct = ({ api }) => {
         setProduct(data || []);
       } catch (error) {
         console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
     };
 
     fetchProduct();
   }, [api, id]);
+
+  if (loading) {
+    return <div className="loading">Loading product details...</div>; // Display loading message
+  }
 
   const validateForm = () => {
     let validationErrors = {};
@@ -85,6 +93,7 @@ const EditProduct = ({ api }) => {
     e.preventDefault();
     if (!validateForm()) return;
 
+    setIsSubmitting(true); // Set submitting state to true
     const formData = new FormData();
     const product = {
       name,
@@ -135,6 +144,8 @@ const EditProduct = ({ api }) => {
     } catch (error) {
       console.error("Error updating product:", error);
       alert("An error occurred while updating the product.", error);
+    } finally {
+      setIsSubmitting(false); // Reset submitting state
     }
   };
 
@@ -313,10 +324,78 @@ const EditProduct = ({ api }) => {
         )}
 
         {/* Submit Button */}
-        <button className="button" type="submit">
-          Update Product
+        <button className="button" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Updating..." : "Update Product"}
         </button>
       </form>
+      <style jsx>{`
+        .form-container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          background-color: #f9f9f9;
+        }
+        .loading {
+          text-align: center;
+          font-size: 18px;
+          color: #555;
+          margin-top: 50px;
+        }
+        h2 {
+          text-align: center;
+          color: #333;
+        }
+        label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: bold;
+          color: #555;
+        }
+        input,
+        select,
+        textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+        .error {
+          color: red;
+          font-size: 12px;
+          margin-top: -10px;
+          margin-bottom: 10px;
+        }
+        .uploaded-images {
+          margin-top: 20px;
+        }
+        .uploaded-images img {
+          margin: 5px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+        }
+        .button {
+          display: block;
+          width: 100%;
+          padding: 10px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        .button:disabled {
+          background-color: #cccccc;
+          cursor: not-allowed;
+        }
+        .button:hover:not(:disabled) {
+          background-color: #0056b3;
+        }
+      `}</style>
     </div>
   );
 };

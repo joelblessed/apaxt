@@ -148,22 +148,23 @@ const token = localStorage.getItem("token")
                       }}
                     >
                       {product.images.length > 0 ? (
-                        <img
-                          src={product.images.length > 0 ? product.images[0] : "/path/to/fallback-image.jpg"} // Fallback image
-                          alt={product.name || "Product Image"}
-                          style={{
-                            width: "250px",
-                            height: "250px",
-                            objectFit: "cover",
-                            borderRadius: "10px",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => {
-                            setSelectedProduct(product);
-                            ViewedProduct(product.id);
-                            show();
-                          }}
-                        />
+                       <img
+                       loading="lazy"
+                       src={product.images.length > 0 ? product.images[0] : "/path/to/fallback-image.jpg"}
+                       alt={product.name || "Product Image"}
+                       style={{
+                         width: "250px",
+                         height: "250px",
+                         objectFit: "cover",
+                         borderRadius: "10px",
+                         cursor: "pointer",
+                       }}
+                       onClick={() => {
+                         setSelectedProduct(product);
+                         ViewedProduct(product.id);
+                         show();
+                       }}
+                     />
                       ) : (
                         <p>{t("No Image Available")}</p>
                       )}
