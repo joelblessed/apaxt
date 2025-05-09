@@ -276,25 +276,23 @@ const CategoryBox = ({
                                                       // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
                                                     }}
                                                   >
-                                                    {product.images.length > 0 ? (
-                                                      <img
-                                                        src={product.images[0]} // Display first image only
-                                                        alt={product.name}
-                                                        style={{
-                                                          width: "135px",
-                                                          height: "150px",
-                                                          objectFit: "cover",
-                                                          borderRadius: "10px",
-                                                          cursor: "pointer",
-                                                        }}
-                                                        onClick={() => {
-                                                          handleProductClick(product);
-                                                          //   show();
-                                                        }}
-                                                      />
-                                                    ) : (
-                                                      <p>{t("No Image Available")}</p>
-                                                    )}
+                                                   {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 ? (
+                        <img
+                          src={
+                            product.thumbnails && product.thumbnails.length > 0
+                              ? product.thumbnails[1]
+                              : product.images[0]
+                          }
+                          alt={t("Loading...")}
+                          style={{ width: "253px", height: "250px" }}
+                          onClick={() => {
+                            handleProductClick(product);
+                            
+                          }}
+                        />
+                      ) : (
+                        <p>{t("No Image Available")}</p>
+                      )}
                                                     <MAddToWishList position={position} Iposition={Iposition}>
                                                       <WishlistButton product={product} />
                                                     </MAddToWishList>
@@ -319,7 +317,7 @@ const CategoryBox = ({
                                                             __html: highlightText(
                                                               isExpanded
                                                                 ? product.name
-                                                                : product.name.slice(0, maxLength),
+                                                                : product.name.slice(0,12),
                                                               searchTerm
                                                             ),
                                                           }}
@@ -451,26 +449,24 @@ const CategoryBox = ({
                                   // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
                                 }}
                               >
-                                {product.images.length > 0 ? (
-                                  <img
-                                    src={product.images[0]} // Display first image only
-                                    alt={product.name}
-                                    style={{
-                                      width: "250px",
-                                      height: "250px",
-                                      objectFit: "cover",
-                                      borderRadius: "10px",
-                                      cursor: "pointer",
-                                    }}
-                                    onClick={() => {
-                                      setSelectedProduct(product);
-                                      ViewedProduct(product.id);
-                                      show();
-                                    }}
-                                  />
-                                ) : (
-                                  <p>{t("No Image Available")}</p>
-                                )}
+                                 {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 ? (
+                        <img
+                          src={
+                            product.thumbnails && product.thumbnails.length > 0
+                              ? product.thumbnails[1]
+                              : product.images[0]
+                          }
+                          alt={t("Loading...")}
+                          style={{ width: "253px", height: "250px" }}
+                          onClick={() => {
+                            setSelectedProduct(product);
+                            ViewedProduct(product.id);
+                            show();
+                          }}
+                        />
+                      ) : (
+                        <p>{t("No Image Available")}</p>
+                      )}
                               </div>
 
                               {/* text */}
