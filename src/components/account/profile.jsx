@@ -63,8 +63,8 @@ const Profile = ({ api,  }) => {
           <NavLink to="/deditProfile">
             <ProfileImage
               src={
-                  User.ProfileImage
-                  ?User.ProfileImage
+                  User.profile_image
+                  ?User.profile_image
                   :User.gender === "male"
                   ? "/images/svgviewer-man(2).svg"
                   : "/images/svgviewer-woman(3).svg"
@@ -75,7 +75,7 @@ const Profile = ({ api,  }) => {
         ) : (
           <NavLink to="/deditProfile">
             <ProfileImage
-              src={User.profileImage}
+              src={User.profile_image}
               alt=""
               onError={() => setImageError(true)} // Fix typo in state variable usage
             />
@@ -84,13 +84,16 @@ const Profile = ({ api,  }) => {
       </div>
 
       <p>
-        <strong>{t("User Name")}:</strong> {User.userName}
+        <strong>{t("User Name")}:</strong> {User.username}
       </p>
       <p>
-        <strong>{t("Full Names")}:</strong> {User.fullName}
+        <strong>{t("First Name")}:</strong> {User.first_name}
+      </p> 
+      <p>
+        <strong>{t("Last Name")}:</strong> {User.last_name}
       </p>
       <p>
-        <strong>{t("Phone Number")}:</strong> {User.phoneNumber}
+        <strong>{t("Phone Number")}:</strong> {User.phone_number}
       </p>
       <p>
         <strong>{t("Email")}:</strong> {User.email}

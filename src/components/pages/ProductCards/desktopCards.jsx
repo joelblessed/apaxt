@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "../../translations/i18n";
 import { useTranslation } from "react-i18next";
 import WishlistButton from "../wishlistButton";
-import {api} from "../../../config";
+import { api } from "../../../config";
 
 import {
   BoxContainer,
@@ -45,49 +45,36 @@ const DesktopCards = ({
   mBoxMarginRight,
   imagekey,
   addToCartBeforeLogin,
-  
 }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch(); // Function to check screen size
-const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
   // const filtered = Dobject.filter(
   //   (product) => category === "All" || product.category === category
   // );
 
-
-
-
-
   const ViewedProduct = async (productId) => {
     try {
       const response = await fetch(`${api}/viewedProducts`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ userId, productId })
+        body: JSON.stringify({ userId, productId }),
       });
-  
+
       if (!response.ok) {
-        throw new Error('Failed to log viewed product');
+        throw new Error("Failed to log viewed product");
       }
-  
+
       const result = await response.json();
-      alert(' DViewed product logged:', result);
+      alert(" DViewed product logged:", result);
     } catch (error) {
-      alert('DError:', error.message);
+      alert("DError:", error.message);
     }
   };
-
-
-
-
-
-
-
-
 
   const styles = {
     container: {
@@ -115,11 +102,18 @@ const token = localStorage.getItem("token")
     },
   };
 
- 
   return (
     <React.Fragment>
       {
-        <div className="animated-box" style={{...styles.container, background:"", width: mBoxWidth ||"100%", marginRight:mBoxMarginRight ||"auto"}}>
+        <div
+          className="animated-box"
+          style={{
+            ...styles.container,
+            background: "",
+            width: mBoxWidth || "100%",
+            marginRight: mBoxMarginRight || "auto",
+          }}
+        >
           {Dobject.length > 0 ? (
             Dobject.map((product, index) => (
               <div>
@@ -138,7 +132,7 @@ const token = localStorage.getItem("token")
                     key={index}
                     categoryOption={categoryShadow[product.category]}
                   >
-                    <div
+                    <div 
                       key={index}
                       style={{
                         ...styles.box,
@@ -147,24 +141,21 @@ const token = localStorage.getItem("token")
                         // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
                       }}
                     >
-                      {product.images.length > 0 ? (
-                       <img
-                       loading="lazy"
-                       src={product.images.length > 0 ? product.images[0] : "/path/to/fallback-image.jpg"}
-                       alt={product.name || "Product Image"}
-                       style={{
-                         width: "250px",
-                         height: "250px",
-                         objectFit: "cover",
-                         borderRadius: "10px",
-                         cursor: "pointer",
-                       }}
-                       onClick={() => {
-                         setSelectedProduct(product);
-                         ViewedProduct(product.id);
-                         show();
-                       }}
-                     />
+                      {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 ? (
+                        <img
+                          src={
+                            product.thumbnails && product.thumbnails.length > 0
+                              ? product.thumbnails[1]
+                              : product.images[0]
+                          }
+                          alt={t("Loading...")}
+                          style={{ width: "253px", height: "250px" }}
+                          onClick={() => {
+                            setSelectedProduct(product);
+                            ViewedProduct(product.id);
+                            show();
+                          }}
+                        />
                       ) : (
                         <p>{t("No Image Available")}</p>
                       )}
@@ -189,7 +180,7 @@ const token = localStorage.getItem("token")
                               __html: highlightText(
                                 isExpanded
                                   ? product.name
-                                  : product.name.slice(0, maxLength),
+                                  : product.name.slice(0, 12),
                                 searchTerm
                               ),
                             }}
@@ -243,8 +234,6 @@ const token = localStorage.getItem("token")
                       <div style={{ background: "" }}>
                         <div>
                           <WishlistButton product={product} />
-
-                
                         </div>
                       </div>
                     </div>
@@ -265,11 +254,8 @@ const token = localStorage.getItem("token")
                     </div>
                   </BoxContainer>
                 )}
-          
               </div>
-              
             ))
-           
           ) : (
             <p></p>
           )}

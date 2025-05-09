@@ -236,7 +236,7 @@ function MobileNavbar({
   brands,
   setBrand,
 }) {
-  const { username, profileImage } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBrandOpen, setIsBrandOpen] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -331,7 +331,7 @@ function MobileNavbar({
 
           <AccountContainer>
             <NavLink to="/d">
-              {imageError ? (
+              {!user ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="30px"
@@ -343,7 +343,7 @@ function MobileNavbar({
                 </svg>
               ) : (
                 <img
-                  src={profileImage || "/public/images/svgviewer-output(1).svg"}
+                  src={user && user.profile_image !== ""    ? user.profile_image : "/images/svgviewer-output(1).svg"  }
                   alt="loading..."
                   width="50"
                   height="50"
@@ -352,7 +352,7 @@ function MobileNavbar({
                 />
               )}
             </NavLink>
-            <span>{username || "Account"}</span>
+            <span>{user ? user.username : "Account"}</span>
           </AccountContainer>
           {/* </div> */}
         </TopRow>

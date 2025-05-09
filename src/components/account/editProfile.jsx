@@ -203,11 +203,21 @@ const EditProfile = ({ api }) => {
         />
       </label>
       <label style={styles.label}>
-        Full Name:
+        First Name:
         <input
           type="text"
           name="full_name"
-          value={user.full_name}
+          value={user.first_name}
+          onChange={handleChange}
+          style={styles.input}
+        />
+      </label>
+      <label style={styles.label}>
+        Last Name:
+        <input
+          type="text"
+          name="full_name"
+          value={user.last_name}
           onChange={handleChange}
           style={styles.input}
         />

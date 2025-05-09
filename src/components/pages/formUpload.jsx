@@ -21,7 +21,7 @@ const FormUpload = ({ api }) => {
     status: "",
     address: "",
     city: "",
-    owner:"joel",
+    owner: userName,
     ownerId:userId,
     size: 0,
     unit_of_size:"",

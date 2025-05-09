@@ -83,8 +83,7 @@ const WishlistButton = ({ product, highlightText }) => {
         style={{
           backgroundColor: isInWishList ? "red" : "green",
           color: "white",
-          border: "none",
-          padding: "10px 20px",
+          border: "none",      
           cursor: "pointer",
         }}
       >

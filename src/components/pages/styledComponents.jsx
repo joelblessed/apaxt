@@ -107,6 +107,9 @@ export const positions = {
   en: {
     left: "100px",
   },
+  others:{
+    left: "200px",
+  }
 };
 export const iospositions = {
   fr: {
@@ -125,16 +128,19 @@ export const MAddToWishList = styled.button`
       ? props.position?.left
       : getOS() === "ios"
       ? props.Iposition?.left
-      : props.position?.left};
-  top: -8px;
+      : "127px"};
+  top: -0px;
   background: none;
   border: none;
   font-size: 10px;
   z-index: 1;
   color: orange;
+  background: blue;
 `;
-export const Name = styled.a`
+export const Name = styled.label`
   font-size: ${({ fontSize }) => fontSize || "20px"};
+width: 150px;
+
 `;
 export const DescriptionContainer = styled.label`
   font-size: 10px;
@@ -154,6 +160,7 @@ export const Discount = styled.h3`
 `;
 export const StatusContainer = styled.label`
   font-size: 13px;
+ 
 `;
 export const StatusTitle = styled.h6`
   font-size: 13px;

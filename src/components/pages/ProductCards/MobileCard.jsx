@@ -71,8 +71,9 @@ loaderRef,
       marginTop: "200px",
     },
     mbox: {
-      width: "100px",
+      width: "150px",
       height: "150px",
+      
     },
 
     mlastBox: {
@@ -102,25 +103,22 @@ loaderRef,
                       // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
                     }}
                   >
-                    {product.images.length > 0 ? (
-                      <img
-                        src={product.images[0]} // Display first image only
-                        alt={product.name}
-                        style={{
-                          width: "135px",
-                          height: "150px",
-                          objectFit: "cover",
-                          borderRadius: "10px",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => {
-                          handleProductClick(product);
-                          //   show();
-                        }}
-                      />
-                    ) : (
-                      <p>{t("No Image Available")}</p>
-                    )}
+                     {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 ? (
+                        <img
+                          src={
+                            product.thumbnails && product.thumbnails.length > 0
+                              ? product.thumbnails[0]
+                              : product.images[0]
+                          }
+                          alt={t("Loading...")}
+                          style={{ width: "150px", height: "160px" }}
+                          onClick={() => {
+                            handleProductClick(product);
+                          }}
+                        />
+                      ) : (
+                        <p>{t("No Image Available")}</p>
+                      )}
                     <MAddToWishList position={position} Iposition={Iposition}>
                       <WishlistButton product={product} />
                     </MAddToWishList>
@@ -132,20 +130,23 @@ loaderRef,
                       className="text"
                       style={{
                         borderRadius: "10px",
-                        width: "100%",
+                        marginTop: "15px",
+                        width: "95%",
                         height: "100px",
-                        // background:"red",
-                        padding: "10px",
+                       padding: "0px",
+                        // background:"green",
+                        marginLeft:"auto",
+                        
                       }}
                     >
                       <Name className="name" fontSize="17px">
                         <span
-                          style={{ color: "black" }}
+                          style={{ color: "black", }}
                           dangerouslySetInnerHTML={{
                             __html: highlightText(
                               isExpanded
                                 ? product.name
-                                : product.name.slice(0, maxLength),
+                                : product.name.slice(0, 12),
                               searchTerm
                             ),
                           }}

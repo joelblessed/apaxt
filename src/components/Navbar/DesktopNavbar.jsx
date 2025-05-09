@@ -179,7 +179,7 @@ function DesktopNavbar({
   handleProductSearch,
 }) {
   const { user } = useContext(AuthContext);
-  const [User, setUser] = useState(  user ||[] );
+  const [User, setUser] = useState( [] );
   const { t } = useTranslation();
   const [imageError, setImageError] = useState(false);
   const [categoryName, setCategoryName] = useState("All Categories");
@@ -283,7 +283,7 @@ function DesktopNavbar({
         <NavItem>
           <NavLinkStyled to="/d" onClick={clearSearch}>
             <AccountContainer>
-              {imageError ? (
+              {!user ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="30px"
@@ -295,7 +295,7 @@ function DesktopNavbar({
                 </svg>
               ) : (
                 <img
-                  src={!User ? "/images/svgviewer-output(1).svg" : User.profileImage }
+                  src={user && user.profile_image !== ""    ? user.profile_image : "/images/svgviewer-output(1).svg"  }
                   alt=""
                   width="50"
                   height="50"
@@ -303,7 +303,7 @@ function DesktopNavbar({
                   style={{ borderRadius: "50%", border: " 1px solid red" }}
                 />
               )}
-              <AccountName>{User.userName || t("Account")}</AccountName>
+              <AccountName>{user ? user.username : t("Account")}</AccountName>
             </AccountContainer>
           </NavLinkStyled>
         </NavItem>

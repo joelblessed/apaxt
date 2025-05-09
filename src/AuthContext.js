@@ -9,36 +9,38 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
-    const profileImage = localStorage.getItem("profileImage");
+    const profile_image = localStorage.getItem("profileImage");
     const email = localStorage.getItem("email");
     const wallet = localStorage.getItem("wallet");
-    const phoneNumber = localStorage.getItem("phoneNumber");
+    const phone_number = localStorage.getItem("phoneNumber");
     const address = localStorage.getItem("address");
     const country = localStorage.getItem("country");
-    const fullName = localStorage.getItem("fullName");
-    const referralCode = localStorage.getItem("referralCode");
-    const userName = localStorage.getItem("userName");
-    const userId = localStorage.getItem("userId");
+    const first_name = localStorage.getItem("firstName");
+    const last_name = localStorage.getItem("lastName");
+    const date_of_birth = localStorage.getItem("dateOfBirth");
+    const referral_code = localStorage.getItem("referralCode");
+    const username = localStorage.getItem("userName");
+    const id = localStorage.getItem("userId");
     const gender = localStorage.getItem("gender");
-    const city = localStorage.getItem("city"); // Fix: Use getItem instead of setItem
-    const dateOfBirth = localStorage.getItem("dateOfBirth"); // Fix: Use getItem instead of setItem
+    const city = localStorage.getItem("city"); 
     if (token && role) {
       setUser({
         token,
         role,
-        profileImage,
+        profile_image,
         gender,
         email,
         wallet,
-        phoneNumber,
+        phone_number,
         address,
         country,
-        fullName,
-        userName,
-        referralCode,
-        userId,
+        first_name,
+        last_name,
+        username,
+        referral_code,
+        id,
         city,
-        dateOfBirth,
+        date_of_birth,
       });
     }
   }, []);
@@ -46,52 +48,56 @@ export const AuthProvider = ({ children }) => {
   const login = (
     token,
     role,
-    profileImage,
+    profile_image,
     gender,
     email,
     wallet,
-    phoneNumber,
+    phone_number,
     address,
     country,
-    fullName,
-    userName,
-    referralCode,
+    first_name,
+    last_name,
+    username,
+    referral_code,
     id,
     city,
-    dateOfBirth
+    date_of_birth
   ) => {
     localStorage.setItem("token", token);
     localStorage.setItem("role", role);
-    localStorage.setItem("profileImage", profileImage);
+    localStorage.setItem("profileImage", profile_image);
     localStorage.setItem("gender", gender);
     localStorage.setItem("email", email);
     localStorage.setItem("wallet", wallet);
-    localStorage.setItem("phoneNumber", phoneNumber);
+    localStorage.setItem("phoneNumber", phone_number);
     localStorage.setItem("address", address);
     localStorage.setItem("country", country);
-    localStorage.setItem("fullName", fullName);
-    localStorage.setItem("userName", userName);
-    localStorage.setItem("referralCode", referralCode);
+    localStorage.setItem("firstName", first_name );
+    localStorage.setItem("lastName", last_name );
+    localStorage.setItem("userName", username);
+    localStorage.setItem("referralCode", referral_code);
     localStorage.setItem("userId", id);
     localStorage.setItem("city", city);
-    localStorage.setItem("dateOfBirth", dateOfBirth);
+    localStorage.setItem("dateOfBirth", date_of_birth);
 
     setUser({
       token,
       role,
-      profileImage,
+      profile_image,
       gender,
       email,
       wallet,
-      phoneNumber,
+      phone_number,
       address,
       country,
-      fullName,
-      userName,
-      referralCode,
+      first_name,
+      last_name,
+      username,
+      referral_code,
       id,
       city,
-      dateOfBirth,
+      date_of_birth,
+      
     });
 
     fetch(`${api}/logs`, {
@@ -153,7 +159,7 @@ export const AuthProvider = ({ children }) => {
          "Authorization": `Bearer ${user.token}`
       },
       body: JSON.stringify({
-        userId: user?.userId, // Fix: Correct reference to userId
+        userId: user?.id, // Fix: Correct reference to userId
         action: "logout",
       }),
     })

@@ -47,28 +47,29 @@ function SignIn({ api, handleLogin, add }) {
        
       login(
         data.token,
-        data.role,
-        data.profileImage,
-        data.gender,
-        data.email,
-        data.wallet,
-        data.phoneNumber,
-        data.address,
-        data.country,
-        data.fullName,
-        data.userName,
-        data.referralCode,
-        data.id,
-        data.city,
-        data.dateOfBirth,
+        data.user.role,
+        data.user.profile_image,
+        data.user.gender,
+        data.user.email,
+        data.user.wallet,
+        data.user.phone_number,
+        data.user.address,
+        data.user.country,
+        data.user.first_name,
+        data.user.last_name,
+        data.user.username,
+        data.user.referral_code,
+        data.user.id,
+        data.user.city,
+        data.user.date_of_birth,
 
       
 
       );
   
-      localStorage.setItem("userId", data.id);
-      dispatch(loadCartAfterLogin(data.id));
-      handleWishlistmerge(data.id);
+      localStorage.setItem("userId", data.user.id);
+      dispatch(loadCartAfterLogin(data.user.id));
+      handleWishlistmerge(data.user.id);
       navigate("/dashboard");
  
       console.log("token",data.token)
