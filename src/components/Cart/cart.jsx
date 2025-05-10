@@ -200,6 +200,8 @@ const fetchAnew = () =>{
               {product ? (
                 <ItemImage
                   src={ glofilteredProducts.find(pro => pro.id === product.product_id)?.images[0] }
+                  style={{ width: "70px", height: "100px" }}
+                  //  glofilteredProducts.find(pro => pro.id === product.product_id)?.thumbnails?.[0] || "/path/to/fallback-image.jpg"
                   alt={product.name}
                 />
               ) : (

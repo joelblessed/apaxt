@@ -294,11 +294,22 @@ const Products = ({ ownersProducts, api, handleDelete }) => {
       <ResponsiveGrid>
         {ownersProducts.map((product) => (
           <Card key={product.id}>
-            <img
-              src={product.images[0]}
-              alt={t("Loading...")}
-              style={{ width: "100px", height: "100px" }}
-            />
+             {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 ? (
+                        <img
+                          src={
+                            product.thumbnails && product.thumbnails.length > 0
+                              ? product.thumbnails[0]
+                              : product.images[0]
+                          }
+                          alt={t("Loading...")}
+                          style={{ width: "100px", height: "100px" }}
+                          onClick={() => {
+                           
+                          }}
+                        />
+                      ) : (
+                        <p>{t("No Image Available")}</p>
+                      )}
             <h3>{product.name}</h3>
             <p>
               {t("Price")}: ${product.price}

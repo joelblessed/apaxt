@@ -87,34 +87,29 @@ const CategoryBox = ({
     handleResize(); // Initial check
     window.addEventListener("resize", handleResize); // Update on resize
     return () => window.removeEventListener("resize", handleResize);
-
-
   }, []);
 
+  const ViewedProduct = async (productId) => {
+    try {
+      const response = await fetch(`${api}/viewedProducts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, productId }),
+      });
 
-   const ViewedProduct = async (productId) => {
-      try {
-        const response = await fetch(`${api}/viewedProducts`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ userId, productId })
-        });
-    
-        if (!response.ok) {
-          throw new Error('Failed to log viewed product');
-        }
-    
-        const result = await response.json();
-        alert('Viewed product logged:', result);
-      } catch (error) {
-        alert('Error:', error.message);
+      if (!response.ok) {
+        throw new Error("Failed to log viewed product");
       }
-    };
-  
-  
-  
+
+      const result = await response.json();
+      alert("Viewed product logged:", result);
+    } catch (error) {
+      alert("Error:", error.message);
+    }
+  };
+
   const styles = {
     container: {
       display: "flex",
@@ -184,7 +179,6 @@ const CategoryBox = ({
     },
   };
 
-
   const mstyles = {
     Mcontainer: {
       display: "flex",
@@ -200,7 +194,7 @@ const CategoryBox = ({
       marginTop: "200px",
     },
     mbox: {
-      width: "100px",
+      width: "150px",
       height: "150px",
     },
 
@@ -235,96 +229,103 @@ const CategoryBox = ({
         // />
 
         <div style={styles.container}>
-                  {Dobject.map((category, index) => (
-                    <div key={index} style={styles.categoryContainer}>
-                      <h2 style={styles.categoryTitle}>
-                        {" "}
-                        <span
-                          style={{ color: "black" }}
-                          dangerouslySetInnerHTML={{
-                            __html: highlightText(category, searchTerm),
-                          }}
-                        ></span>{" "}
-                      </h2>
-                      <div style={styles.productsGrid}>
-                        {Dobject1[category]?.map((product) => (
-                          <React.Fragment>
-                            {
-                              <div className="animated-box" style={styles.container}>
-                                <div>
-                                  {/* selected Product */}
-                                  {selectedProduct === product && (
-                                    <div>
-                                      <SelectedProductDesktop
-                                        selectedProduct={selectedProduct}
-                                        handleProductHid={handleProductHid}
-                                      />
-                                    </div>
-                                  )}
-        
-                                  {product !== selectedProduct && (
-                                 <BoxContainer
-                                                  key={index}
-                                                  categoryOption={categoryShadow[product.category]}
-                                                >
-                                                  <div
-                                                    key={index}
-                                                    style={{
-                                                      ...mstyles.mbox,
-                                
-                                                      // justifyContent:
-                                                      // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
-                                                    }}
-                                                  >
-                                                   {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 ? (
-                        <img
-                          src={
-                            product.thumbnails && product.thumbnails.length > 0
-                              ? product.thumbnails[1]
-                              : product.images[0]
-                          }
-                          alt={t("Loading...")}
-                          style={{ width: "253px", height: "250px" }}
-                          onClick={() => {
-                            handleProductClick(product);
-                            
-                          }}
-                        />
-                      ) : (
-                        <p>{t("No Image Available")}</p>
-                      )}
-                                                    <MAddToWishList position={position} Iposition={Iposition}>
-                                                      <WishlistButton product={product} />
-                                                    </MAddToWishList>
-                                                  </div>
-                                
-                                                  {/* text */}
-                                                  <div style={{ display: "flex" }}>
-                                                    <div
-                                                      className="text"
-                                                      style={{
-                                                        borderRadius: "10px",
-                                                        width: "100%",
-                                                        height: "100px",
-                                                        // background:"red",
-                                                        padding: "10px",
-                                                      }}
-                                                    >
-                                                      <Name className="name" fontSize="17px">
-                                                        <span
-                                                          style={{ color: "black" }}
-                                                          dangerouslySetInnerHTML={{
-                                                            __html: highlightText(
-                                                              isExpanded
-                                                                ? product.name
-                                                                : product.name.slice(0,12),
-                                                              searchTerm
-                                                            ),
-                                                          }}
-                                                        ></span>{" "}
-                                                      </Name>
-                                
-                                                      {/* <DescriptionContainer>
+          {Dobject.map((category, index) => (
+            <div key={index} style={styles.categoryContainer}>
+              <h2 style={styles.categoryTitle}>
+                {" "}
+                <span
+                  style={{ color: "black" }}
+                  dangerouslySetInnerHTML={{
+                    __html: highlightText(category, searchTerm),
+                  }}
+                ></span>{" "}
+              </h2>
+              <div style={styles.productsGrid}>
+                {Dobject1[category]?.map((product) => (
+                  <React.Fragment>
+                    {
+                      <div className="animated-box" style={styles.container}>
+                        <div>
+                          {/* selected Product */}
+                          {selectedProduct === product && (
+                            <div>
+                              <SelectedProductDesktop
+                                selectedProduct={selectedProduct}
+                                handleProductHid={handleProductHid}
+                              />
+                            </div>
+                          )}
+
+                          {product !== selectedProduct && (
+                            <BoxContainer
+                              key={index}
+                              categoryOption={categoryShadow[product.category]}
+                            >
+                              <div
+                                key={index}
+                                style={{
+                                  ...mstyles.mbox,
+
+                                  // justifyContent:
+                                  // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
+                                }}
+                              >
+                                {(product.thumbnails &&
+                                  product.thumbnails.length > 0) ||
+                                product.images.length > 0 ? (
+                                  <img
+                                    src={
+                                      product.thumbnails &&
+                                      product.thumbnails.length > 0
+                                        ? product.thumbnails[1]
+                                        : product.images[0]
+                                    }
+                                    alt={t("Loading...")}
+                                    style={{ width: "150px", height: "160px" }}
+                                    onClick={() => {
+                                      handleProductClick(product);
+                                    }}
+                                  />
+                                ) : (
+                                  <p>{t("No Image Available")}</p>
+                                )}
+                                <MAddToWishList
+                                  position={position}
+                                  Iposition={Iposition}
+                                >
+                                  <WishlistButton product={product} />
+                                </MAddToWishList>
+                              </div>
+
+                              {/* text */}
+                              <div style={{ display: "flex" }}>
+                                <div
+                                  className="text"
+                                  style={{
+                                    borderRadius: "10px",
+                                    marginTop: "15px",
+                                    width: "95%",
+                                    height: "100px",
+                                    padding: "0px",
+                                    // background:"green",
+                                    marginLeft: "auto",
+                                  }}
+                                >
+                                  <Name className="name" fontSize="17px">
+                                    <span
+                                      style={{ color: "black" }}
+                                      dangerouslySetInnerHTML={{
+                                        __html: highlightText(
+                                          isExpanded
+                                            ? product.name
+                                            : product.name.slice(0, 12),
+                                          searchTerm
+                                        ),
+                                      }}
+                                    ></span>{" "}
+                                  </Name>
+
+                                  {/* <DescriptionContainer>
                                                    <DescriptionTitle>
                                                      {t("Description")}:
                                                      <DescriptionContent>
@@ -332,80 +333,84 @@ const CategoryBox = ({
                                                      </DescriptionContent>
                                                    </DescriptionTitle>
                                                  </DescriptionContainer> */}
-                                                      <StatusContainer>
-                                                        <StatusTitle>
-                                                          {t("Status")}:
-                                                          <StatusContent>{product.status}</StatusContent>
-                                                        </StatusTitle>
-                                                      </StatusContainer>
-                                                      <Price key={index}>
-                                                        {t("CFA")}: {product.price - product.discount}
-                                                      </Price>
-                                                      {product.discount > 0 && (
-                                                        <Discount key={index}>
-                                                          {t("CFA")}:<s>{product.price}</s>
-                                                          <label
-                                                            style={{
-                                                              width: "40px",
-                                                              height: "20px",
-                                                              background: "#90EE90",
-                                                              textAlign: "center",
-                                                              borderRadius: "5px",
-                                                              marginLeft: "15px",
-                                                            }}
-                                                          >
-                                                            -
-                                                            {((product.discount / product.price) * 100).toFixed(
-                                                              0
-                                                            )}
-                                                            %
-                                                          </label>
-                                                        </Discount>
-                                                      )}
-                                                    </div>
-                                                  </div>
-                                
-                                                  <div
-                                                    style={{
-                                                      background: "",
-                                                      textAlign: "center",
-                                                      padding: "5px",
-                                                    }}
-                                                  >
-                                                    <MAddtocartButton
-                                                      fontSize={fontSize}
-                                                      IfontSize={IfontSize}
-                                                      main={product.discount > 0}
-                                                      width="auto"
-                                                      onClick={() => dispatch(addToCartAPI(product))}
-                                                    >
-                                                      {t("Add To Cart")}
-                                                    </MAddtocartButton>
-                                                  </div>
-                                                </BoxContainer>
+                                  <StatusContainer>
+                                    <StatusTitle>
+                                      {t("Status")}:
+                                      <StatusContent>
+                                        {product.status}
+                                      </StatusContent>
+                                    </StatusTitle>
+                                  </StatusContainer>
+                                  <Price key={index}>
+                                    {t("CFA")}:{" "}
+                                    {product.price - product.discount}
+                                  </Price>
+                                  {product.discount > 0 && (
+                                    <Discount key={index}>
+                                      {t("CFA")}:<s>{product.price}</s>
+                                      <label
+                                        style={{
+                                          width: "40px",
+                                          height: "20px",
+                                          background: "#90EE90",
+                                          textAlign: "center",
+                                          borderRadius: "5px",
+                                          marginLeft: "15px",
+                                        }}
+                                      >
+                                        -
+                                        {(
+                                          (product.discount / product.price) *
+                                          100
+                                        ).toFixed(0)}
+                                        %
+                                      </label>
+                                    </Discount>
                                   )}
                                 </div>
-        
-                             
                               </div>
-                            }
-        
-                            {/* {product.isSelected ? "Unselect" : "Select"} */}
-                          </React.Fragment>
-                        ))}
-                        <div>
-                          <Link
-                            to={`/category/${category}`}
-                            style={styles.viewMoreButton}
-                          >
-                            {t("View More")}
-                          </Link>
+
+                              <div
+                                style={{
+                                  background: "",
+                                  textAlign: "center",
+                                  padding: "5px",
+                                }}
+                              >
+                                <MAddtocartButton
+                                  fontSize={fontSize}
+                                  IfontSize={IfontSize}
+                                  main={product.discount > 0}
+                                  width="auto"
+                                  onClick={() =>
+                                    dispatch(addToCartAPI(product))
+                                  }
+                                >
+                                  {t("Add To Cart")}
+                                </MAddtocartButton>
+                              </div>
+                            </BoxContainer>
+                          )}
                         </div>
                       </div>
-                    </div>
-                  ))}
-                  <div ref={loadeRef}> {t("Loading...")}</div>
+                    }
+
+                    {/* {product.isSelected ? "Unselect" : "Select"} */}
+                  </React.Fragment>
+                ))}
+                <div>
+                  <Link
+                    to={`/category/${category}`}
+                    style={styles.viewMoreButton}
+                  >
+                    {t("View More")}
+                  </Link>
                 </div>
+              </div>
+            </div>
+          ))}
+          <div ref={loadeRef}> {t("Loading...")}</div>
+        </div>
       ) : (
         <div style={styles.container}>
           {Dobject.map((category, index) => (
@@ -449,24 +454,27 @@ const CategoryBox = ({
                                   // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
                                 }}
                               >
-                                 {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 ? (
-                        <img
-                          src={
-                            product.thumbnails && product.thumbnails.length > 0
-                              ? product.thumbnails[1]
-                              : product.images[0]
-                          }
-                          alt={t("Loading...")}
-                          style={{ width: "253px", height: "250px" }}
-                          onClick={() => {
-                            setSelectedProduct(product);
-                            ViewedProduct(product.id);
-                            show();
-                          }}
-                        />
-                      ) : (
-                        <p>{t("No Image Available")}</p>
-                      )}
+                                {(product.thumbnails &&
+                                  product.thumbnails.length > 0) ||
+                                product.images.length > 0 ? (
+                                  <img
+                                    src={
+                                      product.thumbnails &&
+                                      product.thumbnails.length > 0
+                                        ? product.thumbnails[1]
+                                        : product.images[0]
+                                    }
+                                    alt={t("Loading...")}
+                                    style={{ width: "253px", height: "250px" }}
+                                    onClick={() => {
+                                      setSelectedProduct(product);
+                                      ViewedProduct(product.id);
+                                      show();
+                                    }}
+                                  />
+                                ) : (
+                                  <p>{t("No Image Available")}</p>
+                                )}
                               </div>
 
                               {/* text */}
@@ -545,10 +553,7 @@ const CategoryBox = ({
 
                                 {/* like and wishlist */}
                                 <div style={{ background: "" }}>
-                                  
-                                  
-                                <WishlistButton product={product} />
-
+                                  <WishlistButton product={product} />
                                 </div>
                               </div>
 
@@ -571,8 +576,6 @@ const CategoryBox = ({
                             </BoxContainer>
                           )}
                         </div>
-
-                     
                       </div>
                     }
 
