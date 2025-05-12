@@ -42,6 +42,9 @@ const Category = ({
   const fetchProducts = useCallback(async () => {
     try {
       const res = await fetch(`${api}/products?page=${page}&limit=10`);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
       const data = await res.json();
       const fetched = data.products || data;
 
@@ -56,6 +59,7 @@ const Category = ({
       });
     } catch (error) {
       console.error("Failed to fetch products:", error);
+      setHasMore(false); // Stop further pagination on error
     }
   }, [page, api]);
 

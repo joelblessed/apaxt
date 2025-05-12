@@ -208,10 +208,11 @@ const CategoryBox = ({
     },
   };
 
- 
-  const topage = (category) => {
+  const handleViewMore = (category) => {
     navigate(`/category/${encodeURIComponent(category)}`);
+    window.location.reload(); // Force a reload to ensure navigation works
   };
+ 
   return (
     <>
       {isMobile ? (
@@ -407,8 +408,9 @@ const CategoryBox = ({
                 ))}
                 <div>
                   <Link
-                    to={`/category/${encodeURIComponent(category)}`}
+                    to="#"
                     style={styles.viewMoreButton}
+                    onClick={() => handleViewMore(category)}
                   >
                     {t("View More")}
                   </Link>
@@ -591,8 +593,9 @@ const CategoryBox = ({
                 ))}
                 <div>
                   <Link
+                    to="#"
                     style={styles.viewMoreButton}
-                    onClick={() => {topage(category)}}
+                    onClick={() => handleViewMore(category)}
                   >
                     {t("View More")}
                   </Link>
