@@ -49,7 +49,7 @@ const DesktopCards = ({
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch(); // Function to check screen size
   const token = localStorage.getItem("token");
-
+  const imageSelect = localStorage.getItem("imageSelect");
   // const filtered = Dobject.filter(
   //   (product) => category === "All" || product.category === category
   // );
@@ -141,11 +141,11 @@ const DesktopCards = ({
                         // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
                       }}
                     >
-                      {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 ? (
+                      {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 && imageSelect.id ?  (
                         <img
                           src={
-                            product.thumbnails && product.thumbnails.length > 0
-                              ? product.thumbnails[1]
+                            product.thumbnails && product.thumbnails.length > 0 
+                              ? product.thumbnails[product.thumbnail_index]
                               : product.images[0]
                           }
                           alt={t("Loading...")}

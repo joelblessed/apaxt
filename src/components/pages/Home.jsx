@@ -36,9 +36,9 @@ const Home = ({
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token")
 
-  const handleClick = (brand) => navigate(`/brand/${brand}`);
-  const CathandleClick = (category) => navigate(`/category/${category}`);
-  const handleDiscounts = () => navigate("/discountedProducts");
+  const handleClick = (brand) => navigate(`/brand/${encodeURIComponent(brand)}`);
+  const CathandleClick = (category) => navigate(`/category/${encodeURIComponent(category)}`);
+  const handleDiscounts = () => navigate(`/discountedProducts`);
 
   // Function to handle swapping items in an array
   const swapItems = (array, fromIndex, toIndex) => {

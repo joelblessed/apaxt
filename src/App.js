@@ -167,21 +167,34 @@ function App() {
 
   useEffect(() => {
     fetch(`${api}/AllProfiles`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch profiles: ${response.statusText}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         setAllProfiles(data);
+        console.log("Fetched profiles successfully:", data); // Debug log
       })
-      .catch((error) => console.error("Error fetching profies:", error));
+      .catch((error) => {
+        console.error("Error fetching profiles:", error);
+      });
   }, []);
 
   useEffect(() => {
     fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch products: ${response.statusText}`);
+        }
+        return response.json();
+      })
       .then((data) => {
+        console.log("Fetched products successfully:", data); // Debug log
         const products = data.products; // Extract products from the response
         setAllProducts(products);
         setFilteredProducts(products);
-        console.log("allProducts", products);
 
         const filteredProducts = products.filter(
           (product) => product.owner_id === userId
@@ -198,20 +211,11 @@ function App() {
         const discountedProducts = products.filter(
           (product) => product.discount > 0
         );
-
-        // Set the filtered products to state
         setDiscount(discountedProducts);
-
-        // Extract unique brands from the products
-        const uniqueBrands = [
-          ...new Set(
-            products.flatMap((product) => product.brand.map((bra) => bra.name))
-          ),
-        ];
-
-        setBrands(uniqueBrands);
       })
-      .catch((error) => console.error("Error fetching products:", error));
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
   }, [userId]);
 
   const mobilefilteredProducts =

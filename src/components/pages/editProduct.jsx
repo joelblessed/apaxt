@@ -27,6 +27,7 @@ const EditProduct = ({ api }) => {
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]); // New state for selected images
   const [errors, setErrors] = useState({});
+  const [thumbnail_index, setThumbnail_index] = useState(); // New state for thumbnail index
 
   useEffect(() => {
     // Fetch product details
@@ -51,6 +52,7 @@ const EditProduct = ({ api }) => {
         setImages(data.images || []);
         setSelectedImages(data.images || []); // Count fetched images as selected
         setProduct(data || []);
+        setThumbnail_index(data.thumbnail_index || 0); // Set thumbnail index from fetched data
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -110,6 +112,7 @@ const EditProduct = ({ api }) => {
       weight,
       location,
       posted_on: postedOn,
+      thumbnail_index,
     };
     formData.append("product", JSON.stringify(product));
 
@@ -139,7 +142,9 @@ const EditProduct = ({ api }) => {
         alert("Product updated successfully!");
       } else {
         const errorData = await response.json();
-        alert(`Failed to update product: ${errorData.error || "Unknown error"}`);
+        alert(
+          `Failed to update product: ${errorData.error || "Unknown error"}`
+        );
       }
     } catch (error) {
       console.error("Error updating product:", error);
@@ -202,7 +207,9 @@ const EditProduct = ({ api }) => {
           onChange={(e) => setNumberInStock(e.target.value)}
           required
         />
-        {errors.numberInStock && <p className="error">{errors.numberInStock}</p>}
+        {errors.numberInStock && (
+          <p className="error">{errors.numberInStock}</p>
+        )}
 
         {/* Discount */}
         <label>Discount</label>
@@ -289,6 +296,17 @@ const EditProduct = ({ api }) => {
         />
         {errors.city && <p className="error">{errors.city}</p>}
 
+        {/* thumbnail */}
+        <label>Thumbnail Index</label>
+        <input
+          type="number"
+          name="thumbnail_index"
+          placeholder="0"
+          value={thumbnail_index}
+          onChange={(e) => setThumbnail_index(e.target.value)}
+          disabled
+        />
+
         {/* Image Upload */}
         <label>Product Images (2 and above)</label>
         <input
@@ -303,12 +321,18 @@ const EditProduct = ({ api }) => {
         {selectedImages.length > 0 ? (
           <div className="uploaded-images">
             <h3>Selected Images:</h3>
+
+            <h3>Choose your preview Image</h3>
             {selectedImages.map((file, index) => (
               <img
                 key={index}
                 src={file instanceof File ? URL.createObjectURL(file) : file} // Ensure only File objects are passed
                 alt={`Selected ${index}`}
                 width="100"
+                onClick={() => {
+                  setThumbnail_index(index); // Set thumbnail index on click
+                }}
+                style={{ cursor: "pointer", border: thumbnail_index === index &&"5px solid blue", borderRadius: "4px"}} // Add cursor pointer for selected images
               />
             ))}
           </div>
@@ -316,8 +340,19 @@ const EditProduct = ({ api }) => {
           images.length > 0 && (
             <div className="uploaded-images">
               <h3>Existing Images:</h3>
+              <h3>Choose your preview Image</h3>
               {images.map((image, index) => (
-                <img key={index} src={image} alt={`Existing ${index}`} width="100" />
+               
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Existing ${index}`}
+                  width="100"
+                  onClick={() => {
+                    setThumbnail_index(index); // Set thumbnail index on click
+                  }}
+                  style={{ cursor: "pointer", border: thumbnail_index === index &&"5px solid blue", borderRadius: "4px", background:'red' }} // Add cursor pointer for existing images
+                />
               ))}
             </div>
           )
@@ -328,6 +363,7 @@ const EditProduct = ({ api }) => {
           {isSubmitting ? "Updating..." : "Update Product"}
         </button>
       </form>
+
       <style jsx>{`
         .form-container {
           max-width: 600px;

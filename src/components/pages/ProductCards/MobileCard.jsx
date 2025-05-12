@@ -107,7 +107,7 @@ loaderRef,
                         <img
                           src={
                             product.thumbnails && product.thumbnails.length > 0
-                              ? product.thumbnails[0]
+                              ? product.thumbnails[product.thumbnail_index]
                               : product.images[0]
                           }
                           alt={t("Loading...")}

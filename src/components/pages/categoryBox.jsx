@@ -13,6 +13,8 @@ import { addToWishlist } from "../../wishlistSlice";
 import SelectedProductDesktop from "./selectedProductsDesktop";
 import MobileCard from "./ProductCards/MobileCard";
 import WishlistButton from "./wishlistButton";
+
+
 import {
   BoxContainer,
   AddtocartButton,
@@ -72,6 +74,7 @@ const CategoryBox = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const maxLength = 20;
+  const navigate = useNavigate();
 
   const position = positions[i18n.language] || position.en;
   const fontSize = fontSizes[i18n.language] || fontSize.en;
@@ -205,6 +208,10 @@ const CategoryBox = ({
     },
   };
 
+ 
+  const topage = (category) => {
+    navigate(`/category/${encodeURIComponent(category)}`);
+  };
   return (
     <>
       {isMobile ? (
@@ -277,7 +284,7 @@ const CategoryBox = ({
                                     src={
                                       product.thumbnails &&
                                       product.thumbnails.length > 0
-                                        ? product.thumbnails[1]
+                                        ? product.thumbnails[product.thumbnail_index]
                                         : product.images[0]
                                     }
                                     alt={t("Loading...")}
@@ -400,7 +407,7 @@ const CategoryBox = ({
                 ))}
                 <div>
                   <Link
-                    to={`/category/${category}`}
+                    to={`/category/${encodeURIComponent(category)}`}
                     style={styles.viewMoreButton}
                   >
                     {t("View More")}
@@ -461,7 +468,7 @@ const CategoryBox = ({
                                     src={
                                       product.thumbnails &&
                                       product.thumbnails.length > 0
-                                        ? product.thumbnails[1]
+                                        ? product.thumbnails[product.thumbnail_index]
                                         : product.images[0]
                                     }
                                     alt={t("Loading...")}
@@ -496,7 +503,7 @@ const CategoryBox = ({
                                         __html: highlightText(
                                           isExpanded
                                             ? product.name
-                                            : product.name.slice(0, maxLength),
+                                            : product.name.slice(0, 12),
                                           searchTerm
                                         ),
                                       }}
@@ -584,8 +591,8 @@ const CategoryBox = ({
                 ))}
                 <div>
                   <Link
-                    to={`/category/${category}`}
                     style={styles.viewMoreButton}
+                    onClick={() => {topage(category)}}
                   >
                     {t("View More")}
                   </Link>

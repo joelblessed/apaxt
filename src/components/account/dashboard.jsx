@@ -121,7 +121,7 @@ const Dashboard = ({
   const { t } = useTranslation();
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const userId = localStorage.getItem("userId");
- 
+
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
@@ -175,6 +175,10 @@ const Dashboard = ({
           <NavLink onClick={toggleSidebar} to="/dproducts">
             {t("Products")}
           </NavLink>
+          <NavLink onClick={toggleSidebar} to="/dimageSelect">
+            {t("Image Select")}
+          </NavLink>
+
           <NavLink onClick={toggleSidebar} to="/dorders">
             {t("Orders")}
           </NavLink>
@@ -197,6 +201,20 @@ const Dashboard = ({
             path="/d"
             element={
               <Home
+                products={products}
+                orders={orders}
+                ownersProducts={ownersProducts}
+                users={users}
+              />
+            }
+          />
+
+          <Route
+            path="/dimageSelect"
+            element={
+              <ImageSelect
+                api={api}
+                glofilteredProducts={glofilteredProducts}
                 products={products}
                 orders={orders}
                 ownersProducts={ownersProducts}
@@ -230,7 +248,6 @@ const Dashboard = ({
             path="/dorders"
             element={
               <Orders
-               
                 api={api}
                 glofilteredProducts={glofilteredProducts}
                 Card={Card}
@@ -284,6 +301,31 @@ const Home = ({ products, orders, ownersProducts, users }) => {
   );
 };
 
+const ImageSelect = ({ products, orders, ownersProducts, users }) => {
+  const { t } = useTranslation();
+console.log("settings" ,localStorage.getItem("imageSelect"));
+  return (
+    <div >
+    {ownersProducts.map((product) => (
+      <div
+   
+      >
+        <h3>{t("Product Name")}: {product.name}</h3>
+        {product.images.map((images, index) =>(
+          <span key={index}    style={{ hover:"background:blue", border:"1px solid red", borderRadius:"10px", height:"220px"}}>
+          <img
+          src={images}
+          style={{ width: "100px", height: "100px", margin:"15px", }} 
+          onClick={() => {localStorage.setItem("imageSelect", JSON.stringify({ id: product.id, imgIndex: index }));}}
+          />
+          </span>
+        ))}
+      </div>
+    ))}
+    </div>
+  );
+}
+
 // Products Component
 const Products = ({ ownersProducts, api, handleDelete }) => {
   const { t } = useTranslation();
@@ -294,22 +336,21 @@ const Products = ({ ownersProducts, api, handleDelete }) => {
       <ResponsiveGrid>
         {ownersProducts.map((product) => (
           <Card key={product.id}>
-             {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 ? (
-                        <img
-                          src={
-                            product.thumbnails && product.thumbnails.length > 0
-                              ? product.thumbnails[0]
-                              : product.images[0]
-                          }
-                          alt={t("Loading...")}
-                          style={{ width: "100px", height: "100px" }}
-                          onClick={() => {
-                           
-                          }}
-                        />
-                      ) : (
-                        <p>{t("No Image Available")}</p>
-                      )}
+            {(product.thumbnails && product.thumbnails.length > 0) ||
+            product.images.length > 0 ? (
+              <img
+                src={
+                  product.thumbnails && product.thumbnails.length > 0
+                    ? product.thumbnails[0]
+                    : product.images[0]
+                }
+                alt={t("Loading...")}
+                style={{ width: "100px", height: "100px" }}
+                onClick={() => {}}
+              />
+            ) : (
+              <p>{t("No Image Available")}</p>
+            )}
             <h3>{product.name}</h3>
             <p>
               {t("Price")}: ${product.price}
@@ -339,10 +380,6 @@ const Products = ({ ownersProducts, api, handleDelete }) => {
   );
 };
 
-
-
-
-
 <div>
   <div>
     <Wallet />
@@ -360,7 +397,7 @@ const Products = ({ ownersProducts, api, handleDelete }) => {
     <EditProfile />
   </div>
   <div>
-    <Orders/>
+    <Orders />
   </div>
 </div>;
 
