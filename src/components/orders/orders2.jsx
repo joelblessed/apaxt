@@ -25,6 +25,7 @@ const Orders2 = ({api}) => {
         <thead>
           <tr>
             <th>ID</th>
+            <th>user Name</th>
             <th>User</th>
             <th>Date</th>
             <th>Amount</th>
@@ -39,6 +40,7 @@ const Orders2 = ({api}) => {
             <tr key={order.id}>
               <td>{order.id}</td>
               <td> (ID: {order.user_id})</td>
+              <td>o</td>
               <td>{new Date(order.placed_at).toLocaleString()}</td>
               <td>${order.total_amount}</td>
               <td>{order.status}</td>

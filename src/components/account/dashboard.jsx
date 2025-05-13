@@ -356,7 +356,7 @@ const Products = ({ ownersProducts, api, handleDelete }) => {
               {t("Price")}: ${product.price}
             </p>
             <p>
-              {t("Stock")}: {product.numberInStock}
+              {t("Stock")}: {product.number_in_stock}
             </p>
 
             <div>

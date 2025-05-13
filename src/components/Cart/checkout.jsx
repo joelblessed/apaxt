@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { clearCart } from "../../cartSlice"; // Assuming you have a clearCart action
+import { ProfileImage } from "../account/dashboardStyles";
 
 // Styled components
 const CheckoutContainer = styled.div`
@@ -92,7 +93,7 @@ const Message = styled.p`
 const Checkout = ({
   api,
   user,
-  userId,
+
   setCalculateTotal,
   setCheckOut,
   paymentStatus,
@@ -118,16 +119,19 @@ const Checkout = ({
   const [address, setAddress] = useState(user.address);
   const [deliveryDate, setDeliveryDate] = useState("");
   const [isPickup, setIsPickup] = useState(false); // For self-pickup
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState([{
     username: localStorage.getItem("userName"),
     userId: localStorage.getItem("userId"),
+    profile_image: localStorage.getItem("profileImage"),
+    phone_number: localStorage.getItem("phoneNumber"),
     paymentMethod: "cash",
     paymentNumber: paymentNumber,
-    paymentStatus: paymentStatus,
+    paymentStatus: "pending",
     paymentId: paymentId,
-  });
+  }]);
 
   // Retrieve token from localStorage
+  const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
   // Calculate delivery date when shipping method changes
@@ -218,12 +222,13 @@ const Checkout = ({
       const formattedDate = currentDate.toLocaleString();
 
       const orderData = {
-        user: userInfo,
+        userId: userId,
         date: formattedDate,
         totalAmount: calculateTotalWithShipping(), // Ensure totalAmount is calculated correctly
         paymentMethod: "cash",
         status: "pending",
         cart:crt,
+        user_data:userInfo,
         shipping: {
           address,
           deliveryDate,
