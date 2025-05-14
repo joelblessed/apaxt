@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import "../../translations/i18n";
 import { useTranslation } from "react-i18next";
 import WishlistButton from "../wishlistButton";
+import AddToCartButton from "../addToCartButton";
+
 import {
   BoxContainer,
   AddtocartButton,
@@ -201,15 +203,8 @@ loaderRef,
                       padding: "5px",
                     }}
                   >
-                    <MAddtocartButton
-                      fontSize={fontSize}
-                      IfontSize={IfontSize}
-                      main={product.discount > 0}
-                      width="auto"
-                      onClick={() => dispatch(addToCartAPI(product))}
-                    >
-                      {t("Add To Cart")}
-                    </MAddtocartButton>
+                     <AddToCartButton product={product}
+                      />
                   </div>
                 </BoxContainer>
               </div>

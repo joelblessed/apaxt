@@ -13,6 +13,8 @@ import { addToWishlist } from "../../wishlistSlice";
 import SelectedProductDesktop from "./selectedProductsDesktop";
 import MobileCard from "./ProductCards/MobileCard";
 import WishlistButton from "./wishlistButton";
+import AddToCartButton from "./addToCartButton";
+
 
 
 import {
@@ -385,15 +387,8 @@ const CategoryBox = ({
                                   padding: "5px",
                                 }}
                               >
-                                <MAddtocartButton
-                                  fontSize={fontSize}
-                                  IfontSize={IfontSize}
-                                  main={product.discount > 0}
-                                  width="auto"
+                                 <AddToCartButton product={product}/>
                                 
-                                >
-                                  {t("Add To Cart")}
-                                </MAddtocartButton>
                               </div>
                             </BoxContainer>
                           )}
@@ -571,12 +566,7 @@ const CategoryBox = ({
                                   padding: "5px",
                                 }}
                               >
-                                <AddtocartButton
-                                  main={product.discount > 0}
-                                 
-                                >
-                                  {t("Add To Cart")}
-                                </AddtocartButton>
+                                  <AddToCartButton product={product}/>
                               </div>
                             </BoxContainer>
                           )}

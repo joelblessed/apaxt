@@ -245,12 +245,7 @@ const DesktopCards = ({
                         padding: "5px",
                       }}
                     >
-                      {/* <AddtocartButton
-                        main={product.discount > 0}
-                        onClick={() => dispatch(addToCartAPI(product))}
-                      >
-                        {t("Add To Cart")}
-                      </AddtocartButton> */}
+                     
                       <AddToCartButton product={product}
                      />
                       

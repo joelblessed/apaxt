@@ -48,7 +48,7 @@ export const AddtocartButton = styled.button`
   font-size: 100%,
   transition: all 0.3s ease;
   width: 90%;
-  margin-top:${(props) => (props.main ? "40px" : "10px")};
+  margin-top:${(props) => (props.main ?  "10px" : "40px" )};
   
   
   &:hover{
@@ -91,7 +91,7 @@ export const MAddtocartButton = styled.button`
       : props.fontSize?.fontSize};
   transition: all 0.3s ease;
   width: auto;
-  margin-top: ${(props) => (props.main ? "5px" : "-60px")};
+  margin-top: ${(props) => (props.main ? "-60px" : "0px")};
 
   &:hover {
     transform: scale(1.1);
