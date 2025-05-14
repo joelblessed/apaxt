@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import { useDispatch } from "react-redux";
-import { addToCartBeforeLogin } from "../../cartAction";
+// import { addToCartBeforeLogin } from "../../cartAction";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -50,7 +50,7 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
   };
 
   return (
-    <Container>
+    <Container style={{marginTop:"100px"}}>
       {/* Product Image & Details */}
       <ProductWrapper>
         <ImageContainer>
@@ -84,7 +84,7 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
 
           <ButtonsContainer>
             <ActionButton
-              onClick={() => dispatch(addToCartBeforeLogin(selectedProduct))}
+              
             >
               Add To Cart
             </ActionButton>

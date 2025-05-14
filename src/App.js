@@ -13,6 +13,7 @@ import { addToWishlist, removeFromWishlist } from "./wishlistSlice";
 import { useMemo } from "react";
 import { debounce } from "lodash";
 import Fuse from "fuse.js";
+import { loadCart } from './cartJs/cartThunks';
 import {
   BrowserRouter as Router,
   Route,
@@ -24,7 +25,7 @@ import LanguageSwitcher from "./components/translations/languageSwitcher";
 import "./components/translations/i18n";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { loadCartAfterLogin } from "./cartAction";
+
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -77,7 +78,7 @@ import ForgotPassword from "./components/account/forgotPasword";
 import ResetPassword from "./components/account/resetPassword";
 import FormUpload from "./components/pages/formUpload";
 // import ProductSelection from "./components/pages/productSelection";
-import { addToCart } from "./cartSlice";
+
 import DeleteProduct from "./components/pages/deleteProduct";
 import Footer from "./components/pages/footer";
 
@@ -146,12 +147,7 @@ function App() {
 
   const userId = Number(localStorage.getItem("userId" || "guest"));
 
-  useEffect(() => {
-    if (userId) {
-      dispatch(loadCartAfterLogin(userId));
-    }
-  }, [userId, dispatch]);
-
+ 
   // Function to check screen size
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 760);
@@ -164,6 +160,12 @@ function App() {
   }, []);
 
   /////////////////////////////////////////////////
+  useEffect(() => {
+    // Load cart on app initialization
+    dispatch(loadCart());
+  }, [dispatch]);
+
+  // /////////////////////////////////////////////
 
   useEffect(() => {
     fetch(`${api}/AllProfiles`)
@@ -305,7 +307,7 @@ function App() {
                 glofilteredProducts={allProducts}
                 discounts={discounts}
                 SelectedProduct={setSelectedProduct}
-                addToCart={addToCart}
+               
                 filteredProducts={filteredProducts}
                 ownersProducts={ownersProducts}
                 mobilefilteredProducts={mobilefilteredProducts}

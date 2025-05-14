@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import { useDispatch } from "react-redux";
-import { addToCartBeforeLogin } from "../../cartAction";
+// import { addToCartBeforeLogin } from "../../cartAction";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
@@ -69,7 +69,7 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
             {selectedProduct.rating && <Rating>⭐ {selectedProduct.rating} / 5</Rating>}
 
             <ButtonGroup>
-              <ActionButton onClick={() => dispatch(addToCartBeforeLogin(selectedProduct))}>
+              <ActionButton >
                 Add To Cart
               </ActionButton>
               <ActionButton secondary>Add To Wishlist</ActionButton>

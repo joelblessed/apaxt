@@ -3,7 +3,7 @@ import "./products.css";
 import { AuthContext } from "../../AuthContext";
 import { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCartBeforeLogin, addToCartAPI } from "../../cartAction";
+// import { addToCartBeforeLogin, addToCartAPI } from "../../cartAction";
 import styled, { keyframes } from "styled-components";
 
 import Slider from "react-slick";
@@ -134,8 +134,7 @@ fetch(`${api}/viewedProducts`, {
     <>
       {isMobile ? (
         <MobileCard
-          addToCartAPI={addToCartAPI}
-          addToCartBeforeLogin={addToCartBeforeLogin}
+        
           addToWishlist={addToWishlist}
           Mobject={Mobject}
           handleWislistToggle={handleWislistToggle}
@@ -159,8 +158,7 @@ fetch(`${api}/viewedProducts`, {
         />
       ) : (
         <DesktopCards
-          addToCartAPI={addToCartAPI}
-          addToCartBeforeLogin={addToCartBeforeLogin}
+          
           addToWishlist={addToWishlist}
           Dobject={Dobject}
           ts={ts}

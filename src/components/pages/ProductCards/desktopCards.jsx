@@ -4,7 +4,7 @@ import "../../translations/i18n";
 import { useTranslation } from "react-i18next";
 import WishlistButton from "../wishlistButton";
 import { api } from "../../../config";
-
+import AddToCartButton from "../addToCartButton";
 import {
   BoxContainer,
   AddtocartButton,
@@ -245,13 +245,17 @@ const DesktopCards = ({
                         padding: "5px",
                       }}
                     >
-                      <AddtocartButton
+                      {/* <AddtocartButton
                         main={product.discount > 0}
                         onClick={() => dispatch(addToCartAPI(product))}
                       >
                         {t("Add To Cart")}
-                      </AddtocartButton>
+                      </AddtocartButton> */}
+                      <AddToCartButton product={product}
+                     />
+                      
                     </div>
+                    
                   </BoxContainer>
                 )}
               </div>

@@ -1,248 +1,272 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { 
-  addToCartBeforeLogin, 
-  loadCartAfterLogin, 
-  removeFromCartAPI, 
-  clearCartOnLogout, 
-  updateCartItemQuantity
+  loadCart, 
+  incrementQuantity, 
+  decrementQuantity, 
+  removeFromCartWithAuth,
+  clearCartWithAuth
+} from '../../cartJs/cartThunks';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-} from "../../cartAction";
-import { useNavigate, Link } from "react-router-dom";
-import styled from "styled-components";
-
-// Styled Components
-const CartContainer = styled.div`
-  padding: 2rem;
+const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  
-  @media (max-width: 768px) {
-    margin-top: 150px;
+  padding: 2rem 1rem;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+`;
+
+const EmptyCart = styled.div`
+  text-align: center;
+  padding: 3rem 0;
+
+  p {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
   }
 
+  a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
 `;
 
-const EmptyMessage = styled.h1`
-  text-align: center;
-  color: #666;
-  margin-top: 3rem;
-  font-size: 1.5rem;
-`;
-
-const ItemsContainer = styled.div`
+const Grid = styled.div`
   display: grid;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: 2fr 1fr;
   }
+`;
+
+const CartItems = styled.div`
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 `;
 
 const CartItem = styled.div`
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1rem;
   display: flex;
-  transition: box-shadow 0.3s ease;
+  align-items: center;
+  padding: 1rem;
 
-  &:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-`;
-
-const ItemImage = styled.img`
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 4px;
-  margin-right: 1rem;
-
-  @media (max-width: 480px) {
+  img {
     width: 80px;
     height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .details {
+    margin-left: 1rem;
+    flex: 1;
+
+    h3 {
+      font-weight: 500;
+    }
+
+    p {
+      color: #6b7280;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      margin-top: 0.5rem;
+
+      button {
+        padding: 0.25rem 0.5rem;
+        border: 1px solid #d1d5db;
+        background: white;
+        cursor: pointer;
+
+        &:disabled {
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+
+        &:first-child {
+          border-radius: 4px 0 0 4px;
+        }
+
+        &:last-child {
+          border-radius: 0 4px 4px 0;
+        }
+      }
+
+      .remove {
+        margin-left: 1rem;
+        color: #ef4444;
+        cursor: pointer;
+
+        &:hover {
+          color: #dc2626;
+        }
+      }
+    }
   }
 `;
 
-const ItemDetails = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ItemDescription = styled.div`
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-`;
-
-const ItemName = styled.div`
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-`;
-
-const ItemPrice = styled.div`
-  color: #e63946;
-  font-weight: bold;
-  margin-bottom: 1rem;
-`;
-
-const QuantityControls = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-const Quantity = styled.div`
-  min-width: 30px;
-  text-align: center;
-`;
-
-const Button = styled.button`
-  padding: 0.25rem 0.5rem;
-  border: 1px solid #ddd;
-  background: #f8f9fa;
-  border-radius: 4px;
+const ClearCartButton = styled.button`
+  margin-top: 1rem;
+  color: #ef4444;
   cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover:not(:disabled) {
-    background: #e9ecef;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
-
-const DeleteButton = styled(Button)`
-  background: #ff6b6b;
-  color: white;
-  border-color: #ff6b6b;
-
-  &:hover:not(:disabled) {
-    background: #ff5252;
-  }
-`;
-
-const CheckoutButton = styled(Link)`
-  display: block;
-  text-align: center;
-  background: #4caf50;
-  color: white;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-top: 2rem;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.2s ease;
 
   &:hover {
-    background: #3e8e41;
+    color: #dc2626;
   }
 `;
 
-const NoImage = styled.p`
-  width: 100px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f5f5f5;
-  border-radius: 4px;
-  margin-right: 1rem;
-  color: #999;
+const Summary = styled.div`
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+
+  h2 {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      font-weight: bold;
+      font-size: 1.125rem;
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
 `;
-const Cart = ({ api, highlightText, glofilteredProducts, searchTerm }) => {
-  const navigate = useNavigate();
+
+const CartPage = ({ glofilteredProducts }) => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.items);
-  const token = localStorage.getItem("token");
+  const { items, loading, error } = useSelector(state => state.cart);
+  const isAuthenticated = useSelector(state => state.auth?.isAuthenticated);
 
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (!token && storedCart.length > 0) {
-      dispatch({ type: "cart/setCart", payload: storedCart });
+    dispatch(loadCart());
+  }, [dispatch]);
+
+  const handleIncrement = (productId) => {
+    dispatch(incrementQuantity(productId));
+  };
+
+  const handleDecrement = (productId) => {
+    dispatch(decrementQuantity(productId));
+  };
+
+  const handleRemove = (productId) => {
+    dispatch(removeFromCartWithAuth(productId));
+  };
+
+  const handleClearCart = () => {
+    if (window.confirm('Are you sure you want to clear your cart?')) {
+      dispatch(clearCartWithAuth());
     }
-  }, [dispatch, token]);
-
-
-  const handleIncreaseQuantity = (productId, action) => {
-    dispatch(updateCartItemQuantity(productId, action));
   };
 
-  const handleDecreaseQuantity = (productId, action) => {
-    dispatch(updateCartItemQuantity(productId, action));
+  const calculateTotal = () => {
+    return items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
   };
 
-
-const fetchAnew = () =>{
-  if (token) {
-    dispatch(loadCartAfterLogin());
-  }
-
-}
-   
-// const filtered = glofilteredProducts.filter(product => viewedIds.includes(product.id));
-
+  if (loading) return <div>Loading cart...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
-    <CartContainer>
-      {cart.length === 0 ? (
-        <EmptyMessage>The cart is empty<button onClick={fetchAnew}>refresh</button></EmptyMessage>
+    <Container>
+      <Title>Your Shopping Cart</Title>
+      {items.length === 0 ? (
+        <EmptyCart>
+          <p>Your cart is empty</p>
+          <Link to="/products">Continue Shopping</Link>
+        </EmptyCart>
       ) : (
-        <ItemsContainer>
-          {cart.map((product) => (
-            <CartItem key={product.id}>
-              {product ? (
-                <ItemImage
-                  src={ glofilteredProducts.find(pro => pro.id === product.product_id)?.images[0] }
-                  style={{ width: "70px", height: "100px" }}
-                  //  glofilteredProducts.find(pro => pro.id === product.product_id)?.thumbnails?.[0] || "/path/to/fallback-image.jpg"
-                  alt={product.name}
-                />
-              ) : (
-                <NoImage>No image available</NoImage>
-              )}
-              <ItemDetails>
-                <ItemDescription>{product.desc}</ItemDescription>
-                <ItemName>
-                  {product.name}
-                </ItemName>
-                <ItemPrice>Price: CFA {product.price}</ItemPrice>
-                <QuantityControls>
-                  <Quantity>{product.quantity}</Quantity>
-                  <Button
-                    onClick={() => {handleIncreaseQuantity(product.product_id, "increment"); fetchAnew()}}
-                    disabled={product.quantity === product.number_in_stock}
-                  >
-                    +
-                  </Button>
-                  <Button
-                    onClick={() => {handleDecreaseQuantity(product.product_id, "decrement"); fetchAnew()}}
-                    disabled={product.quantity === 1}
-                  >
-                    -
-                  </Button>
-                  <DeleteButton
-                    onClick={() => {dispatch(removeFromCartAPI(product.product_id)); fetchAnew()}}
-                  >
-                    X
-                  </DeleteButton>
-                </QuantityControls>
-              </ItemDetails>
-            </CartItem>
-          ))}
-          <CheckoutButton to="/checkout">
-            Checkout
-          </CheckoutButton>
-        </ItemsContainer>
+        <Grid>
+          <div>
+            <CartItems>
+              {items.map(item => (
+                <CartItem key={item.product_id}>
+                  <img 
+                    src={glofilteredProducts.find(pro => pro.id === item.product_id)?.images[0]} 
+                    alt={item.name} 
+                  />
+                  <div className="details">
+                    <h3>{item.name}</h3>
+                    <p>${item.price}</p>
+                    <div className="actions">
+                      <button onClick={() => handleIncrement(item.product_id)}>+</button>
+                      <span>{item.quantity}</span>
+                      <button 
+                        onClick={() => handleDecrement(item.product_id)} 
+                        disabled={item.quantity <= 1}
+                      >
+                        -
+                      </button>
+                      <button 
+                        onClick={() => handleRemove(item.product_id)} 
+                        className="remove"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </CartItem>
+              ))}
+            </CartItems>
+            <ClearCartButton onClick={handleClearCart}>Clear Cart</ClearCartButton>
+          </div>
+          <Summary>
+            <h2>Order Summary</h2>
+            <div className="summary-item">
+              <span>Subtotal ({items.length} items)</span>
+              <span>${calculateTotal()}</span>
+            </div>
+            <div className="summary-item">
+              <span>Total</span>
+              <span>${calculateTotal()}</span>
+            </div>
+            <button>
+              {isAuthenticated ? 'Proceed to Checkout' : 'Login to Checkout'}
+            </button>
+          </Summary>
+        </Grid>
       )}
-    </CartContainer>
+    </Container>
   );
 };
 
-export default Cart;
+export default CartPage;

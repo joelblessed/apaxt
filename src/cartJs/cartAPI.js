@@ -1,0 +1,74 @@
+import { api } from "../config";
+export const fetchCart = async (token) => {
+  const response = await fetch(`${api}/cart`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  if (!response.ok) throw new Error('Failed to fetch cart');
+  return await response.json();
+};
+
+export const addToCart = async (productId, quantity, token) => {
+  const response = await fetch(`${api}/cart`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ productId, quantity })
+  });
+  if (!response.ok) throw new Error('Failed to add to cart');
+  return await response.json();
+};
+
+export const updateCartItem = async (productId, action, token) => {
+  const response = await fetch(`${api}/cart/${productId}/${action}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  if (!response.ok) throw new Error(`Failed to ${action} item quantity`);
+  return await response.json();
+};
+
+export const removeFromCart = async (productId, token) => {
+  const response = await fetch(`${api}/cart/${productId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  if (!response.ok) throw new Error('Failed to remove from cart');
+  return await response.json();
+};
+
+export const mergeCarts = async (localCart, token) => {
+  const response = await fetch(`${api}/cart/merge`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ localCart })
+  });
+  if (!response.ok) throw new Error('Failed to merge carts');
+  return await response.json();
+};
+
+export const clearCart = async (token) => {
+  const response = await fetch(`${api}/cart`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  if (!response.ok) throw new Error('Failed to clear cart');
+  return await response.json();
+};

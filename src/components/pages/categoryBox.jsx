@@ -3,7 +3,7 @@ import "./products.css";
 import { AuthContext } from "../../AuthContext";
 import { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCartBeforeLogin, addToCartAPI } from "../../cartAction";
+// import { addToCartBeforeLogin, addToCartAPI } from "../../cartAction";
 import styled, { keyframes } from "styled-components";
 import { useTranslation } from "react-i18next";
 import Slider from "react-slick";
@@ -390,9 +390,7 @@ const CategoryBox = ({
                                   IfontSize={IfontSize}
                                   main={product.discount > 0}
                                   width="auto"
-                                  onClick={() =>
-                                    dispatch(addToCartAPI(product))
-                                  }
+                                
                                 >
                                   {t("Add To Cart")}
                                 </MAddtocartButton>
@@ -575,9 +573,7 @@ const CategoryBox = ({
                               >
                                 <AddtocartButton
                                   main={product.discount > 0}
-                                  onClick={() =>
-                                    dispatch(addToCartAPI(product))
-                                  }
+                                 
                                 >
                                   {t("Add To Cart")}
                                 </AddtocartButton>

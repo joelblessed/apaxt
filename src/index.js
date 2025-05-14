@@ -1,20 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom/client'; // Updated import for ReactDOM
+import { Provider } from 'react-redux';
+import store from './store';
 import App from './App';
-import ReactDom from "react-dom";
-import { Provider } from "react-redux";
-import store from "./store";
-// import wstore from "./wStore"
+import './index.css';
 import reportWebVitals from './reportWebVitals';
 import "./components/translations/i18n";
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root')); // Use createRoot
 root.render(
-  <Provider store={store}  >
-  <App />
-</Provider>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

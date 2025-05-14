@@ -3,7 +3,7 @@ import { AuthContext } from "../../AuthContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loadCartAfterLogin } from "../../cartAction";
+// import { loadCartAfterLogin } from "../../cartAction";
 import { fetchWishlist, addToWishlist } from "../../wishlistSlice";
 import "./signIN.css"; // Import the CSS file
 
@@ -68,7 +68,7 @@ function SignIn({ api, handleLogin, add }) {
       );
   
       localStorage.setItem("userId", data.user.id);
-      dispatch(loadCartAfterLogin(data.user.id));
+     
       handleWishlistmerge(data.user.id);
       navigate("/dashboard");
  
