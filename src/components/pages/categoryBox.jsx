@@ -357,7 +357,7 @@ const CategoryBox = ({
                                   </Price>
                                   {product.discount > 0 && (
                                     <Discount key={index}>
-                                      {t("CFA")}:<s>{product.price}</s>
+                                      
                                       <label
                                         style={{
                                           width: "40px",
@@ -531,7 +531,7 @@ const CategoryBox = ({
                                   </Price>
                                   {product.discount > 0 && (
                                     <Discount key={index}>
-                                      {t("CFA")}:<s>{product.price}</s>
+                                     
                                       <label
                                         style={{
                                           width: "40px",
