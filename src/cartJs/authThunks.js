@@ -1,5 +1,5 @@
 import { login, logout } from "../authJs/authSlice";
-import { AuthContext } from "../AuthContext";
+import { AuthContext } from "../AuthContextz";
 import { useContext } from "react";
 
 export const loginUser = (credentials) => async (dispatch) => {

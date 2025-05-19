@@ -55,11 +55,31 @@ export const mergeCarts = async (localCart, token) => {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ localCart })
+    body: JSON.stringify({ localCart:localCart })
   });
   if (!response.ok) throw new Error('Failed to merge carts');
   return await response.json();
 };
+
+
+//   const response = await fetch(`${api}/cart/merge`, {
+//     method: 'POST',
+//     headers: {
+//       'Authorization': `Bearer ${token}`,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({ 
+//       localCart: localCart.map(item => ({
+//         product_id: item.product_id, // or item.id depending on your structure
+//         quantity: item.quantity
+//       }))
+//     })
+//   });
+  
+//   if (!response.ok) throw new Error('Failed to merge carts');
+//   return await response.json();
+// };
+
 
 export const clearCart = async (token) => {
   const response = await fetch(`${api}/cart`, {

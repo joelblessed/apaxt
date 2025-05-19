@@ -3,7 +3,7 @@ import { AuthContext } from "../../AuthContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import { loadCartAfterLogin } from "../../cartAction";
+import { mergeCartsAfterLogin} from "../../cartJs/cartThunks";
 import { fetchWishlist, addToWishlist } from "../../wishlistSlice";
 import "./signIN.css"; // Import the CSS file
 
@@ -13,11 +13,13 @@ function SignIn({ api, handleLogin, add }) {
   const [error, setError] = useState("");
   const { login, signIn } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
-  const [token, setToken] = useState("");
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [theUser, setTheuser] = useState(localStorage.getItem("userId"))
+  const localCart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  
   // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -40,11 +42,10 @@ function SignIn({ api, handleLogin, add }) {
         return;
       }
 
-    if (data.id !== theUser){
+      if (data.id !== theUser) {
         localStorage.removeItem("cart");
-    
-       }
-       
+      }
+
       login(
         data.token,
         data.user.role,
@@ -61,19 +62,17 @@ function SignIn({ api, handleLogin, add }) {
         data.user.referral_code,
         data.user.id,
         data.user.city,
-        data.user.date_of_birth,
-
-      
-
+        data.user.date_of_birth
       );
-  
+
       localStorage.setItem("userId", data.user.id);
-     
+      merge(data.token)
       handleWishlistmerge(data.user.id);
       navigate("/dashboard");
- 
-      console.log("token",data.token)
+      dispatch(mergeCartsAfterLogin());
+      console.log("token", data.token);
     } catch (err) {
+      console.error("Sign-in error:", err.message); // Log sign-in error
       setError(err.message || "Login failed");
     }
   };
@@ -93,6 +92,28 @@ function SignIn({ api, handleLogin, add }) {
     localStorage.removeItem('sessionId');
   };
 
+
+ const merge = async ( token) => {
+   const response = await fetch(`${api}/cart/merge`, {
+     method: 'POST',
+     headers: {
+       'Authorization': `Bearer ${token}`,
+       'Content-Type': 'application/json'
+     },
+  
+     body: JSON.stringify({ localCart:localCart })
+   });   
+   if (!response.ok) throw new Error('Failed to merge carts');
+   
+   return await response.json();
+ };
+ 
+
+ const localC =()=>{
+  console.log("carzgdt",localCart)
+ }
+
+  
   return (
     <div className="signin-container">
       <h2>Login</h2>
@@ -128,7 +149,7 @@ function SignIn({ api, handleLogin, add }) {
         <button type="submit">Login</button>
         {error && <p className="error-message">{error}</p>}
       </form>
-      {/* <button onClick={() => handleWishlistmerge("2")}>ted</button> */}
+      {/* <button onClick={() =>    dispatch(mergeCartsAfterLogin())}>ted</button> */}
     </div>
   );
 }

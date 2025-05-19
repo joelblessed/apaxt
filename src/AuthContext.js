@@ -100,20 +100,20 @@ export const AuthProvider = ({ children }) => {
       
     });
 
-    fetch(`${api}/logs`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        userId: id,
-        action: "login",
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("Log created:", data))
-      .catch((error) => console.error("Error:", error));
+    // fetch(`${api}/logs`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Authorization": `Bearer ${token}`
+    //   },
+    //   body: JSON.stringify({
+    //     userId: id,
+    //     action: "login",
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => console.log("Log created:", data))
+    //   .catch((error) => console.error("Error:", error));
   };
 
   // useEffect (()=>{
@@ -152,20 +152,20 @@ export const AuthProvider = ({ children }) => {
 
     setUser(null);
 
-    fetch(`${api}/logs`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-         "Authorization": `Bearer ${user.token}`
-      },
-      body: JSON.stringify({
-        userId: user?.id, // Fix: Correct reference to userId
-        action: "logout",
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => alert("Log created:", data))
-      .catch((error) => console.error("Error:", error));
+    // fetch(`${api}/logs`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //      "Authorization": `Bearer ${user.token}`
+    //   },
+    //   body: JSON.stringify({
+    //     userId: user?.id, // Fix: Correct reference to userId
+    //     action: "logout",
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => alert("Log created:", data))
+    //   .catch((error) => console.error("Error:", error));
   };
 
 
