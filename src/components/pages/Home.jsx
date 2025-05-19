@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next"; // Import i18n
+import { useTranslation } from "react-i18next";
+
+// Import styles
 import {
   Container,
   Section,
@@ -9,10 +11,18 @@ import {
   NavButton,
   ImageaContainer,
   Image,
-} from "./home-styledComponents"; // Import styles
-import { Box as Boxx } from "./home-styledComponents";
-import CategoryBox from "./categoryBox"; // Import CategoryBox component
+  Box as Boxx,
+} from "./home-styledComponents";
+import CategoryBox from "./categoryBox";
 import Box from "./boxes";
+
+// Create Web Workers for heavy computations
+const createGroupingWorker = () => {
+  if (window.Worker) {
+    return new Worker(new URL('./homeWorker.js', import.meta.url));
+  }
+  return null;
+};
 
 const Home = ({
   brands,
@@ -24,7 +34,7 @@ const Home = ({
   discounts,
   api,
 }) => {
-  const { i18n } = useTranslation(); // Get i18n language
+  const { i18n } = useTranslation();
   const boxesPerPage = 2;
   const catboxesPerPage = 2;
   const [startIndex, setStartIndex] = useState(0);
@@ -34,13 +44,17 @@ const Home = ({
   const [draggedIndex, setDraggedIndex] = useState(null);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
+
+  // Create workers
+  const groupingWorker = useMemo(() => createGroupingWorker(), []);
+  const [groupedProducts, setGroupedProducts] = useState({});
+  const [groupedBrand, setGroupedBrand] = useState({});
 
   const handleClick = (brand) => navigate(`/brand/${encodeURIComponent(brand)}`);
   const CathandleClick = (category) => navigate(`/category/${encodeURIComponent(category)}`);
   const handleDiscounts = () => navigate(`/discountedProducts`);
 
-  // Function to handle swapping items in an array
   const swapItems = (array, fromIndex, toIndex) => {
     const updatedArray = [...array];
     const temp = updatedArray[fromIndex];
@@ -49,23 +63,18 @@ const Home = ({
     return updatedArray;
   };
 
-  // Drag handlers for mobile swap
   const handleDragStart = (index) => setDraggedIndex(index);
   const handleDrop = (index, type) => {
-    if (draggedIndex === null || draggedIndex === index) return; // Prevent invalid swaps
+    if (draggedIndex === null || draggedIndex === index) return;
 
     if (type === "brands") {
       const updatedBrands = swapItems(brands, draggedIndex, index);
-      // Ensure brands are updated correctly
       console.log("Updated brands:", updatedBrands);
-      setStartIndex(0); // Reset startIndex for brands
-      // Update brands state if needed (e.g., via a parent prop or context)
+      setStartIndex(0);
     } else if (type === "categories") {
       const updatedCategories = swapItems(categories, draggedIndex, index);
-      // Ensure categories are updated correctly
       console.log("Updated categories:", updatedCategories);
-      setCatStartIndex(0); // Reset catstartIndex for categories
-      // Update categories state if needed (e.g., via a parent prop or context)
+      setCatStartIndex(0);
     }
 
     setDraggedIndex(null);
@@ -80,83 +89,86 @@ const Home = ({
     [SelectedProduct, navigate]
   );
 
+  // Fetch viewed products with error handling
   useEffect(() => {
     if (!userId || glofilteredProducts.length === 0) return;
-  
-    (async () => {
+
+    const fetchViewedProducts = async () => {
       try {
-        const response = await 
-        fetch(`${api}/viewedProducts/${userId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-            },
-           
-          }
-        );
+        const response = await fetch(`${api}/viewedProducts/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        });
+        
         if (!response.ok) throw new Error('Failed to fetch viewed products');
-  
+
         const data = await response.json();
         const viewedIds = data.map(item => item.productId);
-        try {
-          const filtered = glofilteredProducts.filter(product => viewedIds.includes(product.id));
-          setViewed(filtered);
-        } catch (error) {
-          console.error('Error filtering viewed products:', error.message);
-          setViewed([]);
-        }
+        const filtered = glofilteredProducts.filter(product => 
+          viewedIds.includes(product.id)
+        );
+        setViewed(filtered);
       } catch (error) {
-        console.error('Error fetching viewed products:', error.message);
+        console.error('Error:', error.message);
         setViewed([]);
       }
-    })();
-  }, [glofilteredProducts, userId]);
+    };
 
-  const groupByCategory = useCallback((products) => {
-    return products.reduce((acc, product) => {
-      if (!acc[product.category]) acc[product.category] = [];
-      acc[product.category].push(product);
-      return acc;
-    }, {});
-  }, []);
+    fetchViewedProducts();
+  }, [glofilteredProducts, userId, api, token]);
 
-  const groupByBrand = useCallback((products) => {
-    return products.reduce((acc, product) => {
-      product.brand.forEach((brand) => {
-        if (!acc[brand.name]) acc[brand.name] = [];
-        acc[brand.name].push(product);
-      });
-      return acc;
-    }, {});
-  }, []);
+  // Set up worker for product grouping
+  useEffect(() => {
+    if (!groupingWorker) return;
 
-  const groupedProducts = useMemo(
-    () => groupByCategory(glofilteredProducts),
-    [glofilteredProducts, groupByCategory, groupByBrand]
-  );
+    const handleWorkerMessage = (event) => {
+      const { type, result } = event.data;
+      if (type === 'groupByCategory') {
+        setGroupedProducts(result);
+      } else if (type === 'groupByBrand') {
+        setGroupedBrand(result);
+      }
+    };
 
-  const groupedBrand = useMemo(
-    () => groupByBrand(glofilteredProducts),
-    [glofilteredProducts, groupByCategory, groupByBrand]
-  );
-  const Dobject = useMemo(
-    () => Object.keys(groupedProducts),
-    [groupedProducts]
-  );
+    groupingWorker.addEventListener('message', handleWorkerMessage);
 
+    return () => {
+      groupingWorker.removeEventListener('message', handleWorkerMessage);
+    };
+  }, [groupingWorker]);
+
+  // Process data in worker when glofilteredProducts changes
+  useEffect(() => {
+    if (!groupingWorker || !glofilteredProducts.length) return;
+
+    groupingWorker.postMessage({
+      type: 'groupByCategory',
+      products: glofilteredProducts
+    });
+
+    groupingWorker.postMessage({
+      type: 'groupByBrand',
+      products: glofilteredProducts
+    });
+  }, [glofilteredProducts, groupingWorker]);
+
+  // Memoized derived data
+  const Dobject = useMemo(() => Object.keys(groupedProducts), [groupedProducts]);
   const bDobject = useMemo(() => Object.keys(groupedBrand), [groupedBrand]);
+
   const Dobject1 = useMemo(() => {
     return Dobject.reduce((acc, category) => {
-      acc[category] = groupedProducts[category].slice(0, 4);
+      acc[category] = (groupedProducts[category] || []).slice(0, 4);
       return acc;
     }, {});
   }, [Dobject, groupedProducts]);
 
   const bDobject1 = useMemo(() => {
     return bDobject.reduce((acc, brand) => {
-      acc[brand] = groupedBrand[brand].slice(0, 4);
+      acc[brand] = (groupedBrand[brand] || []).slice(0, 4);
       return acc;
     }, {});
   }, [bDobject, groupedBrand]);
@@ -175,12 +187,17 @@ const Home = ({
     }, {});
   }, [categories, glofilteredProducts]);
 
-  console.log("prosd", glofilteredProducts);
+  // Clean up worker on unmount
+  useEffect(() => {
+    return () => {
+      if (groupingWorker) {
+        groupingWorker.terminate();
+      }
+    };
+  }, [groupingWorker]);
 
   return (
     <>
-      {/* Discount Banner with Language-Based Image */}
-
       <ImageaContainer>
         <Image
           src={
@@ -218,13 +235,6 @@ const Home = ({
                   onDragOver={(e) => e.preventDefault()}
                 >
                   {category}
-                  {/* <ul>
-                    {groupedBrandsByCategory[category]?.map((brand, idx) => (
-                      <li key={idx} onClick={() => handleClick(brand)}>
-                        {brand.name}
-                      </li>
-                    ))}
-                  </ul> */}
                 </Boxx>
               ))}
             </ScrollWrapper>
@@ -237,20 +247,21 @@ const Home = ({
             </NavButton>
           )}
         </Section>
-       {viewed.length > 0 && (
-         <div>
-         <h3 style={{ textAlign: "center" }}> Viewed Products</h3>
-         <Box
-           Mobject={viewed}
-           Dobject={viewed}
-           highlightText={highlightText}
-         />
-       </div>
-       )}
+
+        {viewed.length > 0 && (
+          <div>
+            <h3 style={{ textAlign: "center" }}> Viewed Products</h3>
+            <Box
+              Mobject={viewed}
+              Dobject={viewed}
+              highlightText={highlightText}
+            />
+          </div>
+        )}
 
         <div>
           <CategoryBox
-            Mobject={products || []} // Fallback to an empty array if products is undefined
+            Mobject={products || []}
             Dobject={Dobject}
             Dobject1={Dobject1}
             loaderRef={loaderRef}
