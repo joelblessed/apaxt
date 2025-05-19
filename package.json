@@ -61,6 +61,14 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "env": {
+    "browser": true,
+    "es2021": true,
+    "worker": true
+  },
+  "rules": {
+    "no-restricted-globals": ["error", "window", "document"]
+  },
     "extends": [
       "react-app",
       "react-app/jest"
