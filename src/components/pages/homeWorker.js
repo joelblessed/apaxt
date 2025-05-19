@@ -17,14 +17,14 @@ const groupByCategory = (products) => {
     }, {});
   };
   
-  self.onmessage = (event) => {
+  onmessage = (event) => {
     const { type, products } = event.data;
     
     if (type === 'groupByCategory') {
       const result = groupByCategory(products);
-      self.postMessage({ type: 'groupByCategory', result });
+      postMessage({ type: 'groupByCategory', result });
     } else if (type === 'groupByBrand') {
       const result = groupByBrand(products);
-      self.postMessage({ type: 'groupByBrand', result });
+      postMessage({ type: 'groupByBrand', result });
     }
   };
