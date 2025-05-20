@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
 import { 
   loadCart, 
   incrementQuantity, 
@@ -176,6 +178,12 @@ const CartPage = ({ glofilteredProducts }) => {
   const dispatch = useDispatch();
   const { items, loading, error } = useSelector(state => state.cart);
   const isAuthenticated = useSelector(state => state.auth?.isAuthenticated);
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    navigate("/checkout")
+  }
+
 
   useEffect(() => {
     dispatch(loadCart());
@@ -259,8 +267,8 @@ const CartPage = ({ glofilteredProducts }) => {
               <span>Total</span>
               <span>${calculateTotal()}</span>
             </div>
-            <button>
-              {isAuthenticated ? 'Proceed to Checkout' : 'Login to Checkout'}
+            <button onclick={handleCheckout}>
+              Proceed to Checkout
             </button>
           </Summary>
         </Grid>

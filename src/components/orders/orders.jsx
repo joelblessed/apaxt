@@ -91,7 +91,7 @@ const [orderC, setOrderC] = useState(1);
                     )
                    
                 )}
-                 {/* <button onClick={()=> handleCancel(order.id)} styles={{background:'red', borderRadius:"10px", height:"100px"}}>Cancel Order</button> */}
+                 <button onClick={()=> handleCancel(order.id)} styles={{background:'red', borderRadius:"10px", height:"100px"}}>Cancel Order</button>
 
               </div>
             ) : null

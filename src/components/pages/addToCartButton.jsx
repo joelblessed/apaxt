@@ -31,8 +31,6 @@ const AddToCartButton = ({ product }) => {
         id: product.id,
         product_id: product.id,
         name: product.name,
-        price: product.price,
-
         quantity: 1,
       })
     );

@@ -32,6 +32,7 @@ const Home = ({
   highlightText,
   loaderRef,
   discounts,
+  searchTerm,
   api,
 }) => {
   const { i18n } = useTranslation();
@@ -54,6 +55,12 @@ const Home = ({
   const handleClick = (brand) => navigate(`/brand/${encodeURIComponent(brand)}`);
   const CathandleClick = (category) => navigate(`/category/${encodeURIComponent(category)}`);
   const handleDiscounts = () => navigate(`/discountedProducts`);
+  useEffect(()=>{
+    if (searchTerm.length >0){
+      navigate(`/products`);
+
+    }
+  })
 
   const swapItems = (array, fromIndex, toIndex) => {
     const updatedArray = [...array];

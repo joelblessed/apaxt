@@ -40,7 +40,7 @@ const Orders2 = ({api}) => {
             <tr key={order.id}>
               <td>{order.id}</td>
               <td> (ID: {order.user_id})</td>
-              <td>o</td>
+              <td>{order.user_data.map(ud => ud.username)}</td>
               <td>{new Date(order.placed_at).toLocaleString()}</td>
               <td>${order.total_amount}</td>
               <td>{order.status}</td>

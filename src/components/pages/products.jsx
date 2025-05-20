@@ -26,11 +26,12 @@ const Products = ({
 }) => {
   const { t } = useTranslation();
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState("All");
+
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
-  const [category, setCategory] = useState("All");
   const token = localStorage.getItem("token")
 
   // Fetch products with pagination

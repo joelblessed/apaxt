@@ -444,6 +444,7 @@ function App() {
                 token={token}
                 userId={userId}
                 api={api}
+                glofilteredProducts={allProducts}
                 allProfiles={allProfiles}
               />
             }
@@ -648,7 +649,7 @@ function App() {
           <Route
             path="/checkout"
             element={
-              <ProtectedRoute allowedRoles={["admin", "user"]}>
+              // <ProtectedRoute allowedRoles={["admin", "user"]}>
                 <Checkout
                   api={api}
                   userId={userId}
@@ -660,7 +661,7 @@ function App() {
                   paymentNumber={phoneNumber}
                   paymentId={paymentId}
                 />
-              </ProtectedRoute>
+              // </ProtectedRoute>
             }
           />
           <Route path="/" element={<Home />} />
