@@ -126,6 +126,7 @@ function App() {
   const [hasMore, setHasMore] = useState(true);
   const [isEnglish, setIsEnglish] = useState(i18n.language === "en");
   const loaderRef = useRef();
+  const [orderCount, setOrderCount] = useState(0)
 
   // Load saved language from localStorage or default to "en"
   useEffect(() => {
@@ -432,6 +433,8 @@ function App() {
             path="/orders"
             element={
               <Orders
+              OrderCount={setOrderCount}
+              api={api}
               
                
               />
@@ -641,6 +644,7 @@ function App() {
                   ownersProducts={ownersProducts}
                   changeLanguage={changeLanguage}
                   glofilteredProducts={allProducts}
+                  orderCount={orderCount}
                 />
               </ProtectedRoute>
             }

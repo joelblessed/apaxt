@@ -149,6 +149,9 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("userName");
     localStorage.removeItem("city");
     localStorage.removeItem("dateOfBirth"); // Ensure these are removed during logout
+    localStorage.removeItem("OrdersCount");
+
+    
 
     setUser(null);
 

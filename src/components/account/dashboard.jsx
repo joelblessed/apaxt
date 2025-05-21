@@ -90,19 +90,7 @@ const ToggleButton = styled.button`
   }
 `;
 
-// Mock data (replace with API calls)
-const mockProducts = [
-  { id: 1, name: "Product A", price: 100, stock: 10 },
-  { id: 2, name: "Product B", price: 200, stock: 5 },
-];
-const mockOrders = [
-  { id: 1, product: "Product A", customer: "John Doe", status: "Shipped" },
-  { id: 2, product: "Product B", customer: "Jane Smith", status: "Pending" },
-];
-// const mockUsers = [
-//   { id: 1, name: "John Doe", email: "john@example.com" },
-//   { id: 2, name: "Jane Smith", email: "jane@example.com" },
-// ];
+
 
 const Dashboard = ({
   api,
@@ -110,9 +98,11 @@ const Dashboard = ({
   error,
   changeLanguage,
   glofilteredProducts,
+  orderCount
 }) => {
-  const [orders, setOrders] = useState(mockOrders);
+  ;
   const [users, setUsers] = useState([]);
+
   const { logout } = useContext(AuthContext);
   const [ownersProducts, setOwnersProducts] = useState([]);
   const [products, setProducts] = useState([]);
@@ -202,7 +192,7 @@ const Dashboard = ({
             element={
               <Home
                 products={products}
-                orders={orders}
+                orderCount={orderCount}
                 ownersProducts={ownersProducts}
                 users={users}
               />
@@ -216,7 +206,7 @@ const Dashboard = ({
                 api={api}
                 glofilteredProducts={glofilteredProducts}
                 products={products}
-                orders={orders}
+               
                 ownersProducts={ownersProducts}
                 users={users}
               />
@@ -253,6 +243,8 @@ const Dashboard = ({
                 Card={Card}
                 ResponsiveGrid={ResponsiveGrid}
                 Header={Header}
+             
+                
               />
             }
           />
@@ -281,7 +273,7 @@ const Dashboard = ({
 };
 
 // Home Component
-const Home = ({ products, orders, ownersProducts, users }) => {
+const Home = ({ products, orderCount, ownersProducts, users }) => {
   const { t } = useTranslation();
 
   return (
@@ -294,7 +286,7 @@ const Home = ({ products, orders, ownersProducts, users }) => {
         </Card>
         <Card>
           <h3>{t("Total Orders")}</h3>
-          <p>{orders.length}</p>
+          <p>{localStorage.getItem("OrdersCount")}</p>
         </Card>
       </ResponsiveGrid>
     </div>
@@ -397,7 +389,7 @@ const Products = ({ ownersProducts, api, handleDelete }) => {
     <EditProfile />
   </div>
   <div>
-    <Orders />
+    <Orders  />
   </div>
 </div>;
 

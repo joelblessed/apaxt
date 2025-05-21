@@ -23,7 +23,7 @@ const OrderItem = ({ item, order, glofilteredProducts, Card }) => {
   );
 };
 
-const Orders = ({ api, glofilteredProducts , Header, ResponsiveGrid, Card}) => {
+const Orders = ({ api, glofilteredProducts , Header, ResponsiveGrid, Card }) => {
   const { t } = useTranslation();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,6 +32,7 @@ const Orders = ({ api, glofilteredProducts , Header, ResponsiveGrid, Card}) => {
 const [orderC, setOrderC] = useState(1);
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
+
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -44,6 +45,8 @@ const [orderC, setOrderC] = useState(1);
 
         const data = await response.json();
         setOrders(data);
+        const count = data.map(d => d.cart.map(c => c.length))
+        localStorage.setItem("OrdersCount",count )
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -71,7 +74,7 @@ const [orderC, setOrderC] = useState(1);
       <ResponsiveGrid >
         {orders.length > 0 ? (
           orders.map((order) =>
-            order.status === "pending" ? (
+            order.status === "Pending" ? (
               <div key={order.id} style={{display:"flex", flexWrap:'wrap', background:"green", gap:"20px", padding:"30px", }} >
                 <h2>{t("Order")}: {order.placed_at} </h2>
                 {order.length > 1 && setOrderC(+1)}
