@@ -65,7 +65,7 @@ loaderRef,
       flexWrap: "wrap",
       justifyContent: "center",
       alignItems: "center",
-      gap: "5px",
+      gap: "10px",
       background: "white",
       maxWidth: "100%", // Prevents full width spread
       margin: "auto", // Centers the whole container
