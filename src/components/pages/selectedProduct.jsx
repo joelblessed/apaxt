@@ -50,7 +50,7 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
   };
 
   return (
-    <Container style={{marginTop:"100px"}}>
+    <Container style={{marginTop:"150px"}}>
       {/* Product Image & Details */}
       <ProductWrapper>
         <ImageContainer>

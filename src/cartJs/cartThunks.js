@@ -38,17 +38,18 @@ export const addToCartWithAuth = (product) => async (dispatch, getState) => {
       if (existingItem) {
         existingItem.quantity += product.quantity || 1;
       } else {
+      
         localCart.push({
           product_id: product.id,
           ...product,
-          quantity: product.quantity || 1
+          quantity: product.quantity || 1,
+          price: product.price
         });
       }
      
       
 
       localStorage.setItem('cart', JSON.stringify(localCart));
-      localStorage.setItem('cartT', JSON.stringify(localCart));
       dispatch(setCart(localCart));
       return;
     }

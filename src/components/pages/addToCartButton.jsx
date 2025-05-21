@@ -32,6 +32,7 @@ const AddToCartButton = ({ product }) => {
         product_id: product.id,
         name: product.name,
         quantity: 1,
+        price:product.price - product.discount
       })
     );
   };
