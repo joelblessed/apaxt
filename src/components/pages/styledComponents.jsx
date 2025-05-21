@@ -135,8 +135,11 @@ export const MAddToWishList = styled.button`
   font-size: 10px;
   z-index: 1;
   color: orange;
-  background: blue;
+  // background: blue;
 `;
+
+
+
 export const Name = styled.label`
   font-size: ${({ fontSize }) => fontSize || "20px"};
 width: 150px;

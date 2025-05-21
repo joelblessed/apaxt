@@ -132,7 +132,7 @@ const DesktopCards = ({
                     key={index}
                     categoryOption={categoryShadow[product.category]}
                   >
-                    <div 
+                    <div
                       key={index}
                       style={{
                         ...styles.box,
@@ -141,15 +141,20 @@ const DesktopCards = ({
                         // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
                       }}
                     >
-                      {(product.thumbnails && product.thumbnails.length > 0) || product.images.length > 0 && imageSelect.id ?  (
+                      {(product.thumbnails && product.thumbnails.length > 0) ||
+                      (product.images.length > 0 && imageSelect.id) ? (
                         <img
                           src={
-                            product.thumbnails && product.thumbnails.length > 0 
+                            product.thumbnails && product.thumbnails.length > 0
                               ? product.thumbnails[product.thumbnail_index]
                               : product.images[0]
                           }
                           alt={t("Loading...")}
-                          style={{ width: "253px", height: "250px" }}
+                          style={{
+                            width: "250px",
+                            height: "250px",
+                            borderRadius: "10px",
+                          }}
                           onClick={() => {
                             setSelectedProduct(product);
                             ViewedProduct(product.id);
@@ -160,9 +165,15 @@ const DesktopCards = ({
                         <p>{t("No Image Available")}</p>
                       )}
                     </div>
+                    <div style={{position:"relative",top:"0px", left:"212px"}}>
+                    <WishlistButton
+                      product={product}
+                      
+                    />
+                    </div>
 
                     {/* text */}
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: "flex", marginTop: "-40px" }}>
                       <div
                         className="text"
                         style={{
@@ -229,13 +240,6 @@ const DesktopCards = ({
                           </Discount>
                         )}
                       </div>
-
-                      {/* like and wishlist */}
-                      <div style={{ background: "" }}>
-                        <div>
-                          <WishlistButton product={product} />
-                        </div>
-                      </div>
                     </div>
 
                     <div
@@ -245,12 +249,8 @@ const DesktopCards = ({
                         padding: "5px",
                       }}
                     >
-                     
-                      <AddToCartButton product={product}
-                     />
-                      
+                      <AddToCartButton product={product} />
                     </div>
-                    
                   </BoxContainer>
                 )}
               </div>

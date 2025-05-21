@@ -113,7 +113,7 @@ loaderRef,
                               : product.images[0]
                           }
                           alt={t("Loading...")}
-                          style={{ width: "150px", height: "160px" }}
+                          style={{ width: "150px", height: "160px", borderRadius:"10px"}}
                           onClick={() => {
                             handleProductClick(product);
                           }}

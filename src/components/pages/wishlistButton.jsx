@@ -76,18 +76,22 @@ const WishlistButton = ({ product, highlightText }) => {
 
 
   return (
-    <div>
+    <div >
       <button
         id={`wishlist-button-${product.id}`}
         onClick={ handleWishlistToggle}
         style={{
-          backgroundColor: isInWishList ? "red" : "green",
-          color: "white",
-          border: "none",      
+          background: "none",
+          border: "none",
           cursor: "pointer",
+          // fontWeight:'bold',
+          fontSize: "25px",
+          background:"none",
+          color:  isInWishList ? "red" : "blue",
+       
         }}
       >
-        {isInWishList ? "R" : "A"}
+        {isInWishList ? "[-]" : "[+]"}
       </button>
     </div>
   );

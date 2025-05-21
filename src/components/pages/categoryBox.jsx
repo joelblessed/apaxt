@@ -291,7 +291,7 @@ const CategoryBox = ({
                                         : product.images[0]
                                     }
                                     alt={t("Loading...")}
-                                    style={{ width: "150px", height: "160px" }}
+                                    style={{ width: "150px", height: "160px", borderRadius:"10px" }}
                                     onClick={() => {
                                       handleProductClick(product);
                                     }}
@@ -467,7 +467,7 @@ const CategoryBox = ({
                                         : product.images[0]
                                     }
                                     alt={t("Loading...")}
-                                    style={{ width: "253px", height: "250px" }}
+                                    style={{ width: "250px", height: "250px", borderRadius:"10px" }}
                                     onClick={() => {
                                       setSelectedProduct(product);
                                       ViewedProduct(product.id);
@@ -478,9 +478,14 @@ const CategoryBox = ({
                                   <p>{t("No Image Available")}</p>
                                 )}
                               </div>
+                    <div style={{position:"relative",top:"0px", left:"212px"}}>
+                              
+                              <WishlistButton product={product} />
+                              </div>
+
 
                               {/* text */}
-                              <div style={{ display: "flex" }}>
+                              <div style={{ display: "flex", marginTop: "-40px"  }}>
                                 <div
                                   className="text"
                                   style={{
@@ -554,9 +559,7 @@ const CategoryBox = ({
                                 </div>
 
                                 {/* like and wishlist */}
-                                <div style={{ background: "" }}>
-                                  <WishlistButton product={product} />
-                                </div>
+                               
                               </div>
 
                               <div

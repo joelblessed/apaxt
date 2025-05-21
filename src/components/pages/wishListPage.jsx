@@ -2,11 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWishlist, removeFromWishlist } from "../../wishlistSlice";
 import Box from "./boxes";
+import { v4 as uuidv4 } from 'uuid';
+
 
 const WishlistPage = ({ filteredProducts, api, highlightText }) => {
+
+
+    useEffect(() => {
+      let sessionId = localStorage.getItem('sessionId');
+      if (!sessionId) {
+        sessionId = uuidv4();
+        localStorage.setItem('sessionId', sessionId);
+      }
+    }, []);
+
+
   const dispatch = useDispatch();
   const [wishlistProducts, setWishlistProducts] = useState([]);
-  const userId = localStorage.getItem("userId") || ""; // Ensure userId is a string
+  const userId = localStorage.getItem("userId") || localStorage.getItem('sessionId') ; // Ensure userId is a string
   const wishlist = useSelector((state) => state.wishlist.items);
   const WL = wishlist.length > 0 ? wishlist.map((productId) => productId.toString()) : [];
 
@@ -18,7 +31,7 @@ const WishlistPage = ({ filteredProducts, api, highlightText }) => {
     }
   }, [dispatch, userId]);
 
-  console.log("wishlist", wishlist)
+  // console.log("wishlist", wishlist)
 
   useEffect(() => {
     // Filter products in the frontend
@@ -26,7 +39,7 @@ const WishlistPage = ({ filteredProducts, api, highlightText }) => {
       WL.includes(product.id.toString())
     );
     setWishlistProducts(filtered);
-  },[wishlist, filteredProducts]); // Runs when products are fetched
+  }); // Runs when products are fetched
 
   return (
     <div>
