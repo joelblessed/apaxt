@@ -131,7 +131,7 @@ const CategoryBox = ({
       margin: "5px",
     },
     Categorycontainer: {
-      width: "90%",
+      width: "96%",
       margin: "auto",
       marginTop: "90px",
       paddingRight: "20px",
@@ -143,7 +143,7 @@ const CategoryBox = ({
       flexWrap: "wrap",
       gap: "10px",
       border: "none",
-      padding: "10px",
+      padding: "0px",
     },
     productBox: {
       width: "250px",
@@ -218,25 +218,7 @@ const CategoryBox = ({
   return (
     <>
       {isMobile ? (
-        // <MobileCard
-        //   addToCartAPI={addToCartAPI}
-        //   addToCartBeforeLogin={addToCartBeforeLogin}
-        //   addToWishlist={addToWishlist}
-        //   Mobject={Mobject}
-        //   handleProductClick={handleProductClick}
-        //   // show={show}
-        //   position={position}
-        //   loaderRef={loadeRef}
-        //   Iposition={Iposition}
-        //   userId={userId}
-        //   highlightText={highlightText}
-        //   searchTerm={searchTerm}
-        //   fontSize={fontSize}
-        //   IfontSize={IfontSize}
-        //   showDetails={showDetails}
-        //   maxLength={maxLength}
-        //   isExpanded={isExpanded}
-        // />
+       
 
         <div style={styles.container}>
           {Dobject.map((category, index) => (
