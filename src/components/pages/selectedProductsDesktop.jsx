@@ -57,7 +57,7 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
           <DetailsSection>
             <SellerInfo>
               Seller:{" "}
-              <SellerLink to={`/productsByOwner/${selectedProduct.owner}`}>
+              <SellerLink to={`/productsByOwner/${encodeURIComponent(selectedProduct.owner)}`}>
                 {selectedProduct.owner}
               </SellerLink>
             </SellerInfo>

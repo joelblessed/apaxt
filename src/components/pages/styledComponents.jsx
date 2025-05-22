@@ -102,10 +102,10 @@ export const MAddtocartButton = styled.button`
 
 export const positions = {
   fr: {
-    left: "122px",
+    left: "102px",
   },
   en: {
-    left: "120px",
+    left: "100px",
   }
  
 };
