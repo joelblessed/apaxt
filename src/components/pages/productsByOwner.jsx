@@ -27,102 +27,112 @@ const ProductsByOwner = ({
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
   const { categoryName } = useParams();
-  const [ownersProducts, setAllProducts] = useState([]);
+  const [ownersProducts, setOwnersProducts] = useState([]);
   const [generalProducts, setGeneralProducts] = useState([]);
   const [uniqueCategories, setUniqueCategories] = useState([]);
   const [category, setCategory] = useState("");
 
-  // Fetch all products
-
+  // Fetch all owner's products and categories
   useEffect(() => {
-    fetch(`${api}/allProducts`)
-      .then((response) => response.json())
-      .then((data) => {
-        const fetched = data.products;
-        const filteredByOwner = fetched.filter(
+    const fetchData = async () => {
+      try {
+        const [productsRes, allProductsRes] = await Promise.all([
+          fetch(`${api}/products`),
+          fetch(`${api}/allProducts`)
+        ]);
+        
+        const productsData = await productsRes.json();
+        const allProductsData = await allProductsRes.json();
+        
+        const fetched = productsData.products || productsData;
+        const allFetched = allProductsData.products || allProductsData;
+        
+        // Filter by owner
+        const filteredByOwner = allFetched.filter(
           (product) => product.owner === ownerName
         );
-        setAllProducts(filteredByOwner);
-      })
-      .catch((error) => console.error("Error fetching profies:", error));
-  }, [api]);
-
-  // const searchTerm = ownerName;
-
-  // // Memoized fuse instance for search
-  // const fuse = useMemo(() => new Fuse(glofilteredProducts, {
-  //   keys: ["name", "category", "owner", "brand.name"],
-  //   threshold: 0.3,
-  // }), [glofilteredProducts]);
-
-  // Fetch products with pagination
-  const fetchProducts = useCallback(async () => {
-    const res = await fetch(`${api}/products?page=${page}&limit=5`);
-    const data = await res.json();
-    const fetched = data.products || data;
-
-    if (fetched.length === 0) setHasMore(false);
-
-    // Set filtered products based on fetched data
-    const uniqueProducts = (prev, newItems) => {
-      const ids = new Set(prev.map((p) => p.id));
-      return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
+        
+        setOwnersProducts(filteredByOwner);
+        setProducts(filteredByOwner);
+        
+        // Extract unique categories
+        const uniqueCategories = [
+          ...new Set(filteredByOwner.map((product) => product.category)),
+        ];
+        setUniqueCategories(uniqueCategories);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
+    
+    fetchData();
+  }, [api, ownerName]);
 
-    const mobilefilteredProducts =
-      category === category
-        ? products
-        : products.filter((product) => product.category === category);
-
-    setProducts((prev) => uniqueProducts(prev, fetched));
-  }, [page]);
-
-  // // Handle infinite scroll
-  // useEffect(() => {
-  //   if (!hasMore) return;
-
-  //   const observer = new IntersectionObserver(
-  //     ([entry]) => {
-  //       if (entry.isIntersecting) {
-  //         setPage(prev => prev + 1);
-  //       }
-  //     },
-  //     { rootMargin: "100px" }
-  //   );
-
-  //   const currentLoader = loaderRef.current;
-  //   if (currentLoader) observer.observe(currentLoader);
-
-  //   return () => {
-  //     if (currentLoader) observer.unobserve(currentLoader);
-  //   };
-  // }, [hasMore]);
-
-  useEffect(() => {
+  // Fetch more products with pagination
+  const fetchMoreProducts = useCallback(async () => {
     if (!hasMore) return;
+    
+    try {
+      const res = await fetch(`${api}/products?page=${page}&limit=5`);
+      const data = await res.json();
+      const fetched = data.products || data;
+
+      if (fetched.length === 0) {
+        setHasMore(false);
+        return;
+      }
+
+      setProducts(prev => {
+        const ids = new Set(prev.map(p => p.id));
+        const newItems = fetched.filter(item => !ids.has(item.id));
+        return [...prev, ...newItems];
+      });
+    } catch (error) {
+      console.error("Error fetching more products:", error);
+    }
+  }, [api, page, hasMore]);
+
+  // Handle infinite scroll
+  useEffect(() => {
+    if (!hasMore || !loaderRef.current) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setPage((prev) => prev + 1);
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setPage(prev => prev + 1);
         }
       },
       { rootMargin: "100px" }
     );
 
-    if (loaderRef.current) observer.observe(loaderRef.current);
+    observer.observe(loaderRef.current);
 
     return () => {
       if (loaderRef.current) observer.unobserve(loaderRef.current);
     };
-  }, [hasMore]);
+  }, [hasMore, loaderRef]);
 
-  // Initial fetch and reset when category changes
+  // Fetch more products when page changes
   useEffect(() => {
-    setPage(1);
-    setProducts([]);
-    setHasMore(true);
-  }, [category]);
+    if (page > 1) {
+      fetchMoreProducts();
+    }
+  }, [page, fetchMoreProducts]);
+
+  // Reset pagination when category changes
+  useEffect(() => {
+    if (category) {
+      setPage(1);
+      setHasMore(false); // We're filtering existing products, no need for pagination
+      const filtered = ownersProducts.filter(
+        (product) => product.category === category
+      );
+      setProducts(filtered);
+    } else {
+      setProducts(ownersProducts);
+      setHasMore(true);
+    }
+  }, [category, ownersProducts]);
 
   // Mobile scroll to top on search
   useEffect(() => {
@@ -142,144 +152,60 @@ const ProductsByOwner = ({
     [SelectedProduct, navigate]
   );
 
+  // Search functionality
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
-
-  // OwnersProducts search
-  useEffect(() => {
-    if (ownerName || (searchTerm.trim() !== "" && searchTerm)) {
-      const fuse = new Fuse(ownersProducts, {
-        keys: ["name", "category", "owner", "brand.name"],
-        threshold: 0.3,
-      });
-
-      if (searchTerm.length === 0) {
-        const results = fuse.search(ownerName.trim());
-        const matched = results.map((res) => res.item);
-
-        setProducts(matched);
-        setHasMore(false); // Stop pagination on search
-      } else {
-        const results = fuse.search(searchTerm.trim());
-        const matched = results.map((res) => res.item);
-
-        setProducts(matched);
-        setHasMore(false); // Stop pagination on search
-      }
-    } else {
-      setProducts(ownersProducts); // Reset to owner's products
-      setHasMore(true); // Enable pagination again
-    }
-  }, [searchTerm, ownersProducts, ownerName]);
-
-  const fetchSearchResults = useCallback(
-    async (query) => {
-      try {
-        const res = await fetch(
-          `${api}/search?query=${encodeURIComponent(
-            query
-          )}&page=${page}&limit=5`
+    if (!searchTerm) {
+      if (category) {
+        const filtered = ownersProducts.filter(
+          (product) => product.category === category
         );
-        const data = await res.json();
-        const fetched = data.results || [];
-
-        if (fetched.length === 0) setHasMore(false);
-
-        const uniqueProducts = (prev, newItems) => {
-          const ids = new Set(prev.map((p) => p.id));
-          return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
-        };
-
-        const filteredProducts = category
-          ? fetched.filter(
-              (product) =>
-                product.owner === ownerName && product.category === category
-            )
-          : fetched;
-
-        setProducts((prev) => uniqueProducts(prev, filteredProducts));
-      } catch (error) {
-        console.error("Error fetching search results:", error);
-      }
-    },
-    [page, category, api]
-  );
-
-  // Debounced search function
-  const debouncedSearch = debounce((query) => {
-    fetchSearchResults(query);
-  }, 200); // Delay in milliseconds
-
-  useEffect(() => {
-    // Trigger the debounced search when the search term changes
-    debouncedSearch(searchTerm || category);
-
-    // Cleanup debounce function when the component unmounts or searchTerm changes
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [searchTerm, category]);
-
-  // general products fetch
-  useEffect(() => {
-    if (ownerName || category || (searchTerm.trim() !== "" && searchTerm)) {
-      // Use fuse search if products already loaded
-      const fuse = new Fuse(glofilteredProducts, {
-        keys: ["name", "category", "owner", "brand.name"],
-        threshold: 0.3,
-      });
-
-      if (searchTerm.length === 0 && category === "") {
-        const results = fuse.search(ownerName.trim());
-
-        const matched = results.map((res) => res.item);
-
-        setGeneralProducts(matched);
-        setHasMore(false); // Stop pagination on search
-      } else if (searchTerm.length === 0) {
-        const results = fuse.search(category.trim());
-
-        const matched = results.map((res) => res.item);
-
-        setGeneralProducts(matched);
-        setHasMore(false); // Stop pagination on search
+        setProducts(filtered);
       } else {
-        const results = fuse.search(searchTerm.trim());
-
-        const matched = results.map((res) => res.item);
-        const noOwner = matched.filter(
-          (product) => product.owner !== ownerName
-        );
-        setGeneralProducts(noOwner);
-        setHasMore(false); // Stop pagination on search
+        setProducts(ownersProducts);
       }
-    } else {
-      setProducts(products); // Reset to original products
-      setHasMore(true); // Enable pagination again
+      return;
     }
-  }, [searchTerm, glofilteredProducts, products]);
 
-  // Fetch all products
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch(`${api}/products`);
-      const data = await response.json();
-      const fetched = data.products || data;
-      const filteredByOwner = fetched.filter(
-        (product) => product.owner === ownerName
+    const fuse = new Fuse(ownersProducts, {
+      keys: ["name", "category", "owner", "brand.name"],
+      threshold: 0.3,
+    });
+
+    const results = fuse.search(searchTerm.trim());
+    const matched = results.map((res) => res.item);
+    
+    if (category) {
+      const filtered = matched.filter(
+        (product) => product.category === category
       );
-      setProducts(filteredByOwner);
-      // setProducts(data);
+      setProducts(filtered);
+    } else {
+      setProducts(matched);
+    }
+    
+    setHasMore(false);
+  }, [searchTerm, ownersProducts, category]);
 
-      // Extract unique categories from the products
-      const uniqueCategories = [
-        ...new Set(fetched.map((product) => product.category)),
-      ];
-      setUniqueCategories(uniqueCategories);
-    };
-    fetchProducts();
-  }, [api]);
+  // General products search (other sellers)
+  useEffect(() => {
+    if (!searchTerm) {
+      setGeneralProducts([]);
+      return;
+    }
+
+    const fuse = new Fuse(glofilteredProducts, {
+      keys: ["name", "category", "owner", "brand.name"],
+      threshold: 0.3,
+    });
+
+    const results = fuse.search(searchTerm.trim());
+    const matched = results.map((res) => res.item);
+    const noOwner = matched.filter(
+      (product) => product.owner !== ownerName
+    );
+    
+    setGeneralProducts(noOwner);
+  }, [searchTerm, glofilteredProducts, ownerName]);
 
   const mBoxWidth = "90%";
   const mBoxMarginRight = "30px";
@@ -301,20 +227,18 @@ const ProductsByOwner = ({
 
         {uniqueCategories.map((categoryName, index) => (
           <div
-            onClick={() => setCategory(categoryName)}
+            onClick={() => setCategory(categoryName === category ? "" : categoryName)}
             style={{
               cursor: "pointer",
               fontWeight: category === categoryName ? "bold" : "normal",
               color: category === categoryName ? "blue" : "black",
               display: "grid",
-
               marginBottom: "5px",
               padding: "5px",
               border: "1px solid #ccc",
               borderRadius: "4px",
               width: "100px",
               overflow: "hidden",
-              background: "",
             }}
             key={index}
           >
@@ -322,11 +246,11 @@ const ProductsByOwner = ({
           </div>
         ))}
       </div>
-      <div style={{}}>
+      <div style={{ marginLeft: "120px" }}>
         {products.length > 0 ? (
           <div>
             <h4 style={{ textAlign: "center", marginTop: "40px" }}>
-              {ownerName} Products
+              {ownerName}'s Products
             </h4>
             <Box
               Mobject={products}
@@ -341,15 +265,14 @@ const ProductsByOwner = ({
           </div>
         ) : (
           <h4 style={{ textAlign: "center", marginTop: "40px" }}>
-            {" "}
-            {ownerName} dosen't have the products Found{" "}
+            {ownerName} doesn't have any products matching your criteria
           </h4>
         )}
 
-        {generalProducts.length > 0  &&(
+        {generalProducts.length > 0 && (
           <div>
             <h4 style={{ textAlign: "center", marginTop: "40px" }}>
-              Product other Sellers
+              Products from Other Sellers
             </h4>
             <Box
               Mobject={generalProducts}
