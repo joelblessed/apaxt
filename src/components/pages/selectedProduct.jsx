@@ -29,12 +29,12 @@ import {
 const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
   const dispatch = useDispatch();
     const navigate = useNavigate();
-  
+  const [product, setProduct] = useState(selectedProduct)
   const [activeTab, setActiveTab] = useState("details"); // Tabs state
   const [isExpanded, setIsExpanded] = useState(false);
   const maxLength = 100;
 
-  if (!selectedProduct) {
+  if (!product) {
     return <LoadingMessage>Loading product...</LoadingMessage>;
   }
 
@@ -54,9 +54,9 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
       {/* Product Image & Details */}
       <ProductWrapper>
         <ImageContainer>
-          {selectedProduct.images?.length > 0 ? (
+          {product.images?.length > 0 ? (
             <Slider {...sliderSettings}>
-              {selectedProduct.images.map((imgUrl, index) => (
+              {product.images.map((imgUrl, index) => (
                 <div key={index}>
                   <ProductImage
                     src={imgUrl}
@@ -71,15 +71,15 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
         </ImageContainer>
 
         <DetailsContainer>
-          <SellerLink to={`/productsByOwner/${selectedProduct.owner}`}>
-            Seller: {selectedProduct.owner}
+          <SellerLink to={`/productsByOwner/${product.owner}`}>
+            Seller: {product.owner}
           </SellerLink>
-          <ProductTitle>{selectedProduct.name}</ProductTitle>
-          <ProductPrice>Price: ${selectedProduct.price}</ProductPrice>
+          <ProductTitle>{product.name}</ProductTitle>
+          <ProductPrice>Price: ${product.price}</ProductPrice>
 
           {/* Display Rating Above Add to Cart Button */}
-          {selectedProduct.rating && (
-            <Rating>⭐ {selectedProduct.likes} / 5</Rating>
+          {product.rating && (
+            <Rating>⭐ {product.likes} / 5</Rating>
           )}
 
           <ButtonsContainer>
@@ -118,19 +118,19 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
       <TabContent>
         {activeTab === "details" && (
           <p>
-            <strong>Stock:</strong> {selectedProduct.stock} available
+            <strong>Stock:</strong> {product.stock} available
           </p>
         )}
         {activeTab === "seller" && (
           <p>
-            <strong>Seller Contact:</strong> {selectedProduct.phoneNumber}
+            <strong>Seller Contact:</strong> {product.phoneNumber}
           </p>
         )}
         {activeTab === "description" && <div>
             <p>
-        {isExpanded ? selectedProduct.description : selectedProduct.description.slice(0, maxLength) + "..."}
+        {isExpanded ? product.description : product.description.slice(0, maxLength) + "..."}
       </p>
-      {selectedProduct.description.length > maxLength && (
+      {product.description.length > maxLength && (
         <button onClick={() => setIsExpanded(!isExpanded)}>
           {isExpanded ? "Show Less" : "Show More"}
         </button>
