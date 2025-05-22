@@ -106,17 +106,15 @@ export const positions = {
   },
   en: {
     left: "100px",
-  },
-  others:{
-    left: "200px",
   }
+ 
 };
 export const iospositions = {
   fr: {
-    left: "57px",
+    left: "107px",
   },
   en: {
-    left: "58px",
+    left: "108px",
   },
 };
 
@@ -128,7 +126,7 @@ export const MAddToWishList = styled.button`
       ? props.position?.left
       : getOS() === "ios"
       ? props.Iposition?.left
-      : "127px"};
+      : "110px"};
   top: -0px;
   background: none;
   border: none;
