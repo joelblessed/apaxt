@@ -77,10 +77,11 @@ import ProtectedRoute from "./ProtectedRoute";
 import ForgotPassword from "./components/account/forgotPasword";
 import ResetPassword from "./components/account/resetPassword";
 import FormUpload from "./components/pages/formUpload";
+import About from "./components/Navbar/about";
 // import ProductSelection from "./components/pages/productSelection";
 
 import DeleteProduct from "./components/pages/deleteProduct";
-import Footer from "./components/pages/footer";
+import Footer from "./components/Navbar/footer";
 
 function App() {
   const [calalculateTotal, setCalculateTotal] = useState();
@@ -668,6 +669,8 @@ function App() {
               // </ProtectedRoute>
             }
           />
+
+<Route path="/about" element={<About api={api} />} />
           <Route path="/" element={<Home />} />
 
           {/* Redirect unknown routes */}
