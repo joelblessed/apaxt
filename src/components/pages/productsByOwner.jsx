@@ -13,13 +13,13 @@ import Fuse from "fuse.js";
 import { useLocation } from "react-router-dom";
 
 const ProductsByOwner = ({
-  api,
-  glofilteredProducts,
-  loaderRef,
-  SelectedProduct,
-  highlightText,
-  searchTerm,
-  setSearchTerm,
+ api = "", // Prevents undefined API error
+  glofilteredProducts = [],
+  loaderRef = { current: null },
+  SelectedProduct = () => {},
+  highlightText = "",
+  searchTerm = "",
+  setSearchTerm = () => {},
 }) => {
   // const { ownerName } = useParams();
   const { t } = useTranslation();
@@ -39,6 +39,7 @@ const ProductsByOwner = ({
 
   // Fetch all owner's products and categories
   useEffect(() => {
+    if(!api || !ownerName) return;
     const fetchData = async () => {
       try {
         const [productsRes, allProductsRes] = await Promise.all([
