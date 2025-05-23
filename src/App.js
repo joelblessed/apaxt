@@ -499,20 +499,13 @@ function App() {
             element={
               <ProductsByOwner
                 api={api}
-                items={products}
-                filteredProducts={filteredProducts}
-                selectedCategory={selectedCategory}
                 SelectedProduct={setSelectedProduct}
-                mobilefilteredProducts={mobilefilteredProducts}
                 highlightText={highlightText}
-                getProducts={products}
-                categories={categories}
-                setCategories={setCategories}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
+                loaderRef={loaderRef}  searchTerm={searchTerm}
                 glofilteredProducts={allProducts}
-                loaderRef={loaderRef}
-                setSelectedProduct={setSelectedProduct}
+                setSearchTerm={setSearchTerm}
+
+               
               />
             }
           />
@@ -674,7 +667,7 @@ function App() {
           <Route path="/" element={<Home />} />
 
           {/* Redirect unknown routes */}
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
         </Routes>
         {/* <Test/> */}
         <Footer />
