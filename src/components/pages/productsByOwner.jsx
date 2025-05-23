@@ -37,7 +37,6 @@ const ProductsByOwner = ({
  const ownerName = params.get("ownerName")
 
 
-
   // Fetch all owner's products and categories
   useEffect(() => {
     const fetchData = async () => {
@@ -216,9 +215,12 @@ const ProductsByOwner = ({
   const mBoxWidth = "90%";
   const mBoxMarginRight = "30px";
 
+ if (!ownerName) return <div>Loading owner data...</div>;
+
+
   return (
     <div style={{ display: "flex" }}>
-      {ownerName ? "owerTest": "no ownerTest"}
+   
       <div
         style={{
           marginTop: "80px",
