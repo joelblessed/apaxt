@@ -10,6 +10,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import Box from "./boxes";
 import { debounce } from "lodash";
 import Fuse from "fuse.js";
+import { useLocation } from "react-router-dom";
 
 const ProductsByOwner = ({
   api,
@@ -20,18 +21,20 @@ const ProductsByOwner = ({
   searchTerm,
   setSearchTerm,
 }) => {
-  const { ownerName } = useParams();
+  // const { ownerName } = useParams();
   const { t } = useTranslation();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
-  const { categoryName } = useParams();
+  // const { categoryName } = useParams();
   const [ownersProducts, setOwnersProducts] = useState([]);
   const [generalProducts, setGeneralProducts] = useState([]);
   const [uniqueCategories, setUniqueCategories] = useState([]);
   const [category, setCategory] = useState("");
-
+ const location = useLocation();
+ const params =new URLSearchParams(location.search);
+ const ownerName = params.get("ownerName")
   // Fetch all owner's products and categories
   useEffect(() => {
     const fetchData = async () => {

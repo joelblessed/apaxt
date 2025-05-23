@@ -495,7 +495,7 @@ function App() {
             element={<EditProfilePicture api={api} />}
           />
           <Route
-            path="/productsByOwner/:ownerName"
+            path="/productsByOwner"
             element={
               <ProductsByOwner
                 api={api}
