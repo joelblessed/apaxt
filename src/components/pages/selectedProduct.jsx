@@ -71,7 +71,7 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
         </ImageContainer>
 
         <DetailsContainer>
-          <SellerLink to={`/productsByOwner/${encodeURIComponent(selectedProduct.owner)}`}>
+          <SellerLink to={`/productsByOwner?ownerName=${selectedProduct.owner}`}>
             Seller: {selectedProduct.owner}
           </SellerLink>
           <ProductTitle>{selectedProduct.name}</ProductTitle>

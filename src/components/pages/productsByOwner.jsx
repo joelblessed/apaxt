@@ -13,7 +13,7 @@ import Fuse from "fuse.js";
 import { useLocation } from "react-router-dom";
 
 const ProductsByOwner = ({
- api = "", // Prevents undefined API error
+ api = "https://apaxt-api.onrender.com", // Prevents undefined API error
   glofilteredProducts = [],
   loaderRef = { current: null },
   SelectedProduct = () => {},
@@ -34,7 +34,7 @@ const ProductsByOwner = ({
   const [category, setCategory] = useState("");
  const location = useLocation();
  const params =new URLSearchParams(location.search);
- const ownerName = params.get("ownerName")
+ const ownerName = params.get("ownerName") || "joelblessed"
 
 
   // Fetch all owner's products and categories
