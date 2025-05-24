@@ -49,7 +49,6 @@ import WishlistButton from "./components/pages/wishlistButton";
 // import WishList from "./components/pages/wishList";
 import Wallet from "./components/account/wallet";
 import LastViewedProducts from "./components/account/lastviewedProducts";
-
 import BrandPage from "./components/pages/brandPage";
 import Payment from "./components/Payment/Payment";
 import Alert from "./components/others/alert";
@@ -79,10 +78,10 @@ import ResetPassword from "./components/account/resetPassword";
 import FormUpload from "./components/pages/formUpload";
 import About from "./components/Navbar/about";
 // import ProductSelection from "./components/pages/productSelection";
-
+import ProductCard from "./components/pages/ProductCards/productCard";
 import DeleteProduct from "./components/pages/deleteProduct";
 import Footer from "./components/Navbar/footer";
-
+import BrandSection from "./components/pages/brandSection";
 function App() {
   const [calalculateTotal, setCalculateTotal] = useState();
   const [checkout, setCheckOut] = useState();
@@ -373,7 +372,7 @@ function App() {
           ></Route>
 
           <Route
-            path="/category/:selectedCategory"
+            path="/category"
             element={
               <Category
                 filteredProducts={filteredProducts}
@@ -481,9 +480,13 @@ function App() {
           />
           <Route
             path="/desktopCards"
-            element={<DesktopCards Dobject={filteredProducts} api={api} />}
+            element={<DesktopCards Dobject={filteredProducts}   highlightText={highlightText} api={api} />}
           />
           <Route path="/editProduct/:id" element={<EditProduct api={api} />} />
+          <Route path="/productCard" element={<ProductCard api={api} />} />
+          <Route path="/brandSection" element={<BrandSection api={api} highlightText={highlightText}/>} />
+
+
 
           <Route path="/deleteProduct" element={<DeleteProduct api={api} />} />
           <Route
@@ -494,6 +497,8 @@ function App() {
             path="/editProfilePicture"
             element={<EditProfilePicture api={api} />}
           />
+
+
           <Route
             path="/productsByOwner"
             element={
@@ -565,7 +570,7 @@ function App() {
           <Route path="/resetPassword" element={<ResetPassword api={api} />} />
 
           <Route
-            path="/category"
+            path="/categoryPage"
             element={
               <CategoryPage
                 api={api}
@@ -664,7 +669,7 @@ function App() {
           />
 
 <Route path="/about" element={<About api={api} />} />
-          <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<Home />} /> */}
 
           {/* Redirect unknown routes */}
           {/* <Route path="*" element={<Navigate to="/" />} /> */}

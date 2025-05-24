@@ -123,7 +123,7 @@ const CategoryBox = ({
       alignItems: "center",
       gap: "20px",
       background: "white",
-      maxWidth: "96%", // Prevents full width spread
+      maxWidth: "100%", // Prevents full width spread
       margin: "auto", // Centers the whole container
       padding: "0px",
       marginTop: "50px",
@@ -210,7 +210,9 @@ const CategoryBox = ({
   };
 
   const handleViewMore = (category) => {
-    navigate(`/category/${encodeURIComponent(category)}`);
+    navigate(`/categoryPage?categoryName=${category}`);
+
+      
     window.location.reload(); // Force a reload to ensure navigation works
   };
 

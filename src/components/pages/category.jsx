@@ -26,7 +26,9 @@ const Category = ({
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
   const { selectedCategory } = useParams();
-  const [category, setCategory] = useState(selectedCategory);
+  const [category, setCategory] = useState();
+    const [isMobile, setIsMobile] = useState(false);
+  
   const [uniqueCategories, setUniqueCategories] = useState([]);
 
   // Memoize fuse instance for performance
@@ -215,22 +217,20 @@ const Category = ({
     }
   }, [searchTerm]);
 
+   // Function to check screen size
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1000);
+    };
+  
+    useEffect(() => {
+      handleResize(); // Initial check
+      window.addEventListener("resize", handleResize); // Update on resize
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
   return (
-    <div>
-      {searchTerm.length > 0 || category !== "All Categories" ? (
-        <div>
-         <Box
-            Mobject={products}
-            Dobject={products}
-            loaderRef={loaderRef}
-            SelectedProduct={SelectedProduct}
-            handleProductClick={handleProductClick}
-            highlightText={highlightText}
-          />
-       
-        </div>
-      ) : (
-        <div>
+    <div style={{background:"red", width:"100%"}}>
+     
            
              <CategoryBox
             Mobject={products}
@@ -242,8 +242,8 @@ const Category = ({
             highlightText={highlightText}
           />
         </div>
-      )}
-    </div>
+     
+  
   );
 };
 

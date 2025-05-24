@@ -243,7 +243,10 @@ function DesktopNavbar({
           </NavLinkStyled>
         </NavItem>
         <NavItem>
-          <NavLinkStyled to={`/category/${encodeURIComponent(categoryName)}`} onClick={clearSearch}>
+        <NavLinkStyled to="/category" onClick={clearSearch}>
+            {t("category")}
+          </NavLinkStyled>
+          {/* <NavLinkStyled to={`/category/${encodeURIComponent(categoryName)}`} onClick={clearSearch}>
             <StyledSelect
               value={category}
               onChange={(e) => {
@@ -262,7 +265,7 @@ function DesktopNavbar({
                 </StyledOption>
               ))}
             </StyledSelect>
-          </NavLinkStyled>
+          </NavLinkStyled> */}
         </NavItem>
 
         <NavItem>

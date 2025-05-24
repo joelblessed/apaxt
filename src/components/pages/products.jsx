@@ -195,7 +195,7 @@ const Products = ({
   }, [searchTerm, debouncedSearch]);
 
   return (
-    <div className="products-container">
+    <div className="products-container" style={{background:""}}>
       <Box
         Mobject={products}
         Dobject={products}
@@ -204,7 +204,7 @@ const Products = ({
         handleProductClick={handleProductClick}
         highlightText={highlightText}
         category={category}
-        imageKey="image" // Add this prop to specify the key for image URLs
+     
       />
       {hasMore && <div ref={loaderRef} className="loader">Loading...</div>} {/* Loader for infinite scroll */}
     </div>

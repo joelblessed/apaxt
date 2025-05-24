@@ -180,7 +180,10 @@ const DesktopCards = ({
                       }}
                     >
                       <Name className="name">
-                        <span
+                      { isExpanded 
+                          ? Dobject.name
+                          : Dobject.name.slice(0, 12)}
+                        {/* <span
                           style={{ color: "black" }}
                           dangerouslySetInnerHTML={{
                             __html: highlightText(
@@ -190,7 +193,7 @@ const DesktopCards = ({
                               searchTerm
                             ),
                           }}
-                        ></span>{" "}
+                        ></span>{" "} */}
                       </Name>
                       <DescriptionContainer>
                         <DescriptionTitle>
