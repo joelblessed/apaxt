@@ -249,16 +249,16 @@ function MobileNavbar({
   const { t } = useTranslation();
 
   const goToCategory = (cat) => {
-    navigate(`/category/${encodeURIComponent(cat)}`);
+    navigate(`/categoryPage?categoryName=${cat}`);
   };
   const goToProducts = () => {
     navigate("/products");
   };
   const goToAllCategories = () => {
-    navigate(`/category/${encodeURIComponent("All Categories")}`);
+    navigate(`/category`);
   };
   const handleClick = (brandName) => {
-    navigate(`/brand/${encodeURIComponent(brandName)}`);
+    navigate(`/categoryPage?categoryName=${brandName}`);
   };
 
   const show = (event) => {
