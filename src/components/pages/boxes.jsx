@@ -118,73 +118,79 @@ const Box = ({
     localStorage.setItem("selectedProduct", product);
     navigate("/selectedProduct");
 
-fetch(`${api}/viewedProducts`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-   productId: product.id,
-
-  })
-});
-
+    fetch(`${api}/viewedProducts`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        productId: product.id,
+      }),
+    });
   };
   const navigate = useNavigate();
 
   return (
     <>
       {isMobile ? (
-        <MobileCard
-        
-          addToWishlist={addToWishlist}
-          Mobject={Mobject}
-          handleWislistToggle={handleWislistToggle}
-          isInWishlist={isInWishlist}
-          handleProductClick={handleProductClick}
-          show={show}
-          loaderRef={loaderRef}
-          category={category}
-          position={position}
-          Iposition={Iposition}
-          userId={userId}
-          highlightText={highlightText}
-          searchTerm={searchTerm}
-          fontSize={fontSize}
-          IfontSize={IfontSize}
-          showDetails={showDetails}
-          maxLength={maxLength}
-          isExpanded={isExpanded}
-          WishlistArray={WishlistArray}
-          imagekey={imagekey}
-        />
+        <>
+          {Mobject.map((product, index) => (
+            <MobileCard
+              addToWishlist={addToWishlist}
+              Mobject={product}
+              index={index}
+              handleWislistToggle={handleWislistToggle}
+              isInWishlist={isInWishlist}
+              handleProductClick={handleProductClick}
+              show={show}
+              loaderRef={loaderRef}
+              category={category}
+              position={position}
+              Iposition={Iposition}
+              userId={userId}
+              highlightText={highlightText}
+              searchTerm={searchTerm}
+              fontSize={fontSize}
+              IfontSize={IfontSize}
+              showDetails={showDetails}
+              maxLength={maxLength}
+              isExpanded={isExpanded}
+              WishlistArray={WishlistArray}
+              imagekey={imagekey}
+            />
+          ))}
+        </>
       ) : (
-        <DesktopCards
-          
-          addToWishlist={addToWishlist}
-          Dobject={Dobject}
-          ts={ts}
-          mBoxWidth={mBoxWidth}
-          mBoxMarginRight={mBoxMarginRight}
-          loaderRef={loaderRef}
-          category={category}
-          show={show}
-          position={position}
-          Iposition={Iposition}
-          userId={userId}
-          highlightText={highlightText}
-          searchTerm={searchTerm}
-          fontSize={fontSize}
-          IfontSize={IfontSize}
-          showDetails={showDetails}
-          selectedProduct={selectedProduct}
-          handleProductHid={handleProductHid}
-          setSelectedProduct={setSelectedProduct}
-          isExpanded={isExpanded}
-          toggleLike={toggleLike}
-          SelectedProductDesktop={SelectedProductDesktop}
-          maxLength={maxLength}
-          WishlistArray={WishlistArray}
-          imagekey={imagekey}
-        />
+        <>
+          {Dobject.map((product, index) => (
+            <DesktopCards
+              addToWishlist={addToWishlist}
+              Dobject={product}
+              index={index}
+              ts={ts}
+              mBoxWidth={mBoxWidth}
+              mBoxMarginRight={mBoxMarginRight}
+              loaderRef={loaderRef}
+              category={category}
+              show={show}
+              position={position}
+              Iposition={Iposition}
+              userId={userId}
+              highlightText={highlightText}
+              searchTerm={searchTerm}
+              fontSize={fontSize}
+              IfontSize={IfontSize}
+              showDetails={showDetails}
+              selectedProduct={selectedProduct}
+              handleProductHid={handleProductHid}
+              setSelectedProduct={setSelectedProduct}
+              isExpanded={isExpanded}
+              toggleLike={toggleLike}
+              SelectedProductDesktop={SelectedProductDesktop}
+              maxLength={maxLength}
+              WishlistArray={WishlistArray}
+              imagekey={imagekey}
+            />
+          ))}
+        </>
       )}
     </>
   );

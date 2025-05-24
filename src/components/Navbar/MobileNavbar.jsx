@@ -302,7 +302,7 @@ function MobileNavbar({
   }, [categories, glofilteredProducts]);
 
   return (
-    <>
+    <div style={{marginBottom:"200px"}}>
       <Navbar>
         <TopRow>
           {/* <div style={{display:"flex"}}> */}
@@ -620,7 +620,7 @@ function MobileNavbar({
           ))}
         </ul> */}
       </MobileMenu>
-    </>
+    </div>
   );
 }
 

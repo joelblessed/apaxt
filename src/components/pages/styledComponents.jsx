@@ -33,6 +33,7 @@ export const BoxContainer = styled.div`
   border-radius: 12px;
   box-shadow: ${(props) => categoryOptions[props.categoryOption]};
  transition: transform 0.3s, box-shadow 0.3s;
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(21, 237, 32, 0.2);

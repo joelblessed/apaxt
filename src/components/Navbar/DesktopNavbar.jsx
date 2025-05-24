@@ -38,6 +38,7 @@ const Navbar = styled.nav`
   position: sticky;
   top: 0;
   z-index: 1000;
+  margin-bottom: 50px;
   animation: ${fadeIn} 0.5s ease-in-out;
 `;
 
