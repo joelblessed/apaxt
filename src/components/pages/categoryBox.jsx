@@ -11,11 +11,10 @@ import { useNavigate, Link } from "react-router-dom";
 import "../translations/i18n";
 import { addToWishlist } from "../../wishlistSlice";
 import SelectedProductDesktop from "./selectedProductsDesktop";
-import MobileCard from "./ProductCards/MobileCard";
 import WishlistButton from "./wishlistButton";
 import AddToCartButton from "./addToCartButton";
-
-
+import DesktopCards from "./ProductCards/desktopCards";
+import MobileCard from "./ProductCards/MobileCard";
 
 import {
   BoxContainer,
@@ -52,7 +51,7 @@ const CategoryBox = ({
   addToWishList,
   handleShowAlert,
   showAlert,
-  loadeRef,
+  loaderRef,
   searchTerm,
   highlightText,
   selectedCategory,
@@ -214,12 +213,10 @@ const CategoryBox = ({
     navigate(`/category/${encodeURIComponent(category)}`);
     window.location.reload(); // Force a reload to ensure navigation works
   };
- 
+
   return (
     <>
       {isMobile ? (
-       
-
         <div style={styles.container}>
           {Dobject.map((category, index) => (
             <div key={index} style={styles.categoryContainer}>
@@ -234,152 +231,26 @@ const CategoryBox = ({
               </h2>
               <div style={styles.productsGrid}>
                 {Dobject1[category]?.map((product) => (
-                  <React.Fragment>
-                    {
-                      <div className="animated-box" style={styles.container}>
-                        <div>
-                          {/* selected Product */}
-                          {selectedProduct === product && (
-                            <div>
-                              <SelectedProductDesktop
-                                selectedProduct={selectedProduct}
-                                handleProductHid={handleProductHid}
-                              />
-                            </div>
-                          )}
-
-                          {product !== selectedProduct && (
-                            <BoxContainer
-                              key={index}
-                              categoryOption={categoryShadow[product.category]}
-                            >
-                              <div
-                                key={index}
-                                style={{
-                                  ...mstyles.mbox,
-
-                                  // justifyContent:
-                                  // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
-                                }}
-                              >
-                                {(product.thumbnails &&
-                                  product.thumbnails.length > 0) ||
-                                product.images.length > 0 ? (
-                                  <img
-                                    src={
-                                      product.thumbnails &&
-                                      product.thumbnails.length > 0
-                                        ? product.thumbnails[product.thumbnail_index]
-                                        : product.images[0]
-                                    }
-                                    alt={t("Loading...")}
-                                    style={{ width: "150px", height: "160px", borderRadius:"10px" }}
-                                    onClick={() => {
-                                      handleProductClick(product);
-                                    }}
-                                  />
-                                ) : (
-                                  <p>{t("No Image Available")}</p>
-                                )}
-                                <MAddToWishList
-                                  position={position}
-                                  Iposition={Iposition}
-                                >
-                                  <WishlistButton product={product} />
-                                </MAddToWishList>
-                              </div>
-
-                              {/* text */}
-                              <div style={{ display: "flex" }}>
-                                <div
-                                  className="text"
-                                  style={{
-                                    borderRadius: "10px",
-                                    marginTop: "15px",
-                                    width: "95%",
-                                    height: "100px",
-                                    padding: "0px",
-                                    // background:"green",
-                                    marginLeft: "auto",
-                                  }}
-                                >
-                                  <Name className="name" fontSize="17px">
-                                    <span
-                                      style={{ color: "black" }}
-                                      dangerouslySetInnerHTML={{
-                                        __html: highlightText(
-                                          isExpanded
-                                            ? product.name
-                                            : product.name.slice(0, 12),
-                                          searchTerm
-                                        ),
-                                      }}
-                                    ></span>{" "}
-                                  </Name>
-
-                                  {/* <DescriptionContainer>
-                                                   <DescriptionTitle>
-                                                     {t("Description")}:
-                                                     <DescriptionContent>
-                                                       {product.description}
-                                                     </DescriptionContent>
-                                                   </DescriptionTitle>
-                                                 </DescriptionContainer> */}
-                                  <StatusContainer>
-                                    <StatusTitle>
-                                      {t("Status")}:
-                                      <StatusContent>
-                                        {product.status}
-                                      </StatusContent>
-                                    </StatusTitle>
-                                  </StatusContainer>
-                                  <Price key={index}>
-                                    {t("CFA")}:{" "}
-                                    {product.price - product.discount}
-                                  </Price>
-                                  {product.discount > 0 && (
-                                    <Discount key={index}>
-                                      
-                                      <label
-                                        style={{
-                                          width: "40px",
-                                          height: "20px",
-                                          background: "#90EE90",
-                                          textAlign: "center",
-                                          borderRadius: "5px",
-                                          marginLeft: "15px",
-                                        }}
-                                      >
-                                        -
-                                        {(
-                                          (product.discount / product.price) *
-                                          100
-                                        ).toFixed(0)}
-                                        %
-                                      </label>
-                                    </Discount>
-                                  )}
-                                </div>
-                              </div>
-
-                              <div
-                                style={{
-                                  background: "",
-                                  textAlign: "center",
-                                  padding: "5px",
-                                }}
-                              >
-                                 <AddToCartButton product={product}/>
-                                
-                              </div>
-                            </BoxContainer>
-                          )}
-                        </div>
-                      </div>
-                    }
-
-                    {/* {product.isSelected ? "Unselect" : "Select"} */}
-                  </React.Fragment>
+                  <MobileCard
+                    addToWishlist={addToWishlist}
+                    Mobject={product}
+                    index={index}
+                    handleProductClick={handleProductClick}
+                    show={show}
+                    loaderRef={loaderRef}
+                    category={category}
+                    position={position}
+                    Iposition={Iposition}
+                    userId={userId}
+                    highlightText={highlightText}
+                    searchTerm={searchTerm}
+                    fontSize={fontSize}
+                    IfontSize={IfontSize}
+                    showDetails={showDetails}
+                    maxLength={maxLength}
+                    isExpanded={isExpanded}
+                   
+                  />
                 ))}
                 <div>
                   <Link
@@ -393,7 +264,7 @@ const CategoryBox = ({
               </div>
             </div>
           ))}
-          <div ref={loadeRef}> {t("Loading...")}</div>
+          <div ref={loaderRef}> {t("Loading...")}</div>
         </div>
       ) : (
         <div style={styles.container}>
@@ -410,157 +281,32 @@ const CategoryBox = ({
               </h2>
               <div style={styles.productsGrid}>
                 {Dobject1[category]?.map((product) => (
-                  <React.Fragment>
-                    {
-                      <div className="animated-box" style={styles.container}>
-                        <div>
-                          {/* selected Product */}
-                          {selectedProduct === product && (
-                            <div>
-                              <SelectedProductDesktop
-                                selectedProduct={selectedProduct}
-                                handleProductHid={handleProductHid}
-                              />
-                            </div>
-                          )}
-
-                          {product !== selectedProduct && (
-                            <BoxContainer
-                              key={index}
-                              categoryOption={categoryShadow[product.category]}
-                            >
-                              <div
-                                key={index}
-                                style={{
-                                  ...styles.box,
-
-                                  // justifyContent:
-                                  // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
-                                }}
-                              >
-                                {(product.thumbnails &&
-                                  product.thumbnails.length > 0) ||
-                                product.images.length > 0 ? (
-                                  <img
-                                    src={
-                                      product.thumbnails &&
-                                      product.thumbnails.length > 0
-                                        ? product.thumbnails[product.thumbnail_index]
-                                        : product.images[0]
-                                    }
-                                    alt={t("Loading...")}
-                                    style={{ width: "250px", height: "250px", borderRadius:"10px" }}
-                                    onClick={() => {
-                                      setSelectedProduct(product);
-                                      ViewedProduct(product.id);
-                                      show();
-                                    }}
-                                  />
-                                ) : (
-                                  <p>{t("No Image Available")}</p>
-                                )}
-                              </div>
-                    <div style={{position:"relative",top:"0px", left:"212px"}}>
-                              
-                              <WishlistButton product={product} />
-                              </div>
-
-
-                              {/* text */}
-                              <div style={{ display: "flex", marginTop: "-40px"  }}>
-                                <div
-                                  className="text"
-                                  style={{
-                                    borderRadius: "10PX",
-                                    width: "100%",
-                                    height: "100px",
-                                    //  background:"red",
-                                    padding: "10px",
-                                  }}
-                                >
-                                  <Name className="name">
-                                    <span
-                                      style={{ color: "black" }}
-                                      dangerouslySetInnerHTML={{
-                                        __html: highlightText(
-                                          isExpanded
-                                            ? product.name
-                                            : product.name.slice(0, 12),
-                                          searchTerm
-                                        ),
-                                      }}
-                                    ></span>{" "}
-                                  </Name>
-                                  <DescriptionContainer>
-                                    <DescriptionTitle>
-                                      {t("Description")}:
-                                      <DescriptionContent>
-                                        {isExpanded
-                                          ? product.description
-                                          : product.description.slice(
-                                              0,
-                                              maxLength
-                                            ) + "..."}
-                                      </DescriptionContent>
-                                    </DescriptionTitle>
-                                  </DescriptionContainer>
-                                  <StatusContainer>
-                                    <StatusTitle>
-                                      {t("Status")}:
-                                      <StatusContent>
-                                        {product.status}
-                                      </StatusContent>
-                                    </StatusTitle>
-                                  </StatusContainer>
-                                  <Price key={index}>
-                                    {t("CFA")}:{" "}
-                                    {product.price - product.discount}
-                                  </Price>
-                                  {product.discount > 0 && (
-                                    <Discount key={index}>
-                                     
-                                      <label
-                                        style={{
-                                          width: "40px",
-                                          height: "20px",
-                                          background: "#90EE90",
-                                          textAlign: "center",
-                                          borderRadius: "5px",
-                                          marginLeft: "15px",
-                                        }}
-                                      >
-                                        -
-                                        {(
-                                          (product.discount / product.price) *
-                                          100
-                                        ).toFixed(0)}
-                                        %
-                                      </label>
-                                    </Discount>
-                                  )}
-                                </div>
-
-                                {/* like and wishlist */}
-                               
-                              </div>
-
-                              <div
-                                style={{
-                                  background: "",
-                                  textAlign: "center",
-                                  padding: "5px",
-                                }}
-                              >
-                                  <AddToCartButton product={product}/>
-                              </div>
-                            </BoxContainer>
-                          )}
-                        </div>
-                      </div>
-                    }
-
-                    {/* {product.isSelected ? "Unselect" : "Select"} */}
-                  </React.Fragment>
+                  <div>
+                    <DesktopCards
+                      addToWishlist={addToWishlist}
+                      Dobject={product}
+                      index={index}                      
+                      loaderRef={loaderRef}
+                      category={category}
+                      show={show}
+                      position={position}
+                      Iposition={Iposition}
+                      userId={userId}
+                      highlightText={highlightText}
+                      searchTerm={searchTerm}
+                      fontSize={fontSize}
+                      IfontSize={IfontSize}
+                      showDetails={showDetails}
+                      selectedProduct={selectedProduct}
+                      handleProductHid={handleProductHid}
+                      setSelectedProduct={setSelectedProduct}
+                      isExpanded={isExpanded}
+                      toggleLike={toggleLike}
+                      SelectedProductDesktop={SelectedProductDesktop}
+                      maxLength={maxLength}
+                      
+                    />
+                  </div>
                 ))}
                 <div>
                   <Link
@@ -574,7 +320,7 @@ const CategoryBox = ({
               </div>
             </div>
           ))}
-          <div ref={loadeRef}> {t("Loading...")}</div>
+          <div ref={loaderRef}> {t("Loading...")}</div>
         </div>
       )}
     </>
