@@ -41,21 +41,21 @@ const AddToCartButton = ({ product }) => {
   return (
     <>
       {isMobile ? (
-        <MAddtocartButton
+        <div
           onClick={handleAddToCart}
           disabled={loading}
           main={product.discount < 1}
         >
           {loading ? "Adding..." : "mAdd to Cart"}
-        </MAddtocartButton>
+        </div>
       ) : (
-        <AddtocartButton
+        <div
           onClick={handleAddToCart}
           disabled={loading}
           main={product.discount < 1}
         >
           {loading ? "Adding..." : "dAdd to Cart"}
-        </AddtocartButton>
+        </div>
       )}
     </>
   );

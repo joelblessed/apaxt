@@ -241,8 +241,10 @@ const DesktopCards = ({
                       textAlign: "center",
                       padding: "5px",
                     }}
-                  >
-                    <AddToCartButton product={Dobject} />
+                  ><AddtocartButton>
+                       <AddToCartButton product={Dobject} />
+                  </AddtocartButton>
+                   
                   </div>
                 </BoxContainer>
               )}

@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import AddToCartButton from "./addToCartButton";
+import WishlistButton from "./wishlistButton";
+
 
 const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => {
   const dispatch = useDispatch();
@@ -70,9 +73,9 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
 
             <ButtonGroup>
               <ActionButton >
-                Add To Cart
+              <AddToCartButton product={selectedProduct}/>
               </ActionButton>
-              <ActionButton secondary>Add To Wishlist</ActionButton>
+              <ActionButton secondary>Add To Wishlist<label><WishlistButton product={selectedProduct}/></label></ActionButton>
             </ButtonGroup>
           </DetailsSection>
         </ContentWrapper>
@@ -92,13 +95,13 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
 
         <TabContent>
           {activeTab === "details" && <p><strong>Stock:</strong> {selectedProduct.stock} available</p>}
-          {activeTab === "seller" && <p><strong>Contact:</strong> {selectedProduct.phoneNumber}</p>}
+          {activeTab === "seller" && <p><strong>Contact:</strong> {selectedProduct.phone_number}</p>}
           {activeTab === "description" && <div>
             <p>
         {isExpanded ? selectedProduct.description : selectedProduct.description.slice(0, maxLength) + "..."}
       </p>
       {selectedProduct.description.length > maxLength && (
-        <button onClick={() => setIsExpanded(!isExpanded)}>
+        <button onClick={() => setIsExpanded(!isExpanded)} style={{color:"white", background:"orange", borderRadius:'10px', padding:'5x', fontWeight:"bold"}}>
           {isExpanded ? "Show Less" : "Show More"}
         </button>
       )}
@@ -166,8 +169,11 @@ const ContentWrapper = styled.div`
 
 const ImageSection = styled.div`
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   margin-bottom: 20px;
+  height:auto;
+  max-height:800px;
+
 
   @media (min-width: 768px) {
     width: 50%;
