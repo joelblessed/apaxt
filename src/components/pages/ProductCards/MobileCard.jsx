@@ -138,7 +138,8 @@ const MobileCard = ({
                   }}
                 >
                   <Name className="name" fontSize="17px">
-                    <span
+                    { isExpanded ? Mobject.name : Mobject.name.slice(0, 12)}
+                    {/* <span
                       style={{ color: "black" }}
                       dangerouslySetInnerHTML={{
                         __html: highlightText(
@@ -146,7 +147,7 @@ const MobileCard = ({
                           searchTerm
                         ),
                       }}
-                    ></span>{" "}
+                    ></span>{" "} */}
                   </Name>
 
                   {/* <DescriptionContainer>

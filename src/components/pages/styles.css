@@ -1,8 +1,9 @@
 /* Base Styles */
 .category-page {
     padding: 20px;
-    max-width: 1200px;
+    max-width: 95%;
     margin: 0 auto;
+    margin-left: auto;
   }
   
   .loading, .error {
@@ -37,6 +38,7 @@
   /* Category Sections */
   .category-section {
     margin-bottom: 40px;
+    
   }
   
   .category-title {
@@ -48,8 +50,9 @@
   
   .brands-container {
     display: flex;
-    flex-direction: column;
-    gap: 30px;
+    flex-direction: row;
+    gap: 20px;
+   
   }
   
   .brand-title {
@@ -102,7 +105,22 @@
   /* Responsive Adjustments */
   @media (max-width: 768px) {
     .products-grid {
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+    .brands-container {
+      display: flex;
+     flex-wrap: wrap;
+      gap: 10px;
+      background-color: #ff4444;
+      justify-content: center;
+
+     
+    }
+    .category-page {
+      padding: 20px;
+      max-width: 100%;
+     
+      
     }
     
     .filter-controls {

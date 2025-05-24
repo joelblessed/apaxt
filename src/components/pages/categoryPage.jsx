@@ -1,18 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import CategorySection from './categorySection';
-import SearchFilter from './searchFilter';
-import './styles.css';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-const CategoryPage = ({ api }) => {
-  const { categoryName } = useParams();
+import CategorySection from "./categorySection";
+import SearchFilter from "./searchFilter";
+import "./styles.css";
+
+const CategoryPage = ({ api,  searchTerm, setSearchTerm }) => {
+  // const { categoryName } = useParams();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const categoryName = params.get("categoryName");
+
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
+
+  const [searchQuery, setSearchQuery] = useState(searchTerm);
   const [filters, setFilters] = useState({
-    priceRange: [0, 10000],
+    priceRange: [0, 100000],
     inStock: false,
   });
 
@@ -21,15 +28,15 @@ const CategoryPage = ({ api }) => {
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
-        let url =  `${api}/allProducts`;
+        let url = `${api}/allProducts`;
         if (categoryName) {
-          url = `${api}/search?query=${encodeURIComponent(searchQuery)}`
+          url = `${api}/search?query=${encodeURIComponent(categoryName)}`;
         }
-        
+
         const response = await fetch(url);
-        if (!response.ok) throw new Error('Failed to fetch products');
+        if (!response.ok) throw new Error("Failed to fetch products");
         const data = await response.json();
-        const products = data.products; 
+        const products = data.products || data.results;
         const productsArray = Array.isArray(products) ? products : [];
         setProducts(products);
         setFilteredProducts(products);
@@ -48,8 +55,9 @@ const CategoryPage = ({ api }) => {
   // Search functionality
   useEffect(() => {
     const searchProducts = async () => {
-      if (searchQuery.trim() === '') {
+      if (searchQuery.trim() === "" ) {
         setFilteredProducts(products);
+        
         return;
       }
 
@@ -58,16 +66,21 @@ const CategoryPage = ({ api }) => {
           `${api}/search?query=${encodeURIComponent(searchQuery)}`
         );
         const data = await response.json();
-        const products = data.products; 
+        const products = data.products|| data.results;
 
         setFilteredProducts(Array.isArray(products) ? products : []);
       } catch (err) {
-        console.error('Search failed:', err);
+        console.error("Search failed:", err);
         // Fallback to client-side filtering
-        const filtered = Array.isArray(products) 
-          ? products.filter(product =>
-              product?.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              product?.description?.toLowerCase().includes(searchQuery.toLowerCase())
+        const filtered = Array.isArray(products)
+          ? products.filter(
+              (product) =>
+                product?.name
+                  ?.toLowerCase()
+                  .includes(searchQuery.toLowerCase()) ||
+                product?.description
+                  ?.toLowerCase()
+                  .includes(searchQuery.toLowerCase())
             )
           : [];
         setFilteredProducts(filtered);
@@ -87,36 +100,37 @@ const CategoryPage = ({ api }) => {
       setFilteredProducts([]);
       return;
     }
-    
+
     let result = [...products];
-    
+
     // Price filter
     result = result.filter(
-      product => 
-        product?.price >= filters.priceRange[0] && 
+      (product) =>
+        product?.price >= filters.priceRange[0] &&
         product?.price <= filters.priceRange[1]
     );
-    
+
     // Stock filter
     if (filters.inStock) {
-      result = result.filter(product => product?.inStock);
+      result = result.filter((product) => product?.inStock);
     }
-    
+
     setFilteredProducts(result);
   }, [filters, products]);
 
   // Safely group products by category then by brand
-  const groupedProducts = Array.isArray(filteredProducts) 
+  const groupedProducts = Array.isArray(filteredProducts)
     ? filteredProducts.reduce((acc, product) => {
-        if (!product?.category || !product?.brand.map((br)=>(br.name))) return acc;
-        
+        if (!product?.category || !product?.brand.map((br) => br.name))
+          return acc;
+
         if (!acc[product.category]) {
           acc[product.category] = {};
         }
-        if (!acc[product.category][product.brand.map((br)=>br.name)]) {
-          acc[product.category][product.brand.map((br)=>br.name)] = [];
+        if (!acc[product.category][product.brand.map((br) => br.name)]) {
+          acc[product.category][product.brand.map((br) => br.name)] = [];
         }
-        acc[product.category][product.brand.map((br)=>br.name)].push(product);
+        acc[product.category][product.brand.map((br) => br.name)].push(product);
         return acc;
       }, {})
     : {};
@@ -126,20 +140,17 @@ const CategoryPage = ({ api }) => {
 
   return (
     <div className="category-page">
-      <SearchFilter 
+      <SearchFilter
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         filters={filters}
         setFilters={setFilters}
       />
-      
+      {searchTerm}
+
       <div className="products-container">
         {Object.entries(groupedProducts).map(([category, brands]) => (
-          <CategorySection 
-            key={category}
-            category={category}
-            brands={brands}
-          />
+          <CategorySection key={category} category={category} brands={brands} />
         ))}
       </div>
     </div>

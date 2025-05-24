@@ -580,6 +580,9 @@ function App() {
                 highlightText={highlightText}
                 SelectedProduct={setSelectedProduct}
                 setSelectedProduct={setSelectedProduct}
+                cart={cart}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
               />
             }
           />
