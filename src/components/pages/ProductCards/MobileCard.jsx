@@ -195,7 +195,7 @@ const MobileCard = ({
                   padding: "5px",
                 }}
               >
-                <MAddtocartButton>
+                <MAddtocartButton      main={Mobject.discount < 1}>
                   <AddToCartButton product={Mobject} />
                 </MAddtocartButton>
               </div>

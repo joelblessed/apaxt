@@ -107,11 +107,11 @@ const Products = ({
         },
         body: JSON.stringify({
           userId: userId,
-          productId: 19
+          productId: product.id
         }),
       })
         .then((response) => response.json())
-        .then((data) => alert("Viewed product saved:", data))
+        .then((data) => console.log("Viewed product saved:", data))
         .catch((error) => console.error("Error:", error));
     },
     [SelectedProduct, navigate]
@@ -195,7 +195,7 @@ const Products = ({
   }, [searchTerm, debouncedSearch]);
 
   return (
-    <div className="products-container" style={{background:""}}>
+    <div className="products-container" style={{background:"", width:"90%", margin:"auto"}}>
       <Box
         Mobject={products}
         Dobject={products}

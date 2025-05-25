@@ -66,7 +66,7 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
             </SellerInfo>
 
             <ProductName>{selectedProduct.name}</ProductName>
-            <ProductPrice>Price: ${selectedProduct.price}</ProductPrice>
+            <ProductPrice>Price: CFA{selectedProduct.price}</ProductPrice>
 
             {/* Display Rating Above Add to Cart Button */}
             {selectedProduct.rating && <Rating>⭐ {selectedProduct.rating} / 5</Rating>}

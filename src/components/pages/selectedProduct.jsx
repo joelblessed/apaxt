@@ -77,7 +77,7 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
             Seller: {selectedProduct.owner}
           </SellerLink>
           <ProductTitle>{selectedProduct.name}</ProductTitle>
-          <ProductPrice>Price: ${selectedProduct.price}</ProductPrice>
+          <ProductPrice>Price: CFA{selectedProduct.price}</ProductPrice>
 
           {/* Display Rating Above Add to Cart Button */}
           {selectedProduct.rating && (

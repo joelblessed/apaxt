@@ -52,8 +52,8 @@ const Home = ({
   const [groupedProducts, setGroupedProducts] = useState({});
   const [groupedBrand, setGroupedBrand] = useState({});
 
-  const handleClick = (brand) => navigate(`/brand/${encodeURIComponent(brand)}`);
-  const CathandleClick = (category) => navigate(`/category/${encodeURIComponent(category)}`);
+  const handleClick = (brand) => navigate(`/categoryPage?categoryName=${brand}`);
+  const CathandleClick = (category) => navigate(`/categoryPage?categoryName=${category}`);
   const handleDiscounts = () => navigate(`/discountedProducts`);
   useEffect(()=>{
     if (searchTerm.length >0){
@@ -290,7 +290,7 @@ const Home = ({
           )}
           <ScrollContainer>
             <ScrollWrapper translateX={startIndex * 160}>
-              {brands.map((brand, index) => (
+              {bDobject.map((brand, index) => (
                 <Boxx
                   key={index}
                   onClick={() => handleClick(brand)}

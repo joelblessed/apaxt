@@ -13,7 +13,7 @@ import Fuse from "fuse.js";
 import { useLocation } from "react-router-dom";
 
 const ProductsByOwner = ({
- api = "https://apaxt-api.onrender.com", // Prevents undefined API error
+  api = "https://apaxt-api.onrender.com", // Prevents undefined API error
   glofilteredProducts = [],
   loaderRef = { current: null },
   SelectedProduct = () => {},
@@ -21,63 +21,84 @@ const ProductsByOwner = ({
   searchTerm = "",
   setSearchTerm = () => {},
 }) => {
-  // const { ownerName } = useParams();
   const { t } = useTranslation();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
-  // const { categoryName } = useParams();
   const [ownersProducts, setOwnersProducts] = useState([]);
   const [generalProducts, setGeneralProducts] = useState([]);
   const [uniqueCategories, setUniqueCategories] = useState([]);
   const [category, setCategory] = useState("");
- const location = useLocation();
- const params =new URLSearchParams(location.search);
- const ownerName = params.get("ownerName") || "joelblessed"
-
+  const [allCategories, setAllCategories] = useState([]);
+  const [showCategories, setShowCategories] = useState(false);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const ownerName = params.get("ownerName") || "joelblessed";
+  const categoryListRef = useRef(null);
 
   // Fetch all owner's products and categories
   useEffect(() => {
-    if(!api || !ownerName) return;
+    if (!api || !ownerName) return;
     const fetchData = async () => {
       try {
-        const [productsRes, allProductsRes] = await Promise.all([
-          fetch(`${api}/products`),
-          fetch(`${api}/allProducts`)
+        const [ allProductsRes, categoriesRes] = await Promise.all([
+         
+          fetch(`${api}/allProducts`),
+          fetch(`${api}/search?query=${encodeURIComponent(ownerName)}`),
         ]);
-        
-        const productsData = await productsRes.json();
+
         const allProductsData = await allProductsRes.json();
-        
-        const fetched = productsData.products || productsData;
+        const categoriesData = await categoriesRes.json();
+        console.log("cater", categoriesData);
+        console.log("allp",allProductsData)
+
+    
         const allFetched = allProductsData.products || allProductsData;
-        
+        const allCategories = categoriesData.results || categoriesData;
+
         // Filter by owner
         const filteredByOwner = allFetched.filter(
           (product) => product.owner === ownerName
         );
-        
+
         setOwnersProducts(filteredByOwner);
         setProducts(filteredByOwner);
-        
-        // Extract unique categories
-        const uniqueCategories = [
+        setAllCategories(allCategories);
+
+        // Extract unique categories from owner's products
+        const ownerCategories = [
           ...new Set(filteredByOwner.map((product) => product.category)),
         ];
-        setUniqueCategories(uniqueCategories);
+        setUniqueCategories(ownerCategories);
+        console.log("uniqp",ownerCategories)
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    
+
     fetchData();
   }, [api, ownerName]);
+
+  // Close categories when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (categoryListRef.current && !categoryListRef.current.contains(event.target)) {
+        setShowCategories(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Fetch more products with pagination
   const fetchMoreProducts = useCallback(async () => {
     if (!hasMore) return;
-    
+
     try {
       const res = await fetch(`${api}/products?page=${page}&limit=5`);
       const data = await res.json();
@@ -88,9 +109,9 @@ const ProductsByOwner = ({
         return;
       }
 
-      setProducts(prev => {
-        const ids = new Set(prev.map(p => p.id));
-        const newItems = fetched.filter(item => !ids.has(item.id));
+      setProducts((prev) => {
+        const ids = new Set(prev.map((p) => p.id));
+        const newItems = fetched.filter((item) => !ids.has(item.id));
         return [...prev, ...newItems];
       });
     } catch (error) {
@@ -105,7 +126,7 @@ const ProductsByOwner = ({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setPage(prev => prev + 1);
+          setPage((prev) => prev + 1);
         }
       },
       { rootMargin: "100px" }
@@ -179,7 +200,7 @@ const ProductsByOwner = ({
 
     const results = fuse.search(searchTerm.trim());
     const matched = results.map((res) => res.item);
-    
+
     if (category) {
       const filtered = matched.filter(
         (product) => product.category === category
@@ -188,7 +209,7 @@ const ProductsByOwner = ({
     } else {
       setProducts(matched);
     }
-    
+
     setHasMore(false);
   }, [searchTerm, ownersProducts, category]);
 
@@ -209,93 +230,184 @@ const ProductsByOwner = ({
     const noOwner = matched.filter(
       (product) => product.owner !== ownerName
     );
-    
+
     setGeneralProducts(noOwner);
   }, [searchTerm, glofilteredProducts, ownerName]);
+
+  const toggleCategories = () => {
+    setShowCategories(!showCategories);
+  };
+
+  const handleCategorySelect = (categoryName) => {
+    setCategory(categoryName === category ? "" : categoryName);
+    setShowCategories(false);
+  };
 
   const mBoxWidth = "90%";
   const mBoxMarginRight = "30px";
 
- if (!ownerName) return <div>Loading owner data...</div>;
-
+  if (!ownerName) return <div>Loading owner data...</div>;
 
   return (
-    <div style={{ display: "flex" }}>
-   
+    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      {/* Mobile Categories Toggle */}
       <div
         style={{
+          display: "flex",
+          justifyContent: "center",
           marginTop: "80px",
-          marginLeft: "10px",
-          marginRight: "-60",
-          position: "fixed",
-          left: "0px",
+          marginBottom: "20px",
         }}
       >
-        <h4 style={{ width: "100px", textAlign: "center" }}>
-          {ownerName}'s Products
-        </h4>
-
-        {uniqueCategories.map((categoryName, index) => (
-          <div
-            onClick={() => setCategory(categoryName === category ? "" : categoryName)}
-            style={{
-              cursor: "pointer",
-              fontWeight: category === categoryName ? "bold" : "normal",
-              color: category === categoryName ? "blue" : "black",
-              display: "grid",
-              marginBottom: "5px",
-              padding: "5px",
-              border: "1px solid #ccc",
-              borderRadius: "4px",
-              width: "100px",
-              overflow: "hidden",
-            }}
-            key={index}
-          >
-            <label>{categoryName}</label>
-          </div>
-        ))}
+        <button
+          onClick={toggleCategories}
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#f0f0f0",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+            cursor: "pointer",
+            display: "block", // Hidden by default
+            "@media (max-width: 768px)": {
+              display: "block", // Show on mobile
+            },
+          }}
+        >
+          {showCategories ? "Hide Categories" : "Show Categories"}
+        </button>
       </div>
-      <div style={{ marginLeft: "120px" }}>
-        {products.length > 0 ? (
-          <div>
-            <h4 style={{ textAlign: "center", marginTop: "40px" }}>
-              {ownerName}'s Products
-            </h4>
-            <Box
-              Mobject={products}
-              Dobject={products}
-              loaderRef={loaderRef}
-              mBoxWidth={mBoxWidth}
-              SelectedProduct={SelectedProduct}
-              mBoxMarginRight={mBoxMarginRight}
-              handleProductClick={handleProductClick}
-              highlightText={highlightText}
-            />
-          </div>
-        ) : (
-          <h4 style={{ textAlign: "center", marginTop: "40px" }}>
-            {ownerName} doesn't have any products matching your criteria
-          </h4>
-        )}
 
-        {generalProducts.length > 0 && (
-          <div>
-            <h4 style={{ textAlign: "center", marginTop: "40px" }}>
-              Products from Other Sellers
-            </h4>
-            <Box
-              Mobject={generalProducts}
-              Dobject={generalProducts}
-              loaderRef={loaderRef}
-              mBoxWidth={mBoxWidth}
-              mBoxMarginRight={mBoxMarginRight}
-              SelectedProduct={SelectedProduct}
-              handleProductClick={handleProductClick}
-              highlightText={highlightText}
-            />
+      <div style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+        {/* Categories Sidebar */}
+        <div
+          ref={categoryListRef}
+          style={{
+            marginTop: "80px",
+            position: "fixed",
+            left: "0px",
+            width: "150px",
+            backgroundColor: "#f8f9fa",
+            padding: "10px",
+            height: "calc(100vh - 80px)",
+            overflowY: "auto",
+            transition: "transform 0.3s ease",
+            transform: showCategories ? "translateX(0)" : "translateX(-100%)",
+            zIndex: 1,
+            "@media (min-width: 769px)": {
+              transform: "translateX(0)",
+            },
+            zIndex: 1000,
+          }}
+        >
+          <h4 style={{ width: "100%", textAlign: "center", marginBottom: "20px" }}>
+            {ownerName}'s Products
+          </h4>
+
+          <div style={{ marginBottom: "20px" }}>
+            <h5 style={{ marginBottom: "10px" }}>Owner's Categories</h5>
+            {uniqueCategories.map((categoryName, index) => (
+              <div
+                onClick={() => handleCategorySelect(categoryName)}
+                style={{
+                  cursor: "pointer",
+                  fontWeight: category === categoryName ? "bold" : "normal",
+                  color: category === categoryName ? "blue" : "black",
+                  marginBottom: "5px",
+                  padding: "5px",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                  width: "100%",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+                key={`owner-${index}`}
+              >
+                {categoryName}
+              </div>
+            ))}
           </div>
-        )}
+
+          <div>
+            <h5 style={{ marginBottom: "10px" }}>All Categories</h5>
+            {allCategories.map((categoryName, index) => (
+              <div
+                onClick={() => handleCategorySelect(categoryName)}
+                style={{
+                  cursor: "pointer",
+                  fontWeight: category === categoryName.category ? "bold" : "normal",
+                  color: category === categoryName.category ? "blue" : "black",
+                  marginBottom: "5px",
+                  padding: "5px",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                  width: "100%",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+                key={`all-${index}`}
+              >
+                {categoryName.category}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Products List */}
+        <div
+          style={{
+            marginLeft: "150px",
+            width: "calc(100% - 150px)",
+            padding: "20px",
+            "@media (max-width: 768px)": {
+              marginLeft: "0",
+              width: "100%",
+            },
+          }}
+        >
+          {products.length > 0 ? (<>
+            <h4 style={{ textAlign: "center", marginTop: "40px" }}>
+                {ownerName}'s Products
+              </h4>
+            <div style={{display:"flex", flexWrap:'wrap',gap:"20px", background:"red"}}>
+             
+              <Box
+                style={{ display: "flex" }}
+                Mobject={products}
+                Dobject={products}
+                loaderRef={loaderRef}
+                mBoxWidth={mBoxWidth}
+                SelectedProduct={SelectedProduct}
+                mBoxMarginRight={mBoxMarginRight}
+                handleProductClick={handleProductClick}
+                highlightText={highlightText}
+              />
+            </div></>
+          ) : (
+            <h4 style={{ textAlign: "center", marginTop: "40px" }}>
+              {ownerName} doesn't have any products matching your criteria
+            </h4>
+          )}
+
+          {generalProducts.length > 0 && (
+            <div>
+              <h4 style={{ textAlign: "center", marginTop: "40px" }}>
+                Products from Other Sellers
+              </h4>
+              <Box
+                Mobject={generalProducts}
+                Dobject={generalProducts}
+                loaderRef={loaderRef}
+                mBoxWidth={mBoxWidth}
+                mBoxMarginRight={mBoxMarginRight}
+                SelectedProduct={SelectedProduct}
+                handleProductClick={handleProductClick}
+                highlightText={highlightText}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

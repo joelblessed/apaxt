@@ -71,9 +71,9 @@ const DesktopCards = ({
       }
 
       const result = await response.json();
-      alert(" DViewed product logged:", result);
+      console.log(" DViewed product logged:", result);
     } catch (error) {
-      alert("DError:", error.message);
+      console.log("DError:", error.message);
     }
   };
 
@@ -103,7 +103,7 @@ const DesktopCards = ({
   };
 
   return (
-    <React.Fragment>
+    <React.Fragment >
       {
         <div
           className="animated-box"
@@ -244,7 +244,7 @@ const DesktopCards = ({
                       textAlign: "center",
                       padding: "5px",
                     }}
-                  ><AddtocartButton>
+                  ><AddtocartButton     main={Dobject.discount < 1}>
                        <AddToCartButton product={Dobject} />
                   </AddtocartButton>
                    
