@@ -255,16 +255,17 @@ const Home = ({
           )}
         </Section>
 
-        {viewed.length > 0 && (
-          <div>
-            <h3 style={{ textAlign: "center" }}> Viewed Products</h3>
+        {viewed.length > 0 && (<>
+          <h3 style={{ textAlign: "center" }}> Viewed Products</h3>
+          <div  style={{ display: "flex", justifyContent: "center", gap: "20px", background:"", width: "90%", padding: "20px", margin: "20px auto", borderRadius: "10px" }}>
+          
             <Box
               Mobject={viewed}
               Dobject={viewed}
               highlightText={highlightText}
             />
           </div>
-        )}
+        </>)}
 
         <div>
           <CategoryBox

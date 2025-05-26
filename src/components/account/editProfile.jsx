@@ -10,7 +10,8 @@ const EditProfile = ({ api }) => {
     id: "",
     email: "",
     username: "",
-    full_name: "",
+    first_name: "",
+    last_name: "",
     phone: "",
     country: "",
     address: "",
@@ -206,7 +207,7 @@ const EditProfile = ({ api }) => {
         First Name:
         <input
           type="text"
-          name="full_name"
+          name="first_name"
           value={user.first_name}
           onChange={handleChange}
           style={styles.input}
@@ -216,7 +217,7 @@ const EditProfile = ({ api }) => {
         Last Name:
         <input
           type="text"
-          name="full_name"
+          name="last_name"
           value={user.last_name}
           onChange={handleChange}
           style={styles.input}

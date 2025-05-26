@@ -139,7 +139,7 @@ const CategoryBox = ({
     categoryTitle: { color: "teal" },
     productsGrid: {
       display: "flex",
-      flexWrap: "wrap",
+    flexWrap: "wrap",
       gap: "10px",
       border: "none",
       padding: "0px",
@@ -233,6 +233,7 @@ const CategoryBox = ({
               </h2>
               <div style={styles.productsGrid}>
                 {Dobject1[category]?.map((product) => (
+                  <div style={{  justifyContent: "center", gap: "0px", background:"",  padding: "20px" }}>
                   <MobileCard
                     addToWishlist={addToWishlist}
                     Mobject={product}
@@ -253,7 +254,12 @@ const CategoryBox = ({
                     isExpanded={isExpanded}
                    
                   />
+                  </div>
                 ))}
+              <div>
+
+              </div>
+              </div>
                 <div>
                   <Link
                     to="#"
@@ -263,7 +269,6 @@ const CategoryBox = ({
                     {t("View More")}
                   </Link>
                 </div>
-              </div>
             </div>
           ))}
           <div ref={loaderRef}> {t("Loading...")}</div>
