@@ -143,6 +143,8 @@ const CategoryBox = ({
       gap: "10px",
       border: "none",
       padding: "0px",
+      background:"",
+      justifyContent: "center",
     },
     productBox: {
       width: "250px",
@@ -233,7 +235,7 @@ const CategoryBox = ({
               </h2>
               <div style={styles.productsGrid}>
                 {Dobject1[category]?.map((product) => (
-                  <div style={{  justifyContent: "center", gap: "0px", background:"",  padding: "20px" }}>
+                  <div style={{  justifyContent: "center", background:"",marginTop:"10px"  }}>
                   <MobileCard
                     addToWishlist={addToWishlist}
                     Mobject={product}
