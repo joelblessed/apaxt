@@ -19,7 +19,7 @@ const CategoryPage = ({ api,  searchTerm, setSearchTerm }) => {
 
   const [searchQuery, setSearchQuery] = useState(searchTerm);
   const [filters, setFilters] = useState({
-    priceRange: [0, 100000],
+    priceRange: [0, 1000000],
     inStock: false,
   });
 

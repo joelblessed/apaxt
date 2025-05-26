@@ -13,7 +13,7 @@ const SearchFilter = ({ searchQuery, setSearchQuery, filters, setFilters }) => {
       
       <div className="filter-controls">
         <label>
-          Price Range: ${filters.priceRange[0]} - ${filters.priceRange[1]}
+          Price Range: CFA {filters.priceRange[0]} - CFA {filters.priceRange[1]}
           <input
             type="range"
             min="0"
@@ -29,10 +29,10 @@ const SearchFilter = ({ searchQuery, setSearchQuery, filters, setFilters }) => {
         <label>
           <input
             type="checkbox"
-            checked={filters.inStock}
+            checked={filters.number_in_stock}
             onChange={(e) => setFilters({
               ...filters,
-              inStock: e.target.checked
+              number_in_stock: e.target.checked
             })}
           />
           In Stock Only

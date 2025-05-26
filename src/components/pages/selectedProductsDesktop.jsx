@@ -48,7 +48,7 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
               <Slider {...sliderSettings}>
                 {selectedProduct.images.map((imgUrl, index) => (
                   <ImageWrapper key={index}>
-                    <ProductImage src={imgUrl} alt={`Product Image ${index + 1}`} />
+                    <ProductImage src={imgUrl} loading="lazy" alt={`Product Image ${index + 1} `} />
                   </ImageWrapper>
                 ))}
               </Slider>

@@ -36,6 +36,16 @@ const ProductsByOwner = ({
   const params = new URLSearchParams(location.search);
   const ownerName = params.get("ownerName") || "joelblessed";
   const categoryListRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
+
+  // Check if mobile view
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 769);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Fetch all owner's products and categories
   useEffect(() => {
@@ -250,60 +260,25 @@ const ProductsByOwner = ({
 
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-      {/* Mobile Categories Toggle */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "80px",
-          marginBottom: "20px",
-        }}
-      >
-        <button
-          onClick={toggleCategories}
-          style={{
-            padding: "10px 20px",
-            backgroundColor: "#f0f0f0",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-            cursor: "pointer",
-            display: "block", // Hidden by default
-            "@media (max-width: 768px)": {
-              display: "block", // Show on mobile
-            },
-          }}
-        >
-          {showCategories ? "Hide Categories" : "Show Categories"}
-        </button>
-      </div>
-
-      <div style={{ display: "flex", flexDirection: "row", width: "100%" }}>
-        {/* Categories Sidebar */}
+      {/* Mobile Categories - Now placed above products */}
+      {isMobile && (
         <div
           ref={categoryListRef}
           style={{
-            marginTop: "80px",
-            position: "fixed",
-            left: "0px",
-            width: "150px",
+            width: "100%",
             backgroundColor: "#f8f9fa",
             padding: "10px",
-            height: "calc(100vh - 80px)",
-            overflowY: "auto",
-            transition: "transform 0.3s ease",
-            transform: showCategories ? "translateX(0)" : "translateX(-100%)",
+            transition: "max-height 0.3s ease",
+            maxHeight: showCategories ? "500px" : "0",
+            overflow: "hidden",
+            position: "sticky",
+            top: "80px",
+            marginTop:"-0px",
             zIndex: 1,
-            "@media (min-width: 769px)": {
-              transform: "translateX(0)",
-            },
-            zIndex: 1000,
+            boxShadow: showCategories ? "0 2px 5px rgba(0,0,0,0.1)" : "none"
           }}
         >
-          <h4 style={{ width: "100%", textAlign: "center", marginBottom: "20px" }}>
-            {ownerName}'s Products
-          </h4>
-
-          <div style={{ marginBottom: "20px" }}>
+          <div style={{ marginBottom: "10px" }}>
             <h5 style={{ marginBottom: "10px" }}>Owner's Categories</h5>
             {uniqueCategories.map((categoryName, index) => (
               <div
@@ -332,7 +307,7 @@ const ProductsByOwner = ({
             <h5 style={{ marginBottom: "10px" }}>All Categories</h5>
             {allCategories.map((categoryName, index) => (
               <div
-                onClick={() => handleCategorySelect(categoryName)}
+                onClick={() => handleCategorySelect(categoryName.category)}
                 style={{
                   cursor: "pointer",
                   fontWeight: category === categoryName.category ? "bold" : "normal",
@@ -353,25 +328,124 @@ const ProductsByOwner = ({
             ))}
           </div>
         </div>
+      )}
+
+      {/* Mobile Categories Toggle Button */}
+      {isMobile && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "80px",
+            zIndex: 1,
+            marginBottom: "20px",
+          }}
+        >
+          <button
+            onClick={toggleCategories}
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#f0f0f0",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              cursor: "pointer",
+              position: "sticky",
+              top: "80px",
+              zIndex: 1
+            }}
+          >
+            {showCategories ? "Hide Categories" : "Show Categories"}
+          </button>
+        </div>
+      )}
+
+      <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", width: "100%" }}>
+        {/* Desktop Categories Sidebar */}
+        {!isMobile && (
+          <div
+            ref={categoryListRef}
+            style={{
+              marginTop: "80px",
+              position: "fixed",
+              left: "0px",
+              width: "150px",
+              backgroundColor: "#f8f9fa",
+              padding: "10px",
+              height: "calc(100vh - 80px)",
+              overflowY: "auto",
+              zIndex: 1
+            }}
+          >
+            <h4 style={{ width: "100%", textAlign: "center", marginBottom: "20px" }}>
+              {ownerName}'s Products
+            </h4>
+
+            <div style={{ marginBottom: "20px" }}>
+              <h5 style={{ marginBottom: "10px" }}></h5>
+              {uniqueCategories.map((categoryName, index) => (
+                <div
+                  onClick={() => handleCategorySelect(categoryName)}
+                  style={{
+                    cursor: "pointer",
+                    fontWeight: category === categoryName ? "bold" : "normal",
+                    color: category === categoryName ? "blue" : "black",
+                    marginBottom: "5px",
+                    padding: "5px",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    width: "100%",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                  key={`owner-${index}`}
+                >
+                  {categoryName}
+                </div>
+              ))}
+            </div>
+
+            <div>
+              <h5 style={{ marginBottom: "10px" }}>All Categories</h5>
+              {allCategories.map((categoryName, index) => (
+                <div
+                  onClick={() => handleCategorySelect(categoryName.category)}
+                  style={{
+                    cursor: "pointer",
+                    fontWeight: category === categoryName.category ? "bold" : "normal",
+                    color: category === categoryName.category ? "blue" : "black",
+                    marginBottom: "5px",
+                    padding: "5px",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    width: "100%",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                  key={`all-${index}`}
+                >
+                  {categoryName.category}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Products List */}
         <div
           style={{
-            marginLeft: "150px",
-            width: "calc(100% - 150px)",
+            marginLeft: isMobile ? "0" : "150px",
+            width: isMobile ? "100%" : "calc(100% - 150px)",
             padding: "20px",
-            "@media (max-width: 768px)": {
-              marginLeft: "0",
-              width: "100%",
-            },
+            background:"",
           }}
         >
           {products.length > 0 ? (<>
-            <h4 style={{ textAlign: "center", marginTop: "40px" }}>
+            <h4 style={{ textAlign: "center", marginTop: isMobile ? "0px" : "40px"  }}>
                 {ownerName}'s Products
               </h4>
-            <div style={{display:"flex", flexWrap:'wrap',gap:"20px", background:"red"}}>
-             
+            <div style={{display:"flex", flexWrap:'wrap',gap:"20px",background:"",marginTop:"30px", justifyContent:"center"}}>
               <Box
                 style={{ display: "flex" }}
                 Mobject={products}

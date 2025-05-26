@@ -63,6 +63,7 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
                   <ProductImage
                     src={imgUrl}
                     alt={`Product Image ${index + 1}`}
+                    loading="lazy"
                   />
                 </div>
               ))}
