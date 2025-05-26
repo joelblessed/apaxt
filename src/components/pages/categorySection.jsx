@@ -1,7 +1,7 @@
 import React from 'react';
 import BrandSection from './brandSection';
 
-const CategorySection = ({ category, brands }) => {
+const CategorySection = ({ category, brands, SelectedProduct }) => {
   return (
     <section className="category-section">
       <h2 className="category-title">{category}</h2>
@@ -11,6 +11,9 @@ const CategorySection = ({ category, brands }) => {
             key={brand}
             brand={brand}
             products={products}
+        SelectedProduct={SelectedProduct}
+        
+
           />
         ))}
       </div>

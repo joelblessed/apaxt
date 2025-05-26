@@ -1,0 +1,302 @@
+/* Base Styles */
+.pre-payment-review {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .review-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .review-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Review Sections */
+  .review-section {
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e1e1e1;
+  }
+  
+  .section-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .edit-button {
+    background: none;
+    border: none;
+    color: #0066cc;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .edit-button:hover {
+    text-decoration: underline;
+  }
+  
+  .section-content {
+    padding: 20px;
+    background-color: white;
+  }
+  
+  .shipping-method {
+    margin-top: 10px;
+    font-weight: 500;
+  }
+  
+  /* Order Items */
+  .order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .order-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .order-item:last-child {
+    border-bottom: none;
+  }
+  
+  .item-image-container {
+    position: relative;
+    margin-right: 15px;
+  }
+  
+  .item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+  
+  .item-quantity {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #333;
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+  
+  .item-details {
+    flex-grow: 1;
+  }
+  
+  .item-name {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .item-name:hover {
+    text-decoration: underline;
+  }
+  
+  .item-variant {
+    color: #666;
+    font-size: 13px;
+    margin: 3px 0;
+  }
+  
+  .item-price {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .item-total {
+    font-weight: 600;
+    min-width: 80px;
+    text-align: right;
+  }
+  
+  /* Order Summary */
+  .order-summary {
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .order-summary h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+  
+  .summary-row.total {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .place-order-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+  }
+  
+  .place-order-button:hover {
+    background-color: #e68a00;
+  }
+  
+  .secure-checkout {
+    text-align: center;
+    margin: 15px 0 5px;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .lock-icon {
+    margin-right: 5px;
+  }
+  
+  .return-policy {
+    text-align: center;
+    color: #666;
+    font-size: 12px;
+    margin-top: 15px;
+  }
+  
+  .return-policy a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .return-policy a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .pre-payment-review {
+      padding: 15px;
+      gap: 20px;
+    }
+    
+    .review-title {
+      font-size: 24px;
+    }
+    
+    .section-header {
+      padding: 12px 15px;
+    }
+    
+    .section-content {
+      padding: 15px;
+    }
+    
+    .item-image {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .order-summary {
+      padding: 15px;
+    }
+    
+    .place-order-button {
+      padding: 12px;
+    }
+  }
+
+  /* Add these to your existing PrePaymentReview.css */
+
+.payment-method {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .card-icon {
+    font-size: 24px;
+  }
+  
+  .card-details p {
+    margin: 5px 0;
+  }
+  
+  .discount {
+    color: #00a650;
+  }
+  
+  .stock-warning {
+    color: #cc5500;
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+  
+  .item-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    .payment-method {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    
+    .card-details p {
+      margin: 2px 0;
+    }
+  }

@@ -93,29 +93,29 @@ const Products = ({
     }
   }, [searchTerm]);
 
-  const handleProductClick = useCallback(
-    (product) => {
-      SelectedProduct(product);
-      localStorage.setItem("selectedProduct", JSON.stringify(product));
-      navigate("/selectedProduct");
+  // const handleProductClick = useCallback(
+  //   (product) => {
+  //     SelectedProduct(product);
+  //     localStorage.setItem("selectedProduct", JSON.stringify(product));
+  //     navigate("/selectedProduct");
 
-      fetch(`${api}/viewedProducts`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          userId: userId,
-          productId: product.id
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log("Viewed product saved:", data))
-        .catch((error) => console.error("Error:", error));
-    },
-    [SelectedProduct, navigate]
-  );
+  //     fetch(`${api}/viewedProducts`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": `Bearer ${token}`
+  //       },
+  //       body: JSON.stringify({
+  //         userId: userId,
+  //         productId: product.id
+  //       }),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => console.log("Viewed product saved:", data))
+  //       .catch((error) => console.error("Error:", error));
+  //   },
+  //   [SelectedProduct, navigate]
+  // );
 
   useEffect(() => {
     fetchProducts();
@@ -200,8 +200,8 @@ const Products = ({
         Mobject={products}
         Dobject={products}
         loaderRef={loaderRef}
-        SelectedProduct={handleProductClick}
-        handleProductClick={handleProductClick}
+        SelectedProduct={SelectedProduct}
+        // handleProductClick={handleProductClick}
         highlightText={highlightText}
         category={category}
      

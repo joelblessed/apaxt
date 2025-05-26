@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
 
 import CategorySection from "./categorySection";
 import SearchFilter from "./searchFilter";
 import "./styles.css";
 
-const CategoryPage = ({ api,  searchTerm, setSearchTerm }) => {
+const CategoryPage = ({ api, SelectedProduct, searchTerm, setSearchTerm }) => {
   // const { categoryName } = useParams();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -16,12 +15,41 @@ const CategoryPage = ({ api,  searchTerm, setSearchTerm }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   const [searchQuery, setSearchQuery] = useState(searchTerm);
   const [filters, setFilters] = useState({
     priceRange: [0, 1000000],
     inStock: false,
   });
+
+  // //viewed products
+  // const handleProductClick = useCallback(
+  //   (product) => {
+  //     SelectedProduct(product);
+  //     localStorage.setItem("selectedProduct", JSON.stringify(product));
+  //     navigate("/selectedProduct");
+
+  //     fetch(`${api}/viewedProducts`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({
+  //         userId: userId,
+  //         productId: product.id,
+  //       }),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => console.log("Viewed product saved:", data))
+  //       .catch((error) => console.error("Error:", error));
+  //   },
+  //   [SelectedProduct, navigate]
+  // );
 
   // Fetch products by category
   useEffect(() => {
@@ -55,9 +83,9 @@ const CategoryPage = ({ api,  searchTerm, setSearchTerm }) => {
   // Search functionality
   useEffect(() => {
     const searchProducts = async () => {
-      if (searchQuery.trim() === "" ) {
+      if (searchQuery.trim() === "") {
         setFilteredProducts(products);
-        
+
         return;
       }
 
@@ -66,7 +94,7 @@ const CategoryPage = ({ api,  searchTerm, setSearchTerm }) => {
           `${api}/search?query=${encodeURIComponent(searchQuery)}`
         );
         const data = await response.json();
-        const products = data.products|| data.results;
+        const products = data.products || data.results;
 
         setFilteredProducts(Array.isArray(products) ? products : []);
       } catch (err) {
@@ -150,7 +178,13 @@ const CategoryPage = ({ api,  searchTerm, setSearchTerm }) => {
 
       <div className="products-container">
         {Object.entries(groupedProducts).map(([category, brands]) => (
-          <CategorySection key={category} category={category} brands={brands} />
+          <CategorySection
+            key={category}
+        SelectedProduct={SelectedProduct}
+          
+            category={category}
+            brands={brands}
+          />
         ))}
       </div>
     </div>

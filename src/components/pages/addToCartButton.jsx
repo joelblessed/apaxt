@@ -46,7 +46,7 @@ const AddToCartButton = ({ product }) => {
           disabled={loading}
           main={product.discount < 1}
         >
-          {loading ? "Adding..." : "mAdd to Cart"}
+          {loading ? "Adding..." : "Add to Cart"}
         </div>
       ) : (
         <div
@@ -54,7 +54,7 @@ const AddToCartButton = ({ product }) => {
           disabled={loading}
           main={product.discount < 1}
         >
-          {loading ? "Adding..." : "dAdd to Cart"}
+          {loading ? "Adding..." : "Add to Cart"}
         </div>
       )}
     </>

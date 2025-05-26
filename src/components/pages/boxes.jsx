@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./products.css";
 import { AuthContext } from "../../AuthContext";
 import { useContext } from "react";
@@ -80,12 +80,15 @@ const Box = ({
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch(); // Function to check screen size
   const [isExpanded, setIsExpanded] = useState(false);
-  const userId = localStorage.getItem("userId") || "guest"; // Check user login
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId"); // Check user login
   const maxLength = 20;
   const [showDetails, setShowDetails] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const previewRef = useRef(null);
+    const navigate = useNavigate();
+  
 
   const position = positions[i18n.language] || position.en;
   const fontSize = fontSizes[i18n.language] || fontSize.en;
@@ -113,20 +116,46 @@ const Box = ({
     }
   };
 
-  const handleProductClick = (product) => {
-    SelectedProduct(product);
-    localStorage.setItem("selectedProduct", product);
-    navigate("/selectedProduct");
 
-    fetch(`${api}/viewedProducts`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        productId: product.id,
-      }),
-    });
-  };
-  const navigate = useNavigate();
+
+  const handleProductClick = useCallback(
+    (product) => {
+      SelectedProduct(product);
+      localStorage.setItem("selectedProduct", JSON.stringify(product));
+      navigate("/selectedProduct");
+
+      fetch(`${api}/viewedProducts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          userId: userId,
+          productId: product.id
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log("Viewed product saved:", data))
+        .catch((error) => console.error("Error:", error));
+    },
+    [SelectedProduct, navigate]
+  );
+
+  // const handleProductClick = (product) => {
+  //   SelectedProduct(product);
+  //   localStorage.setItem("selectedProduct", product);
+  //   navigate("/selectedProduct");
+
+  //   fetch(`${api}/viewedProducts`, {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       productId: product.id,
+  //     }),
+  //   });
+  // };
+  // const navigate = useNavigate();
 
   return (
     <>

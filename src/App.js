@@ -13,7 +13,7 @@ import { addToWishlist, removeFromWishlist } from "./wishlistSlice";
 import { useMemo } from "react";
 import { debounce } from "lodash";
 import Fuse from "fuse.js";
-import { loadCart } from './cartJs/cartThunks';
+import { loadCart } from "./cartJs/cartThunks";
 import {
   BrowserRouter as Router,
   Route,
@@ -82,6 +82,9 @@ import ProductCard from "./components/pages/ProductCards/productCard";
 import DeleteProduct from "./components/pages/deleteProduct";
 import Footer from "./components/Navbar/footer";
 import BrandSection from "./components/pages/brandSection";
+import OrdersReview from "./components/orders/ordersReview";
+import OrdersPreview from "./components/orders/ordersPreview";
+
 function App() {
   const [calalculateTotal, setCalculateTotal] = useState();
   const [checkout, setCheckOut] = useState();
@@ -126,7 +129,7 @@ function App() {
   const [hasMore, setHasMore] = useState(true);
   const [isEnglish, setIsEnglish] = useState(i18n.language === "en");
   const loaderRef = useRef();
-  const [orderCount, setOrderCount] = useState(0)
+  const [orderCount, setOrderCount] = useState(0);
 
   // Load saved language from localStorage or default to "en"
   useEffect(() => {
@@ -148,7 +151,6 @@ function App() {
 
   const userId = Number(localStorage.getItem("userId" || "guest"));
 
- 
   // Function to check screen size
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 760);
@@ -256,7 +258,6 @@ function App() {
 
   return (
     <AuthProvider>
-   
       <ToastContainer theme="colored" position="top-center"></ToastContainer>
 
       <Router>
@@ -308,7 +309,6 @@ function App() {
                 glofilteredProducts={allProducts}
                 discounts={discounts}
                 SelectedProduct={setSelectedProduct}
-               
                 filteredProducts={filteredProducts}
                 ownersProducts={ownersProducts}
                 mobilefilteredProducts={mobilefilteredProducts}
@@ -417,9 +417,30 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
+
+          <Route
+            path="/ordersReview"
+            element={
+              // <ProtectedRoute allowedRoles={["admin", "user"]}>
+                <OrdersReview api={api} />
+              // </ProtectedRoute>
+            }
+          ></Route>
+
+<Route
+            path="/ordersPreview"
+            element={
+              // <ProtectedRoute allowedRoles={["admin", "user"]}>
+                <OrdersPreview api={api} />
+              // </ProtectedRoute>
+            }
+          ></Route>
           <Route path="/signIN" element={<SignIN api={api} />} />
           <Route path="/logs" element={<Logs api={api} />} />
-          <Route path="/lastViewedProducts" element={<LastViewedProducts api={api} />} />
+          <Route
+            path="/lastViewedProducts"
+            element={<LastViewedProducts api={api} />}
+          />
 
           <Route
             path="/wishlistButton"
@@ -431,14 +452,7 @@ function App() {
           />
           <Route
             path="/orders"
-            element={
-              <Orders
-              OrderCount={setOrderCount}
-              api={api}
-              
-               
-              />
-            }
+            element={<Orders OrderCount={setOrderCount} api={api} />}
           />
           <Route
             path="/orders2"
@@ -453,23 +467,16 @@ function App() {
             }
           />
 
-
-
           <Route
             path="/profile"
             element={
               <ProtectedRoute allowedRoles={["admin", "user"]}>
-            <Profile api={api} user={user} error={error} />
-            </ProtectedRoute>}
-          />
-            <Route
-            path="/wallet"
-            element={
-            
-            <Wallet api={api} user={user}  />
+                <Profile api={api} user={user} error={error} />
+              </ProtectedRoute>
             }
           />
-          
+          <Route path="/wallet" element={<Wallet api={api} user={user} />} />
+
           <Route
             path="/editProfile"
             element={
@@ -480,13 +487,20 @@ function App() {
           />
           <Route
             path="/desktopCards"
-            element={<DesktopCards Dobject={filteredProducts}   highlightText={highlightText} api={api} />}
+            element={
+              <DesktopCards
+                Dobject={filteredProducts}
+                highlightText={highlightText}
+                api={api}
+              />
+            }
           />
           <Route path="/editProduct/:id" element={<EditProduct api={api} />} />
           <Route path="/productCard" element={<ProductCard api={api} />} />
-          <Route path="/brandSection" element={<BrandSection api={api} highlightText={highlightText}/>} />
-
-
+          <Route
+            path="/brandSection"
+            element={<BrandSection api={api} highlightText={highlightText} />}
+          />
 
           <Route path="/deleteProduct" element={<DeleteProduct api={api} />} />
           <Route
@@ -498,7 +512,6 @@ function App() {
             element={<EditProfilePicture api={api} />}
           />
 
-
           <Route
             path="/productsByOwner"
             element={
@@ -506,11 +519,10 @@ function App() {
                 api={api}
                 SelectedProduct={setSelectedProduct}
                 highlightText={highlightText}
-                loaderRef={loaderRef}  searchTerm={searchTerm}
+                loaderRef={loaderRef}
+                searchTerm={searchTerm}
                 glofilteredProducts={allProducts}
                 setSearchTerm={setSearchTerm}
-
-               
               />
             }
           />
@@ -628,12 +640,7 @@ function App() {
             }
           />
 
-          <Route
-            path="/formUpload"
-            element={
-                <FormUpload api={api} />
-            }
-          />
+          <Route path="/formUpload" element={<FormUpload api={api} />} />
 
           <Route
             path="/*"
@@ -656,22 +663,22 @@ function App() {
             path="/checkout"
             element={
               // <ProtectedRoute allowedRoles={["admin", "user"]}>
-                <Checkout
-                  api={api}
-                  userId={userId}
-                  user={user}
-                  setCalculateTotal={setCalculateTotal}
-                  setCheckOut={setCheckOut}
-                  glofilteredProducts={allProducts}
-                  paymentStatus={paymentStatus}
-                  paymentNumber={phoneNumber}
-                  paymentId={paymentId}
-                />
+              <Checkout
+                api={api}
+                userId={userId}
+                user={user}
+                setCalculateTotal={setCalculateTotal}
+                setCheckOut={setCheckOut}
+                glofilteredProducts={allProducts}
+                paymentStatus={paymentStatus}
+                paymentNumber={phoneNumber}
+                paymentId={paymentId}
+              />
               // </ProtectedRoute>
             }
           />
 
-<Route path="/about" element={<About api={api} />} />
+          <Route path="/about" element={<About api={api} />} />
           {/* <Route path="/" element={<Home />} /> */}
 
           {/* Redirect unknown routes */}
@@ -680,7 +687,6 @@ function App() {
         {/* <Test/> */}
         <Footer />
       </Router>
-     
     </AuthProvider>
   );
 }
