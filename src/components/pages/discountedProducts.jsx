@@ -21,7 +21,7 @@ const Discounts = ({
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "center", gap: "20px", background:"", width: "90%", padding: "20px", margin: "20px auto", borderRadius: "10px" }}>
+      <div style={{ display: "flex", flexWrap:"wrap", justifyContent: "center", gap: "20px", background:"", width: "90%", padding: "20px", margin: "20px auto", borderRadius: "10px" }}>
         <Box
           Mobject={discounts}
           Dobject={discounts}
