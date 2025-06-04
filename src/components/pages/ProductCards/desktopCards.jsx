@@ -104,7 +104,8 @@ const DesktopCards = ({
 
   return (
     <React.Fragment >
-      {
+      { Dobject.user_products.map((userp)=>(
+
         <div
           className="animated-box"
           style={{
@@ -138,11 +139,11 @@ const DesktopCards = ({
                     }}
                   >
                     {(Dobject.thumbnails && Dobject.thumbnails.length > 0) ||
-                    (Dobject.images.length > 0 && imageSelect.id) ? (
+                    (Dobject.images.length > 0 && imageSelect.id && Dobject.images !== null && Dobject.thumbnails !== null ) ? (
                       <img
                         src={
                           Dobject.thumbnails && Dobject.thumbnails.length > 0
-                            ? Dobject.thumbnails[Dobject.thumbnail_index]
+                            ? Dobject.thumbnails
                             : Dobject.images[0]
                         }
                         alt={t("Loading...")}
@@ -208,15 +209,15 @@ const DesktopCards = ({
                       <StatusContainer>
                         <StatusTitle>
                           {t("Status")}:
-                          <StatusContent>{Dobject.status}</StatusContent>
+                          <StatusContent>{userp.status}</StatusContent>
                         </StatusTitle>
                       </StatusContainer>
                       <Price key={index}>
-                        {t("CFA")}: {Dobject.price - Dobject.discount}
+                        {t("CFA")}: {userp.price - userp.discount}
                       </Price>
                       {Dobject.discount > 0 && (
                         <Discount key={index}>
-                          {t("CFA")}:<s>{Dobject.price}</s>
+                          {t("CFA")}:<s>{userp.price}</s>
                           <label
                             style={{
                               width: "40px",
@@ -228,7 +229,7 @@ const DesktopCards = ({
                             }}
                           >
                             -
-                            {((Dobject.discount / Dobject.price) * 100).toFixed(
+                            {((userp.discount / userp.price) * 100).toFixed(
                               0
                             )}
                             %
@@ -244,7 +245,7 @@ const DesktopCards = ({
                       textAlign: "center",
                       padding: "5px",
                     }}
-                  ><AddtocartButton     main={Dobject.discount < 1}>
+                  ><AddtocartButton     main={userp.discount < 1}>
                        <AddToCartButton product={Dobject} />
                   </AddtocartButton>
                    
@@ -259,7 +260,7 @@ const DesktopCards = ({
 
           {selectedProduct && showDetails && selectedProduct && <></>}
         </div>
-      }
+       ))}
 
       {/* {Dobject.isSelected ? "Unselect" : "Select"} */}
     </React.Fragment>

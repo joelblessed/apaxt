@@ -27,7 +27,6 @@ import {
   FormButton,
   ChartPlaceholder,
 } from "./dashboardStyles";
-import { filter } from "lodash";
 
 // Add responsive styles
 const ResponsiveDashboardContainer = styled(DashboardContainer)`
@@ -93,7 +92,7 @@ const ToggleButton = styled.button`
 
 
 
-const Dashboard = ({
+const AdminDashboard = ({
   api,
   user,
   error,
@@ -111,25 +110,22 @@ const Dashboard = ({
   const ownerId = localStorage.getItem("userId");
   const { t } = useTranslation();
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const userId = "1b0b7a73-3e48-4d2a-bc4f-33212e3405e3" ;
-  
+  const  [userId,setUserId] = useState( localStorage.getItem("userId"));
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
 
   useEffect(() => {
-    fetch(`${api}/products?_sort=_id&_order=desc`) // Adjust the URL if necessary
+    fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
       .then((response) => response.json())
       .then((data) => {
-        const products = data.products || data ; // Extract products from the response
+        const products = data.products; // Extract products from the response
 
-        const filteredProducts = products.filter((product) =>
-          product.user_products?.map((up) => up?.owner_id === userId)
+        const filteredProducts = products.filter(
+          (product) => product.owner_id === userId
         );
-        
         setOwnersProducts(filteredProducts);
-        console.log("test", filteredProducts)
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
@@ -160,24 +156,24 @@ const Dashboard = ({
       <ResponsiveSidebar isVisible={isSidebarVisible}>
         <h2 style={{ marginBottom: "16px" }}>{t("DashBoard")}</h2>
         <nav>
-          <NavLink onClick={toggleSidebar} to="/d">
+          <NavLink onClick={toggleSidebar} to="/Admin">
             {t("DashBoard")}
           </NavLink>
-          <NavLink onClick={toggleSidebar} to="/dprofile">
+          <NavLink onClick={toggleSidebar} to="/Adminprofile">
             {t("Profile")}
           </NavLink>
-          <NavLink onClick={toggleSidebar} to="/dproducts">
+          <NavLink onClick={toggleSidebar} to="/Adminproducts">
             {t("Products")}
           </NavLink>
-          <NavLink onClick={toggleSidebar} to="/dimageSelect">
+          <NavLink onClick={toggleSidebar} to="/AdmonimageSelect">
             {t("Image Select")}
           </NavLink>
 
-          <NavLink onClick={toggleSidebar} to="/dorders">
+          <NavLink onClick={toggleSidebar} to="/Adminorders">
             {t("Orders")}
           </NavLink>
           {/* <NavLink to="/users">{t("Users")}</NavLink> */}
-          <NavLink onClick={toggleSidebar} to="/dwallet">
+          <NavLink onClick={toggleSidebar} to="/Adminwallet">
             {t("Wallet")}
           </NavLink>
           {/* <NavLink to="/analytics">{t("Analytics")}</NavLink> */}
@@ -190,9 +186,11 @@ const Dashboard = ({
 
       {/* Main Content */}
       <ResponsiveMainContent>
+     
+
         <Routes>
           <Route
-            path="/d"
+            path="/Admin"
             element={
               <Home
                 products={products}
@@ -204,7 +202,7 @@ const Dashboard = ({
           />
 
           <Route
-            path="/dimageSelect"
+            path="/AdmindimageSelect"
             element={
               <ImageSelect
                 api={api}
@@ -217,7 +215,7 @@ const Dashboard = ({
             }
           />
           <Route
-            path="/dproducts"
+            path="/Adminproducts"
             element={
               <Products
                 products={products}
@@ -229,7 +227,7 @@ const Dashboard = ({
             }
           />
           <Route
-            path="/deditProfilePicture"
+            path="/AdmineditProfilePicture"
             element={
               <EditProfilePicture
                 products={products}
@@ -237,9 +235,9 @@ const Dashboard = ({
               />
             }
           />
-          <Route path="/deditProfile" element={<EditProfile api={api} />} />
+          <Route path="/AdmineditProfile" element={<EditProfile api={api} />} />
           <Route
-            path="/dorders"
+            path="/Adminorders"
             element={
               <Orders
                 api={api}
@@ -254,7 +252,7 @@ const Dashboard = ({
           />
           {/* <Route path="/users" element={<Users users={users} />} /> */}
           <Route
-            path="/dwallet"
+            path="/Adminwallet"
             element={<Wallet error={error} user={user} />}
           />
 
@@ -326,58 +324,54 @@ console.log("settings" ,localStorage.getItem("imageSelect"));
 const Products = ({ ownersProducts, api, handleDelete }) => {
   const { t } = useTranslation();
 
+  const  [user,setUserId] = useState( { id: "f1ca2adf-723e-4fe6-b7d1-4ec5af58b96b",});
+const [products, setProducts] = useState([])
+
+
+  useEffect(() => {
+    fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
+      .then((response) => response.json())
+      .then((data) => {
+        const products = data.products; // Extract products from the response
+
+        const filteredProducts = products.filter((product) =>
+          product.user_products?.some((up) => up.owner_id === "f1ca2adf-723e-4fe6-b7d1-4ec5af58b96b")
+        );
+        
+      })
+      .catch((error) => console.error("Error fetching products:", error));
+  }, [user]);
+
+
+  // Handle form field changes
+   const handleChange = (e) => {
+    setUserId({ ...user, [e.target.name]: e.target.value });
+  };
+
   return (
     <div>
+       
       <Header>{t("Product Management")}</Header>
-      <ResponsiveGrid>
-        {ownersProducts.map((product) => (
-          <Card key={product.id}>
-            {(product.thumbnails && product.thumbnails.length > 0) ||
-            product.images.length > 0 ? (
-              <img
-                src={
-                  product.thumbnails && product.thumbnails.length > 0
-                    ? product.thumbnails[0]
-                    : product.images[0]
-                }
-                alt={t("Loading...")}
-                style={{ width: "100px", height: "100px" }}
-                onClick={() => {}}
-              />
-            ) : (
-              <p>{t("No Image Available")}</p>
-            )}
-            <h3>{product.name}</h3>
-            
-              {product.user_products?.map((up)=>(
-                <div>
-                  <p>
-                    {t("Price")}: ${up.price}
-            </p>
-            <p>
-              {t("Stock")}: {up.number_in_stock}
-            </p>
 
-            <div>
-              <EditButton to={`/editProduct/${product.id}`}>
-                <img
-                  src="/images/edit_24dp_00F70F_FILL0_wght400_GRAD0_opsz24.svg"
-                  style={{ color: "red" }}
-                />
-              </EditButton>
-              <DeleteButton onClick={() => handleDelete(product.id)}>
-                <img
-                  src="/images/delete_24dp_FC0202_FILL0_wght400_GRAD0_opsz24.svg"
-                  style={{ color: "red" }}
-                />
-              </DeleteButton>
-            </div>
-                  
-                </div>
-              ))}
-            
-          </Card>
+      {user.id}
+        <div>
+          <label>Product Name *</label>
+          <input
+            type="text"
+            name="id"
+            value={user.id}
+            onChange={handleChange}
+            placeholder="Enter costomer Id"
+          />
+          </div>
+          {products.map((product) => (
+        <div>
+          {product.name}dgdgdg
+        </div>
         ))}
+      <ResponsiveGrid>
+      
+        vxkvx
       </ResponsiveGrid>
     </div>
   );
@@ -404,4 +398,4 @@ const Products = ({ ownersProducts, api, handleDelete }) => {
   </div>
 </div>;
 
-export default Dashboard;
+export default AdminDashboard;

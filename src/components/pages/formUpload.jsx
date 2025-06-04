@@ -4,42 +4,44 @@ import { AuthContext } from "../../AuthContext";
 
 const FormUpload = ({ api }) => {
   const { user } = useContext(AuthContext);
-  const userName = user?.username;
   const userId = localStorage.getItem("userId");
+const token = localStorage.getItem("token")
 
   // Form state
   const [formData, setFormData] = useState({
-    name: "",
-    brand: [{ id: Date.now(), name: "", image: "" }],
-    category: "",
-    subcategory: "",
+    name_en: "",
+    name_fr: "",
+    category: { main: "", sub: "" },
     price: 0,
-    quantity: 1,
-    numberInStock: 0,
+    dimensions: {},
+    attributes: {},
+    number_in_stock: 0,
     discount: 0,
-    weight: 0,
-    unit_of_weight: "",
-    color: "",
-    phoneNumber: "",
-    description: "",
+    description_en: "",
+    description_fr: "",
     status: "",
     address: "",
     city: "",
-    owner: userName,
-    ownerId: userId,
-    size: 0,
-    unit_of_size: "",
-    likes: 10,
-    location: [{ id: Date.now(), location: "", latitude: "", longitude: "" }],
+    colors: [],
+    thumbnail_index: 0,
+    phone_number: "",
+    brand: { name: "" },
   });
-  console.log("username", userName);
+
   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState();
   const [success, setSuccess] = useState(false);
+  const [newColor, setNewColor] = useState("");
+  const [attributes, setAttributes] = useState({});
+  const [newAttributeKey, setNewAttributeKey] = useState("");
+  const [newAttributeValue, setNewAttributeValue] = useState("");
+  const [dimensions, setDimensions] = useState("");
+  const [newDimKey, setNewDimKey] = useState("");
+  const [newDimValue, setNewDimValue] = useState("");
 
-  const category = [
+  // Categories data
+  const categories = [
     {
       id: 1,
       name: "Electronics",
@@ -123,7 +125,8 @@ const FormUpload = ({ api }) => {
         { id: 10, name: "Appliances" },
       ],
     },
-    {id: 4,
+    {
+      id: 4,
       name: "Farm",
       subcategories: [
         { id: 1, name: "Agricultural Equipment" },
@@ -134,16 +137,18 @@ const FormUpload = ({ api }) => {
         { id: 6, name: "Farm Tools" },
         { id: 7, name: "Pesticides" },
         { id: 8, name: "herbicides" },
-        { id: 9, name: "egusi",subsubcategories: [
-          { id: 1, name: "cracked" },
-          { id: 2, name: "uncracked" },
-       
-        ] },
-      
-
-    
-   ] },
-   {id: 5,
+        {
+          id: 9,
+          name: "egusi",
+          subsubcategories: [
+            { id: 1, name: "cracked" },
+            { id: 2, name: "uncracked" },
+          ],
+        },
+      ],
+    },
+    {
+      id: 5,
       name: "School",
       subcategories: [
         { id: 1, name: "Books" },
@@ -152,7 +157,8 @@ const FormUpload = ({ api }) => {
         { id: 4, name: "Electronics" },
         { id: 5, name: "Art Supplies" },
         { id: 6, name: "Sports Equipment" },
-      ]},
+      ],
+    },
     {
       id: 6,
       name: "Sports & Outdoors",
@@ -167,56 +173,70 @@ const FormUpload = ({ api }) => {
         { id: 8, name: "Running" },
         { id: 9, name: "Water Sports" },
       ],
-    }
+    },
   ];
 
-  // Initialize form with user data from localStorage
+  // Initialize form with user data
   useEffect(() => {
-    const username = localStorage.getItem("username");
-    const userId = localStorage.getItem("userId");
-
     setFormData((prev) => ({
       ...prev,
-      owner: username,
+      owner: user?.username,
       ownerId: userId,
     }));
+  }, [user, userId]);
 
-    // Fetch categories from API
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(`${api}/categories`);
-        const data = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchCategories();
-  }, [api]);
-
-  // Handle brand updates
-  const handleBrandChange = (index, field, value) => {
-    setFormData((prev) => {
-      const updatedBrands = [...prev.brand];
-      updatedBrands[index][field] = value;
-      return { ...prev, brand: updatedBrands };
-    });
+  // Handle color management
+  const addColor = () => {
+    if (newColor.trim() && !formData.colors.includes(newColor.trim())) {
+      setFormData((prev) => ({
+        ...prev,
+        colors: [...prev.colors, newColor.trim()],
+      }));
+      setNewColor("");
+    }
   };
 
-  // Add/remove brands
-  const addBrand = () => {
+  const removeColor = (index) => {
     setFormData((prev) => ({
       ...prev,
-      brand: [...prev.brand, { id: Date.now(), name: "", image: "" }],
+      colors: prev.colors.filter((_, i) => i !== index),
     }));
   };
 
-  const removeBrand = (index) => {
-    setFormData((prev) => ({
-      ...prev,
-      brand: prev.brand.filter((_, i) => i !== index),
-    }));
+  // Handle attribute management
+  const addAttribute = () => {
+    if (newAttributeKey.trim() && newAttributeValue.trim()) {
+      setAttributes((prev) => ({
+        ...prev,
+        [newAttributeKey.trim()]: newAttributeValue.trim(),
+      }));
+      setNewAttributeKey("");
+      setNewAttributeValue("");
+    }
+  };
+
+  const removeAttribute = (key) => {
+    const newAttributes = { ...attributes };
+    delete newAttributes[key];
+    setAttributes(newAttributes);
+  };
+
+  // Handle Dimentions management
+  const addDimentions = () => {
+    if (newDimKey.trim() && newDimValue.trim()) {
+      setDimensions((prev) => ({
+        ...prev,
+        [newDimKey.trim()]: newDimValue.trim(),
+      }));
+      setNewDimKey("");
+      setNewDimValue("");
+    }
+  };
+
+  const removeDimensions = (key) => {
+    const newDimensions = { ...dimensions };
+    delete newDimensions[key];
+    setAttributes(newDimensions);
   };
 
   // Handle image uploads
@@ -244,59 +264,36 @@ const FormUpload = ({ api }) => {
   // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handle category changes
+  const handleCategoryChange = (e) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      category: {
+        ...prev.category,
+        [name]: value,
+      },
     }));
   };
 
   // Form Validation
   const validateForm = () => {
     const validationErrors = {};
-    const {
-      name,
-      brand,
-      category,
-      price,
-      numberInStock,
-      phoneNumber,
-      description,
-      status,
-      address,
-      city,
-      weight,
-      color,
-      size,
-      unit_of_size,
-      unit_of_weight,
-    } = formData;
+    const { name_en, name_fr, category, price, number_in_stock } = formData;
 
-    if (!name) validationErrors.name = "Product name is required";
-    if (!weight || weight <= 0)
-      validationErrors.weight = "Valid weight is required";
-    if (!size || size <= 0) validationErrors.size = "Valid size is required";
-    if (!color) validationErrors.color = "Product color is required";
-    if (!category) validationErrors.category = "Category is required";
+    if (!name_en) validationErrors.name_en = "English name is required";
+    if (!name_fr) validationErrors.name_fr = "French name is required";
+    if (!category.main) validationErrors.category = "Main category is required";
+    if (!category.sub) validationErrors.category = "Subcategory is required";
     if (!price || isNaN(price) || price <= 0)
       validationErrors.price = "Valid price is required";
-    if (!numberInStock || isNaN(numberInStock) || numberInStock < 0) {
-      validationErrors.numberInStock = "Valid stock quantity is required";
-    }
-    if (!phoneNumber || isNaN(phoneNumber) || phoneNumber.length < 8) {
-      validationErrors.phoneNumber = "Valid phone number is required";
-    }
-    if (!status) validationErrors.status = "Status is required";
-    if (!description) validationErrors.description = "Description is required";
-    if (brand.some((b) => !b.name))
-      validationErrors.brand = "Brand details must be complete";
-    if (images.length === 0)
-      validationErrors.images = "At least one image is required";
-    if (!address) validationErrors.address = "Address is required";
-    if (!city) validationErrors.city = "City is required";
-    if (!unit_of_size)
-      validationErrors.unit_of_size = "put a unit of measurement";
-    if (!unit_of_weight)
-      validationErrors.unit_of_weight = "put a unit of measurement";
+    if (!number_in_stock || isNaN(number_in_stock) || number_in_stock < 0)
+      validationErrors.number_in_stock = "Valid stock quantity is required";
+    if (images.length < 2)
+      validationErrors.images = "At least two images are required";
 
     setErrors(validationErrors);
     return Object.keys(validationErrors).length === 0;
@@ -311,26 +308,33 @@ const FormUpload = ({ api }) => {
 
     const formDataToSend = new FormData();
 
-    // Append all form data
-    Object.entries(formData).forEach(([key, value]) => {
-      if (key === "brand" || key === "location") {
-        // Ensure proper JSON formatting
-        formDataToSend.append(key, JSON.stringify(value));
-      } else {
-        formDataToSend.append(key, value);
-      }
-    });
+    // Prepare the product data
+    const productData = {
+      ...formData,
+      attributes,
+      dimensions: formData.dimensions,
+      colors: formData.colors,
+      thumbnail_index: formData.thumbnail_index,
+    };
+
+    // Append all data
+    formDataToSend.append("product", JSON.stringify(productData));
+
 
     // Append images
     images.forEach((file) => {
       formDataToSend.append("images", file);
     });
 
+
     try {
       const response = await fetch(`${api}/upload`, {
         method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
         body: formDataToSend,
       });
+    console.log("form", formDataToSend)
+
 
       if (!response.ok) {
         throw new Error(await response.text());
@@ -338,33 +342,28 @@ const FormUpload = ({ api }) => {
 
       const result = await response.json();
       setSuccess(true);
-
       // Reset form on success
       setFormData({
-        name: "",
-        brand: [{ id: Date.now(), name: "", image: "" }],
-        category: "",
-        subcategory: "",
-        unit_of_size: "",
-        unit_of_weight: "",
-        price: "",
-        quantity: 1,
-        numberInStock: 0,
-        weight: 0,
-        color: "",
-        phoneNumber: "",
-        description: "",
+        name_en: "",
+        name_fr: "",
+        category: { main: "", sub: "" },
+        price: 0,
+        dimensions: {},
+        attributes: {},
+        number_in_stock: 0,
+        discount: 0,
+        description_en: "",
+        description_fr: "",
         status: "",
         address: "",
         city: "",
-        likes: 0,
-        location: [
-          { id: Date.now(), location: "", latitude: "", longitude: "" },
-        ],
-        owner: localStorage.getItem("username") || "",
-        ownerId: localStorage.getItem("userId") || "",
+        colors: [],
+        thumbnail_index: 0,
+        phone_number: "",
+        brand: { name: "" },
       });
       setImages([]);
+      setAttributes({});
     } catch (error) {
       console.error("Error uploading product:", error);
       alert(`Failed to upload product: ${error.message}`);
@@ -372,14 +371,6 @@ const FormUpload = ({ api }) => {
       setLoading(false);
     }
   };
-
-  // Reset success message after 3 seconds
-  useEffect(() => {
-    if (success) {
-      const timer = setTimeout(() => setSuccess(false), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [success]);
 
   return (
     <div className="form-container">
@@ -389,76 +380,74 @@ const FormUpload = ({ api }) => {
       )}
 
       <form onSubmit={handleSubmit}>
-        {/* Product Name */}
+        {/* English Name */}
         <div className="form-group">
-          <label>Product Name *</label>
+          <label>Product Name (English) *</label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
+            name="name_en"
+            value={formData.name_en}
             onChange={handleChange}
-            placeholder="Enter product name"
+            placeholder="English product name"
           />
-          {errors.name && <span className="error">{errors.name}</span>}
+          {errors.name_en && <span className="error">{errors.name_en}</span>}
         </div>
 
-        {/* Brand Input */}
+        {/* French Name */}
         <div className="form-group">
-          <label>Product Brand *</label>
-          {formData.brand.map((b, index) => (
-            <div key={b.id} className="brand-input-group">
-              <input
-                type="text"
-                value={b.name}
-                onChange={(e) =>
-                  handleBrandChange(index, "name", e.target.value)
-                }
-                placeholder="Brand name"
-              />
-              {formData.brand.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeBrand(index)}
-                  className="remove-brand-btn"
-                >
-                  ×
-                </button>
-              )}
-            </div>
-          ))}
-          <button type="button" onClick={addBrand} className="add-brand-btn">
-            + Add Brand
-          </button>
-          {errors.brand && <span className="error">{errors.brand}</span>}
-        </div>
-
-        {/* Category Dropdown */}
-
-        <div className="form-group">
-          <label>Category</label>
-          <select
-            name="category"
-            value={formData.category}
+          <label>Product Name (French) *</label>
+          <input
+            type="text"
+            name="name_fr"
+            value={formData.name_fr}
             onChange={handleChange}
+            placeholder="French product name"
+          />
+          {errors.name_fr && <span className="error">{errors.name_fr}</span>}
+        </div>
+
+        {/* Brand */}
+        <div className="form-group">
+          <label>Brand *</label>
+          <input
+            type="text"
+            name="brand.name"
+            value={formData.brand.name}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                brand: { ...prev.brand, name: e.target.value },
+              }))
+            }
+            placeholder="Brand name"
+          />
+        </div>
+
+        {/* Category Selection */}
+        <div className="form-group">
+          <label>Category *</label>
+          <select
+            name="main"
+            value={formData.category.main}
+            onChange={handleCategoryChange}
           >
             <option value="">Select Category</option>
-            {category.map((cat) => (
+            {categories.map((cat) => (
               <option key={cat.id} value={cat.name}>
                 {cat.name}
               </option>
             ))}
           </select>
 
-          {/* Subcategory Dropdown */}
-          {formData.category && (
+          {formData.category.main && (
             <select
-              name="subcategory"
-              value={formData.subcategory}
-              onChange={handleChange}
+              name="sub"
+              value={formData.category.sub}
+              onChange={handleCategoryChange}
             >
               <option value="">Select Subcategory</option>
-              {category
-                .find((cat) => cat.name === formData.category)
+              {categories
+                .find((c) => c.name === formData.category.main)
                 ?.subcategories.map((sub) => (
                   <option key={sub.id} value={sub.name}>
                     {sub.name}
@@ -466,6 +455,7 @@ const FormUpload = ({ api }) => {
                 ))}
             </select>
           )}
+          {errors.category && <span className="error">{errors.category}</span>}
         </div>
 
         {/* Price */}
@@ -488,147 +478,145 @@ const FormUpload = ({ api }) => {
           <label>Number in Stock *</label>
           <input
             type="number"
-            name="numberInStock"
-            value={formData.numberInStock}
+            name="number_in_stock"
+            value={formData.number_in_stock}
             onChange={handleChange}
             placeholder="0"
             min="0"
           />
-          {errors.numberInStock && (
-            <span className="error">{errors.numberInStock}</span>
+          {errors.number_in_stock && (
+            <span className="error">{errors.number_in_stock}</span>
           )}
         </div>
 
-        {/* Phone Number */}
+       
+
+        {/* Color Management */}
         <div className="form-group">
-          <label>Phone Number *</label>
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            placeholder="e.g., 677331862"
-          />
-          {errors.phoneNumber && (
-            <span className="error">{errors.phoneNumber}</span>
-          )}
+          <label>Colors *</label>
+          <div className="color-input">
+            <input
+              type="text"
+              value={newColor}
+              onChange={(e) => setNewColor(e.target.value)}
+              placeholder="Add color"
+              onKeyDown={(e) => e.key === "Enter" && addColor()}
+            />
+            <button type="button" onClick={addColor}>
+              Add
+            </button>
+          </div>
+          <div className="color-list">
+            {formData.colors.map((color, index) => (
+              <div key={index} className="color-item">
+                <span>{color}</span>
+                <button type="button" onClick={() => removeColor(index)}>
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Color */}
+        {/* Attributes Management */}
         <div className="form-group">
-          <label>Color *</label>
-          <input
-            type="text"
-            name="color"
-            value={formData.color}
-            onChange={handleChange}
-            placeholder="Product color"
-          />
-          {errors.color && <span className="error">{errors.color}</span>}
+          <label>Attributes</label>
+          <div className="attribute-input">
+            <input
+              type="text"
+              value={newAttributeKey}
+              onChange={(e) => setNewAttributeKey(e.target.value)}
+              placeholder="Attribute key"
+            />
+            <input
+              type="text"
+              value={newAttributeValue}
+              onChange={(e) => setNewAttributeValue(e.target.value)}
+              placeholder="Attribute value"
+            />
+            <button type="button" onClick={addAttribute}>
+              Add
+            </button>
+          </div>
+          <div className="attribute-list">
+            {Object.entries(attributes).map(([key, value]) => (
+              <div key={key} className="attribute-item">
+                <span>
+                  {key}: {value}
+                </span>
+                <button type="button" onClick={() => removeAttribute(key)}>
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* size */}
-        <div className="form-group">
-          <label>Size*</label>
-          <input
-            type="number"
-            name="size"
-            value={formData.size}
-            onChange={handleChange}
-            placeholder="cm"
-            step="0.1"
-            min="0"
-          />
-          {errors.size && <span className="error">{errors.size}</span>}
-        </div>
+        {/* {Dimensions} */}
 
-        {/* size */}
         <div className="form-group">
-          <label>unit of Measurement *</label>
-          <input
-            type="text"
-            name="unit_of_size"
-            value={formData.unit_of_size}
-            onChange={handleChange}
-            placeholder="Product size"
-            step="0.1"
-            min="0"
-          />
-          {errors.unit_of_size && (
-            <span className="error">{errors.unit_of_size}</span>
-          )}
-        </div>
-
-        {/* Weight */}
-        <div className="form-group">
-          <label>Weight *</label>
-          <input
-            type="number"
-            name="weight"
-            value={formData.weight}
-            onChange={handleChange}
-            placeholder="Product weight in kg"
-            step="0.1"
-            min="0"
-          />
-          {errors.weight && <span className="error">{errors.weight}</span>}
-        </div>
-
-        {/* Weight */}
-        <div className="form-group">
-          <label> unit of measurement *</label>
-          <input
-            type="text"
-            name="unit_of_weight"
-            value={formData.unit_of_weight}
-            onChange={handleChange}
-            placeholder="kg "
-            step="0.1"
-            min="0"
-          />
-          {errors.unit_of_weight && (
-            <span className="error">{errors.unit_of_weight}</span>
-          )}
-        </div>
-
-        {/* Description */}
-        <div className="form-group">
-          <label>Description *</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Detailed product description"
-            rows="4"
-          />
-          {errors.description && (
-            <span className="error">{errors.description}</span>
-          )}
+          <label>Dimentions</label>
+          <div className="dimensions-input">
+            <input
+              type="text"
+              value={newDimKey}
+              onChange={(e) => setNewDimKey(e.target.value)}
+              placeholder="dimension key"
+            />
+            <input
+              type="text"
+              value={newDimValue}
+              onChange={(e) => setNewDimValue(e.target.value)}
+              placeholder="dimension value"
+            />
+            <button type="button" onClick={addDimentions}>
+              Add
+            </button>
+          </div>
+          <div className="dimensions-list">
+            {Object.entries(dimensions).map(([key, value]) => (
+              <div key={key} className="dimensions-item">
+                <span>
+                  {key}: {value}
+                </span>
+                <button type="button" onClick={() => removeDimensions(key)}>
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Status */}
-        <div className="form-group">
-          <label>Status *</label>
-          <select name="status" value={formData.status} onChange={handleChange}>
-            <option value="">Select Status</option>
-            <option value="New">New</option>
-            <option value="Used">Used</option>
-            <option value="Refurbished">Refurbished</option>
-          </select>
-          {errors.status && <span className="error">{errors.status}</span>}
-        </div>
+        <label>Product Condition</label>
+        <select
+          name="status"
+          value={formData.status}
+          onChange={handleChange}
+          required
+        >
+          <option>Select Status</option>
+          <option value="New">New</option>
+          <option value="Used">Used</option>
+        </select>
+        {errors.status && <p className="error">{errors.status}</p>}
 
-        {/* Address */}
-        <div className="form-group">
-          <label>Address *</label>
-          <input
-            type="text"
-            name="address"
-            value={formData.address}
+        {/* description */}
+        <div className="translation-block">
+          <label>Description (EN)</label>
+          <textarea
+            value={formData.description_en}
+            name="description_en"
             onChange={handleChange}
-            placeholder="Street address"
+            required
           />
-          {errors.address && <span className="error">{errors.address}</span>}
+          {errors.description && <p className="error">{errors.description}</p>}
+
+          <label>Description (FR)</label>
+          <textarea value={formData.description_fr} onChange={handleChange} name="description_fr" />
+          {errors.description_fr && (
+            <p className="error">{errors.description_fr}</p>
+          )}
         </div>
 
         {/* City */}
@@ -639,45 +627,74 @@ const FormUpload = ({ api }) => {
             name="city"
             value={formData.city}
             onChange={handleChange}
-            placeholder="City"
+            placeholder="city"
           />
           {errors.city && <span className="error">{errors.city}</span>}
+        </div>
+        {/* phone number */}
+        <div className="form-group">
+          <label>Phone Number *</label>
+          <input
+            type="number"
+            name="phone_number"
+            value={formData.phone_number}
+            onChange={handleChange}
+            placeholder="Phone number"
+          />
+          {errors.phone_number && (
+            <span className="error">{errors.phone_number}</span>
+          )}
+        </div>
+        {/* thumbnail Index */}
+        <div className="form-group">
+          <label>Phone Number *</label>
+          <input
+            type="number"
+            name="thumbnail_index"
+            value={formData.thumbnail_index}
+            onChange={handleChange}
+            placeholder="thumbnail index"
+            disabled
+          />
         </div>
 
         {/* Image Upload */}
         <div className="form-group">
-          <label>Product Images *</label>
+          <label>Product Images * (At least 2)</label>
           <input
             type="file"
             multiple
             accept="image/*"
             onChange={handleImageUpload}
-            // className="file-input"
           />
           {errors.images && <span className="error">{errors.images}</span>}
-
-          {/* Preview uploaded images */}
-          {images.length > 0 && (
-            <div className="image-previews">
-              {images.map((file, index) => (
-                <div key={index} className="image-preview">
-                  <img
-                    src={URL.createObjectURL(file)}
-                    alt={`Preview ${index + 1}`}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="image-previews">
+            {images.map((file, index) => (
+              <div key={index} className="image-preview">
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt={`Preview ${index + 1}`}
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, thumbnail_index: index }))
+                  }
+                  className={
+                    formData.thumbnail_index === index ? "selected" : ""
+                  }
+                  style={{
+                    cursor: "pointer",
+                    border:
+                      formData.thumbnail_index === index && "5px solid blue",
+                    borderRadius: "4px",
+                    background: "red",
+                  }} // Add cursor pointer for existing images
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Submit Button */}
-        <button
-          style={{ width: "100px" }}
-          type="submit"
-          disabled={loading}
-          className="submit-btn"
-        >
+        <button type="submit" disabled={loading}>
           {loading ? "Uploading..." : "Upload Product"}
         </button>
       </form>

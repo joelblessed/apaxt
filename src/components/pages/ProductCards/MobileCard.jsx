@@ -49,7 +49,6 @@ const MobileCard = ({
   handleWishlistToggle,
   isInWishlist,
 
-  category,
 }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch(); // Function to check screen size
@@ -81,6 +80,9 @@ const MobileCard = ({
 
   return (
     <React.Fragment>
+      {Mobject.user_products.map((userp)=>(
+
+   
       <div className="animated-box" style={{ ...mstyles.Mcontainer }}>
         {Mobject ? (
           <div>
@@ -98,11 +100,11 @@ const MobileCard = ({
                 }}
               >
                 {(Mobject.thumbnails && Mobject.thumbnails.length > 0) ||
-                Mobject.images.length > 0 ? (
+                Mobject.images.length > 0 || Mobject.images !== null || Mobject.thumbnails !== null   ? (
                   <img
                     src={
                       Mobject.thumbnails && Mobject.thumbnails.length > 0
-                        ? Mobject.thumbnails[Mobject.thumbnail_index]
+                        ? Mobject.thumbnails
                         : Mobject.images[0]
                     }
                     alt={t("Loading...")}
@@ -161,15 +163,15 @@ const MobileCard = ({
                   <StatusContainer>
                     <StatusTitle>
                       {t("Status")}:
-                      <StatusContent>{Mobject.status}</StatusContent>
+                      <StatusContent>{Mobject.user_products.map((userp => userp.status))}</StatusContent>
                     </StatusTitle>
                   </StatusContainer>
                   <Price key={index}>
-                    {t("CFA")}: {Mobject.price - Mobject.discount}
+                    {t("CFA")}: {userp.price - userp.discount}
                   </Price>
                   {Mobject.discount > 0 && (
                     <Discount key={index}>
-                      {t("CFA")}:<s>{Mobject.price}</s>
+                      {t("CFA")}:<s>{userp.price}</s>
                       <label
                         style={{
                           width: "40px",
@@ -180,7 +182,7 @@ const MobileCard = ({
                           marginLeft: "15px",
                         }}
                       >
-                        -{((Mobject.discount / Mobject.price) * 100).toFixed(0)}
+                        -{((userp.discount / userp.price) * 100).toFixed(0)}
                         %
                       </label>
                     </Discount>
@@ -206,6 +208,7 @@ const MobileCard = ({
         )}
         <div ref={loaderRef}> {t()}</div>
       </div>
+         ))}
     </React.Fragment>
   );
 };

@@ -287,19 +287,25 @@ function MobileNavbar({
     const normalized = term.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     search(normalized);
   };
+
+   // Extract unique categories from the products
+   const uniqueCategories = [
+    ...new Set(glofilteredProducts.map((product) => product.category?.main)),
+  ];
+
   const groupedBrandsByCategory = useMemo(() => {
-    return categories.reduce((acc, category) => {
+    return uniqueCategories.reduce((acc, category) => {
       acc[category] = [
         ...new Set(
           glofilteredProducts
-            .filter((product) => product.category === category)
+            .filter((product) => product.category?.main === category)
             .map((product) => product.brand)
             .flat()
         ),
       ];
       return acc;
     }, {});
-  }, [categories, glofilteredProducts]);
+  }, [uniqueCategories, glofilteredProducts]);
 
   return (
     <div style={{marginBottom:"200px"}}>
@@ -569,8 +575,8 @@ function MobileNavbar({
                       style={{
                         cursor: "pointer",
                         fontWeight:
-                          brandName === brand.name ? "bold" : "normal",
-                        color: brandName === brand.name ? "blue" : "black",
+                          brandName === brand ? "bold" : "normal",
+                        color: brandName === brand ? "blue" : "black",
                         width: "40%",
                         marginLeft: "0px",
 

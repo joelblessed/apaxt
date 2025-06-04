@@ -51,7 +51,7 @@ const Products = ({
     const filteredProducts =
       category === "All"
         ? fetched
-        : fetched.filter((product) => product.category === category);
+        : fetched.filter((product) => product.user_products.map((userp)=>userp.category?.main) === category);
 
     setProducts((prev) => uniqueProducts(prev, filteredProducts));
   }, [api, page, category]);

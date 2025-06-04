@@ -5,245 +5,153 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CategoryBox from "./categoryBox";
 import { debounce } from "lodash";
 import Fuse from "fuse.js";
-import Box from "./boxes";
 
 const Category = ({
   searchTerm,
   setSearchTerm,
   api,
-  allProducts,
-  glofilteredProducts,
   loaderRef,
   highlightText,
   SelectedProduct,
 }) => {
-  const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  // Consolidated state
+  const [data, setData] = useState({
+    products: [],
+    allProducts: [],
+    page: 1,
+    hasMore: true,
+    category: null,
+  });
+  
   const navigate = useNavigate();
   const { selectedCategory } = useParams();
-  const [category, setCategory] = useState();
-    const [isMobile, setIsMobile] = useState(false);
-  
   const [uniqueCategories, setUniqueCategories] = useState([]);
 
   // Memoize fuse instance for performance
   const fuse = useMemo(
     () =>
-      new Fuse(glofilteredProducts, {
+      new Fuse(data.allProducts, {
         keys: ["name", "category", "owner", "brand.name"],
         threshold: 0.3,
       }),
-    [glofilteredProducts]
+    [data.allProducts]
   );
 
+  // Fetch all products once on mount
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        const res = await fetch(`${api}/allProducts`);
+        const { products } = await res.json();
+        setData(prev => ({ ...prev, allProducts: products || [] }));
+      
+      } catch (error) {
+        console.error("Failed to fetch all products:", error);
+      }
+    };
+    fetchAllProducts();
+  }, [api]);
+
+  // Main data fetching logic
   const fetchProducts = useCallback(async () => {
+    if (!data.hasMore) return;
+
     try {
-      const res = await fetch(`${api}/products?page=${page}&limit=10`);
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      const data = await res.json();
-      const fetched = data.products || data;
+      const url = searchTerm || selectedCategory 
+        ? `${api}/search?query=${encodeURIComponent(searchTerm || selectedCategory)}&page=${data.page}&limit=10`
+        : `${api}/products?page=${data.page}&limit=10;`
 
-      if (fetched.length === 0) {
-        setHasMore(false);
-        return;
-      }
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      
+      const response = await res.json();
+      const newProducts = response.products || response.results || response || [];
 
-      setProducts((prev) => {
-        const ids = new Set(prev.map((p) => p.id));
-        return [...prev, ...fetched.filter((item) => !ids.has(item.id))];
+      setData(prev => {
+        const ids = new Set(prev.products.map(p => p.id));
+        const filtered = newProducts.filter(item => !ids.has(item.id));
+        
+        return {
+          ...prev,
+          products: [...prev.products, ...filtered],
+          hasMore: filtered.length > 0,
+        };
       });
     } catch (error) {
       console.error("Failed to fetch products:", error);
-      setHasMore(false); // Stop further pagination on error
+      setData(prev => ({ ...prev, hasMore: false }));
     }
-  }, [page, api]);
+  }, [data.page, data.hasMore, api, searchTerm, selectedCategory]);
 
+  // Handle infinite scroll
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
-
-  useEffect(() => {
-    if (!hasMore) return;
+    if (!loaderRef.current || !data.hasMore) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setPage((prev) => prev + 1);
-        }
-      },
+      ([entry]) => entry.isIntersecting && setData(prev => ({ ...prev, page: prev.page + 1 })),
       { rootMargin: "100px" }
     );
 
-    const currentLoader = loaderRef.current;
-    if (currentLoader) observer.observe(currentLoader);
+    observer.observe(loaderRef.current);
+    return () => observer.disconnect();
+  }, [loaderRef, data.hasMore]);
 
-    return () => {
-      if (currentLoader) observer.unobserve(currentLoader);
-    };
-  }, [hasMore, loaderRef]);
-
-  // Handle search functionality
+  // Reset and fetch when search/category changes
   useEffect(() => {
-    if (selectedCategory || searchTerm.trim() !== "") {
-      const results = fuse.search(searchTerm.trim() || selectedCategory.trim());
-      const matched = results.map((res) => res.item);
-      setProducts(matched);
-      setHasMore(false); // Stop pagination on search
-    } else {
-      setProducts([]); // Reset products
-      setHasMore(true); // Enable pagination again
-      setPage(1); // Reset page for fresh fetch
-      fetchProducts(); // Fetch initial products
-    }
-  }, [searchTerm, selectedCategory, fuse, fetchProducts]);
+    setData(prev => ({
+      ...prev,
+      products: [],
+      page: 1,
+      hasMore: true,
+      category: selectedCategory || null
+    }));
+  }, [searchTerm, selectedCategory]);
 
-  const handleProductClick = useCallback(
-    (product) => {
-      SelectedProduct(product);
-      localStorage.setItem("selectedProduct", JSON.stringify(product));
-      navigate("/selectedProduct");
-    },
-    [SelectedProduct, navigate]
-  );
-
-  const groupByCategory = useCallback((products) => {
-    return products.reduce((acc, product) => {
-      if (!acc[product.category]) acc[product.category] = [];
-      acc[product.category].push(product);
+  // Group products by category
+  const groupedProducts = useMemo(() => {
+    return data.allProducts.reduce((acc, product) => {
+      const mainCategory = product.category?.main;
+      if (!mainCategory) return acc;
+  
+      if (!acc[mainCategory]) acc[mainCategory] = [];
+      acc[mainCategory].push(product);
       return acc;
     }, {});
-  }, []);
+  }, [data.allProducts]);
 
-  const groupedProducts = useMemo(
-    () => groupByCategory(allProducts),
-    [allProducts, groupByCategory]
-  );
+  
 
-  const Dobject = useMemo(
-    () => Object.keys(groupedProducts),
-    [groupedProducts]
-  );
-  const Dobject1 = useMemo(() => {
-    return Dobject.reduce((acc, category) => {
+  const categoryPreview = useMemo(() => {
+    return Object.keys(groupedProducts).reduce((acc, category) => {
       acc[category] = groupedProducts[category].slice(0, 5);
       return acc;
     }, {});
-  }, [Dobject, groupedProducts]);
+  }, [groupedProducts]);
 
-  const fetchSearchResults = useCallback(
-    async (query) => {
-      try {
-        const res = await fetch(
-          `${api}/search?query=${encodeURIComponent(
-            query
-          )}&page=${page}&limit=10`
-        );
-        const data = await res.json();
-        const fetched = data.results || [];
+  const handleProductClick = useCallback((product) => {
+    SelectedProduct(product);
+    localStorage.setItem("selectedProduct", JSON.stringify(product));
+    navigate("/selectedProduct");
+  }, [SelectedProduct, navigate]);
 
-        if (fetched.length === 0) setHasMore(false);
-
-        const uniqueProducts = (prev, newItems) => {
-          const ids = new Set(prev.map((p) => p.id));
-          return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
-        };
-
-        const filteredProducts = category
-          ? fetched.filter((product) => product.category === category)
-          : fetched;
-
-        setProducts((prev) => uniqueProducts(prev, filteredProducts));
-      } catch (error) {
-        console.error("Error fetching search results:", error);
-      }
-    },
-    [page, category, api]
-  );
-
-  // Debounced search function
-  const debouncedSearch = debounce((query) => {
-    fetchSearchResults(query);
-  }, 200); // Delay in milliseconds
-
-  useEffect(() => {
-    // Trigger the debounced search when the search term changes
-    debouncedSearch(searchTerm || category);
-
-    // Cleanup debounce function when the component unmounts or searchTerm changes
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [searchTerm, category]);
-
-  useEffect(() => {
-    if (!hasMore) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setPage((prev) => prev + 1);
-        }
-      },
-      { rootMargin: "100px" }
-    );
-
-    if (loaderRef.current) observer.observe(loaderRef.current);
-
-    return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
-    };
-  }, [hasMore]);
-
-
-  // Initial fetch and reset when category changes
-  useEffect(() => {
-    setProducts([]);
-    setHasMore(true);
-  }, [category]);
-
-  // Mobile scroll to top on search
-  useEffect(() => {
-    if (searchTerm && window.innerWidth < 1000) {
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 300);
-    }
-  }, [searchTerm]);
-
-   // Function to check screen size
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1000);
-    };
-  
-    useEffect(() => {
-      handleResize(); // Initial check
-      window.addEventListener("resize", handleResize); // Update on resize
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
+  console.log("test",groupedProducts)
 
   return (
-    <div style={{background:"red", width:"100%"}}>
-     
-           
-             <CategoryBox
-            Mobject={products}
-            Dobject={Dobject}
-            Dobject1={Dobject1}
-            loaderRef={loaderRef}
-            SelectedProduct={SelectedProduct}
-            handleProductClick={handleProductClick}
-            highlightText={highlightText}
-          />
-        </div>
-     
-  
+    <div style={{ background: "red", width: "100%" }}>
+      <CategoryBox
+        Mobject={data.products}
+        Dobject={Object.keys(groupedProducts)}
+        Dobject1={categoryPreview}
+        loaderRef={loaderRef}
+        SelectedProduct={SelectedProduct}
+        handleProductClick={handleProductClick}
+        highlightText={highlightText}
+      />
+    </div>
   );
 };
 

@@ -147,21 +147,24 @@ const CategoryPage = ({ api, SelectedProduct, searchTerm, setSearchTerm }) => {
   }, [filters, products]);
 
   // Safely group products by category then by brand
-  const groupedProducts = Array.isArray(filteredProducts)
-    ? filteredProducts.reduce((acc, product) => {
-        if (!product?.category || !product?.brand.map((br) => br.name))
-          return acc;
+  
 
-        if (!acc[product.category]) {
-          acc[product.category] = {};
-        }
-        if (!acc[product.category][product.brand.map((br) => br.name)]) {
-          acc[product.category][product.brand.map((br) => br.name)] = [];
-        }
-        acc[product.category][product.brand.map((br) => br.name)].push(product);
-        return acc;
-      }, {})
-    : {};
+    const groupedProducts = Array.isArray(filteredProducts)
+  ? filteredProducts.reduce((acc, product) => {
+      const category = product.category?.main;
+      const brandName = product.brand?.name;
+
+      if (!category || !brandName) return acc;
+
+      if (!acc[category]) acc[category] = {};
+      if (!acc[category][brandName]) acc[category][brandName] = [];
+
+      acc[category][brandName].push(product);
+
+      return acc;
+    }, {})
+  : {};
+    
 
   if (isLoading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">Error: {error}</div>;

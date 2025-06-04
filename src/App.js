@@ -84,6 +84,8 @@ import Footer from "./components/Navbar/footer";
 import BrandSection from "./components/pages/brandSection";
 import OrdersReview from "./components/orders/ordersReview";
 import OrdersPreview from "./components/orders/ordersPreview";
+import AdminDashboard from './components/account/adminDashboard'
+
 
 function App() {
   const [calalculateTotal, setCalculateTotal] = useState();
@@ -188,7 +190,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
+    fetch(`${api}/allProducts`) // Adjust the URL if necessary
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Failed to fetch products: ${response.statusText}`);
@@ -196,7 +198,6 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        console.log("Fetched products successfully:", data); // Debug log
         const products = data.products; // Extract products from the response
         setAllProducts(products);
         setFilteredProducts(products);
@@ -208,7 +209,7 @@ function App() {
 
         // Extract unique categories from the products
         const uniqueCategories = [
-          ...new Set(products.map((product) => product.category)),
+          ...new Set(products.map((product) => product.category?.main)),
         ];
         setCategories(uniqueCategories);
 
@@ -226,7 +227,7 @@ function App() {
   const mobilefilteredProducts =
     category === "All"
       ? products
-      : products.filter((product) => product.category === category);
+      : products.filter((product) => product.category?.main === category);
 
   // Handle filtering logic
   const handleSearch = (query) => {
@@ -475,6 +476,15 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+{/* <Route
+            path="/*"
+            element={
+              // <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminDashboard api={api} user={user}  />
+              // </ProtectedRoute>
+            }
+          /> */}
           <Route path="/wallet" element={<Wallet api={api} user={user} />} />
 
           <Route
