@@ -111,7 +111,7 @@ const Dashboard = ({
   const ownerId = localStorage.getItem("userId");
   const { t } = useTranslation();
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const userId = "1b0b7a73-3e48-4d2a-bc4f-33212e3405e3" ;
+  const userId = localStorage.getItem('userId') ;
   
 
   const toggleSidebar = () => {
@@ -119,13 +119,13 @@ const Dashboard = ({
   };
 
   useEffect(() => {
-    fetch(`${api}/products?_sort=_id&_order=desc`) // Adjust the URL if necessary
+    fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
       .then((response) => response.json())
       .then((data) => {
         const products = data.products || data ; // Extract products from the response
 
         const filteredProducts = products.filter((product) =>
-          product.user_products?.map((up) => up?.owner_id === userId)
+          product.user_products?.some((up) => up?.owner_id === userId)
         );
         
         setOwnersProducts(filteredProducts);
@@ -223,6 +223,7 @@ const Dashboard = ({
                 products={products}
                 error={error}
                 user={user}
+                userId={userId}
                 handleDelete={handleDelete}
                 ownersProducts={ownersProducts}
               />
@@ -323,7 +324,7 @@ console.log("settings" ,localStorage.getItem("imageSelect"));
 }
 
 // Products Component
-const Products = ({ ownersProducts, api, handleDelete }) => {
+const Products = ({ ownersProducts, userId, handleDelete }) => {
   const { t } = useTranslation();
 
   return (
@@ -359,7 +360,7 @@ const Products = ({ ownersProducts, api, handleDelete }) => {
             </p>
 
             <div>
-              <EditButton to={`/editProduct/${product.id}`}>
+              <EditButton to={`/editProduct/${product.id}/${userId}`}>
                 <img
                   src="/images/edit_24dp_00F70F_FILL0_wght400_GRAD0_opsz24.svg"
                   style={{ color: "red" }}

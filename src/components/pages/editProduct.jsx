@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { color } from "framer-motion";
 
 const EditProduct = ({ api }) => {
-  const { id } = useParams();
+  const { productId, userId } = useParams();
 
   // Individual states for each product property
   const [product, setProduct] = useState([]);
@@ -178,7 +178,7 @@ const EditProduct = ({ api }) => {
     // Fetch product details
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`${api}/productPrev/127`);
+        const response = await fetch(`${api}/productPrev/${productId}/${userId}`);
         const data = await response.json();
         const product = data.product || data;
 
@@ -230,7 +230,7 @@ const EditProduct = ({ api }) => {
     };
 
     fetchProduct();
-  }, [api, id]);
+  }, [api]);
 
   // useEffect(() => {
   //   if (product?.dimensions) {
@@ -319,7 +319,7 @@ const EditProduct = ({ api }) => {
 
     try {
       const response = await fetch(
-        `${api}/adminEdit/127/1cce70d5-66f7-419e-8ad5-7b9dd56de5eb`,
+        `${api}/adminEdit/${productId}/${userId}`,
         {
           method: "PUT",
           body: formData,

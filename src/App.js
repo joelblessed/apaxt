@@ -84,8 +84,7 @@ import Footer from "./components/Navbar/footer";
 import BrandSection from "./components/pages/brandSection";
 import OrdersReview from "./components/orders/ordersReview";
 import OrdersPreview from "./components/orders/ordersPreview";
-import AdminDashboard from './components/account/adminDashboard'
-
+import AdminDashboard from "./components/account/adminDashboard";
 
 function App() {
   const [calalculateTotal, setCalculateTotal] = useState();
@@ -423,16 +422,16 @@ function App() {
             path="/ordersReview"
             element={
               // <ProtectedRoute allowedRoles={["admin", "user"]}>
-                <OrdersReview api={api} />
+              <OrdersReview api={api} />
               // </ProtectedRoute>
             }
           ></Route>
 
-<Route
+          <Route
             path="/ordersPreview"
             element={
               // <ProtectedRoute allowedRoles={["admin", "user"]}>
-                <OrdersPreview api={api} />
+              <OrdersPreview api={api} />
               // </ProtectedRoute>
             }
           ></Route>
@@ -477,14 +476,14 @@ function App() {
             }
           />
 
-{/* <Route
+          <Route
             path="/*"
             element={
               // <ProtectedRoute allowedRoles={["admin"]}>
-                <AdminDashboard api={api} user={user}  />
+              <AdminDashboard api={api} user={user} />
               // </ProtectedRoute>
             }
-          /> */}
+          />
           <Route path="/wallet" element={<Wallet api={api} user={user} />} />
 
           <Route
@@ -505,7 +504,7 @@ function App() {
               />
             }
           />
-          <Route path="/editProduct/:id" element={<EditProduct api={api} />} />
+          <Route path="/editProduct/:productId/:userId" element={<EditProduct api={api} />} />
           <Route path="/productCard" element={<ProductCard api={api} />} />
           <Route
             path="/brandSection"

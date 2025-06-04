@@ -152,7 +152,7 @@ const Container = styled.div`
   max-width: 96%;
   margin: 0 auto;
   padding: 0 15px;
-  background: pink;
+  background: white;
 `;
 
 const SectionTitle = styled.h2`
@@ -288,6 +288,10 @@ const CategoryName = styled.h3`
   margin: 0;
   font-size: 1rem;
   color: #333;
+  display:flex;
+  border:1px solid red;
+  border-radius: 8px;
+  
 `;
 
 const ProductGrid = styled.div`
@@ -750,19 +754,25 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
         <SectionTitle>Shop by Category</SectionTitle>
 
         {Object.entries(groupedBrandsByCategory).map(([category]) => (
-          <CategoryGrid>
+          <CategoryGrid >
             <CategoryCard>
               <CategoryImage src={"sgfgf"} alt={"   "} />
-              <CategoryName >
-              <button onClick={()=> handleCategory(category)}>
-                    {category}
-                  </button>
-                
-                  <button onClick={() => setSelectedCategory(category)}>
-                    Brands
-                  </button>
-                
+
+              <div style={{display:"flex" , width:"20px"}}>
+              <CategoryName onClick={()=> handleCategory(category)}>
+              {category}
+             
               </CategoryName>
+              <CategoryName onClick={() => setSelectedCategory(category)}>
+              Brand
+             
+                
+               
+              </CategoryName>
+                 
+              </div>
+            
+                
             </CategoryCard>
           </CategoryGrid>
         ))}

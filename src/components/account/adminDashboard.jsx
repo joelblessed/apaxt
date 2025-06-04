@@ -27,6 +27,8 @@ import {
   FormButton,
   ChartPlaceholder,
 } from "./dashboardStyles";
+import { filter } from "lodash";
+import { Gif } from "@mui/icons-material";
 
 // Add responsive styles
 const ResponsiveDashboardContainer = styled(DashboardContainer)`
@@ -92,7 +94,7 @@ const ToggleButton = styled.button`
 
 
 
-const AdminDashboard = ({
+const Dashboard = ({
   api,
   user,
   error,
@@ -110,25 +112,44 @@ const AdminDashboard = ({
   const ownerId = localStorage.getItem("userId");
   const { t } = useTranslation();
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const  [userId,setUserId] = useState( localStorage.getItem("userId"));
+  const [id, setId]= useState("")
+  
+ 
+
+  const userId = id || localStorage.getItem('userId') ;
+
+  useEffect(()=>{
+    const savedInput = localStorage.getItem("savedId")
+    if(savedInput){
+      setId(savedInput)
+    }
+  })
+  
+
+  const handleChange =(e)=>{
+    const id = e.target.value;
+    setId(id);
+    localStorage.setItem("savedId", id)
+  }
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
-
   useEffect(() => {
     fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
       .then((response) => response.json())
       .then((data) => {
-        const products = data.products; // Extract products from the response
+        const products = data.products || data ; // Extract products from the response
 
-        const filteredProducts = products.filter(
-          (product) => product.owner_id === userId
+        const filteredProducts = products.filter((product) =>
+          product.user_products?.some((up) => up?.owner_id === userId)
         );
+        
         setOwnersProducts(filteredProducts);
+        console.log("test", filteredProducts)
       })
       .catch((error) => console.error("Error fetching products:", error));
-  }, []);
+  }, [id]);
 
   // Delete product by ID
   const handleDelete = (id) => {
@@ -156,24 +177,24 @@ const AdminDashboard = ({
       <ResponsiveSidebar isVisible={isSidebarVisible}>
         <h2 style={{ marginBottom: "16px" }}>{t("DashBoard")}</h2>
         <nav>
-          <NavLink onClick={toggleSidebar} to="/Admin">
+          <NavLink onClick={toggleSidebar} to="/admin">
             {t("DashBoard")}
           </NavLink>
-          <NavLink onClick={toggleSidebar} to="/Adminprofile">
+          <NavLink onClick={toggleSidebar} to="/adminProfile">
             {t("Profile")}
           </NavLink>
-          <NavLink onClick={toggleSidebar} to="/Adminproducts">
+          <NavLink onClick={toggleSidebar} to="/adminProducts">
             {t("Products")}
           </NavLink>
-          <NavLink onClick={toggleSidebar} to="/AdmonimageSelect">
+          <NavLink onClick={toggleSidebar} to="/adminImageSelect">
             {t("Image Select")}
           </NavLink>
 
-          <NavLink onClick={toggleSidebar} to="/Adminorders">
+          <NavLink onClick={toggleSidebar} to="/adminOrders">
             {t("Orders")}
           </NavLink>
           {/* <NavLink to="/users">{t("Users")}</NavLink> */}
-          <NavLink onClick={toggleSidebar} to="/Adminwallet">
+          <NavLink onClick={toggleSidebar} to="/adminWallet">
             {t("Wallet")}
           </NavLink>
           {/* <NavLink to="/analytics">{t("Analytics")}</NavLink> */}
@@ -186,11 +207,9 @@ const AdminDashboard = ({
 
       {/* Main Content */}
       <ResponsiveMainContent>
-     
-
         <Routes>
           <Route
-            path="/Admin"
+            path="/admin"
             element={
               <Home
                 products={products}
@@ -202,7 +221,7 @@ const AdminDashboard = ({
           />
 
           <Route
-            path="/AdmindimageSelect"
+            path="/adminImageSelect"
             element={
               <ImageSelect
                 api={api}
@@ -215,19 +234,22 @@ const AdminDashboard = ({
             }
           />
           <Route
-            path="/Adminproducts"
+            path="/adminProducts"
             element={
               <Products
                 products={products}
                 error={error}
                 user={user}
+                id={id}
+                handleChange={handleChange}
+                userId={userId}
                 handleDelete={handleDelete}
                 ownersProducts={ownersProducts}
               />
             }
           />
           <Route
-            path="/AdmineditProfilePicture"
+            path="/adminEditProfilePicture"
             element={
               <EditProfilePicture
                 products={products}
@@ -235,9 +257,9 @@ const AdminDashboard = ({
               />
             }
           />
-          <Route path="/AdmineditProfile" element={<EditProfile api={api} />} />
+          <Route path="/adminEditProfile" element={<EditProfile api={api} />} />
           <Route
-            path="/Adminorders"
+            path="/adminOrders"
             element={
               <Orders
                 api={api}
@@ -252,12 +274,12 @@ const AdminDashboard = ({
           />
           {/* <Route path="/users" element={<Users users={users} />} /> */}
           <Route
-            path="/Adminwallet"
+            path="/adminWallet"
             element={<Wallet error={error} user={user} />}
           />
 
           <Route
-            path="/dprofile"
+            path="/adminProfile"
             element={
               <Profile
                 user={user}
@@ -321,57 +343,72 @@ console.log("settings" ,localStorage.getItem("imageSelect"));
 }
 
 // Products Component
-const Products = ({ ownersProducts, api, handleDelete }) => {
+const Products = ({ ownersProducts, userId, handleDelete,id, handleChange}) => {
   const { t } = useTranslation();
 
-  const  [user,setUserId] = useState( { id: "f1ca2adf-723e-4fe6-b7d1-4ec5af58b96b",});
-const [products, setProducts] = useState([])
 
 
-  useEffect(() => {
-    fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
-      .then((response) => response.json())
-      .then((data) => {
-        const products = data.products; // Extract products from the response
-
-        const filteredProducts = products.filter((product) =>
-          product.user_products?.some((up) => up.owner_id === "f1ca2adf-723e-4fe6-b7d1-4ec5af58b96b")
-        );
-        
-      })
-      .catch((error) => console.error("Error fetching products:", error));
-  }, [user]);
-
-
-  // Handle form field changes
-   const handleChange = (e) => {
-    setUserId({ ...user, [e.target.name]: e.target.value });
-  };
-
+ 
   return (
     <div>
-       
       <Header>{t("Product Management")}</Header>
+      <input 
+        type="text"
+        value={id}
+        onChange={handleChange}
+        style={{width:"50%"}}
 
-      {user.id}
-        <div>
-          <label>Product Name *</label>
-          <input
-            type="text"
-            name="id"
-            value={user.id}
-            onChange={handleChange}
-            placeholder="Enter costomer Id"
-          />
-          </div>
-          {products.map((product) => (
-        <div>
-          {product.name}dgdgdg
-        </div>
-        ))}
+        />
       <ResponsiveGrid>
-      
-        vxkvx
+  
+        {ownersProducts.map((product) => (
+          <Card key={product.id}>
+            {(product.thumbnails && product.thumbnails.length > 0) ||
+            product.images.length > 0 ? (
+              <img
+                src={
+                  product.thumbnails && product.thumbnails.length > 0
+                    ? product.thumbnails[0]
+                    : product.images[0]
+                }
+                alt={t("Loading...")}
+                style={{ width: "100px", height: "100px" }}
+                onClick={() => {}}
+              />
+            ) : (
+              <p>{t("No Image Available")}</p>
+            )}
+            <h3>{product.name}</h3>
+            
+              {product.user_products?.map((up)=>(
+                <div>
+                  <p>
+                    {t("Price")}: ${up.price}
+            </p>
+            <p>
+              {t("Stock")}: {up.number_in_stock}
+            </p>
+
+            <div>
+              <EditButton to={`/editProduct/${product.id}/${userId}`}>
+                <img
+                  src="/images/edit_24dp_00F70F_FILL0_wght400_GRAD0_opsz24.svg"
+                  style={{ color: "red" }}
+                />
+              </EditButton>
+              <DeleteButton onClick={() => handleDelete(product.id)}>
+                <img
+                  src="/images/delete_24dp_FC0202_FILL0_wght400_GRAD0_opsz24.svg"
+                  style={{ color: "red" }}
+                />
+              </DeleteButton>
+            </div>
+                  
+                </div>
+              ))}
+            
+          </Card>
+        ))}
       </ResponsiveGrid>
     </div>
   );
@@ -398,4 +435,4 @@ const [products, setProducts] = useState([])
   </div>
 </div>;
 
-export default AdminDashboard;
+export default Dashboard;
