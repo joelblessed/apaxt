@@ -104,7 +104,7 @@ const DesktopCards = ({
 
   return (
     <React.Fragment >
-      { Dobject.user_products.map((userp)=>(
+      {Dobject.user_products.map((userp) => (
 
         <div
           className="animated-box"
@@ -138,29 +138,29 @@ const DesktopCards = ({
                       // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
                     }}
                   >
-                    {(Dobject.thumbnails && Dobject.thumbnails.length > 0) ||
-                    (Dobject.images.length > 0 && imageSelect.id && Dobject.images !== null && Dobject.thumbnails !== null ) ? (
-                      <img
-                        src={
-                          Dobject.thumbnails && Dobject.thumbnails.length > 0
-                            ? Dobject.thumbnails
-                            : Dobject.images[0]
-                        }
-                        alt={t("Loading...")}
-                        style={{
-                          width: "250px",
-                          height: "250px",
-                          borderRadius: "10px",
-                        }}
-                        onClick={() => {
-                          setSelectedProduct(Dobject);
-                          ViewedProduct(Dobject.id);
-                          show();
-                        }}
-                      />
-                    ) : (
-                      <p>{t("No Image Available")}</p>
-                    )}
+                    {(Dobject.thumbnails.length > 0)
+                      ? (
+                        <img
+                          src={
+                            
+                              Dobject.thumbnails[Dobject.thumbnail_index] ||
+                              "/images/Screenshot From 2025-06-05 15-29-37.png"
+                          }
+                          alt={t("Loading...")}
+                          style={{
+                            width: "250px",
+                            height: "250px",
+                            borderRadius: "10px",
+                          }}
+                          onClick={() => {
+                            setSelectedProduct(Dobject);
+                            ViewedProduct(Dobject.id);
+                            show();
+                          }}
+                        />
+                      ) : (
+                        <p>{t("No Image Available")}</p>
+                      )}
                   </div>
                   <div
                     style={{ position: "relative", top: "0px", left: "212px" }}
@@ -181,7 +181,7 @@ const DesktopCards = ({
                       }}
                     >
                       <Name className="name">
-                      { isExpanded 
+                        {isExpanded
                           ? Dobject.name
                           : Dobject.name.slice(0, 12)}
                         {/* <span
@@ -245,10 +245,10 @@ const DesktopCards = ({
                       textAlign: "center",
                       padding: "5px",
                     }}
-                  ><AddtocartButton     main={userp.discount < 1}>
-                       <AddToCartButton product={Dobject} />
-                  </AddtocartButton>
-                   
+                  ><AddtocartButton main={userp.discount < 1}>
+                      <AddToCartButton product={Dobject} />
+                    </AddtocartButton>
+
                   </div>
                 </BoxContainer>
               )}
@@ -260,7 +260,7 @@ const DesktopCards = ({
 
           {selectedProduct && showDetails && selectedProduct && <></>}
         </div>
-       ))}
+      ))}
 
       {/* {Dobject.isSelected ? "Unselect" : "Select"} */}
     </React.Fragment>

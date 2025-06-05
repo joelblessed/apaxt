@@ -99,13 +99,12 @@ const MobileCard = ({
                   // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
                 }}
               >
-                {(Mobject.thumbnails && Mobject.thumbnails.length > 0) ||
-                Mobject.images.length > 0 || Mobject.images !== null || Mobject.thumbnails !== null   ? (
+                {(Mobject.thumbnails.length > 0) 
+                ? (
                   <img
                     src={
-                      Mobject.thumbnails && Mobject.thumbnails.length > 0
-                        ? Mobject.thumbnails
-                        : Mobject.images[0]
+                      Mobject.thumbnails[Mobject.thumbnail_index] ||
+                              "/images/Screenshot From 2025-06-05 15-29-37.png"
                     }
                     alt={t("Loading...")}
                     style={{
@@ -120,6 +119,8 @@ const MobileCard = ({
                 ) : (
                   <p>{t("No Image Available")}</p>
                 )}
+
+                
                 <MAddToWishList position={position} Iposition={Iposition}>
                   <WishlistButton product={Mobject} />
                 </MAddToWishList>

@@ -39,6 +39,7 @@ const Products = ({
     const res = await fetch(`${api}/products?page=${page}&limit=10`);
     const data = await res.json();
     const fetched = data.products || data;
+console.log(fetched)
 
     if (fetched.length === 0) setHasMore(false);
 
