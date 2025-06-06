@@ -12,7 +12,7 @@ const EditProduct = ({ api }) => {
   const [isSubmitting, setIsSubmitting] = useState(false); // New state for button loading
   const [name_en, setName_en] = useState("");
   const [name_fr, setName_fr] = useState("");
-  const [category, setCategory] = useState({ main: "", sud: "" });
+  const [category, setCategory] = useState({ main: "", sub: "" });
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [numberInStock, setNumberInStock] = useState(0);
@@ -24,7 +24,7 @@ const EditProduct = ({ api }) => {
   const [city, setCity] = useState("");
   const [colors, setColors] = useState([]);
   const [newColor, setNewColor] = useState("");
-  const [dimensions, setDimensions] = useState({ });
+  const [dimensions, setDimensions] = useState({});
   const [weight, setWeight] = useState(0);
   const [postedOn, setPostedOn] = useState(new Date().toISOString());
   const [images, setImages] = useState([]);
@@ -444,75 +444,75 @@ const EditProduct = ({ api }) => {
 
         {/* Product Color */}
         <div>
-      <h4>Colors</h4>
+          <h4>Colors</h4>
 
-      {Array.isArray(colors) &&
-        colors.map((color, index) => (
-          <div
-            key={index}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "5px",
-            }}
-          >
+          {Array.isArray(colors) &&
+            colors.map((color, index) => (
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginBottom: "5px",
+                }}
+              >
+                <input
+                  type="text"
+                  value={color}
+                  onChange={(e) => {
+                    const updated = [...colors];
+                    updated[index] = e.target.value;
+                    setColors(updated);
+                  }}
+                  style={{ marginRight: "10px" }}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const updated = colors.filter((_, i) => i !== index);
+                    setColors(updated);
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+
+          <div>
+            <h3>Color</h3>
             <input
               type="text"
-              value={color}
-              onChange={(e) => {
-                const updated = [...colors];
-                updated[index] = e.target.value;
-                setColors(updated);
+              placeholder="Add new color"
+              value={newColor}
+              onChange={(e) => setNewColor(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  if (newColor.trim() && !colors.includes(newColor.trim())) {
+                    setColors([...colors, newColor.trim()]);
+                    setNewColor("");
+                  }
+                }
               }}
-              style={{ marginRight: "10px" }}
             />
             <button
               type="button"
               onClick={() => {
-                const updated = colors.filter((_, i) => i !== index);
-                setColors(updated);
+                if (newColor.trim() && !colors.includes(newColor.trim())) {
+                  setColors([...colors, newColor.trim()]);
+                  setNewColor("");
+                }
               }}
+              style={{ marginLeft: "5px" }}
             >
-              Remove
+              Add Color
             </button>
           </div>
-        ))}
 
-      <div>
-        <h3>Color</h3>
-        <input
-          type="text"
-          placeholder="Add new color"
-          value={newColor}
-          onChange={(e) => setNewColor(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              if (newColor.trim() && !colors.includes(newColor.trim())) {
-                setColors([...colors, newColor.trim()]);
-                setNewColor("");
-              }
-            }
-          }}
-        />
-        <button
-          type="button"
-          onClick={() => {
-            if (newColor.trim() && !colors.includes(newColor.trim())) {
-              setColors([...colors, newColor.trim()]);
-              setNewColor("");
-            }
-          }}
-          style={{ marginLeft: "5px" }}
-        >
-          Add Color
-        </button>
-      </div>
+          {errors.color && <p className="error">{errors.color}</p>}
 
-      {errors.color && <p className="error">{errors.color}</p>}
-
-      <pre>{JSON.stringify(colors, null, 2)}</pre>
-    </div>
+          <pre>{JSON.stringify(colors, null, 2)}</pre>
+        </div>
 
         {/* {custom daimention} */}
 
@@ -580,9 +580,11 @@ const EditProduct = ({ api }) => {
               type="button"
               onClick={() => {
                 if (newDimKey.trim()) {
+                  // Try to convert to number if possible, otherwise keep as string
+                  const parsed = newDimValue !== "" && !isNaN(newDimValue) ? Number(newDimValue) : newDimValue;
                   setDimensions((prev) => ({
                     ...prev,
-                    [newDimKey]: newDimValue,
+                    [newDimKey]: parsed,
                   }));
                   setNewDimKey("");
                   setNewDimValue("");
@@ -652,9 +654,10 @@ const EditProduct = ({ api }) => {
               type="button"
               onClick={() => {
                 if (newAttrKey.trim()) {
+                  const parsed = newAttrValue !== "" && !isNaN(newAttrValue) ? Number(newAttrValue) : newAttrValue;
                   setAttributes((prev) => ({
                     ...prev,
-                    [newAttrKey]: newAttrValue,
+                    [newAttrKey]: parsed,
                   }));
                   setNewAttrKey("");
                   setNewAttrValue("");
