@@ -267,9 +267,9 @@ const EditProduct = ({ api }) => {
       validationErrors.description_fr = "Description_fr is required";
 
     // Check if selectedImages or images have at least one entry
-    if (selectedImages.length < 2 && images.length < 2) {
-      validationErrors.images = "At least one image is required";
-    }
+    // if (selectedImages.length < 2 && images.length < 2) {
+    //   validationErrors.images = "At least one image is required";
+    // }
 
     setErrors(validationErrors);
     console.log("validation erro:", validationErrors);
@@ -308,12 +308,13 @@ const EditProduct = ({ api }) => {
           formData.append("images", file);
         }
       });
-    } else if (images.length > 0) {
+    } else if (images.length === 0 || images.length > 1) {
+      // If no new images are selected, use existing images
       images.forEach((image) => {
         formData.append("existingImages", image); // Use existing images
       });
     } else {
-      alert("At least one image is required.");
+      alert("At least two image is required.");
       return;
     }
 
@@ -744,7 +745,7 @@ const EditProduct = ({ api }) => {
           accept="image/*"
           onChange={(e) => setSelectedImages(Array.from(e.target.files))} // Directly set selected images
         />
-        {errors.images && <p className="error">{errors.images}</p>}
+        {/* {errors.images && <p className="error">{errors.images}</p>} */}
 
         {/* Display Uploaded Images */}
         {selectedImages.length > 0 ? (
