@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useMemo } from "react";
+import React, { useState, useContext, useEffect, useRef, useMemo } from "react";
 import { AuthContext } from "../../AuthContext";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
@@ -227,14 +227,14 @@ function MobileNavbar({
   searchTerm,
   setSearchTerm,
   search,
-  categories,
+  // categories,
   glofilteredProducts,
   changeLanguage,
-  setCategory,
-  category,
-  brand,
-  brands,
-  setBrand,
+  // setCategory,
+  // category,
+  // brand,
+  // brands,
+  // setBrand,
 }) {
   const { user } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -247,6 +247,26 @@ function MobileNavbar({
   const [brandName, setaBrandName] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeSubcategory, setActiveSubcategory] = useState(null);
+
+  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+
+  const [subcategory, setSubCategory] = useState("");
+  const [brand, setBrand] = useState("");
+  const [query, setSearch] = useState("");
+  const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isBrand, setIsBrand] = useState(false);
+  const [isSubcategory, setIsSubcategory] = useState(false);
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   const goToCategory = (cat) => {
     navigate(`/categoryPage?categoryName=${cat}`);
@@ -288,27 +308,79 @@ function MobileNavbar({
     search(normalized);
   };
 
-   // Extract unique categories from the products
-   const uniqueCategories = [
-    ...new Set(glofilteredProducts.map((product) => product.category?.main)),
-  ];
+  useEffect(() => {
+    const mainCategories = [
+      ...new Set(
+        glofilteredProducts
+          .map((product) => product.category?.main)
+          .filter(Boolean)
+      ),
+    ];
+    const subCategories = [
+      ...new Set(
+        glofilteredProducts
+          .map((product) => product.category?.sub)
+          .filter(Boolean)
+      ),
+    ];
 
-  const groupedBrandsByCategory = useMemo(() => {
-    return uniqueCategories.reduce((acc, category) => {
-      acc[category] = [
-        ...new Set(
-          glofilteredProducts
-            .filter((product) => product.category?.main === category)
-            .map((product) => product.brand)
-            .flat()
-        ),
-      ];
-      return acc;
-    }, {});
-  }, [uniqueCategories, glofilteredProducts]);
+    if (mainCategories.length > 0) {
+      setCategories(mainCategories);
+      setSubCategories(subCategories);
+    }
+  }, [glofilteredProducts]);
 
+  const normalize = (str) =>
+    typeof str === "string"
+      ? str.trim().toLowerCase().replace(/\s+/g, " ")
+      : "";
+
+  const nestedCategoryStructure = useMemo(() => {
+    const structure = {};
+    const displayMap = {};
+
+    glofilteredProducts.forEach((product) => {
+      const rawMain = product.category?.main;
+      const rawSub = product.category?.sub;
+      const rawBrand = product.brand?.name;
+
+      const main = normalize(rawMain);
+      const sub = normalize(rawSub);
+      const brand = normalize(rawBrand);
+
+      if (!main || !sub || !brand) return;
+
+      // Save original display names
+      if (!displayMap[main]) displayMap[main] = rawMain;
+      if (!displayMap[`${main}|${sub}`]) displayMap[`${main}|${sub}`] = rawSub;
+      if (!displayMap[`${brand}|${brand}`])
+        displayMap[`${brand}|${brand}`] = rawBrand;
+
+      if (!structure[main]) structure[main] = {};
+      if (!structure[main][sub]) structure[main][sub] = new Set();
+
+      structure[main][sub].add(brand);
+    });
+
+    // Convert Sets to arrays and restore original display names
+    const result = {};
+    Object.keys(structure).forEach((main) => {
+      const subMap = structure[main];
+      const displayMain = displayMap[main];
+      result[displayMain] = {};
+
+      Object.keys(subMap).forEach((sub) => {
+        const displaySub = displayMap[`${main}|${sub}`];
+        result[displayMain][displaySub] = [...subMap[sub]].map(
+          (brandKey) => displayMap[`${brandKey}|${brandKey}`]
+        );
+      });
+    });
+
+    return result;
+  }, [glofilteredProducts]);
   return (
-    <div style={{marginBottom:"200px"}}>
+    <div style={{ marginBottom: "200px" }}>
       <Navbar>
         <TopRow>
           {/* <div style={{display:"flex"}}> */}
@@ -349,7 +421,11 @@ function MobileNavbar({
                 </svg>
               ) : (
                 <img
-                  src={user && user.profile_image !== ""    ? user.profile_image : "/images/svgviewer-output(1).svg"  }
+                  src={
+                    user && user.profile_image !== ""
+                      ? user.profile_image
+                      : "/images/svgviewer-output(1).svg"
+                  }
                   alt="loading..."
                   width="50"
                   height="50"
@@ -422,7 +498,7 @@ function MobileNavbar({
               show();
             }}
           >
-            <MobileNavLink>
+            <MobileNavLink onClick={toggleSidebar}>
               {t("Categories")}
               {!isOpen ? (
                 <svg
@@ -455,149 +531,202 @@ function MobileNavbar({
               )}
             </MobileNavLink>
           </MobileNavLink>
-          <div style={{ marginTop: "20px" }}>
-            {isOpen && (
-              <h4
-                style={{
-                  cursor: "pointer",
-                  fontWeight: "normal",
-                  color: "red",
-                  width: "50%",
-                  fontSize: "20px",
-                  marginBottom: "5px",
-                  padding: "5px",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                }}
-              
-                onClick={() => { setIsMenuOpen(false); goToAllCategories()}}
-              >
-                All Categories
-              </h4>
-            )}
-            {categories.map((cat, index) => (
-              <div>
-                <div style={{ display: "flex" }}>
-                  <div>
-                    {" "}
-                    {isOpen && (
-                      <div>
-                        <li
-                          key={index}
-                          style={{
-                            cursor: "pointer",
-                            fontWeight:
-                              categoryName === cat ? "bold" : "normal",
-                            color: categoryName === cat ? "blue" : "black",
+          {/* Sidebar Menu */}
 
-                            marginBottom: "5px",
-                            padding: "5px",
-                            border: "1px solid #ccc",
-                            borderRadius: "4px",
-                          }}
+          <div
+            style={{
+              position: "fixed",
+              top: 150,
+              left: isSidebarOpen ? 0 : "-300px",
+              width: "300px",
+              maxHeight: "80vh",
+              backgroundColor: "#f8f8f8",
+              boxShadow: "2px 0 5px rgba(0,0,0,0.1)",
+              transition: "left 0.3s ease",
+              zIndex: 1000,
+              overflowY: "auto",
+              overflowX: "hidden",
+              padding: "20px 0",
+            }}
+          >
+            <h3 style={{ padding: "0 20px", marginBottom: "20px" }}>
+              Categories
+            </h3>
+            <button
+              onClick={closeSidebar}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                background: "none",
+                border: "none",
+                fontSize: "24px",
+                cursor: "pointer",
+              }}
+            >
+              &times;
+            </button>
+
+            {Object.entries(nestedCategoryStructure).map(
+              ([mainCategory, subCategoryMap]) => (
+                <div key={mainCategory} style={{ marginBottom: "5px" }}>
+                  {/* Main Category */}
+                  <div
+                    onClick={() => {
+                      setActiveCategory(
+                        activeCategory === mainCategory ? null : mainCategory
+                      );
+                      setCategory(mainCategory);
+                      setSearch(mainCategory);
+                      setProducts([]);
+                      setPage(1);
+                      setHasMore(true);
+                    }}
+                    style={{
+                      padding: "12px 20px",
+                      background:
+                        activeCategory === mainCategory
+                          ? "#e0e0e0"
+                          : "transparent",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span>{mainCategory}</span>
+                    <span>
+                      {activeCategory === mainCategory ? (
+                        <svg
+                          width="20px"
+                          fill="red"
+                          height="20px"
+                          viewBox="0 0 48 48"
+                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          <div style={{ display: "flex", gap: "5px" }}>
-                            <div>
-                              <h4
-                                style={{ color: "red", margin: 0 }}
-                                onClick={() => {
-                                  setCategoryName(cat);
-                                  goToCategory(cat);
-                                  setIsMenuOpen(false);
-                                }}
-                              >
-                                {cat}
-                              </h4>
-                            </div>
-                            <div>
-                              {" "}
-                              {isOpen === true && (
-                                <button
-                                  style={{
-                                    borderRadius: "5px",
-                                    border: "1px solid orange",
-                                    background: "none",
-                                    color: "",
-                                  }}
-                                  onClick={() => brandShow(cat)}
-                                >
-                                  Brands{" "}
-                                  {!isBrandOpen ? (
-                                    <svg
-                                      width="20px"
-                                      height="20px"
-                                      viewBox="0 0 48 48"
-                                      fill="red"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <path d="M0 0h48v48H0z" fill="none" />
-                                      <g id="Shopicon">
-                                        <g>
-                                          <polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585 		" />
-                                        </g>
-                                      </g>
-                                    </svg>
-                                  ) : (
-                                    <svg
-                                      width="20px"
-                                      height="20px"
-                                      viewBox="0 0 48 48"
-                                      fill="red"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <path d="M0 0h48v48H0z" fill="none" />
-                                      <g id="Shopicon">
-                                        <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
-                                      </g>
-                                    </svg>
-                                  )}
-                                </button>
-                              )}{" "}
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                    )}
+                          <path d="M0 0h48v48H0z" fill="none" />
+                          <g id="Shopicon">
+                            <g>
+                              <polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585 		" />
+                            </g>
+                          </g>
+                        </svg>
+                      ) : (
+                        <svg
+                          width="20px"
+                          height="20px"
+                          viewBox="0 0 48 48"
+                          fill="red"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M0 0h48v48H0z" fill="none" />
+                          <g id="Shopicon">
+                            <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
+                          </g>
+                        </svg>
+                      )}
+                    </span>
                   </div>
-                  <div></div>
-                </div>
-                {isBrandOpen && isOpen &&
-                  cat === catName &&
-                  [
-                    ...new Map(
-                      groupedBrandsByCategory[cat]?.map((brand) => [
-                        brand.name,
-                        brand,
-                      ])
-                    ).values(),
-                  ].map((brand, idx) => (
-                    <h6
-                      style={{
-                        cursor: "pointer",
-                        fontWeight:
-                          brandName === brand ? "bold" : "normal",
-                        color: brandName === brand ? "blue" : "black",
-                        width: "40%",
-                        marginLeft: "0px",
 
-                        marginBottom: "5px",
-                        padding: "5px",
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                      }}
-                      key={idx}
-                      onClick={() => {
-                        clearSearch();
-                        setIsMenuOpen(false);
-                        setaBrandName(brand.name);
-                        handleClick(brand.name);
-                      }}
-                    >
-                      {brand.name}
-                    </h6>
-                  ))}
-              </div>
-            ))}
+                  {/* Subcategories */}
+                  {activeCategory === mainCategory && (
+                    <div style={{ marginLeft: "15px" }}>
+                      {Object.entries(subCategoryMap).map(
+                        ([subCategory, brands]) => (
+                          <div key={subCategory}>
+                            <div
+                              onClick={() => {
+                                setActiveSubcategory(
+                                  activeSubcategory === subCategory
+                                    ? null
+                                    : subCategory
+                                );
+                                setSubCategory(subCategory);
+                                setSearch(subCategory);
+                                setProducts([]);
+                                setPage(1);
+                                setHasMore(true);
+                              }}
+                              style={{
+                                padding: "10px 20px",
+                                background:
+                                  activeSubcategory === subCategory
+                                    ? "#e8e8e8"
+                                    : "transparent",
+                                cursor: "pointer",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                              }}
+                            >
+                              <span>{subCategory}</span>
+                              <span>
+                                {activeSubcategory === subCategory ? (
+                                  <svg
+                                    width="20px"
+                                    fill="red"
+                                    height="20px"
+                                    viewBox="0 0 48 48"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path d="M0 0h48v48H0z" fill="none" />
+                                    <g id="Shopicon">
+                                      <g>
+                                        <polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585 		" />
+                                      </g>
+                                    </g>
+                                  </svg>
+                                ) : (
+                                  <svg
+                                    width="20px"
+                                    height="20px"
+                                    viewBox="0 0 48 48"
+                                    fill="red"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path d="M0 0h48v48H0z" fill="none" />
+                                    <g id="Shopicon">
+                                      <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
+                                    </g>
+                                  </svg>
+                                )}
+                              </span>
+                            </div>
+
+                            {/* Brands */}
+                            {activeSubcategory === subCategory && (
+                              <div style={{ marginLeft: "15px" }}>
+                                {brands.map((brand) => (
+                                  <div
+                                    key={brand}
+                                    onClick={() => {
+                                      setBrand(brand);
+                                      setSearch(brand);
+                                      setProducts([]);
+                                      setPage(1);
+                                      setHasMore(true);
+                                    }}
+                                    style={{
+                                      padding: "8px 25px",
+                                      cursor: "pointer",
+                                      background: "#f0f0f0",
+                                      marginBottom: "2px",
+                                    }}
+                                  >
+                                    {brand}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      )}
+                    </div>
+                  )}
+                </div>
+              )
+            )}
           </div>
         </li>
         {/* <ul style={{ listStyleType: "none", padding: 0 }}>

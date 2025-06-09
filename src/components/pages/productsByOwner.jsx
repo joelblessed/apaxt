@@ -6,132 +6,166 @@ import React, {
   useMemo,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import Box from "./boxes";
+import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { debounce } from "lodash";
 import Fuse from "fuse.js";
-import { useLocation } from "react-router-dom";
+import Box from "./boxes";
+import "./products.css";
+import "../translations/i18n";
+import { main } from "@popperjs/core";
 
-const ProductsByOwner = ({
-  api = "https://apaxt-api.onrender.com", // Prevents undefined API error
-  glofilteredProducts = [],
-  loaderRef = { current: null },
-  SelectedProduct = () => {},
-  highlightText = "",
-  searchTerm = "",
-  setSearchTerm = () => {},
+const Products = ({
+  glofilteredProducts,
+  SelectedProduct,
+  highlightText,
+  loaderRef,
+  searchTerm,
+  setSearchTerm,
+
+  api,
+  Search,
 }) => {
   const { t } = useTranslation();
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState("All");
+  const [search, setSearch] = useState("");
+  const [subcategory, setSubCategory] = useState("");
+  const [brand, setBrand] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isCategory, setIsCategory] = useState(true);
+  const [isSubcategory, setIsSubcategory] = useState(false);
+  const [isBrand, setIsBrand] = useState(false);
+  const [isMobile, setIsMobile ] = useState();
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
-  const [ownersProducts, setOwnersProducts] = useState([]);
-  const [generalProducts, setGeneralProducts] = useState([]);
-  const [uniqueCategories, setUniqueCategories] = useState([]);
-  const [category, setCategory] = useState("");
-  const [allCategories, setAllCategories] = useState([]);
-  const [showCategories, setShowCategories] = useState(false);
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const ownerName = params.get("ownerName") || "joelblessed";
-  const categoryListRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
 
-  // Check if mobile view
-  useEffect(() => {
+
+
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const ownerName = params.get("OwnerName");
+
+    // Function to check screen size
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 769);
+      setIsMobile(window.innerWidth <= 760);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  
+    useEffect(() => {
+      handleResize(); // Initial check
+      window.addEventListener("resize", handleResize); // Update on resize
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+  
 
-  // Fetch all owner's products and categories
   useEffect(() => {
-    if (!api || !ownerName) return;
-    const fetchData = async () => {
-      try {
-        const [ allProductsRes, categoriesRes] = await Promise.all([
-         
-          fetch(`${api}/allProducts`),
-          fetch(`${api}/search?query=${encodeURIComponent(ownerName)}`),
-        ]);
+    const mainCategories = [
+      ...new Set(
+        glofilteredProducts
+          .map((product) => product.category?.main)
+          .filter(Boolean)
+      ),
+    ];
+    const subCategories = [
+      ...new Set(
+        glofilteredProducts
+          .map((product) => product.category?.sub)
+          .filter(Boolean)
+      ),
+    ];
 
-        const allProductsData = await allProductsRes.json();
-        const categoriesData = await categoriesRes.json();
-        console.log("cater", categoriesData);
-        console.log("allp",allProductsData)
-
-    
-        const allFetched = allProductsData.products || allProductsData;
-        const allCategories = categoriesData.results || categoriesData;
-
-        // Filter by owner
-        const filteredByOwner = allFetched.filter(
-          (product) => product.owner === ownerName
-        );
-
-        setOwnersProducts(filteredByOwner);
-        setProducts(filteredByOwner);
-        setAllCategories(allCategories);
-
-        // Extract unique categories from owner's products
-        const ownerCategories = [
-          ...new Set(filteredByOwner.map((product) => product.category)),
-        ];
-        setUniqueCategories(ownerCategories);
-        console.log("uniqp",ownerCategories)
-
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [api, ownerName]);
-
-  // Close categories when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (categoryListRef.current && !categoryListRef.current.contains(event.target)) {
-        setShowCategories(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  // Fetch more products with pagination
-  const fetchMoreProducts = useCallback(async () => {
-    if (!hasMore) return;
-
-    try {
-      const res = await fetch(`${api}/products?page=${page}&limit=5`);
-      const data = await res.json();
-      const fetched = data.products || data;
-
-      if (fetched.length === 0) {
-        setHasMore(false);
-        return;
-      }
-
-      setProducts((prev) => {
-        const ids = new Set(prev.map((p) => p.id));
-        const newItems = fetched.filter((item) => !ids.has(item.id));
-        return [...prev, ...newItems];
-      });
-    } catch (error) {
-      console.error("Error fetching more products:", error);
+    if (mainCategories.length > 0) {
+      setCategories(mainCategories);
+      setSubCategories(subCategories);
     }
-  }, [api, page, hasMore]);
+  }, [glofilteredProducts]);
+
+  const normalize = (str) =>
+    typeof str === "string"
+      ? str.trim().toLowerCase().replace(/\s+/g, " ")
+      : "";
+
+  const nestedCategoryStructure = useMemo(() => {
+    const structure = {};
+    const displayMap = {};
+
+    glofilteredProducts.forEach((product) => {
+      const rawMain = product.category?.main;
+      const rawSub = product.category?.sub;
+      const rawBrand = product.brand?.name;
+
+      const main = normalize(rawMain);
+      const sub = normalize(rawSub);
+      const brand = normalize(rawBrand);
+
+      if (!main || !sub || !brand) return;
+
+      // Save original display names
+      if (!displayMap[main]) displayMap[main] = rawMain;
+      if (!displayMap[`${main}|${sub}`]) displayMap[`${main}|${sub}`] = rawSub;
+      if (!displayMap[`${brand}|${brand}`])
+        displayMap[`${brand}|${brand}`] = rawBrand;
+
+      if (!structure[main]) structure[main] = {};
+      if (!structure[main][sub]) structure[main][sub] = new Set();
+
+      structure[main][sub].add(brand);
+    });
+
+    // Convert Sets to arrays and restore original display names
+    const result = {};
+    Object.keys(structure).forEach((main) => {
+      const subMap = structure[main];
+      const displayMain = displayMap[main];
+      result[displayMain] = {};
+
+      Object.keys(subMap).forEach((sub) => {
+        const displaySub = displayMap[`${main}|${sub}`];
+        result[displayMain][displaySub] = [...subMap[sub]].map(
+          (brandKey) => displayMap[`${brandKey}|${brandKey}`]
+        );
+      });
+    });
+
+    return result;
+  }, [glofilteredProducts]);
+
+  // Fetch products with pagination
+  const fetchProducts = useCallback(async () => {
+    const res = await fetch(
+      `${api}/products?owner=${ownerName}&page=${page}&limit=20`
+    );
+    const data = await res.json();
+    const fetched = data.products || data;
+    console.log(fetched);
+
+    if (fetched.length === 0) setHasMore(false);
+
+    // Set filtered products based on fetched data
+    const uniqueProducts = (prev, newItems) => {
+      const ids = new Set(prev.map((p) => p.id));
+      return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
+    };
+
+    const filteredProducts =
+      category === "All"
+        ? fetched
+        : fetched.filter((product) =>
+            product.user_products.map(
+              (userp) => userp.category?.main === category
+            )
+          );
+
+    setProducts((prev) => uniqueProducts(prev, filteredProducts));
+  }, [api, page, category]);
 
   // Handle infinite scroll
   useEffect(() => {
-    if (!hasMore || !loaderRef.current) return;
+    if (!hasMore) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -139,352 +173,415 @@ const ProductsByOwner = ({
           setPage((prev) => prev + 1);
         }
       },
-      { rootMargin: "100px" }
+      { rootMargin: "100px" } // Adjust rootMargin for earlier triggering
     );
 
-    observer.observe(loaderRef.current);
+    const currentLoader = loaderRef?.current; // Add optional chaining to avoid errors
+    if (currentLoader) observer.observe(currentLoader);
 
     return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
+      if (currentLoader) observer.unobserve(currentLoader);
     };
   }, [hasMore, loaderRef]);
 
-  // Fetch more products when page changes
+  // Initial fetch and reset when category changes
   useEffect(() => {
-    if (page > 1) {
-      fetchMoreProducts();
-    }
-  }, [page, fetchMoreProducts]);
-
-  // Reset pagination when category changes
-  useEffect(() => {
-    if (category) {
-      setPage(1);
-      setHasMore(false); // We're filtering existing products, no need for pagination
-      const filtered = ownersProducts.filter(
-        (product) => product.category === category
-      );
-      setProducts(filtered);
-    } else {
-      setProducts(ownersProducts);
-      setHasMore(true);
-    }
-  }, [category, ownersProducts]);
+    setPage(1);
+    setProducts([]);
+    setHasMore(true);
+  }, [category]);
 
   // Mobile scroll to top on search
   useEffect(() => {
-    if (searchTerm && window.innerWidth < 1000) {
+    if (searchTerm  && window.innerWidth < 1000) {
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 300);
     }
   }, [searchTerm]);
 
-  const handleProductClick = useCallback(
-    (product) => {
-      SelectedProduct(product);
-      localStorage.setItem("selectedProduct", JSON.stringify(product));
-      navigate("/selectedProduct");
+  // const handleProductClick = useCallback(
+  //   (product) => {
+  //     SelectedProduct(product);
+  //     localStorage.setItem("selectedProduct", JSON.stringify(product));
+  //     navigate("/selectedProduct");
+
+  //     fetch(`${api}/viewedProducts`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": `Bearer ${token}`
+  //       },
+  //       body: JSON.stringify({
+  //         userId: userId,
+  //         productId: product.id
+  //       }),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => console.log("Viewed product saved:", data))
+  //       .catch((error) => console.error("Error:", error));
+  //   },
+  //   [SelectedProduct, navigate]
+  // );
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  // Fix setProducts logic in search useEffect
+  useEffect(() => {
+    if (searchTerm.trim() !== "" && searchTerm) {
+      const fuse = new Fuse(glofilteredProducts || [], {
+        keys: ["name", "category", "owner", "brand.name"],
+        threshold: 0.3,
+      });
+
+      const results = fuse.search(searchTerm.trim());
+      const matched = results.map((res) => res.item);
+
+      setProducts(matched);
+      setHasMore(false); // Stop pagination on search
+    } else {
+      setProducts([]); // Reset to empty before fetching again
+      setHasMore(true); // Enable pagination again
+      setPage(1); // Reset page to 1
+    }
+  }, [searchTerm, glofilteredProducts]);
+
+  const fetchSearchResults = useCallback(
+    async (query, currentPage = 1) => {
+      try {
+        const res = await fetch(
+          `${api}/search?query=${encodeURIComponent(
+            query
+          )}&page=${currentPage}&limit=20`
+        );
+        const data = await res.json();
+        const fetched = data.results || [];
+
+        if (fetched.length === 0) setHasMore(false);
+
+        const uniqueProducts = (prev, newItems) => {
+          const ids = new Set(prev.map((p) => p.id));
+          return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
+        };
+
+        const filteredProducts =
+          category === "All"
+            ? fetched
+            : fetched.filter((product) => product.category === category);
+
+        setProducts((prev) => uniqueProducts(prev, filteredProducts));
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      }
     },
-    [SelectedProduct, navigate]
+    [api, category]
   );
 
-  // Search functionality
+  // Debounced search function
+  const debouncedSearch = useCallback(
+    debounce((query) => {
+      fetchSearchResults(query, 1); // Always start from page 1 for new searches
+    }, 200),
+    [fetchSearchResults]
+  );
+
   useEffect(() => {
-    if (!searchTerm) {
-      if (category) {
-        const filtered = ownersProducts.filter(
-          (product) => product.category === category
-        );
-        setProducts(filtered);
-      } else {
-        setProducts(ownersProducts);
-      }
-      return;
-    }
-
-    const fuse = new Fuse(ownersProducts, {
-      keys: ["name", "category", "owner", "brand.name"],
-      threshold: 0.3,
-    });
-
-    const results = fuse.search(searchTerm.trim());
-    const matched = results.map((res) => res.item);
-
-    if (category) {
-      const filtered = matched.filter(
-        (product) => product.category === category
-      );
-      setProducts(filtered);
+    if (searchTerm.trim() !== "") {
+      debouncedSearch(searchTerm);
     } else {
-      setProducts(matched);
+      setProducts([]); // Reset products when search term is cleared
+      setHasMore(true); // Enable pagination again
+      setPage(1); // Reset page to 1
     }
 
-    setHasMore(false);
-  }, [searchTerm, ownersProducts, category]);
-
-  // General products search (other sellers)
-  useEffect(() => {
-    if (!searchTerm) {
-      setGeneralProducts([]);
-      return;
-    }
-
-    const fuse = new Fuse(glofilteredProducts, {
-      keys: ["name", "category", "owner", "brand.name"],
-      threshold: 0.3,
-    });
-
-    const results = fuse.search(searchTerm.trim());
-    const matched = results.map((res) => res.item);
-    const noOwner = matched.filter(
-      (product) => product.owner !== ownerName
-    );
-
-    setGeneralProducts(noOwner);
-  }, [searchTerm, glofilteredProducts, ownerName]);
-
-  const toggleCategories = () => {
-    setShowCategories(!showCategories);
-  };
-
-  const handleCategorySelect = (categoryName) => {
-    setCategory(categoryName === category ? "" : categoryName);
-    setShowCategories(false);
-  };
-
-  const mBoxWidth = "90%";
-  const mBoxMarginRight = "30px";
-
-  if (!ownerName) return <div>Loading owner data...</div>;
+    return () => {
+      debouncedSearch.cancel(); // Ensure cleanup of debounce
+    };
+  }, [searchTerm, debouncedSearch]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-      {/* Mobile Categories - Now placed above products */}
-      {isMobile && (
-        <div
-          ref={categoryListRef}
-          style={{
-            width: "100%",
-            backgroundColor: "#f8f9fa",
-            padding: "10px",
-            transition: "max-height 0.3s ease",
-            maxHeight: showCategories ? "500px" : "0",
-            overflow: "hidden",
-            position: "sticky",
-            top: "80px",
-            marginTop:"-0px",
-            zIndex: 1,
-            boxShadow: showCategories ? "0 2px 5px rgba(0,0,0,0.1)" : "none"
-          }}
-        >
-          <div style={{ marginBottom: "10px" }}>
-            <h5 style={{ marginBottom: "10px" }}>Owner's Categories</h5>
-            {uniqueCategories.map((categoryName, index) => (
-              <div
-                onClick={() => handleCategorySelect(categoryName)}
-                style={{
-                  cursor: "pointer",
-                  fontWeight: category === categoryName ? "bold" : "normal",
-                  color: category === categoryName ? "blue" : "black",
-                  marginBottom: "5px",
-                  padding: "5px",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  width: "100%",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}
-                key={`owner-${index}`}
-              >
-                {categoryName}
-              </div>
-            ))}
-          </div>
-
-          <div>
-            <h5 style={{ marginBottom: "10px" }}>All Categories</h5>
-            {allCategories.map((categoryName, index) => (
-              <div
-                onClick={() => handleCategorySelect(categoryName.category)}
-                style={{
-                  cursor: "pointer",
-                  fontWeight: category === categoryName.category ? "bold" : "normal",
-                  color: category === categoryName.category ? "blue" : "black",
-                  marginBottom: "5px",
-                  padding: "5px",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  width: "100%",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}
-                key={`all-${index}`}
-              >
-                {categoryName.category}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Mobile Categories Toggle Button */}
-      {isMobile && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "80px",
-            zIndex: 1,
-            marginBottom: "20px",
-          }}
-        >
-          <button
-            onClick={toggleCategories}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: "#f0f0f0",
-              border: "1px solid #ccc",
-              borderRadius: "4px",
-              cursor: "pointer",
-              position: "sticky",
-              top: "80px",
-              zIndex: 1
-            }}
-          >
-            {showCategories ? "Hide Categories" : "Show Categories"}
-          </button>
-        </div>
-      )}
-
-      <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", width: "100%" }}>
-        {/* Desktop Categories Sidebar */}
-        {!isMobile && (
-          <div
-            ref={categoryListRef}
-            style={{
-              marginTop: "80px",
-              position: "fixed",
-              left: "0px",
-              width: "150px",
-              backgroundColor: "#f8f9fa",
-              padding: "10px",
-              height: "calc(100vh - 80px)",
-              overflowY: "auto",
-              zIndex: 1
-            }}
-          >
-            <h4 style={{ width: "100%", textAlign: "center", marginBottom: "20px" }}>
-              {ownerName}'s Products
-            </h4>
-
-            <div style={{ marginBottom: "20px" }}>
-              <h5 style={{ marginBottom: "10px" }}></h5>
-              {uniqueCategories.map((categoryName, index) => (
-                <div
-                  onClick={() => handleCategorySelect(categoryName)}
-                  style={{
-                    cursor: "pointer",
-                    fontWeight: category === categoryName ? "bold" : "normal",
-                    color: category === categoryName ? "blue" : "black",
-                    marginBottom: "5px",
-                    padding: "5px",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    width: "100%",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
-                  key={`owner-${index}`}
+    <>
+      {isMobile ? (
+       
+         
+  <div style={{ width: "100%" }}>
+ <div style={{}}>
+  {Object.entries(nestedCategoryStructure).map(([mainCategory, subCategoryMap]) => (
+    <div key={mainCategory} style={{ marginBottom: "10px" }}>
+      {/* Main Category Dropdown */}
+      <div
+        onClick={() => {
+          setCategory(mainCategory);
+          setSearch(mainCategory);
+          setProducts([]);
+          setPage(1);
+          setHasMore(true);
+          setIsSubcategory(!isSubcategory);
+        }}
+        style={{
+          padding: "12px",
+          background: "#f0f0f0",
+          borderRadius: "4px",
+          fontWeight: "bold",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          cursor: "pointer"
+        }}
+      >
+        <span>{mainCategory}</span>
+        <span>{isSubcategory && mainCategory === category ? (
+                <svg
+                  width="20px"
+                  fill="red"
+                  height="20px"
+                  viewBox="0 0 48 48"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  {categoryName}
-                </div>
-              ))}
-            </div>
-
-            <div>
-              <h5 style={{ marginBottom: "10px" }}>All Categories</h5>
-              {allCategories.map((categoryName, index) => (
-                <div
-                  onClick={() => handleCategorySelect(categoryName.category)}
-                  style={{
-                    cursor: "pointer",
-                    fontWeight: category === categoryName.category ? "bold" : "normal",
-                    color: category === categoryName.category ? "blue" : "black",
-                    marginBottom: "5px",
-                    padding: "5px",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    width: "100%",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
-                  key={`all-${index}`}
+                  <path d="M0 0h48v48H0z" fill="none" />
+                  <g id="Shopicon">
+                    <g>
+                      <polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585 		" />
+                    </g>
+                  </g>
+                </svg>
+              ) : (
+                <svg
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 48 48"
+                  fill="red"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  {categoryName.category}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Products List */}
-        <div
-          style={{
-            marginLeft: isMobile ? "0" : "150px",
-            width: isMobile ? "100%" : "calc(100% - 150px)",
-            padding: "20px",
-            background:"",
-          }}
-        >
-          {products.length > 0 ? (<>
-            <h4 style={{ textAlign: "center", marginTop: isMobile ? "0px" : "40px"  }}>
-                {ownerName}'s Products
-              </h4>
-            <div style={{display:"flex", flexWrap:'wrap',gap:"20px",background:"",marginTop:"30px", justifyContent:"center"}}>
-              <Box
-                style={{ display: "flex" }}
-                Mobject={products}
-                Dobject={products}
-                loaderRef={loaderRef}
-                mBoxWidth={mBoxWidth}
-                SelectedProduct={SelectedProduct}
-                mBoxMarginRight={mBoxMarginRight}
-                handleProductClick={handleProductClick}
-                highlightText={highlightText}
-              />
-            </div></>
-          ) : (
-            <h4 style={{ textAlign: "center", marginTop: "40px" }}>
-              {ownerName} doesn't have any products matching your criteria
-            </h4>
-          )}
-
-          {generalProducts.length > 0 && (
-            <div>
-              <h4 style={{ textAlign: "center", marginTop: "40px" }}>
-                Products from Other Sellers
-              </h4>
-              <Box
-                Mobject={generalProducts}
-                Dobject={generalProducts}
-                loaderRef={loaderRef}
-                mBoxWidth={mBoxWidth}
-                mBoxMarginRight={mBoxMarginRight}
-                SelectedProduct={SelectedProduct}
-                handleProductClick={handleProductClick}
-                highlightText={highlightText}
-              />
-            </div>
-          )}
-        </div>
+                  <path d="M0 0h48v48H0z" fill="none" />
+                  <g id="Shopicon">
+                    <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
+                  </g>
+                </svg>
+              )}</span>
       </div>
+
+      {/* Subcategory Dropdown (only shown when category is selected) */}
+      {isSubcategory && mainCategory === category && (
+        <div style={{ marginLeft: "15px", marginTop: "5px" }}>
+          {Object.entries(subCategoryMap).map(([subCategory, brands]) => (
+            <div key={subCategory}>
+              <div
+                onClick={() => {
+                  setSearch(subCategory);
+                  setSubCategory(subCategory);
+                  setProducts([]);
+                  setPage(1);
+                  setHasMore(true);
+                  setIsBrand(!isBrand);
+                }}
+                style={{
+                  padding: "10px",
+                  background: "#f8f8f8",
+                  borderRadius: "4px",
+                  marginBottom: "5px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  cursor: "pointer"
+                }}
+              >
+                <span>{subCategory}</span>
+                <span>{isBrand && subcategory === subCategory ? (
+                <svg
+                  width="20px"
+                  fill="red"
+                  height="20px"
+                  viewBox="0 0 48 48"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M0 0h48v48H0z" fill="none" />
+                  <g id="Shopicon">
+                    <g>
+                      <polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585 		" />
+                    </g>
+                  </g>
+                </svg>
+              ) : (
+                <svg
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 48 48"
+                  fill="red"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M0 0h48v48H0z" fill="none" />
+                  <g id="Shopicon">
+                    <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
+                  </g>
+                </svg>
+              )}</span>
+              </div>
+
+              {/* Brands List (only shown when subcategory is selected) */}
+              {isBrand && subcategory === subCategory && (
+                <div style={{ marginLeft: "15px" }}>
+                  {brands.map((brand) => (
+                    <div
+                      key={brand}
+                      onClick={() => {
+                        // setBrand(brand);
+                        // setSearch(brand);
+                        setProducts([]);
+                        setPage(1);
+                        setHasMore(true);
+                      }}
+                      style={{
+                        padding: "8px",
+                        background: "#ffffff",
+                        borderBottom: "1px solid #eee",
+                        cursor: "pointer"
+                      }}
+                    >
+                      {brand}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
+  ))}
+</div>
+  <div
+    className="products-container"
+    style={{ background: "", width: "100%" }}
+  >
+    <Box
+      Mobject={products}
+      Dobject={products}
+      loaderRef={loaderRef}
+      SelectedProduct={SelectedProduct}
+      highlightText={highlightText}
+      category={category}
+    />
+    {hasMore && (
+      <div ref={loaderRef} className="loader">
+        Loading...
+      </div>
+    )}
+  </div>
+</div>
+      ) : (
+        <div style={{ display: "flex" }}>
+          <div
+            style={{
+              padding: "1rem",
+              fontFamily: "Arial",
+              height: "100vh",
+              overflowY: "auto",
+              boxShadow: "10px red ",
+              borderRight: "1px solid black",
+              margin: "10px",
+              background: "white",
+              position: "sticky",
+              top: "120px", // Make it sticky to the top
+              zIndex: 1000, // Ensure it stays above other content
+            }}
+          >
+            {Object.entries(nestedCategoryStructure).map(
+              ([mainCategory, subCategoryMap]) => (
+                <div key={mainCategory} style={{ marginBottom: "1.5rem" }}>
+                  <h3
+                    style={{ cursor: "pointer", color: "blue" }}
+                    onClick={() => {
+                      setCategory(mainCategory);
+                      setSearchTerm(mainCategory); // Clear search term when selecting category
+                      setProducts([]); // Reset products when changing category
+                      setPage(1); // Reset page to 1 when changing category
+                      setHasMore(true); // Enable pagination again
+                      // window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top on category change
+                    }}
+                  >
+                    {mainCategory}
+                  </h3>
+                  <div style={{ paddingLeft: "1rem" }}>
+                    {Object.entries(subCategoryMap).map(
+                      ([subCategory, brands]) => (
+                        <div key={subCategory} style={{ marginBottom: "1rem" }}>
+                          <h4
+                            onClick={() => {
+                              setCategory(subCategory);
+                              setSearchTerm(subCategory); // Clear search term when selecting category
+                              setProducts([]); // Reset products when changing category
+                              setPage(1); // Reset page to 1 when changing category
+                              setHasMore(true); // Enable pagination again
+                              // window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top on category change
+                            }}
+                          >
+                            ↳ {subCategory}
+                          </h4>
+                          <ul
+                            style={{
+                              overflowY: "auto",
+                              maxHeight: "200px",
+                              padding: "0",
+                              listStyleType: "none",
+                            }}
+                          >
+                            {brands.map((brand) => (
+                              <label
+                                style={{
+                                  display: "block",
+                                  overflowY: "auto",
+                                  maxHeight: "50px",
+                                }}
+                                onClick={() => {
+                                  setCategory(brand);
+                                  setSearchTerm(brand); // Clear search term when selecting category
+                                  setProducts([]); // Reset products when changing category
+                                  setPage(1); // Reset page to 1 when changing category
+                                  setHasMore(true); // Enable pagination again
+                                  // window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top on category change
+                                }}
+                                key={brand}
+                              >
+                                {brand}
+                              </label>
+                            ))}
+                          </ul>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              )
+            )}
+          </div>
+
+          <div
+            className="products-container"
+            style={{ background: "", width: "90%", height: "100%", }}
+          >
+            <Box
+              Mobject={products}
+              Dobject={products}
+              loaderRef={loaderRef}
+              SelectedProduct={SelectedProduct}
+              // handleProductClick={handleProductClick}
+              highlightText={highlightText}
+              category={category}
+            />
+            {hasMore && (
+              <div ref={loaderRef} className="loader">
+                Loading...
+              </div>
+            )}{" "}
+            {/* Loader for infinite scroll */}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
-export default ProductsByOwner;
+export default Products;

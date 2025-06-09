@@ -127,7 +127,7 @@ const DesktopCards = ({
               {Dobject !== selectedProduct && (
                 <BoxContainer
                   key={index}
-                  categoryOption={categoryShadow[Dobject.category]}
+                  categoryOption={categoryShadow[Dobject.category?.main]}
                 >
                   <div
                     key={index}

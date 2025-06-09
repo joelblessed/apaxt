@@ -25,7 +25,6 @@ import LanguageSwitcher from "./components/translations/languageSwitcher";
 import "./components/translations/i18n";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -81,7 +80,6 @@ import About from "./components/Navbar/about";
 import ProductCard from "./components/pages/ProductCards/productCard";
 import DeleteProduct from "./components/pages/deleteProduct";
 import Footer from "./components/Navbar/footer";
-import BrandSection from "./components/pages/brandSection";
 import OrdersReview from "./components/orders/ordersReview";
 import OrdersPreview from "./components/orders/ordersPreview";
 import AdminDashboard from "./components/account/adminDashboard";
@@ -506,10 +504,7 @@ function App() {
           />
           <Route path="/editProduct/:productId/:userId" element={<EditProduct api={api} />} />
           <Route path="/productCard" element={<ProductCard api={api} />} />
-          <Route
-            path="/brandSection"
-            element={<BrandSection api={api} highlightText={highlightText} />}
-          />
+         
 
           <Route path="/deleteProduct" element={<DeleteProduct api={api} />} />
           <Route
@@ -694,7 +689,10 @@ function App() {
           {/* <Route path="*" element={<Navigate to="/" />} /> */}
         </Routes>
         {/* <Test/> */}
-        <Footer />
+      <div className="app-container">
+      {/* Your main content goes here */}
+      <Footer />
+    </div>
       </Router>
     </AuthProvider>
   );

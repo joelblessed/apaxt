@@ -50,10 +50,18 @@
   
   .brands-container {
     display: flex;
-    flex-direction: row;
-    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin: 10px;
+    gap: 15px;
+
+
+   
+
+   
    
   }
+  
   
   .brand-title {
     font-size: 1.2rem;
@@ -63,9 +71,10 @@
   
   /* Products Grid */
   .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+ 
   }
   
   .product-card {
@@ -73,6 +82,7 @@
     border-radius: 8px;
     padding: 15px;
     transition: transform 0.2s, box-shadow 0.2s;
+  margin-left: auto;
   }
   
   .product-card:hover {

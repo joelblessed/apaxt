@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
 
-import CategorySection from "./categorySection";
 import SearchFilter from "./searchFilter";
 import "./styles.css";
+import Box from "./boxes";
 
-const CategoryPage = ({ api, SelectedProduct, searchTerm, setSearchTerm }) => {
+const CategoryPage = ({ api, SelectedProduct, searchTerm, highlightText, setSearchTerm }) => {
   // const { categoryName } = useParams();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -179,15 +179,34 @@ const CategoryPage = ({ api, SelectedProduct, searchTerm, setSearchTerm }) => {
       />
       {searchTerm}
 
-      <div className="products-container">
+      <div style={{ gap: "20px", justifyContent: "center", width: "100%" }}>
         {Object.entries(groupedProducts).map(([category, brands]) => (
-          <CategorySection
-            key={category}
-        SelectedProduct={SelectedProduct}
-          
-            category={category}
-            brands={brands}
-          />
+            <section className="category-section">
+                <h2 className="category-title">{category}</h2>
+                <div className="brands-container">
+                  {Object.entries(brands).map(([brand, products]) => (
+                    <div className="brand-section">
+                         <h3 className="brand-title">{brand}</h3>
+                         <div className="products-grid">
+                         
+                            <Box
+                                  Mobject={products}
+                                  Dobject={products}
+                           SelectedProduct={SelectedProduct}
+                           
+                   
+                                 
+                                
+                                  highlightText={highlightText}
+                                 
+                               
+                                />
+                       
+                         </div>
+                       </div>
+                  ))}
+                </div>
+              </section>
         ))}
       </div>
     </div>

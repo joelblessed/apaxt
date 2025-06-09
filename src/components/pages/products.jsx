@@ -67,7 +67,7 @@ console.log(fetched)
           setPage((prev) => prev + 1);
         }
       },
-      { rootMargin: "200px" } // Adjust rootMargin for earlier triggering
+      { rootMargin: "10px" } // Adjust rootMargin for earlier triggering
     );
 
     const currentLoader = loaderRef?.current; // Add optional chaining to avoid errors
@@ -148,7 +148,7 @@ console.log(fetched)
         const res = await fetch(
           `${api}/search?query=${encodeURIComponent(
             query
-          )}&page=${currentPage}&limit=5`
+          )}&page=${currentPage}&limit=20`
         );
         const data = await res.json();
         const fetched = data.results || [];
@@ -196,7 +196,7 @@ console.log(fetched)
   }, [searchTerm, debouncedSearch]);
 
   return (
-    <div className="products-container" style={{background:"", width:"90%", margin:"auto"}}>
+    <div className="products-container" style={{background:"", width:"90%", margin:"auto", marginBottom:"0px"}}>
       <Box
         Mobject={products}
         Dobject={products}

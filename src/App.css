@@ -1,3 +1,17 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  margin-top: -200px; /* Adjusted to account for the fixed navbar height */
+  flex-direction: column;
+}
+
+.app-container > *:not(footer) {
+  flex: 1;
+}
+
+
+
+
 /* mport { useTranslation } from "react-i18next";
 // import "./products.css";
 

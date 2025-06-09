@@ -44,9 +44,9 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
         {/* Product Image & Details */}
         <ContentWrapper>
           <ImageSection>
-            {selectedProduct.images?.length > 0 ? (
+            {selectedProduct.thumbnails?.length > 0 ? (
               <Slider {...sliderSettings}>
-                {selectedProduct.images.map((imgUrl, index) => (
+                {selectedProduct.thumbnails.map((imgUrl, index) => (
                   <ImageWrapper key={index}>
                     <ProductImage src={imgUrl} loading="lazy" alt={`Product Image ${index + 1} `} />
                   </ImageWrapper>
@@ -60,8 +60,12 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
           <DetailsSection>
             <SellerInfo>
               Seller:{" "}
-              <SellerLink to={`/productsByOwner?ownerName=${selectedProduct.owner}`}>
-                {selectedProduct.owner}
+              <SellerLink to={`/productsByOwner?ownerName=${selectedProduct.user_products.map((userp)=>(
+                  userp.owner
+                ))}`}>
+                {selectedProduct.user_products.map((userp)=>(
+                  userp.owner
+                ))}
               </SellerLink>
             </SellerInfo>
 

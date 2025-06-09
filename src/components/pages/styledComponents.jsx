@@ -10,7 +10,7 @@ const getOS = () =>
 
 export const categoryOptions = {
   1: "0px 0px 10px 1px red",
-  2: "0px 0px 10px 1px yellow",
+  2: "0px 0px 10px 1px black",
   3: "0px 0px 10px 1px orange",
   4: "0px 0px 10px 1px blue",
   5: "0px 0px 10px 1px black",

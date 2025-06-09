@@ -34,7 +34,28 @@
 
 
 
-
+//   <div style={{ display: "flex" }}>
+//       <div style={{ padding: "1rem", fontFamily: "Arial" }}>
+//       <h2>Categories → Subcategories → Brands (Unique)</h2>
+//       {Object.entries(nestedCategoryStructure).map(([mainCategory, subCategoryMap]) => (
+//         <div key={mainCategory} style={{ marginBottom: "1.5rem" }}>
+//           <h3>{mainCategory}</h3>
+//           <div style={{ paddingLeft: "1rem" }}>
+//             {Object.entries(subCategoryMap).map(([subCategory, brands]) => (
+//               <div key={subCategory} style={{ marginBottom: "1rem" }}>
+//                 <h4>↳ {subCategory}</h4>
+//                 <ul>
+                
+//                   {brands.map((brand) => (
+//                     <li key={brand}>{brand}</li>
+//                   ))}
+//                 </ul>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       ))}
+//     </div>
 
 
 
