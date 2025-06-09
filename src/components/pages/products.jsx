@@ -33,6 +33,20 @@ const Products = ({
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token")
+  const [isMobile, setIsMobile ] = useState();
+
+
+// Function to check screen size
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1000);
+    };
+  
+    useEffect(() => {
+      handleResize(); // Initial check
+      window.addEventListener("resize", handleResize); // Update on resize
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+  
 
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
@@ -196,7 +210,7 @@ console.log(fetched)
   }, [searchTerm, debouncedSearch]);
 
   return (
-    <div className="products-container" style={{background:"", width:"90%", margin:"auto", marginBottom:"0px"}}>
+    <div className="products-container" style={{background:"", width: isMobile ? "100%" : "90%", margin:"auto", marginBottom:"0px"}}>
       <Box
         Mobject={products}
         Dobject={products}

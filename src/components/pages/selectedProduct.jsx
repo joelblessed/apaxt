@@ -74,8 +74,12 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
         </ImageContainer>
 
         <DetailsContainer>
-          <SellerLink to={`/productsByOwner?ownerName=${selectedProduct.user_products?.owner}`}>
-            Seller: {selectedProduct.user_products?.owner}
+          <SellerLink  to={`/productsByOwner?ownerName=${selectedProduct.user_products.map((userp)=>(
+                  userp.owner
+                ))}`}>
+            Seller: {selectedProduct.user_products.map((userp)=>(
+                  userp.owner
+                ))}
           </SellerLink>
           <ProductTitle>{selectedProduct.name}</ProductTitle>
           <ProductPrice>Price: CFA{selectedProduct.price}</ProductPrice>
