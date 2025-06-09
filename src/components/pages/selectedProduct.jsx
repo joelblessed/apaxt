@@ -130,7 +130,9 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
         )}
         {activeTab === "seller" && (
           <p>
-            <strong>Seller Contact:</strong> {selectedProduct.user_products?.phone_number}
+            <strong>Seller Contact:</strong> {selectedProduct.user_products.map((userp)=>(
+                  userp.phone_number
+                ))}
           </p>
         )}
         {activeTab === "description" && <div>

@@ -137,12 +137,12 @@ const heroImages = [
   },
   {
     id: 2,
-    url: "https://via.placeholder.com/1200x400?text=New+Arrivals+This+Week",
+    url: "public/images/laptop.jpg",
     alt: "New Arrivals",
   },
   {
     id: 3,
-    url: "https://via.placeholder.com/1200x400?text=Superhero+Costumes+Collection",
+    url: "public/images/Screenshot From 2025-06-05 15-29-37.png",
     alt: "Superhero Collection",
   },
 ];
@@ -600,12 +600,12 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
       {
         id: 2,
         name: "Superhero Suit",
-        image: "https://via.placeholder.com/150?text=Superhero+Suit",
+        image: "",
       },
       {
         id: 5,
         name: "Pirate",
-        image: "https://via.placeholder.com/150?text=Pirate",
+        image: "",
       },
     ];
     setLastViewed(mockLastViewed);
@@ -829,7 +829,7 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
         <ProductGrid >
           {products.map((product) => (
             <ProductCard key={product.id} >
-              <ProductImage src={product.images[0]} alt={product.name} onClick={()=> handleName(product.name)}/>
+              <ProductImage src={product.thumbnails[0]} alt={product.name} onClick={()=> handleName(product.name)}/>
               <ProductInfo>
                 <ProductName>{product.name}</ProductName>
                 {product.user_products.map((up) => (
@@ -858,7 +858,7 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
         <ProductGrid>
           {products.map((product) => (
             <ProductCard key={product.id} onClick={()=> handleName(product.name)}>
-              <ProductImage src={product.images[0]} alt={product.name} />
+              <ProductImage src={product.thumbnails[0]} alt={product.name} />
               <ProductInfo>
                 <ProductName>{product.name}</ProductName>
                 {product.user_products.map((up) => (
@@ -930,7 +930,7 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
               .slice(0, 6)
               .map((product) => (
                 <ProductCard key={product.id} onClick={()=> handleName(product.name)}>
-                  <ProductImage src={product.images[0]} alt={product.name} />
+                  <ProductImage src={product.thumbnails[0]} alt={product.name} />
                   <ProductInfo>
                     <ProductName>{product.name}</ProductName>
                     {product.user_products.map((up) => (

@@ -99,7 +99,9 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
 
         <TabContent>
           {activeTab === "details" && <p><strong>Stock:</strong> {selectedProduct.stock} available</p>}
-          {activeTab === "seller" && <p><strong>Contact:</strong> {selectedProduct.user_products?.phone_number}</p>}
+          {activeTab === "seller" && <p><strong>Contact:</strong> {selectedProduct.user_products.map((userp)=>(
+                  userp.phone_number
+                ))}</p>}
           {activeTab === "description" && <div>
             <p>
         {isExpanded ? selectedProduct.description : selectedProduct.description.slice(0, maxLength) + "..."}
