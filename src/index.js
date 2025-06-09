@@ -18,3 +18,55 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//         {/* Shop by Category */}
+// <SectionTitle>Shop by Category</SectionTitle>
+
+//         {Object.entries(groupedProducts).map(([category, subCategories]) => (
+//           <CategoryGrid>
+//             <CategoryCard>
+//               <CategoryImage src={"sgfgf"} alt={"   "} />
+//               <CategoryName >
+//               {category}
+                
+//               </CategoryName>
+//             </CategoryCard>
+//           </CategoryGrid>
+//         ))}
+
+
+
+
+
+//   {Object.entries(groupedProducts).map(([category, subcategories]) => (
+//     <CategoryCard>
+//   <CategoryGrid key={category}>
+//     <CategoryCard>{category}</CategoryCard>
+//     {Object.entries(subcategories).map(([subcat, brands]) => (
+//       <div key={subcat} style={{ paddingLeft: '1rem' }}>
+//         <CategoryCard>{subcat}</CategoryCard>
+//         {Object.entries(brands).map(([brand, products]) => (
+//           <div key={brand} style={{ paddingLeft: '2rem' }}>
+//             <CategoryName>{brand}</CategoryName>
+           
+//           </div>
+//         ))}
+//       </div>
+//     ))}
+//   </CategoryGrid>
+//   </CategoryCard>
+// ))}

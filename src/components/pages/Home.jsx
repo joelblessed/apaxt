@@ -269,6 +269,8 @@ const CategoryCard = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     transform: translateY(-5px);
@@ -290,6 +292,7 @@ const CategoryName = styled.h3`
   font-size: 1rem;
   color: #333;
   display:flex;
+  flex-direction: row;
   border:1px solid red;
   border-radius: 8px;
   
@@ -527,10 +530,12 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
   const [category, setCategory] = useState([]);
   const [brand, setBrands] = useState([]);
   const [brandName, setBrandName] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState([]);
+
 
   const [products, setProducts] = useState([]);
 
+   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubcat, setSelectedSubcat] = useState(null);
 
   const handleBrand = (brand) => navigate(`/categoryPage?categoryName=${brand}`);
   const handleCategory = (category) => navigate(`/categoryPage?categoryName=${category}`);
@@ -557,92 +562,27 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
-  // useEffect(() => {
-  //   fetch(`${api}/allProducts?_sort=_id&_order=desc`) // Adjust the URL if necessary
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const products = data.products; // Extract products from the response
+ const groupedProducts = useMemo(() => {
+  const result = {};
 
-  //       setAllProducts(products);
-  //     })
-  //     .catch((error) => console.error("Error fetching products:", error));
-  // }, []);
-  // 1. Extract unique categories from the products
-  const uniqueCategories = [
-    ...new Set(glofilteredProducts.map((product) => product.category?.main)),
-  ];
+  glofilteredProducts.forEach((product) => {
+    const category = product.category?.main;
+    const subcategory = product.category?.sub;
+    const brandName = product.brand?.name;
 
-  // 2. Group full brand objects by category
-  const groupedBrandsByCategory = useMemo(() => {
-    return uniqueCategories.reduce((acc, category) => {
-      const brandSet = new Set();
+    if (!category || !subcategory || !brandName) return;
 
-      glofilteredProducts.forEach((product) => {
-        if (product.category?.main === category && product.brand?.name) {
-          // Deduplicate full brand objects using JSON string
-          brandSet.add(JSON.stringify(product.brand));
-        }
-      });
+    if (!result[category]) result[category] = {};
+    if (!result[category][subcategory]) result[category][subcategory] = {};
+    if (!result[category][subcategory][brandName])
+      result[category][subcategory][brandName] = [];
 
-      // Convert brandSet back to array of brand objects
-      acc[category] = Array.from(brandSet).map((b) => JSON.parse(b));
-      return acc;
-    }, {});
-  }, [uniqueCategories, glofilteredProducts]);
+    result[category][subcategory][brandName].push(product);
+  });
+
+  return result;
+}, [glofilteredProducts]);
   ////
-  const groupedProducts = useMemo(() => {
-    return glofilteredProducts.reduce((acc, product) => {
-      const mainCategory = product.category?.main;
-      if (!mainCategory) return acc;
-
-      if (!acc[mainCategory]) {
-        acc[mainCategory] = {
-          name: mainCategory,
-          products: [],
-        };
-      }
-
-      acc[mainCategory].products.push(product);
-      return acc;
-    }, {});
-  }, [products]);
-  const categoryPreview = useMemo(() => {
-    return Object.entries(groupedProducts).reduce(
-      (acc, [categoryKey, data]) => {
-        acc[categoryKey] = {
-          ...data,
-          products: data.products.slice(0, 5),
-        };
-        return acc;
-      },
-      {}
-    );
-  }, [groupedProducts]);
-
-  //unique brands
-
-  const groupedBrands = useMemo(() => {
-    return glofilteredProducts.reduce((acc, product) => {
-      const brandName = product.brand?.name;
-      if (!brandName) return acc;
-
-      if (!acc[brandName]) {
-        acc[brandName] = [];
-      }
-      acc[brandName].push(product);
-      return acc;
-    }, {});
-  }, [products]);
-
-  const brandPreview = useMemo(() => {
-    return Object.entries(groupedBrands).reduce((acc, [brandName, items]) => {
-      acc[brandName] = items.slice(0, 5);
-      return acc;
-    }, {});
-  }, [groupedBrands]);
-  useEffect(() => {
-    setBrands(Object.keys(groupedBrands)); // useState([...])
-  }, [groupedBrands]);
 
   // Hero banner carousel effect
   useEffect(() => {
@@ -752,48 +692,109 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
         </HeroBannerContainer>
 
         {/* Shop by Category */}
-        <SectionTitle>Shop by Category</SectionTitle>
+<SectionTitle>Shop by Category</SectionTitle>
+        {/* Categories Row */}
+        <div style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "16px",
+          marginBottom: "1rem"
+        }}>
+          {Object.entries(groupedProducts).map(([category]) => (
+            <CategoryCard
+              key={category}
+              style={{
+                background: selectedCategory === category ? "#ffe0e0" : "#fff",
+                border: selectedCategory === category ? "2px solid #ff6b6b" : "1px solid #eee",
+                cursor: "pointer",
+                minWidth: "140px",
+                textAlign: "center"
+              }}
+              onClick={() => {
+                setSelectedCategory(category);
+                setSelectedSubcat(null);
+              }}
+            >
+              {category}
+            </CategoryCard>
+          ))}
+        </div>
 
-        {Object.entries(groupedBrandsByCategory).map(([category]) => (
-          <CategoryGrid >
+        {/* Subcategories Row */}
+        {selectedCategory && (
+          <div style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "12px",
+            marginBottom: "1rem"
+          }}>
+            {Object.entries(groupedProducts[selectedCategory]).map(([subcat]) => (
+              <CategoryCard
+                key={subcat}
+                style={{
+                  background: selectedSubcat === subcat ? "#e0f7ff" : "#f7f7f7",
+                  border: selectedSubcat === subcat ? "2px solid #2196f3" : "1px solid #eee",
+                  cursor: "pointer",
+                  minWidth: "120px",
+                  textAlign: "center"
+                }}
+                onClick={() => setSelectedSubcat(subcat)}
+              >
+                {subcat}
+              </CategoryCard>
+            ))}
+          </div>
+        )}
+
+        {/* Brands Full Width */}
+        {selectedCategory && selectedSubcat && (
+          <div style={{
+            width: "100%",
+            background: "#fffbe7",
+            padding: "18px 0",
+            margin: "10px 0 24px 0",
+            borderRadius: "8px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
+          }}>
+            <div style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "10px",
+              justifyContent: "center"
+            }}>
+              {Object.entries(groupedProducts[selectedCategory][selectedSubcat]).map(([brand]) => (
+                <CategoryName
+                  key={brand}
+                  style={{
+                    border: "1px solid #ddd",
+                    padding: "8px 16px",
+                    background: "#fff",
+                    fontWeight: "bold",
+                    fontSize: "1rem",
+                    borderRadius: "6px"
+                  }}
+                >
+                  {brand}
+                </CategoryName>
+              ))}
+            </div>
+          </div>
+        )}
+
+
+{/* {Object.entries(groupedProducts).map(([category, subCategories]) => (
+          <CategoryGrid>
             <CategoryCard>
               <CategoryImage src={"sgfgf"} alt={"   "} />
-
-              <div style={{display:"flex" , width:"20px"}}>
-              <CategoryName onClick={()=> handleCategory(category)}>
+              <CategoryName >
               {category}
-             
-              </CategoryName>
-              <CategoryName onClick={() => setSelectedCategory(category)}>
-              Brand
-             
                 
-               
               </CategoryName>
-                 
-              </div>
-            
-                
             </CategoryCard>
           </CategoryGrid>
-        ))}
+        ))}  */}
 
-        {selectedCategory && (
-          <>
-            <SectionTitle>Brands In {selectedCategory} </SectionTitle>
-
-            <CategoryGrid>
-              {groupedBrandsByCategory[selectedCategory]?.map((brand) => (
-                <CategoryCard>
-                  <CategoryImage src={"sgfgf"} alt={"   "} />
-                  <CategoryName onClick={() => handleBrand(brand.name)}>
-                    {brand.name}
-                  </CategoryName>
-                </CategoryCard>
-              ))}
-            </CategoryGrid>
-          </>
-        )}
+       
 
         {/* Limited Time Offers */}
         <CountdownContainer>

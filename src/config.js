@@ -7,4 +7,3 @@ export const api = "https://apaxt-api.onrender.com"
 // "typescript": "^5.8.2",
 // "typescript": "^4.9.5",
 
-

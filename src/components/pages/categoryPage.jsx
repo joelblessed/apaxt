@@ -5,7 +5,13 @@ import SearchFilter from "./searchFilter";
 import "./styles.css";
 import Box from "./boxes";
 
-const CategoryPage = ({ api, SelectedProduct, searchTerm, highlightText, setSearchTerm }) => {
+const CategoryPage = ({
+  api,
+  SelectedProduct,
+  searchTerm,
+  highlightText,
+  setSearchTerm,
+}) => {
   // const { categoryName } = useParams();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -147,24 +153,24 @@ const CategoryPage = ({ api, SelectedProduct, searchTerm, highlightText, setSear
   }, [filters, products]);
 
   // Safely group products by category then by brand
-  
-
-    const groupedProducts = Array.isArray(filteredProducts)
+const groupedProducts = Array.isArray(filteredProducts)
   ? filteredProducts.reduce((acc, product) => {
       const category = product.category?.main;
+      const subCategory = product.category?.sub;
       const brandName = product.brand?.name;
 
-      if (!category || !brandName) return acc;
+      if (!category || !subCategory || !brandName) return acc;
 
       if (!acc[category]) acc[category] = {};
-      if (!acc[category][brandName]) acc[category][brandName] = [];
+      if (!acc[category][subCategory]) acc[category][subCategory] = {};
+      if (!acc[category][subCategory][brandName])
+        acc[category][subCategory][brandName] = [];
 
-      acc[category][brandName].push(product);
+      acc[category][subCategory][brandName].push(product);
 
       return acc;
     }, {})
   : {};
-    
 
   if (isLoading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">Error: {error}</div>;
@@ -180,33 +186,32 @@ const CategoryPage = ({ api, SelectedProduct, searchTerm, highlightText, setSear
       {searchTerm}
 
       <div style={{ gap: "20px", justifyContent: "center", width: "100%" }}>
-        {Object.entries(groupedProducts).map(([category, brands]) => (
-            <section className="category-section">
-                <h2 className="category-title">{category}</h2>
-                <div className="brands-container">
-                  {Object.entries(brands).map(([brand, products]) => (
-                    <div className="brand-section">
-                         <h3 className="brand-title">{brand}</h3>
-                         <div className="products-grid">
-                         
-                            <Box
-                                  Mobject={products}
-                                  Dobject={products}
-                           SelectedProduct={SelectedProduct}
-                           
-                   
-                                 
-                                
-                                  highlightText={highlightText}
-                                 
-                               
-                                />
-                       
-                         </div>
-                       </div>
-                  ))}
+        {Object.entries(groupedProducts).map(([category, subCategories]) => (
+          <section className="category-section" key={category}>
+            <h2 className="category-title">{category}</h2>
+            <div className="brands-container">
+              {Object.entries(subCategories).map(([subCategory, brands]) => (
+                <div className="brand-section">
+                  <h3 className="subcategory-title">{subCategory}</h3>
+                  <div className="brands-container">
+                    {Object.entries(brands).map(([brand, products]) => (
+                      <div className="brand-section">
+                        <h3 className="brand-title">{brand}</h3>
+                        <div className="products-grid">
+                          <Box
+                            Mobject={products}
+                            Dobject={products}
+                            SelectedProduct={SelectedProduct}
+                            highlightText={highlightText}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </section>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </div>

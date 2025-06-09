@@ -74,8 +74,8 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
         </ImageContainer>
 
         <DetailsContainer>
-          <SellerLink to={`/productsByOwner?ownerName=${selectedProduct.owner}`}>
-            Seller: {selectedProduct.owner}
+          <SellerLink to={`/productsByOwner?ownerName=${selectedProduct.user_products?.owner}`}>
+            Seller: {selectedProduct.user_products?.owner}
           </SellerLink>
           <ProductTitle>{selectedProduct.name}</ProductTitle>
           <ProductPrice>Price: CFA{selectedProduct.price}</ProductPrice>
@@ -126,7 +126,7 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
         )}
         {activeTab === "seller" && (
           <p>
-            <strong>Seller Contact:</strong> {selectedProduct.phone_number}
+            <strong>Seller Contact:</strong> {selectedProduct.user_products?.phone_number}
           </p>
         )}
         {activeTab === "description" && <div>
