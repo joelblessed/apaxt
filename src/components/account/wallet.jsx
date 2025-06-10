@@ -7,13 +7,11 @@ const Wallet = ({ api }) => {
   const referralCode = User.referral_code;
 
   // Initialize referralLink variable
-  let referralLink = "";
+ 
 
-  if (api === "https://apaxt-api.onrender.com") {
-    referralLink = `https://apaxt2.netlify.app/signUp?ref=${referralCode}`;
-  } else {
-    referralLink = `http://localhost:3000/signUp?ref=${referralCode}`;
-  }
+
+   const  referralLink = `https://apaxt.com/signUp?ref=${referralCode}`;
+  
 
   // Inline styles
   const containerStyle = {

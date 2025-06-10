@@ -4,7 +4,11 @@ import SignIn from "./components/account/signIN";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const stored = localStorage.getItem("user");
+    return stored ? JSON.parse(stored) : null;
+  });
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -79,6 +83,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("userId", id);
     localStorage.setItem("city", city);
     localStorage.setItem("dateOfBirth", date_of_birth);
+  
+
 
     setUser({
       token,
@@ -151,6 +157,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("dateOfBirth"); // Ensure these are removed during logout
     localStorage.removeItem("OrdersCount");
 
+
     
 
     setUser(null);
@@ -171,7 +178,7 @@ export const AuthProvider = ({ children }) => {
     //   .catch((error) => console.error("Error:", error));
   };
 
-
+localStorage.setItem("user", JSON.stringify(user));
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>

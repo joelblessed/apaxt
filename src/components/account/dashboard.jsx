@@ -9,6 +9,7 @@ import Wallet from "./wallet";
 import EditProfilePicture from "./editProfilePicture";
 import EditProfile from "./editProfile";
 import Orders from "../orders/orders"; // Add this import statement
+import ProductList from "../pages/productList";
 import {
   DashboardContainer,
   Sidebar,
@@ -166,8 +167,8 @@ const Dashboard = ({
           <NavLink onClick={toggleSidebar} to="/dprofile">
             {t("Profile")}
           </NavLink>
-          <NavLink onClick={toggleSidebar} to="/dproducts">
-            {t("Products")}
+          <NavLink onClick={toggleSidebar} to="/productList">
+            {t("Products List")}
           </NavLink>
           <NavLink onClick={toggleSidebar} to="/dimageSelect">
             {t("Image Select")}
@@ -216,19 +217,9 @@ const Dashboard = ({
               />
             }
           />
-          <Route
-            path="/dproducts"
-            element={
-              <Products
-                products={products}
-                error={error}
-                user={user}
-                userId={userId}
-                handleDelete={handleDelete}
-                ownersProducts={ownersProducts}
-              />
-            }
-          />
+          
+           
+         
           <Route
             path="/deditProfilePicture"
             element={
@@ -324,67 +315,10 @@ console.log("settings" ,localStorage.getItem("imageSelect"));
 }
 
 // Products Component
-const Products = ({ ownersProducts, userId, handleDelete }) => {
-  const { t } = useTranslation();
 
-  return (
-    <div>
-      <Header>{t("Product Management")}</Header>
-      <ResponsiveGrid>
-        {ownersProducts.map((product) => (
-          <Card key={product.id}>
-            {(product.thumbnails && product.thumbnails.length > 0) ||
-            product.images.length > 0 ? (
-              <img
-                src={
-                  product.thumbnails && product.thumbnails.length > 0
-                    ? product.thumbnails[0]
-                    : product.images[0]
-                }
-                alt={t("Loading...")}
-                style={{ width: "100px", height: "100px" }}
-                onClick={() => {}}
-              />
-            ) : (
-              <p>{t("No Image Available")}</p>
-            )}
-            <h3>{product.name}</h3>
-            
-              {product.user_products?.map((up)=>(
-                <div>
-                  <p>
-                    {t("Price")}: ${up.price}
-            </p>
-            <p>
-              {t("Stock")}: {up.number_in_stock}
-            </p>
-
-            <div>
-              <EditButton to={`/editProduct/${product.id}/${userId}`}>
-                <img
-                  src="/images/edit_24dp_00F70F_FILL0_wght400_GRAD0_opsz24.svg"
-                  style={{ color: "red" }}
-                />
-              </EditButton>
-              <DeleteButton onClick={() => handleDelete(product.id)}>
-                <img
-                  src="/images/delete_24dp_FC0202_FILL0_wght400_GRAD0_opsz24.svg"
-                  style={{ color: "red" }}
-                />
-              </DeleteButton>
-            </div>
-                  
-                </div>
-              ))}
-            
-          </Card>
-        ))}
-      </ResponsiveGrid>
-    </div>
-  );
-};
 
 <div>
+ 
   <div>
     <Wallet />
   </div>

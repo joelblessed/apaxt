@@ -64,7 +64,7 @@ function SignIn({ api, handleLogin, add }) {
         data.user.city,
         data.user.date_of_birth
       );
-
+      
       localStorage.setItem("userId", data.user.id);
       merge(data.token)
       handleWishlistmerge(data.user.id);

@@ -76,13 +76,13 @@ import ForgotPassword from "./components/account/forgotPasword";
 import ResetPassword from "./components/account/resetPassword";
 import FormUpload from "./components/pages/formUpload";
 import About from "./components/Navbar/about";
-// import ProductSelection from "./components/pages/productSelection";
+import ProductList from "./components/pages/productList";
 import ProductCard from "./components/pages/ProductCards/productCard";
 import DeleteProduct from "./components/pages/deleteProduct";
 import Footer from "./components/Navbar/footer";
 import OrdersReview from "./components/orders/ordersReview";
 import OrdersPreview from "./components/orders/ordersPreview";
-import AdminDashboard from "./components/account/adminDashboard";
+import Unauthorized from "./components/pages/unauthorized";
 
 function App() {
   const [calalculateTotal, setCalculateTotal] = useState();
@@ -410,7 +410,7 @@ function App() {
           <Route
             path="/customer"
             element={
-              <ProtectedRoute allowedRoles={["admin", "user"]}>
+              <ProtectedRoute allowedRoles={["admin",]}>
                 <Customer api={api} />
               </ProtectedRoute>
             }
@@ -419,16 +419,16 @@ function App() {
           <Route
             path="/ordersReview"
             element={
-              // <ProtectedRoute allowedRoles={["admin", "user"]}>
-              <OrdersReview api={api} />
-              // </ProtectedRoute>
+              <ProtectedRoute allowedRoles={["admin", "seller",]}>
+                <OrdersReview api={api} />
+              </ProtectedRoute>
             }
           ></Route>
 
           <Route
             path="/ordersPreview"
             element={
-              // <ProtectedRoute allowedRoles={["admin", "user"]}>
+              // <ProtectedRoute allowedRoles={["admin", "seller",, "user"]}>
               <OrdersPreview api={api} />
               // </ProtectedRoute>
             }
@@ -450,44 +450,41 @@ function App() {
           />
           <Route
             path="/orders"
-            element={<Orders OrderCount={setOrderCount} api={api} />}
+            element={
+              <ProtectedRoute allowedRoles={["admin",]}>
+                <Orders OrderCount={setOrderCount} api={api} />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/orders2"
             element={
-              <Orders2
-                token={token}
-                userId={userId}
-                api={api}
-                glofilteredProducts={allProducts}
-                allProfiles={allProfiles}
-              />
+              <ProtectedRoute allowedRoles={["admin", "seller",]}>
+                <Orders2
+                  token={token}
+                  userId={userId}
+                  api={api}
+                  glofilteredProducts={allProducts}
+                />
+              </ProtectedRoute>
             }
           />
 
           <Route
             path="/profile"
             element={
-              <ProtectedRoute allowedRoles={["admin", "user"]}>
+              <ProtectedRoute allowedRoles={["admin", "seller", "user"]}>
                 <Profile api={api} user={user} error={error} />
               </ProtectedRoute>
             }
           />
 
-          <Route
-            path="/*"
-            element={
-              // <ProtectedRoute allowedRoles={["admin"]}>
-              <AdminDashboard api={api} user={user} />
-              // </ProtectedRoute>
-            }
-          />
           <Route path="/wallet" element={<Wallet api={api} user={user} />} />
 
           <Route
             path="/editProfile"
             element={
-              <ProtectedRoute allowedRoles={["admin", "user"]}>
+              <ProtectedRoute allowedRoles={["admin", "seller", "user"]}>
                 <EditProfile api={api} userInfo={user} error={error} />
               </ProtectedRoute>
             }
@@ -502,23 +499,44 @@ function App() {
               />
             }
           />
-          <Route path="/editProduct/:productId/:userId" element={<EditProduct api={api} />} />
-          <Route path="/productCard" element={<ProductCard api={api} />} />
-         
+          <Route
+            path="/editProduct/:productId/:userId"
+            element={
+              <ProtectedRoute allowedRoles={["admin",]}>
+                <EditProduct api={api} />
+              </ProtectedRoute>
+            }
+          />
 
-          <Route path="/deleteProduct" element={<DeleteProduct api={api} />} />
+          <Route path="/productCard" element={<ProductCard api={api} />} />
+
+          <Route path="/deleteProduct" element={
+            <ProtectedRoute allowedRoles={["admin", "seller",]}>
+              <DeleteProduct api={api} />
+            </ProtectedRoute>
+          } />
           <Route
             path="/calculateDistance"
-            element={<CalculateDistance api={api} />}
+            element={
+              <ProtectedRoute allowedRoles={["admin",]}>
+                <CalculateDistance api={api} />
+              </ProtectedRoute>
+            }
           />
+        
           <Route
             path="/editProfilePicture"
-            element={<EditProfilePicture api={api} />}
-          />
+            element={
+              <ProtectedRoute allowedRoles={["admin", "seller","user"]}>
+                <EditProfilePicture api={api} />
+              </ProtectedRoute>
+            }
+          />``
 
           <Route
             path="/productsByOwner"
             element={
+
               <ProductsByOwner
                 api={api}
                 SelectedProduct={setSelectedProduct}
@@ -581,9 +599,33 @@ function App() {
 
           <Route
             path="/forgotPassword"
-            element={<ForgotPassword api={api} />}
+            element={
+            
+                <ForgotPassword api={api} />
+            }
           />
-          <Route path="/resetPassword" element={<ResetPassword api={api} />} />
+          <Route path="/resetPassword" element={
+            <ProtectedRoute allowedRoles={["admin", "seller",, "user"]}>
+              <ResetPassword api={api} />
+            </ProtectedRoute>
+          } />
+
+          <Route
+            path="/productList"
+            element={
+              <ProtectedRoute allowedRoles={["admin", "seller"]}>
+                <ProductList
+                  SelectedProduct={setSelectedProduct}
+                  api={api}
+                  highlightText={highlightText}
+                  loaderRef={loaderRef}
+                  searchTerm={searchTerm}
+                  glofilteredProducts={allProducts}
+                  setSearchTerm={setSearchTerm}
+                />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/categoryPage"
@@ -606,50 +648,60 @@ function App() {
           <Route
             path="/Payment"
             element={
-              <Payment
-                api={api}
-                amount={calalculateTotal}
-                checkout={checkout}
-                setPaymentStatus={setPaymentStatus}
-                setPhoneNumber={setPhoneNumber}
-                setPaymentId={setPaymentId}
-              />
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <Payment
+                  api={api}
+                  amount={calalculateTotal}
+                  checkout={checkout}
+                  setPaymentStatus={setPaymentStatus}
+                  setPhoneNumber={setPhoneNumber}
+                  setPaymentId={setPaymentId}
+                />
+              </ProtectedRoute>
             }
           />
 
           <Route
             path="/Cart2"
             element={
-              <Cart2
-                api={api}
-                searchTerm={searchTerm}
-                highlightText={highlightText}
-                inwishlist={inwishlist}
-              />
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <Cart2
+                  api={api}
+                  searchTerm={searchTerm}
+                  highlightText={highlightText}
+                  inwishlist={inwishlist}
+                />
+              </ProtectedRoute>
             }
           ></Route>
 
           <Route
             path="/cart"
             element={
-              <Cart
-                api={api}
-                product={product}
-                user={user}
-                searchTerm={searchTerm}
-                highlightText={highlightText}
-                glofilteredProducts={allProducts}
-                inwishlist={inwishlist}
-              />
+              <ProtectedRoute allowedRoles={["admin", "seller", "user"]}>
+                <Cart
+                  api={api}
+                  product={product}
+                  user={user}
+                  searchTerm={searchTerm}
+                  highlightText={highlightText}
+                  glofilteredProducts={allProducts}
+                  inwishlist={inwishlist}
+                />
+              </ProtectedRoute>
             }
           />
 
-          <Route path="/formUpload" element={<FormUpload api={api} />} />
+          <Route path="/formUpload" element={
+            <ProtectedRoute allowedRoles={["admin", "seller", "user"]}>
+              <FormUpload api={api} />
+            </ProtectedRoute>}
+          />
 
           <Route
             path="/*"
             element={
-              <ProtectedRoute allowedRoles={["admin", "user"]}>
+              <ProtectedRoute allowedRoles={["admin", "seller", "user"]}>
                 <Dashboard
                   api={api}
                   user={user}
@@ -666,33 +718,37 @@ function App() {
           <Route
             path="/checkout"
             element={
-              // <ProtectedRoute allowedRoles={["admin", "user"]}>
-              <Checkout
-                api={api}
-                userId={userId}
-                user={user}
-                setCalculateTotal={setCalculateTotal}
-                setCheckOut={setCheckOut}
-                glofilteredProducts={allProducts}
-                paymentStatus={paymentStatus}
-                paymentNumber={phoneNumber}
-                paymentId={paymentId}
-              />
-              // </ProtectedRoute>
+              <ProtectedRoute allowedRoles={["admin", "seller", "user"]}>
+                <Checkout
+                  api={api}
+                  userId={userId}
+                  user={user}
+                  setCalculateTotal={setCalculateTotal}
+                  setCheckOut={setCheckOut}
+                  glofilteredProducts={allProducts}
+                  paymentStatus={paymentStatus}
+                  paymentNumber={phoneNumber}
+                  paymentId={paymentId}
+                />
+              </ProtectedRoute>
             }
           />
 
+         
+
           <Route path="/about" element={<About api={api} />} />
+
+          <Route path="/unauthorized" element={<Unauthorized />} />
           {/* <Route path="/" element={<Home />} /> */}
 
           {/* Redirect unknown routes */}
           {/* <Route path="*" element={<Navigate to="/" />} /> */}
         </Routes>
         {/* <Test/> */}
-      <div className="app-container">
-      {/* Your main content goes here */}
-      <Footer />
-    </div>
+        <div className="app-container">
+          {/* Your main content goes here */}
+          <Footer />
+        </div>
       </Router>
     </AuthProvider>
   );
