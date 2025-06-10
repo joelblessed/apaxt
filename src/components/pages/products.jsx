@@ -50,7 +50,7 @@ const Products = ({
 
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
-    const res = await fetch(`${api}/products?page=${page}&limit=10`);
+    const res = await fetch(`${api}/products?page=${page}&limit=30`);
     const data = await res.json();
     const fetched = data.products || data;
 console.log(fetched)
@@ -81,7 +81,7 @@ console.log(fetched)
           setPage((prev) => prev + 1);
         }
       },
-      { rootMargin: "10px" } // Adjust rootMargin for earlier triggering
+      { rootMargin: "200px" } // Adjust rootMargin for earlier triggering
     );
 
     const currentLoader = loaderRef?.current; // Add optional chaining to avoid errors

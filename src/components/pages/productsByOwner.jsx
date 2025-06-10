@@ -173,7 +173,7 @@ const Products = ({
           setPage((prev) => prev + 1);
         }
       },
-      { rootMargin: "100px" } // Adjust rootMargin for earlier triggering
+      { rootMargin: "200px" } // Adjust rootMargin for earlier triggering
     );
 
     const currentLoader = loaderRef?.current; // Add optional chaining to avoid errors

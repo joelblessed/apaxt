@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { 
-  loadCart, 
-  incrementQuantity, 
-  decrementQuantity, 
+import {
+  loadCart,
+  incrementQuantity,
+  decrementQuantity,
   removeFromCartWithAuth,
-  clearCartWithAuth
-} from '../../cartJs/cartThunks';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+  clearCartWithAuth,
+} from "../../cartJs/cartThunks";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Container = styled.div`
   max-width: 1200px;
@@ -176,14 +176,13 @@ const Summary = styled.div`
 
 const CartPage = ({ glofilteredProducts }) => {
   const dispatch = useDispatch();
-  const { items, loading, error } = useSelector(state => state.cart);
-  const isAuthenticated = useSelector(state => state.auth?.isAuthenticated);
+  const { items, loading, error } = useSelector((state) => state.cart);
+  const isAuthenticated = useSelector((state) => state.auth?.isAuthenticated);
   const navigate = useNavigate();
 
   const handleCheckout = () => {
-    navigate("/checkout")
-  }
-
+    navigate("/checkout");
+  };
 
   useEffect(() => {
     dispatch(loadCart());
@@ -202,13 +201,15 @@ const CartPage = ({ glofilteredProducts }) => {
   };
 
   const handleClearCart = () => {
-    if (window.confirm('Are you sure you want to clear your cart?')) {
+    if (window.confirm("Are you sure you want to clear your cart?")) {
       dispatch(clearCartWithAuth());
     }
   };
 
   const calculateTotal = () => {
-    return items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
+    return items
+      .reduce((total, item) => total + item.final_price * item.quantity, 0)
+      .toFixed(2);
   };
 
   if (loading) return <div>Loading cart...</div>;
@@ -226,26 +227,46 @@ const CartPage = ({ glofilteredProducts }) => {
         <Grid>
           <div>
             <CartItems>
-              {items.map(item => (
+              {items.map((item) => (
                 <CartItem key={item.product_id}>
-                  <img 
-                    src={glofilteredProducts.find(pro => pro.id === item.product_id)?.images[0]} 
-                    alt={item.name} 
+                  <img
+                    src={
+                      glofilteredProducts.find(
+                        (pro) => pro.id === item.product_id
+                      )?.images[0]
+                    }
+                    alt={item.name}
                   />
                   <div className="details">
-                    <h3>{item.name}</h3>
-                    <p>${item.price}</p>
+                    <h3>
+                      {
+                        glofilteredProducts.find(
+                          (pro) => pro.id === item.product_id
+                        )?.name
+                      }
+                    </h3>
+                    <p>${item.final_price}</p>
                     <div className="actions">
-                      <button onClick={() => handleIncrement(item.product_id)}>+</button>
+                      <button
+                        onClick={() => handleIncrement(item.product_id)}
+                        disabled={
+                          item.quantity >=
+                          glofilteredProducts.find(
+                            (pro) => pro.id === item.product_id
+                          )?.number_in_stock
+                        }
+                      >
+                        +
+                      </button>
                       <span>{item.quantity}</span>
-                      <button 
-                        onClick={() => handleDecrement(item.product_id)} 
+                      <button
+                        onClick={() => handleDecrement(item.product_id)}
                         disabled={item.quantity <= 1}
                       >
                         -
                       </button>
-                      <button 
-                        onClick={() => handleRemove(item.product_id)} 
+                      <button
+                        onClick={() => handleRemove(item.product_id)}
                         className="remove"
                       >
                         Remove
@@ -255,7 +276,9 @@ const CartPage = ({ glofilteredProducts }) => {
                 </CartItem>
               ))}
             </CartItems>
-            <ClearCartButton onClick={handleClearCart}>Clear Cart</ClearCartButton>
+            <ClearCartButton onClick={handleClearCart}>
+              Clear Cart
+            </ClearCartButton>
           </div>
           <Summary>
             <h2>Order Summary</h2>
@@ -267,9 +290,7 @@ const CartPage = ({ glofilteredProducts }) => {
               <span>Total</span>
               <span>${calculateTotal()}</span>
             </div>
-            <button onclick={handleCheckout}>
-              Proceed to Checkout
-            </button>
+            <button onclick={handleCheckout}>Proceed to Checkout</button>
           </Summary>
         </Grid>
       )}

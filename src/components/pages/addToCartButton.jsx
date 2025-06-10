@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCartWithAuth,
-  mergeCartsAfterLogin
+  mergeCartsAfterLogin,
 } from "../../cartJs/cartThunks";
 import { AddtocartButton, MAddtocartButton } from "./styledComponents";
 
@@ -23,20 +23,11 @@ const AddToCartButton = ({ product }) => {
   const { loading } = useSelector((state) => state.cart);
   const [isMobile, setIsMobile] = useState(false);
   const token = localStorage.getItem("token");
-  const localCart = localStorage.getItem("cart")
+  const localCart = localStorage.getItem("cart");
 
   const handleAddToCart = () => {
-    dispatch(
-      addToCartWithAuth({
-        id: product.id,
-        product_id: product.id,
-        name: product.name,
-        quantity: 1,
-        price:product.price - product.discount
-      })
-    );
+    dispatch(addToCartWithAuth(product));
   };
-
 
   return (
     <>
