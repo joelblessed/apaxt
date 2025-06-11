@@ -140,14 +140,17 @@ const ProductList = ({
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userId");
+  const [id, setId] = useState("");
+    const role = localStorage.getItem("role");
+
+  const userId =  role === "admin" ? id : localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
   const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const ownerName = params.get("OwnerName");
+  // const params = new URLSearchParams(location.search);
+  // const ownerName = params.get("OwnerName");
+  const ownerName = localStorage.getItem("userName")
 
-  const [id, setId] = useState("");
 
   useEffect(() => {
     const savedInput = localStorage.getItem("savedId");
@@ -261,7 +264,7 @@ const ProductList = ({
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
     const res = await fetch(
-      `${api}/products?owner=${ownerName}&page=${page}&limit=20`
+      `${api}/userProducts?owner_id=${userId}&page=${page}&limit=20`
     );
     const data = await res.json();
     const fetched = data.products || data;
