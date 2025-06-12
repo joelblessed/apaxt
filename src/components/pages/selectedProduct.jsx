@@ -74,7 +74,7 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
         </ImageContainer>
 
         <DetailsContainer>
-          <SellerLink  to={`/productsByOwner?ownerName=${selectedProduct.user_products.map((userp)=>(
+          <SellerLink  to={`/productsByOwner/${selectedProduct.user_products.map((userp)=>(
                   userp.owner
                 ))}`}>
             Seller: {selectedProduct.user_products.map((userp)=>(
