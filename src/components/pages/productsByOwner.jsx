@@ -43,12 +43,14 @@ const Products = ({
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
+  const { ownerName } = useParams();
+  
 
 
 
     const location = useLocation();
-    const params = new URLSearchParams(location.search);
-    const ownerName = params.get("OwnerName");
+    // const params = new URLSearchParams(location.search);
+    // const ownerName = params.get("ownerName");
 
     // Function to check screen size
     const handleResize = () => {
@@ -61,79 +63,60 @@ const Products = ({
       return () => window.removeEventListener("resize", handleResize);
     }, []);
   
-
-  useEffect(() => {
-    const mainCategories = [
-      ...new Set(
-        glofilteredProducts
-          .map((product) => product.category?.main)
-          .filter(Boolean)
-      ),
-    ];
-    const subCategories = [
-      ...new Set(
-        glofilteredProducts
-          .map((product) => product.category?.sub)
-          .filter(Boolean)
-      ),
-    ];
-
-    if (mainCategories.length > 0) {
-      setCategories(mainCategories);
-      setSubCategories(subCategories);
-    }
-  }, [glofilteredProducts]);
-
-  const normalize = (str) =>
-    typeof str === "string"
-      ? str.trim().toLowerCase().replace(/\s+/g, " ")
-      : "";
-
-  const nestedCategoryStructure = useMemo(() => {
-    const structure = {};
-    const displayMap = {};
-
-    glofilteredProducts.forEach((product) => {
-      const rawMain = product.category?.main;
-      const rawSub = product.category?.sub;
-      const rawBrand = product.brand?.name;
-
-      const main = normalize(rawMain);
-      const sub = normalize(rawSub);
-      const brand = normalize(rawBrand);
-
-      if (!main || !sub || !brand) return;
-
-      // Save original display names
-      if (!displayMap[main]) displayMap[main] = rawMain;
-      if (!displayMap[`${main}|${sub}`]) displayMap[`${main}|${sub}`] = rawSub;
-      if (!displayMap[`${brand}|${brand}`])
-        displayMap[`${brand}|${brand}`] = rawBrand;
-
-      if (!structure[main]) structure[main] = {};
-      if (!structure[main][sub]) structure[main][sub] = new Set();
-
-      structure[main][sub].add(brand);
-    });
-
-    // Convert Sets to arrays and restore original display names
-    const result = {};
-    Object.keys(structure).forEach((main) => {
-      const subMap = structure[main];
-      const displayMain = displayMap[main];
-      result[displayMain] = {};
-
-      Object.keys(subMap).forEach((sub) => {
-        const displaySub = displayMap[`${main}|${sub}`];
-        result[displayMain][displaySub] = [...subMap[sub]].map(
-          (brandKey) => displayMap[`${brandKey}|${brandKey}`]
-        );
-      });
-    });
-
-    return result;
-  }, [glofilteredProducts]);
-
+const normalize = (str) =>
+  typeof str === "string"
+    ? str.trim().toLowerCase().replace(/\s+/g, " ")
+    : "";
+ 
+   // Category/subcategory/brand structure
+ const nestedCategoryStructure = useMemo(() => {
+   // Only recalculate when glofilteredProducts or userId changes
+   if (!Array.isArray(glofilteredProducts)) return {};
+ 
+   const structure = {};
+   const displayMap = {};
+ 
+   for (const product of glofilteredProducts) {
+     // Only include products for this user
+     if (!product.user_products?.some(up => up.owner === ownerName)) continue;
+ 
+     const rawMain = product.category?.main;
+     const rawSub = product.category?.sub;
+     const rawBrand = product.brand?.name;
+     const main = normalize(rawMain);
+     const sub = normalize(rawSub);
+     const brand = normalize(rawBrand);
+ 
+     if (!main || !sub || !brand) continue;
+ 
+     // Store display names for later
+     if (!displayMap[main]) displayMap[main] = rawMain;
+     if (!displayMap[`${main}|${sub}`]) displayMap[`${main}|${sub}`] = rawSub;
+     if (!displayMap[`${brand}|${brand}`]) displayMap[`${brand}|${brand}`] = rawBrand;
+ 
+     // Build structure
+     if (!structure[main]) structure[main] = {};
+     if (!structure[main][sub]) structure[main][sub] = new Set();
+     structure[main][sub].add(brand);
+   }
+ 
+   // Convert Sets to arrays and restore original display names
+   const result = {};
+   for (const main of Object.keys(structure)) {
+     const subMap = structure[main];
+     const displayMain = displayMap[main];
+     result[displayMain] = {};
+     for (const sub of Object.keys(subMap)) {
+       const displaySub = displayMap[`${main}|${sub}`];
+       result[displayMain][displaySub] = Array.from(subMap[sub]).map(
+         (brandKey) => displayMap[`${brandKey}|${brandKey}`]
+       );
+     }
+   }
+   return result;
+ }, [glofilteredProducts, userId]);
+ 
+ 
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
     const res = await fetch(

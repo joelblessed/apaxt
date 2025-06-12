@@ -41,21 +41,21 @@ const ResponsiveGrid = styled(Grid)`
   }
 `;
 
-const ProductCard = ({ products, userId, handleDelete, id, handleChange }) => {
+const ProductCard = React.memo(({ products, userId, handleDelete, id, handleChange }) => {
   const { t } = useTranslation();
   const role = localStorage.getItem("role");
 
   return (
     <div>
       <Header>{t("Product Management")}</Header>
-     { role === "admin" && (
+      {role === "admin" && (
         <div style={{ marginBottom: "20px" }}>
           <label>
             {t("Search by User ID:")}
             <input
               type="text"
               value={id}
-              onChange={handleChange} // Handle input change
+              onChange={handleChange}
               style={{ marginLeft: "10px", padding: "5px" }}
             />
           </label>
@@ -64,44 +64,29 @@ const ProductCard = ({ products, userId, handleDelete, id, handleChange }) => {
       <ResponsiveGrid>
         {products.map((product) => (
           <Card key={product.id}>
-            {(product.thumbnails && product.thumbnails.length > 0) ||
-            product.images.length > 0 ? (
+            {(product.thumbnails?.length > 0 || product.images.length > 0) ? (
               <img
                 src={
-                  product.thumbnails && product.thumbnails.length > 0
-                    ? product.thumbnails[0]
-                    : product.images[0]
+                  product.thumbnails?.[0] || product.images[0]
                 }
                 alt={t("Loading...")}
                 style={{ width: "100px", height: "100px" }}
-                onClick={() => {}}
               />
             ) : (
               <p>{t("No Image Available")}</p>
             )}
+            {role === "admin" && <h3>{product.id}</h3>}
             <h3>{product.name}</h3>
-
             {product.user_products?.map((up) => (
-              <div>
-                <p>
-                  {t("Price")}: ${up.price}
-                </p>
-                <p>
-                  {t("Stock")}: {up.number_in_stock}
-                </p>
-
+              <div key={up.id}>
+                <p>{t("Price")}: ${up.price}</p>
+                <p>{t("Stock")}: {up.number_in_stock}</p>
                 <div>
                   <EditButton to={`/editProduct/${product.id}/${userId}`}>
-                    <img
-                      src="/images/edit_24dp_00F70F_FILL0_wght400_GRAD0_opsz24.svg"
-                      style={{ color: "red" }}
-                    />
+                    <img src="/images/edit_24dp_00F70F_FILL0_wght400_GRAD0_opsz24.svg" />
                   </EditButton>
                   <DeleteButton onClick={() => handleDelete(product.id)}>
-                    <img
-                      src="/images/delete_24dp_FC0202_FILL0_wght400_GRAD0_opsz24.svg"
-                      style={{ color: "red" }}
-                    />
+                    <img src="/images/delete_24dp_FC0202_FILL0_wght400_GRAD0_opsz24.svg" />
                   </DeleteButton>
                 </div>
               </div>
@@ -111,8 +96,17 @@ const ProductCard = ({ products, userId, handleDelete, id, handleChange }) => {
       </ResponsiveGrid>
     </div>
   );
-};
+});
 
+const normalize = (str) =>
+  typeof str === "string"
+    ? str.trim().toLowerCase().replace(/\s+/g, " ")
+    : "";
+
+const uniqueProducts = (prev, newItems) => {
+  const ids = new Set(prev.map((p) => p.id));
+  return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
+};
 const ProductList = ({
   glofilteredProducts,
   SelectedProduct,
@@ -140,10 +134,11 @@ const ProductList = ({
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
-  const [id, setId] = useState("");
-    const role = localStorage.getItem("role");
+  const [id, setId] = useState(localStorage.getItem("userId"));
+  const role = localStorage.getItem("role");
+ 
 
-  const userId =  role === "admin" ? id : localStorage.getItem("userId");
+  const userId =  id;
   const token = localStorage.getItem("token");
 
   const location = useLocation();
@@ -152,7 +147,11 @@ const ProductList = ({
   const ownerName = localStorage.getItem("userName")
 
 
+
   useEffect(() => {
+     if(role !== "admin"){
+    localStorage.removeItem("savedId")
+  }
     const savedInput = localStorage.getItem("savedId");
     if (savedInput) {
       setId(savedInput);
@@ -165,12 +164,14 @@ const ProductList = ({
     localStorage.setItem("savedId", id);
   };
 
+
+
   // Delete product by ID
-  const handleDelete = (id) => {
-    fetch(`${api}/deleteProduct/${id}`, { method: "DELETE" })
+  const handleDelete = (productId) => {
+    fetch(`${api}/delete/${productId}/user/${userId}`, { method: "DELETE" })
       .then((res) => {
         if (res.ok) {
-          setProducts(products.filter((product) => product.id !== id)); // Remove from state
+          setProducts(products.filter((product) => product.id !== productId)); // Remove from state
         } else {
           console.error("Error deleting product");
         }
@@ -189,77 +190,57 @@ const ProductList = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    const mainCategories = [
-      ...new Set(
-        glofilteredProducts
-          .map((product) => product.category?.main)
-          .filter(Boolean)
-      ),
-    ];
-    const subCategories = [
-      ...new Set(
-        glofilteredProducts
-          .map((product) => product.category?.sub)
-          .filter(Boolean)
-      ),
-    ];
 
-    if (mainCategories.length > 0) {
-      setCategories(mainCategories);
-      setSubCategories(subCategories);
+
+
+  // Category/subcategory/brand structure
+const nestedCategoryStructure = useMemo(() => {
+  // Only recalculate when glofilteredProducts or userId changes
+  if (!Array.isArray(glofilteredProducts)) return {};
+
+  const structure = {};
+  const displayMap = {};
+
+  for (const product of glofilteredProducts) {
+    // Only include products for this user
+    if (!product.user_products?.some(up => up.owner_id === userId)) continue;
+
+    const rawMain = product.category?.main;
+    const rawSub = product.category?.sub;
+    const rawBrand = product.brand?.name;
+    const main = normalize(rawMain);
+    const sub = normalize(rawSub);
+    const brand = normalize(rawBrand);
+
+    if (!main || !sub || !brand) continue;
+
+    // Store display names for later
+    if (!displayMap[main]) displayMap[main] = rawMain;
+    if (!displayMap[`${main}|${sub}`]) displayMap[`${main}|${sub}`] = rawSub;
+    if (!displayMap[`${brand}|${brand}`]) displayMap[`${brand}|${brand}`] = rawBrand;
+
+    // Build structure
+    if (!structure[main]) structure[main] = {};
+    if (!structure[main][sub]) structure[main][sub] = new Set();
+    structure[main][sub].add(brand);
+  }
+
+  // Convert Sets to arrays and restore original display names
+  const result = {};
+  for (const main of Object.keys(structure)) {
+    const subMap = structure[main];
+    const displayMain = displayMap[main];
+    result[displayMain] = {};
+    for (const sub of Object.keys(subMap)) {
+      const displaySub = displayMap[`${main}|${sub}`];
+      result[displayMain][displaySub] = Array.from(subMap[sub]).map(
+        (brandKey) => displayMap[`${brandKey}|${brandKey}`]
+      );
     }
-  }, [glofilteredProducts]);
+  }
+  return result;
+}, [glofilteredProducts, userId]);
 
-  const normalize = (str) =>
-    typeof str === "string"
-      ? str.trim().toLowerCase().replace(/\s+/g, " ")
-      : "";
-
-  const nestedCategoryStructure = useMemo(() => {
-    const structure = {};
-    const displayMap = {};
-
-    glofilteredProducts.forEach((product) => {
-      const rawMain = product.category?.main;
-      const rawSub = product.category?.sub;
-      const rawBrand = product.brand?.name;
-
-      const main = normalize(rawMain);
-      const sub = normalize(rawSub);
-      const brand = normalize(rawBrand);
-
-      if (!main || !sub || !brand) return;
-
-      // Save original display names
-      if (!displayMap[main]) displayMap[main] = rawMain;
-      if (!displayMap[`${main}|${sub}`]) displayMap[`${main}|${sub}`] = rawSub;
-      if (!displayMap[`${brand}|${brand}`])
-        displayMap[`${brand}|${brand}`] = rawBrand;
-
-      if (!structure[main]) structure[main] = {};
-      if (!structure[main][sub]) structure[main][sub] = new Set();
-
-      structure[main][sub].add(brand);
-    });
-
-    // Convert Sets to arrays and restore original display names
-    const result = {};
-    Object.keys(structure).forEach((main) => {
-      const subMap = structure[main];
-      const displayMain = displayMap[main];
-      result[displayMain] = {};
-
-      Object.keys(subMap).forEach((sub) => {
-        const displaySub = displayMap[`${main}|${sub}`];
-        result[displayMain][displaySub] = [...subMap[sub]].map(
-          (brandKey) => displayMap[`${brandKey}|${brandKey}`]
-        );
-      });
-    });
-
-    return result;
-  }, [glofilteredProducts]);
 
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
@@ -268,6 +249,7 @@ const ProductList = ({
     );
     const data = await res.json();
     const fetched = data.products || data;
+    
     console.log(fetched);
 
     if (fetched.length === 0) setHasMore(false);

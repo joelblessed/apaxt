@@ -534,7 +534,7 @@ function App() {
           />``
 
           <Route
-            path="/productsByOwner"
+            path="/productsByOwner/:ownerName"
             element={
 
               <ProductsByOwner

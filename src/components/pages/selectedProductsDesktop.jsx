@@ -60,7 +60,7 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
           <DetailsSection>
             <SellerInfo>
               Seller:{" "}
-              <SellerLink to={`/productsByOwner?ownerName=${selectedProduct.user_products.map((userp)=>(
+              <SellerLink to={`/productsByOwner/${selectedProduct.user_products.map((userp)=>(
                   userp.owner
                 ))}`}>
                 {selectedProduct.user_products.map((userp)=>(
