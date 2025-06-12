@@ -1,5 +1,5 @@
 
-export const api = "http://localhost:5000"
+export const api = "https://apaxt-api.onrender.com"
 // "http://localhost:5000",
 // https://apaxt-api.onrender.com
 

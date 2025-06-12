@@ -1,5 +1,5 @@
 .app-container {
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   margin-top: -200px; /* Adjusted to account for the fixed navbar height */
   flex-direction: column;
