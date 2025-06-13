@@ -212,7 +212,26 @@ const CartPage = ({ glofilteredProducts }) => {
       .toFixed(2);
   };
 
-  if (loading) return <div>Loading cart...</div>;
+  const dotStyle = {
+  width: "12px",
+  height: "12px",
+  margin: "0 4px",
+  borderRadius: "50%",
+  background: "#333",
+  display: "inline-block",
+  animation: "bounce 1s infinite alternate",
+};
+
+const dot2Style = { ...dotStyle, animationDelay: "0.2s" };
+const dot3Style = { ...dotStyle, animationDelay: "0.4s" };
+
+  if (loading) return <div>
+    
+ <span style={dotStyle}></span>
+    <span style={dot2Style}></span>
+    <span style={dot3Style}></span> 
+    
+  </div>;
   if (error) return <div>Error: {error}</div>;
 
   return (

@@ -250,9 +250,20 @@ function App() {
     return text.replace(regex, "<strong>$1</strong>");
   };
 
-  if (loading) {
-    return <p>loading...</p>;
-  }
+ if (loading) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        minHeight: "100vh",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <p style={{ fontSize: "1.2rem" }}>loading...</p>
+    </div>
+  );
+}
 
   return (
     <AuthProvider>

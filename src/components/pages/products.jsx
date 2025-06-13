@@ -221,9 +221,45 @@ console.log(fetched)
         category={category}
      
       />
-      {hasMore && <div ref={loaderRef} className="loader">Loading...</div>} {/* Loader for infinite scroll */}
+      {hasMore && (
+  <div ref={loaderRef} style={spinnerStyle}>
+    <span style={dotStyle}></span>
+    <span style={dot2Style}></span>
+    <span style={dot3Style}></span>
+  </div>
+)} {/* Loader for infinite scroll */}
     </div>
   );
 };
+// ...existing code...
 
+const spinnerStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "60px",
+};
+
+const dotStyle = {
+  width: "12px",
+  height: "12px",
+  margin: "0 4px",
+  borderRadius: "50%",
+  background: "#333",
+  display: "inline-block",
+  animation: "bounce 1s infinite alternate",
+};
+
+const dot2Style = { ...dotStyle, animationDelay: "0.2s" };
+const dot3Style = { ...dotStyle, animationDelay: "0.4s" };
+
+// Add this keyframes CSS to your products.css or in a <style> tag globally:
+/*
+@keyframes bounce {
+  to {
+    opacity: 0.3;
+    transform: translateY(-12px);
+  }
+}
+*/
 export default Products;

@@ -911,7 +911,7 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
             </CountdownSegment>
           </CountdownTimer>
           <p>
-            Use code <strong>HALLOWEEN30</strong> at checkout
+            Use code <strong>A30D</strong> at checkout
           </p>
         </CountdownContainer>
 

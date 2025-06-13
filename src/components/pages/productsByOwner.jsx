@@ -301,6 +301,7 @@ const normalize = (str) =>
           setPage(1);
           setHasMore(true);
           setSearchTerm(mainCategory);
+           setIsSubcategory(!isSubcategory);
           
         }}
         style={{
@@ -366,6 +367,7 @@ const normalize = (str) =>
                   setPage(1);
                   setHasMore(true);
                   setIsBrand(!isBrand);
+                   setIsSubcategory(!isSubcategory);
                 }}
                 style={{
                   padding: "10px",
@@ -465,7 +467,7 @@ const normalize = (str) =>
     />
     {hasMore && (
       <div ref={loaderRef} className="loader">
-        Loading...
+        Loading...p
       </div>
     )}
   </div>
@@ -572,7 +574,7 @@ const normalize = (str) =>
             />
             {hasMore && (
               <div ref={loaderRef} className="loader">
-                Loading...
+                Loading...p
               </div>
             )}{" "}
             {/* Loader for infinite scroll */}
