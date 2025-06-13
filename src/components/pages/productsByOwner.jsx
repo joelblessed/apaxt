@@ -294,14 +294,14 @@ const normalize = (str) =>
   {Object.entries(nestedCategoryStructure).map(([mainCategory, subCategoryMap]) => (
     <div key={mainCategory} style={{ marginBottom: "10px" }}>
       {/* Main Category Dropdown */}
+      <div style={{display:"flex",justifyContent:'space-between'}}>
       <div
         onClick={() => {
-          setCategory(mainCategory);
-          setSearch(mainCategory);
           setProducts([]);
           setPage(1);
           setHasMore(true);
-          setIsSubcategory(!isSubcategory);
+          setSearchTerm(mainCategory);
+          
         }}
         style={{
           padding: "12px",
@@ -315,7 +315,14 @@ const normalize = (str) =>
         }}
       >
         <span>{mainCategory}</span>
-        <span>{isSubcategory && mainCategory === category ? (
+        
+      </div>
+      <button  onClick={() => {
+         
+          setCategory(mainCategory);
+          
+          setIsSubcategory(!isSubcategory);
+        }} >{isSubcategory && mainCategory === category ? (
                 <svg
                   width="20px"
                   fill="red"
@@ -343,7 +350,7 @@ const normalize = (str) =>
                     <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
                   </g>
                 </svg>
-              )}</span>
+              )}</button>
       </div>
 
       {/* Subcategory Dropdown (only shown when category is selected) */}
@@ -351,10 +358,10 @@ const normalize = (str) =>
         <div style={{ marginLeft: "15px", marginTop: "5px" }}>
           {Object.entries(subCategoryMap).map(([subCategory, brands]) => (
             <div key={subCategory}>
+              <div style={{display:"flex",justifyContent:'space-between'}}>
               <div
                 onClick={() => {
-                  setSearch(subCategory);
-                  setSubCategory(subCategory);
+                  setSearchTerm(subCategory);
                   setProducts([]);
                   setPage(1);
                   setHasMore(true);
@@ -372,7 +379,14 @@ const normalize = (str) =>
                 }}
               >
                 <span>{subCategory}</span>
-                <span>{isBrand && subcategory === subCategory ? (
+              
+              </div>
+
+                <button   onClick={() => {
+                  setSubCategory(subCategory);
+                
+                  setIsBrand(!isBrand);
+                }}>{isBrand && subcategory === subCategory ? (
                 <svg
                   width="20px"
                   fill="red"
@@ -400,7 +414,7 @@ const normalize = (str) =>
                     <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
                   </g>
                 </svg>
-              )}</span>
+              )}</button>
               </div>
 
               {/* Brands List (only shown when subcategory is selected) */}
@@ -410,8 +424,10 @@ const normalize = (str) =>
                     <div
                       key={brand}
                       onClick={() => {
-                        // setBrand(brand);
-                        // setSearch(brand);
+          setIsSubcategory(!isSubcategory);
+
+                        setBrand(brand);
+                        setSearchTerm(brand);
                         setProducts([]);
                         setPage(1);
                         setHasMore(true);

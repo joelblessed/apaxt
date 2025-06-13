@@ -88,7 +88,8 @@ const MobileCard = ({
           <div>
             <BoxContainer
               key={index}
-              categoryOption={categoryShadow[Mobject.category]}
+              categoryOption={categoryShadow[Mobject.category?.main]}
+              
             >
               <div
                 key={index}

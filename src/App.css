@@ -1,7 +1,7 @@
 .app-container {
-  min-height: 50vh;
+  min-height: 80vh;
   display: flex;
-  margin-top: -200px; /* Adjusted to account for the fixed navbar height */
+  margin-top:auto; /* Adjusted to account for the fixed navbar height */
   flex-direction: column;
 }
 

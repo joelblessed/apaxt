@@ -678,7 +678,7 @@ function App() {
           <Route
             path="/cart"
             element={
-              <ProtectedRoute allowedRoles={["admin", "seller", "user"]}>
+             
                 <Cart
                   api={api}
                   product={product}
@@ -688,7 +688,7 @@ function App() {
                   glofilteredProducts={allProducts}
                   inwishlist={inwishlist}
                 />
-              </ProtectedRoute>
+              
             }
           />
 

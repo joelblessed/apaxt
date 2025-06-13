@@ -268,18 +268,15 @@ function MobileNavbar({
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);
 
-  const goToCategory = (cat) => {
-    navigate(`/categoryPage?categoryName=${cat}`);
-  };
-  const goToProducts = () => {
-    navigate("/products");
-  };
-  const goToAllCategories = () => {
-    navigate(`/category`);
-  };
-  const handleClick = (brandName) => {
-    navigate(`/categoryPage?categoryName=${brandName}`);
-  };
+  const handleBrand = (brand) =>
+    navigate(`/categoryPage?categoryName=${brand}`);
+  const handleSubCategory = (subcategory) =>
+    navigate(`/categoryPage?categoryName=${subcategory}`);
+  const handleCategory = (category) =>
+    navigate(`/categoryPage?categoryName=${category}`);
+
+  const handleName = (name) => navigate(`/categoryPage?categoryName=${name}`);
+
 
   const show = (event) => {
     setIsOpen((prevShow) => !prevShow);
@@ -475,7 +472,7 @@ function MobileNavbar({
           <MobileNavLink
             onClick={() => {
               setIsMenuOpen(!isMenuOpen);
-              goToProducts();
+            
             }}
             to="/products"
           >
@@ -572,16 +569,15 @@ function MobileNavbar({
               ([mainCategory, subCategoryMap]) => (
                 <div key={mainCategory} style={{ marginBottom: "5px" }}>
                   {/* Main Category */}
+                 <div style={{display:"flex", justifyContent:"space-between"}}>
                   <div
                     onClick={() => {
-                      setActiveCategory(
-                        activeCategory === mainCategory ? null : mainCategory
-                      );
+                    
+                      handleCategory(mainCategory);
                       setCategory(mainCategory);
-                      setSearch(mainCategory);
-                      setProducts([]);
-                      setPage(1);
-                      setHasMore(true);
+                      setIsMenuOpen(!isMenuOpen);
+
+                      
                     }}
                     style={{
                       padding: "12px 20px",
@@ -597,8 +593,18 @@ function MobileNavbar({
                     }}
                   >
                     <span>{mainCategory}</span>
-                    <span>
+                    
+                    
+                  </div>
+
+                    <button  onClick={() => {
+                      setActiveCategory(
+                        activeCategory === mainCategory ? null : mainCategory
+                      );
+                      
+                    }} >
                       {activeCategory === mainCategory ? (
+                       
                         <svg
                           width="20px"
                           fill="red"
@@ -626,9 +632,15 @@ function MobileNavbar({
                             <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
                           </g>
                         </svg>
-                      )}
-                    </span>
+                        
+                      )
+                    }
+                      </button>
+                  
+
                   </div>
+                 
+                   
 
                   {/* Subcategories */}
                   {activeCategory === mainCategory && (
@@ -636,18 +648,15 @@ function MobileNavbar({
                       {Object.entries(subCategoryMap).map(
                         ([subCategory, brands]) => (
                           <div key={subCategory}>
+                            <div style={{display:"flex", justifyContent:"space-between"}}>
                             <div
+                           
                               onClick={() => {
-                                setActiveSubcategory(
-                                  activeSubcategory === subCategory
-                                    ? null
-                                    : subCategory
-                                );
-                                setSubCategory(subCategory);
-                                setSearch(subCategory);
-                                setProducts([]);
-                                setPage(1);
-                                setHasMore(true);
+                               
+                             
+                                handleSubCategory(subCategory);
+                                setIsMenuOpen(!isMenuOpen);
+                               
                               }}
                               style={{
                                 padding: "10px 20px",
@@ -662,7 +671,17 @@ function MobileNavbar({
                               }}
                             >
                               <span>{subCategory}</span>
-                              <span>
+                            
+                            </div>
+                          
+                                <button   onClick={() => {
+                                setActiveSubcategory(
+                                  activeSubcategory === subCategory
+                                    ? null
+                                    : subCategory
+                                );
+                           
+                              }}>
                                 {activeSubcategory === subCategory ? (
                                   <svg
                                     width="20px"
@@ -692,7 +711,8 @@ function MobileNavbar({
                                     </g>
                                   </svg>
                                 )}
-                              </span>
+                                </button>
+                              
                             </div>
 
                             {/* Brands */}
@@ -703,10 +723,9 @@ function MobileNavbar({
                                     key={brand}
                                     onClick={() => {
                                       setBrand(brand);
-                                      setSearch(brand);
-                                      setProducts([]);
-                                      setPage(1);
-                                      setHasMore(true);
+                                      handleBrand(brand);
+                                      setIsMenuOpen(!isMenuOpen);
+                                      ;
                                     }}
                                     style={{
                                       padding: "8px 25px",

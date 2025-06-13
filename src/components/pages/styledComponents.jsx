@@ -9,11 +9,11 @@ const getOS = () =>
     : "other";
 
 export const categoryOptions = {
-  1: "0px 0px 10px 1px red",
-  2: "0px 0px 10px 1px black",
-  3: "0px 0px 10px 1px orange",
-  4: "0px 0px 10px 1px blue",
-  5: "0px 0px 10px 1px black",
+  1: "0px 0px 10px 1px black",
+  2: "0px 0px 10px 1px green",
+  3: "0px 0px 10px 1px orangered",
+  4: "0px 0px 10px 1px red",
+  5: "0px 0px 10px 1px gold",
   6: "0px 0px 10px 1px violet",
 };
 export const categoryShadow = {
@@ -21,7 +21,8 @@ export const categoryShadow = {
   Farm: 2,
   Sport: 3,
   Fashion: 4,
-  Furniture: 5,
+  Music:5,
+  Furniture: 6,
 };
 export const CloseButton = styled.button`
   &:hover{
