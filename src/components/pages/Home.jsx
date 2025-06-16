@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-import styled, { keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import {
   FaStar,
@@ -8,126 +7,38 @@ import {
   FaArrowRight,
   FaArrowLeft,
 } from "react-icons/fa";
+import Box from "./boxes";
+import Category from "./category";
+import {
+  CategoryCard,
+  CategoryName,
+  Container,
+  CountdownLabel,
+  CountdownSegment,
+  CountdownTimer,
+  CountdownTitle,
+  CountdownValue,
+  PriceContainer,
+  ProductCard,
+  ProductGrid,
+  ProductInfo,
+  ProductName,
+  SectionTitle,
+  DiscountPrice,
+  ProductImage,
+  HeroDot,
+  HeroDots,
+  HeroBannerContainer,
+  HeroNavButton,
+  HeroImage,
+  CountdownContainer,
+  OriginalPrice,
+  LastViewedContainer,
+  LikesContainer,
+} from "./HomeStyled";
+import SelectedProduct from "./selectedProduct";
 
 // Dummy Data
-const categories = [
-  {
-    id: 1,
-    name: "Fantasy",
-    image: "https://via.placeholder.com/150?text=Fantasy",
-  },
-  {
-    id: 2,
-    name: "Superhero",
-    image: "https://via.placeholder.com/150?text=Superhero",
-  },
-  {
-    id: 3,
-    name: "Horror",
-    image: "https://via.placeholder.com/150?text=Horror",
-  },
-  { id: 4, name: "Kids", image: "https://via.placeholder.com/150?text=Kids" },
-  {
-    id: 5,
-    name: "Animals",
-    image: "https://via.placeholder.com/150?text=Animals",
-  },
-  {
-    id: 6,
-    name: "Historical",
-    image: "https://via.placeholder.com/150?text=Historical",
-  },
-];
-
-const trendingCostumes = [
-  {
-    id: 1,
-    name: "Wizard Robe",
-    price: 49.99,
-    discount: 39.99,
-    likes: 128,
-    image: "https://via.placeholder.com/300?text=Wizard+Robe",
-  },
-  {
-    id: 2,
-    name: "Superhero Suit",
-    price: 59.99,
-    discount: 49.99,
-    likes: 95,
-    image: "https://via.placeholder.com/300?text=Superhero+Suit",
-  },
-  {
-    id: 3,
-    name: "Zombie",
-    price: 34.99,
-    discount: null,
-    likes: 76,
-    image: "https://via.placeholder.com/300?text=Zombie",
-  },
-  {
-    id: 4,
-    name: "Dragon",
-    price: 69.99,
-    discount: 59.99,
-    likes: 112,
-    image: "https://via.placeholder.com/300?text=Dragon",
-  },
-];
-
-const newArrivals = [
-  {
-    id: 5,
-    name: "Pirate",
-    price: 44.99,
-    discount: null,
-    image: "https://via.placeholder.com/300?text=Pirate",
-  },
-  {
-    id: 6,
-    name: "Fairy",
-    price: 39.99,
-    discount: 34.99,
-    image: "https://via.placeholder.com/300?text=Fairy",
-  },
-  {
-    id: 7,
-    name: "Robot",
-    price: 54.99,
-    discount: null,
-    image: "https://via.placeholder.com/300?text=Robot",
-  },
-  {
-    id: 8,
-    name: "Unicorn",
-    price: 49.99,
-    discount: 44.99,
-    image: "https://via.placeholder.com/300?text=Unicorn",
-  },
-];
-
-const reviews = [
-  {
-    id: 1,
-    name: "Alex Johnson",
-    rating: 5,
-    comment: "Amazing quality! Got so many compliments at the party.",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-  },
-  {
-    id: 2,
-    name: "Sarah Miller",
-    rating: 4,
-    comment: "Great costume, very comfortable to wear all night.",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-  },
-  {
-    id: 3,
-    name: "Jamie Smith",
-    rating: 5,
-    comment: "Perfect for Halloween! Will definitely buy again.",
-    avatar: "https://randomuser.me/api/portraits/women/63.jpg",
-  },
-];
 
 const heroImages = [
   {
@@ -147,374 +58,16 @@ const heroImages = [
   },
 ];
 
-// Styled Components
-const Container = styled.div`
-  max-width: 96%;
-  margin: 0 auto;
-  padding: 0 15px;
-  background: white;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.8rem;
-  margin: 2rem 0 1rem;
-  color: #333;
-  position: relative;
-  display: inline-block;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 50%;
-    height: 3px;
-    background-color: #ff6b6b;
-  }
-`;
-
-const HeroBannerContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  margin-bottom: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 768px) {
-    height: 300px;
-  }
-
-  @media (max-width: 480px) {
-    height: 200px;
-  }
-`;
-
-const HeroImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: ${(props) => (props.active ? 1 : 0)};
-  transition: opacity 0.5s ease-in-out;
-`;
-
-const HeroNavButton = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.5);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1;
-  ${(props) => (props.left ? "left: 20px" : "right: 20px")};
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.8);
-  }
-`;
-
-const HeroDots = styled.div`
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 1;
-`;
-
-const HeroDot = styled.div`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: ${(props) =>
-    props.active ? "#ff6b6b" : "rgba(255, 255, 255, 0.5)"};
-  cursor: pointer;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background: #ff6b6b;
-  }
-`;
-
-const CategoryGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-  margin-bottom: 2rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const CategoryCard = styled.div`
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-const CategoryImage = styled.img`
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-`;
-
-const CategoryName = styled.h3`
-  padding: 10px;
-  text-align: center;
-  background: white;
-  margin: 0;
-  font-size: 1rem;
-  color: #333;
-  display: flex;
-  flex-direction: row;
-  border: 1px solid red;
-  border-radius: 8px;
-`;
-
-const ProductGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 25px;
-  margin-bottom: 2rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-  }
-
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-`;
-
-const ProductCard = styled.div`
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-const ProductImage = styled.img`
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-
-  @media (max-width: 768px) {
-    height: 200px;
-  }
-`;
-
-const ProductInfo = styled.div`
-  padding: 15px;
-`;
-
-const ProductName = styled.h3`
-  margin: 0 0 5px;
-  font-size: 1.1rem;
-  color: #333;
-`;
-
-const PriceContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 5px;
-`;
-
-const OriginalPrice = styled.span`
-  text-decoration: ${(props) => (props.discounted ? "line-through" : "none")};
-  color: ${(props) => (props.discounted ? "#999" : "#333")};
-  font-size: 1rem;
-`;
-
-const DiscountPrice = styled.span`
-  color: #ff6b6b;
-  font-weight: bold;
-  font-size: 1.1rem;
-`;
-
-const LikesContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #666;
-  font-size: 0.9rem;
-`;
-
-const ReviewGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 2rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const ReviewCard = styled.div`
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const ReviewHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 10px;
-`;
-
-const ReviewAvatar = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-`;
-
-const ReviewerName = styled.h4`
-  margin: 0;
-  color: #333;
-`;
-
-const ReviewStars = styled.div`
-  display: flex;
-  gap: 3px;
-  color: #ffc107;
-`;
-
-const ReviewText = styled.p`
-  color: #666;
-  line-height: 1.5;
-  margin: 0;
-`;
-
-const CountdownContainer = styled.div`
-  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-  color: white;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const CountdownTitle = styled.h3`
-  margin-top: 0;
-  font-size: 1.5rem;
-`;
-
-const CountdownTimer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 15px 0;
-`;
-
-const CountdownSegment = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const CountdownValue = styled.span`
-  font-size: 2rem;
-  font-weight: bold;
-`;
-
-const CountdownLabel = styled.span`
-  font-size: 0.8rem;
-  text-transform: uppercase;
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
-  margin: 2rem 0;
-  max-width: 600px;
-  width: 100%;
-`;
-
-const SearchInput = styled.input`
-  flex: 1;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px;
-  font-size: 1rem;
-  outline: none;
-
-  &:focus {
-    border-color: #ff6b6b;
-  }
-`;
-
-const SearchButton = styled.button`
-  padding: 0 20px;
-  background: #ff6b6b;
-  color: white;
-  border: none;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background: #ff5252;
-  }
-`;
-
-const LastViewedContainer = styled.div`
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-`;
-
-const PersonalizedContainer = styled.div`
-  background: #f0f8ff;
-  padding: 20px;
-  border-radius: 8px;
-
-  height: 500px;
-`;
-
 // Component
-const Home = ({ api, glofilteredProducts, searchTerm }) => {
+const Home = ({
+  api,
+  glofilteredProducts,
+  searchTerm,
+  setSearchTerm,
+  loaderRef,
+  highlightText,
+  SelectedProduct,
+}) => {
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const [lastViewed, setLastViewed] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -702,59 +255,61 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
           }}
         >
           {Object.entries(groupedProducts).map(([category]) => (
-            <div style={{display:"flex"}}>
-            <CategoryCard
-              key={category}
-              style={{
-                background: selectedCategory === category ? "#ffe0e0" : "#fff",
-                border:
-                  selectedCategory === category
-                    ? "2px solid #ff6b6b"
-                    : "1px solid #eee",
-                cursor: "pointer",
-                minWidth: "140px",
-                textAlign: "center",
-              }}
-              onClick={() => {
-                handleCategory(category);
-              }}
-            >
-              {category}
-             
-            </CategoryCard>
-             <CategoryCard
+            <div style={{ display: "flex" }}>
+              <CategoryCard
+                key={category}
+                style={{
+                  background:
+                    selectedCategory === category ? "#ffe0e0" : "#fff",
+                  border:
+                    selectedCategory === category
+                      ? "2px solid #ff6b6b"
+                      : "1px solid #eee",
+                  cursor: "pointer",
+                  minWidth: "140px",
+                  textAlign: "center",
+                }}
+                onClick={() => {
+                  handleCategory(category);
+                }}
+              >
+                {category}
+              </CategoryCard>
+              <CategoryCard
                 onClick={() => {
                   setSelectedCategory(category);
                   setSelectedSubcat(null);
                 }}
               >
-                {selectedCategory ? (   <svg
-                          width="20px"
-                          height="20px"
-                          viewBox="0 0 48 48"
-                          fill="red"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M0 0h48v48H0z" fill="none" />
-                          <g id="Shopicon">
-                            <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
-                          </g>
-                        </svg>  
-                      ) : ( <svg
-                          width="20px"
-                          fill="red"
-                          height="20px"
-                          viewBox="0 0 48 48"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M0 0h48v48H0z" fill="none" />
-                          <g id="Shopicon">
-                            <g>
-                              <polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585 		" />
-                            </g>
-                          </g>
-                        </svg>
-                       )}
+                {selectedCategory ? (
+                  <svg
+                    width="20px"
+                    height="20px"
+                    viewBox="0 0 48 48"
+                    fill="red"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M0 0h48v48H0z" fill="none" />
+                    <g id="Shopicon">
+                      <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
+                    </g>
+                  </svg>
+                ) : (
+                  <svg
+                    width="20px"
+                    fill="red"
+                    height="20px"
+                    viewBox="0 0 48 48"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M0 0h48v48H0z" fill="none" />
+                    <g id="Shopicon">
+                      <g>
+                        <polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585 		" />
+                      </g>
+                    </g>
+                  </svg>
+                )}
               </CategoryCard>
             </div>
           ))}
@@ -772,61 +327,61 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
           >
             {Object.entries(groupedProducts[selectedCategory]).map(
               ([subcat]) => (
-                <div style={{display:'flex'}}>
-                <CategoryCard
-                  key={subcat}
-                  style={{
-                    background:
-                      selectedSubcat === subcat ? "#e0f7ff" : "#f7f7f7",
-                    border:
-                      selectedSubcat === subcat
-                        ? "2px solid #2196f3"
-                        : "1px solid #eee",
-                    cursor: "pointer",
-                    minWidth: "120px",
-                    textAlign: "center",
-                  }}
-                  onClick={() => {
-                   
-                    handleSubCategory(subcat);
-                  }}
-                >
-                  {subcat}
-                </CategoryCard>
+                <div style={{ display: "flex" }}>
                   <CategoryCard
-                onClick={() => {
-                   setSelectedSubcat(subcat);
-                  
-                }}
-              >
-                {selectedCategory ? (   <svg
-                          width="20px"
-                          height="20px"
-                          viewBox="0 0 48 48"
-                          fill="red"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M0 0h48v48H0z" fill="none" />
-                          <g id="Shopicon">
-                            <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
+                    key={subcat}
+                    style={{
+                      background:
+                        selectedSubcat === subcat ? "#e0f7ff" : "#f7f7f7",
+                      border:
+                        selectedSubcat === subcat
+                          ? "2px solid #2196f3"
+                          : "1px solid #eee",
+                      cursor: "pointer",
+                      minWidth: "120px",
+                      textAlign: "center",
+                    }}
+                    onClick={() => {
+                      handleSubCategory(subcat);
+                    }}
+                  >
+                    {subcat}
+                  </CategoryCard>
+                  <CategoryCard
+                    onClick={() => {
+                      setSelectedSubcat(subcat);
+                    }}
+                  >
+                    {selectedCategory ? (
+                      <svg
+                        width="20px"
+                        height="20px"
+                        viewBox="0 0 48 48"
+                        fill="red"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M0 0h48v48H0z" fill="none" />
+                        <g id="Shopicon">
+                          <polygon points="6.586,30.586 9.414,33.414 24,18.828 38.586,33.414 41.414,30.586 24,13.172 	" />
+                        </g>
+                      </svg>
+                    ) : (
+                      <svg
+                        width="20px"
+                        fill="red"
+                        height="20px"
+                        viewBox="0 0 48 48"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M0 0h48v48H0z" fill="none" />
+                        <g id="Shopicon">
+                          <g>
+                            <polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585 		" />
                           </g>
-                        </svg>  
-                      ) : ( <svg
-                          width="20px"
-                          fill="red"
-                          height="20px"
-                          viewBox="0 0 48 48"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M0 0h48v48H0z" fill="none" />
-                          <g id="Shopicon">
-                            <g>
-                              <polygon points="24,29.171 9.414,14.585 6.586,17.413 24,34.827 41.414,17.413 38.586,14.585 		" />
-                            </g>
-                          </g>
-                        </svg>
-                       )}
-              </CategoryCard>
+                        </g>
+                      </svg>
+                    )}
+                  </CategoryCard>
                 </div>
               )
             )}
@@ -916,68 +471,37 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
         </CountdownContainer>
 
         {/* Trending Costumes */}
-        <SectionTitle>Trending Costumes</SectionTitle>
+        <SectionTitle>Trending </SectionTitle>
         <ProductGrid>
-          {products.map((product) => (
-            <ProductCard key={product.id}>
-              <ProductImage
-                src={product.thumbnails[0]}
-                alt={product.name}
-                onClick={() => handleName(product.name)}
-              />
-              <ProductInfo>
-                <ProductName>{product.name}</ProductName>
-                {product.user_products.map((up) => (
-                  <PriceContainer>
-                    <OriginalPrice discounted={up.discount > 0}>
-                      CFA {up.price.toFixed(2)}p
-                    </OriginalPrice>
-                    {up.discount && (
-                      <DiscountPrice>
-                        ${up.price - up.discount.toFixed(2)}d
-                      </DiscountPrice>
-                    )}
-                  </PriceContainer>
-                ))}
-
-                <LikesContainer>
-                  <FaStar color="#ffc107" /> {product.likes} likes
-                </LikesContainer>
-              </ProductInfo>
-            </ProductCard>
-          ))}
+           <Box
+                 Mobject={products}
+                 Dobject={products}
+                 loaderRef={loaderRef}
+                 SelectedProduct={SelectedProduct}
+                 // handleProductClick={handleProductClick}
+                 highlightText={highlightText}
+                 category={category}
+              
+               />
         </ProductGrid>
 
         {/* New Arrivals */}
         <SectionTitle>New Arrivals</SectionTitle>
         <ProductGrid>
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              onClick={() => handleName(product.name)}
-            >
-              <ProductImage src={product.thumbnails[0]} alt={product.name} />
-              <ProductInfo>
-                <ProductName>{product.name}</ProductName>
-                {product.user_products.map((up) => (
-                  <PriceContainer>
-                    <OriginalPrice discounted={up.discount > 0}>
-                      ${up.price.toFixed(2)}
-                    </OriginalPrice>
-                    {up.discount && (
-                      <DiscountPrice>
-                        ${up.price - up.discount.toFixed(2)}
-                      </DiscountPrice>
-                    )}
-                  </PriceContainer>
-                ))}
-              </ProductInfo>
-            </ProductCard>
-          ))}
+            <Box
+                 Mobject={products}
+                 Dobject={products}
+                 loaderRef={loaderRef}
+                 SelectedProduct={SelectedProduct}
+                 // handleProductClick={handleProductClick}
+                 highlightText={highlightText}
+                 category={category}
+              
+               />
         </ProductGrid>
 
         {/* Customer Reviews */}
-        <SectionTitle>Customer Reviews</SectionTitle>
+        {/* <SectionTitle>Customer Reviews</SectionTitle>
         <ReviewGrid>
           {reviews.map((review) => (
             <ReviewCard key={review.id}>
@@ -998,7 +522,7 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
               <ReviewText>{review.comment}</ReviewText>
             </ReviewCard>
           ))}
-        </ReviewGrid>
+        </ReviewGrid> */}
 
         {/* Last Viewed */}
         {lastViewed.length > 0 && (
@@ -1019,6 +543,8 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
                 ))}
               </ProductGrid>
             </LastViewedContainer>
+
+            <div></div>
           </>
         )}
 
@@ -1057,7 +583,20 @@ const Home = ({ api, glofilteredProducts, searchTerm }) => {
               ))}
           </ProductGrid>
         </PersonalizedContainer> */}
+
+
+
+           <div style={{width:"100%"}}>
+        <Category
+          searchTerm={searchTerm}
+          api={api}
+          loaderRef={loaderRef}
+          highlightText={highlightText}
+          SelectedProduct={SelectedProduct}
+        />
+      </div>
       </Container>
+   
     </>
   );
 };

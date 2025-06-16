@@ -327,6 +327,11 @@ function App() {
                 getProducts={products}
                 setSearchTerm={setSearchTerm}
                 highlightText={highlightText}
+                products={products}
+                loaderRef={loaderRef}
+                handleSearchButton={setHandleProductSearch}
+                allProducts={allProducts}
+                category={category}
               />
             }
           ></Route>

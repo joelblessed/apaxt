@@ -141,7 +141,7 @@ const Category = ({
   console.log("test",groupedProducts)
 
   return (
-    <div style={{ background: "red", width: "100%" }}>
+    <div style={{ background: "", width: "100%" }}>
       <CategoryBox
         Mobject={data.products}
         Dobject={Object.keys(groupedProducts)}
