@@ -23,7 +23,7 @@ const fullPhoneNumber = countryCode + phoneNumber;
     email: "",
     dateOfBirth: null,
     phoneNumber: fullPhoneNumber,
-    country: "",
+    country: "Cameroon",
     city: "",
     address: "",
     gender: "male",

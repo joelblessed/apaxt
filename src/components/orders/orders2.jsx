@@ -75,11 +75,13 @@ const Orders2 = ({ api, glofilteredProducts }) => {
             <th> Order ID</th>
             <th>user ID</th>
             <th>user Image</th>
-            <th>User</th>
+            <th>User Name</th>
             <th>phone number</th>
+            <th>Address</th>
             <th>Date</th>
             <th>Amount</th>
-            <th>Status</th>
+            <th>payment status</th>
+            <th>delivery status</th>
             <th>shipping Option</th>
             <th>Delivery Date</th>
             <th>Item Image</th>
@@ -92,7 +94,15 @@ const Orders2 = ({ api, glofilteredProducts }) => {
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order.id}>
+            <tr key={order.id}   style={
+    order.status === "Delivered"
+      ? { background: "green" }
+      : order.status === "Canceled"
+      ? { backgroundColor: "red" }
+      : order.status === "pending"
+      ? { background: "yellow" }
+      : {}
+  }>
               <td>{order.id}</td>
               <td> (ID: {order.user_id})</td>
               <td>
@@ -103,8 +113,10 @@ const Orders2 = ({ api, glofilteredProducts }) => {
               </td>
               <td>{order.user_data.map((ud) => ud.username)}</td>
               <td>{order.user_data.map((ud) => ud.phone_number)}</td>
+              <td>{order.shipping.address}</td>
               <td>{new Date(order.placed_at).toLocaleString()}</td>
               <td>CFA{order.total_amount}</td>
+              <td>{order.payment_status}</td>
               <td>{order.status}</td>
               <td>{ order.shipping.shippingOption &&  JSON.stringify(order.shipping.shippingOption)}</td>
               <td>{order.shipping.deliveryDate}</td>
