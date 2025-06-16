@@ -264,7 +264,7 @@ const dot3Style = { ...dotStyle, animationDelay: "0.4s" };
                         )?.name
                       }
                     </h3>
-                    <p>${item.final_price}</p>
+                    <p>CFA:{item.final_price}</p>
                     <div className="actions">
                       <button
                         onClick={() => handleIncrement(item.product_id)}
@@ -303,13 +303,13 @@ const dot3Style = { ...dotStyle, animationDelay: "0.4s" };
             <h2>Order Summary</h2>
             <div className="summary-item">
               <span>Subtotal ({items.length} items)</span>
-              <span>${calculateTotal()}</span>
+              <span>CFA:{calculateTotal()}</span>
             </div>
             <div className="summary-item">
               <span>Total</span>
-              <span>${calculateTotal()}</span>
+              <span>CFA:{calculateTotal()}</span>
             </div>
-            <button onclick={handleCheckout}>Proceed to Checkout</button>
+            <button onClick={handleCheckout}>Proceed to Checkout</button>
           </Summary>
         </Grid>
       )}

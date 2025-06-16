@@ -76,11 +76,14 @@ const Orders2 = ({ api, glofilteredProducts }) => {
             <th>user ID</th>
             <th>user Image</th>
             <th>User</th>
+            <th>phone number</th>
             <th>Date</th>
             <th>Amount</th>
             <th>Status</th>
+            <th>shipping Option</th>
             <th>Delivery Date</th>
             <th>Item Image</th>
+            <th>metadata</th>
             <th>Items</th>
             <th>quantity</th>
             <th></th>
@@ -99,9 +102,11 @@ const Orders2 = ({ api, glofilteredProducts }) => {
                 />
               </td>
               <td>{order.user_data.map((ud) => ud.username)}</td>
+              <td>{order.user_data.map((ud) => ud.phone_number)}</td>
               <td>{new Date(order.placed_at).toLocaleString()}</td>
-              <td>${order.total_amount}</td>
+              <td>CFA{order.total_amount}</td>
               <td>{order.status}</td>
+              <td>{ order.shipping.shippingOption &&  JSON.stringify(order.shipping.shippingOption)}</td>
               <td>{order.shipping.deliveryDate}</td>
               <td>
                 {order.cart.map((item) => (
@@ -110,10 +115,19 @@ const Orders2 = ({ api, glofilteredProducts }) => {
                       src={
                         glofilteredProducts.find(
                           (pro) => pro.id === item.product_id
-                        )?.images[0]
+                        )?.thumbnails?.[0]
                       }
                       style={{ width: "100px", height: "100px" }}
                     />
+                  </div>
+                ))}
+              </td>
+              <td>
+                {order.cart.map((item) => (
+                  <div key={item.id}>
+                    {!item.metadata
+                      ? "no specifics"
+                      : JSON.stringify(item.metadata)}
                   </div>
                 ))}
               </td>

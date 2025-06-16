@@ -106,17 +106,18 @@ const Checkout = ({
   const navigate = useNavigate();
   const crt = cart.map((item) => ({
     id: item.id,
-    name: item.name,
-    price: item.price,
+  name: glofilteredProducts.find((pro) => pro.id === item.user_product_id)?.name,
+    price: item.price_at_added - item.discount_at_added,
     quantity: item.quantity,
-    product_id: item.product_id,
+    product_id: item.user_product_id,
+    metadata: item.metadata,
     cancledOrder: false,
   }));
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [shippingLocation, setShippingLocation] = useState("local"); // 'local', 'national', 'international'
   const [shippingMethod, setShippingMethod] = useState("standard"); // 'standard', 'express'
-  const [address, setAddress] = useState(user.address);
+  const [address, setAddress] = useState( localStorage.getItem("address"));
   const [deliveryDate, setDeliveryDate] = useState("");
   const [isPickup, setIsPickup] = useState(false); // For self-pickup
   const [userInfo, setUserInfo] = useState([{
@@ -141,42 +142,41 @@ const Checkout = ({
 
   // Calculate total price of items in the cart
   const calculateTotalAmount = () => {
-    return cart.reduce((total, item) => total + item.quantity * item.price, 0);
+    return cart.reduce((total, item) => total + item.quantity * item.price_at_added - item.discount_at_added, 0);
   };
 
   // Calculate the shipping fee
-  const calculateShippingFee = () => {
-    const totalAmount = calculateTotalAmount();
-    const totalWeight = cart.reduce(
-      (total, item) =>
-        total +
-        glofilteredProducts.find((pro) => pro.id === item.product_id)?.weight *
-          item.quantity,
-      0
-    );
+const calculateShippingFee = () => {
+  const totalAmount = calculateTotalAmount();
+  const totalWeight = cart.reduce((total, item) => {
+    const product = glofilteredProducts.find((pro) => pro.id === item.product_id);
+    const kg = product?.dimensions?.kg || 0;
+    return total + kg * item.quantity;
+  },
+ 0);
 
     // Free shipping for pickup
     if (isPickup) {
       return 0;
     }
 
-    if (totalAmount >= 50000) {
+    if (totalAmount >= 5000000) {
       return 0; // Free shipping if total is over $50
     }
 
     if (shippingLocation === "local") {
-      return shippingMethod === "standard" ? totalWeight * 2 : totalWeight * 3; // Different costs for standard/express
+      return shippingMethod === "standard" ? totalWeight * 200 : totalWeight * 300; // Different costs for standard/express
     }
 
     if (shippingLocation === "national") {
-      return shippingMethod === "standard" ? totalWeight * 4 : totalWeight * 5; // Different costs for standard/express
+      return shippingMethod === "standard" ? totalWeight * 400 : totalWeight * 500; // Different costs for standard/express
     }
 
     if (shippingLocation === "international") {
-      return shippingMethod === "standard" ? totalWeight * 6 : totalWeight * 7; // Different costs for standard/express
+      return shippingMethod === "standard" ? totalWeight * 6000: totalWeight * 7000; // Different costs for standard/express
     }
 
-    return 10; // Default shipping fee
+    return 100; // Default shipping fee
   };
 
   // Calculate the total price with shipping fee
@@ -233,6 +233,7 @@ const Checkout = ({
           address,
           deliveryDate,
           isPickup,
+          shippingOption: { [shippingLocation]: shippingMethod },
         },
       };
 
@@ -289,12 +290,12 @@ const Checkout = ({
           {cart.map((item) => (
             <CartItem key={item.id}>
               <CartDetails>
-                {item.name} - Quantity: {item.quantity} - Price: ${item.price} -
+                {item.name} - Quantity: {item.quantity} - Price: CFA:{item.price_at_added - item.discount_at_added} -
                 Weight:{" "}
-                {
-                  glofilteredProducts.find((pro) => pro.id === item.product_id)
-                    ?.weight
-                }
+               {
+  glofilteredProducts.find((pro) => pro.id === item.product_id)
+    ?.dimensions?.kg
+}
                 kg
               </CartDetails>
             </CartItem>
@@ -302,7 +303,7 @@ const Checkout = ({
         </CartList>
       )}
 
-      <TotalAmount>Total Amount: ${calculateTotalAmount()}</TotalAmount>
+      <TotalAmount>Total Amount: CFA:{calculateTotalAmount()}</TotalAmount>
 
       <div>
         <label>Shipping Location:</label>
@@ -358,9 +359,9 @@ const Checkout = ({
         />
       </div>
 
-      <TotalAmount>Shipping Fee: ${calculateShippingFee()}</TotalAmount>
+      <TotalAmount>Shipping Fee: CFA:{calculateShippingFee()}</TotalAmount>
       <TotalAmount>
-        Total with Shipping: ${calculateTotalWithShipping()}
+        Total with Shipping: CFA:{calculateTotalWithShipping()}
       </TotalAmount>
 
       <Button
