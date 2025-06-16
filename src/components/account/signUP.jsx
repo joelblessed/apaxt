@@ -4,12 +4,17 @@ import { toast } from "react-toastify";
 import "./signUP.css";
 import Select from "react-select";
 import DateOfBirthInput from "../support/datePicker";
-import { Countries, PhoneCode } from "../support/usefulArrays";
+import { Countries, PhoneCode, CountryCities } from "../support/usefulArrays";
 
 const SignUP = ({ api }) => {
   const navigate = useNavigate();
 
   // Form state with better initial values
+  const [countryCode, setCountryCode] = useState(PhoneCode[45]?.phone || "+1");
+const [phoneNumber, setPhoneNumber] = useState()
+
+const fullPhoneNumber = countryCode + phoneNumber;
+  
   const [formData, setFormData] = useState({
     userName: "",
     firstName: "",
@@ -17,7 +22,7 @@ const SignUP = ({ api }) => {
     password: "",
     email: "",
     dateOfBirth: null,
-    phoneNumber: "",
+    phoneNumber: fullPhoneNumber,
     country: "",
     city: "",
     address: "",
@@ -31,6 +36,7 @@ const SignUP = ({ api }) => {
   const [search, setSearch] = useState("");
   const [referralValid, setReferralValid] = useState(null);
   const [loading, setLoading] = useState(false);
+
 
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
@@ -201,10 +207,13 @@ const SignUP = ({ api }) => {
     }
   }, []);
 
-  const phoneOptions = phoneCode.map((code) => ({
-    value: code.phone,
-    label: `${code.emoji} ${code.name} (${code.phone})`,
-  }));
+const phoneOptions = phoneCode.map((code) => ({
+  value: code.phone,
+  label: `${code.emoji} ${code.name} (${code.phone})`,
+}));
+
+  const cities = CountryCities[formData.country] || [];
+
 
   return (
     <div className="signup-container">
@@ -331,72 +340,79 @@ const SignUP = ({ api }) => {
               )}
             </div>
 
-            {/* Phone Number */}
-            <label>
-              Phone Number <span className="errmsg">*</span>
-            </label>
-            <div style={{ display: "flex" }} className="form-group">
-              <div style={{ width: "30%", background: "red" }}>
-                <Select
-                  name="phoneNumber"
-                  value={phoneOptions.find(
-                    (opt) => opt.value === formData.phoneNumber
-                  )}
-                  onChange={(option) =>
-                    handleChange({
-                      target: { name: "phoneNumber", value: option.value },
-                    })
-                  }
-                  options={phoneOptions}
-              
-                  placeholder="Select Country Code"
-                />
-              </div>
-              <div style={{ width: "70%", marginLeft: "auto" }}>
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  required
-                  disabled={formData.phoneNumber.length < 1}
-                />
-              </div>
-            </div>
+      {/* phone Number */}
+<label>
+  Phone Number <span className="errmsg">*</span>
+</label>
+<div style={{ display: "flex" }} className="form-group">
+  <div style={{ width: "30%" }}>
+    <Select
+      name="countryCode"
+      value={phoneOptions.find((opt) => opt.value === countryCode)}
+      onChange={(option) => setCountryCode(option.value)}
+      options={phoneOptions}
+      placeholder="Select Country Code"
+      isSearchable
+    />
+  </div>
+  <div style={{ width: "70%", marginLeft: "auto", display: "flex", alignItems: "center" }}>
+    <span   style={{ height:"43px", padding: "8px", background: "#f8f9fa", border: "1px solid #ccc", borderRadius: "4px 0 0 4px" , }}>
+      {countryCode}
+    </span>
+    <input
+      type="tel"
+      name="phoneNumber"
+      value={phoneNumber}
+      onChange={(e) => setPhoneNumber(e.target.value)}
+      required
+      style={{ borderRadius: "0 4px 4px 0", borderLeft: "none", flex: 1 }}
+      // Do NOT include the code in the input value
+    />
+   
+  </div>
+</div>
 
-            {/* City */}
-            <div className="form-group">
-              <label>
-                City <span className="errmsg">*</span>
-              </label>
-              <input
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                required
-              />
-            </div>
+             {/* Country */}
+      <div className="form-group">
+        <label>
+          Country <span className="errmsg">*</span>
+        </label>
+        <select
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Country</option>
+          {Object.keys(CountryCities).map((country) => (
+            <option key={country} value={country}>
+              {country}
+            </option>
+          ))}
+        </select>
+      </div>
 
-            {/* Country */}
-            <div className="form-group">
-              <label>
-                Country <span className="errmsg">*</span>
-              </label>
-              <select
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select Country</option>
-                {countries.map((country, index) => (
-                  <option key={index} value={country}>
-                    {country}
-                  </option>
-                ))}
-              </select>
-            </div>
-
+      {/* City */}
+      {formData.country && (
+        <div className="form-group">
+          <label>
+            City <span className="errmsg">*</span>
+          </label>
+          <select
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select City</option>
+            {cities.map((city, index) => (
+              <option key={index} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
             {/* Address */}
             <div className="form-group">
               <label>
