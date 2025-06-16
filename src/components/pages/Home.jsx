@@ -35,6 +35,7 @@ import {
   OriginalPrice,
   LastViewedContainer,
   LikesContainer,
+  PersonalizedContainer
 } from "./HomeStyled";
 import SelectedProduct from "./selectedProduct";
 
@@ -548,8 +549,22 @@ const Home = ({
           </>
         )}
 
+      
+
+           <div style={{width:"100%"}}>
+        <Category
+          searchTerm={searchTerm}
+          api={api}
+          loaderRef={loaderRef}
+          highlightText={highlightText}
+          SelectedProduct={SelectedProduct}
+        />
+      </div>
+
+
+
         {/* Personalized Picks */}
-        {/* <SectionTitle>Personalized Picks For You</SectionTitle>
+         <SectionTitle>Personalized Picks For You</SectionTitle>
         <PersonalizedContainer>
           <ProductGrid>
             {[...glofilteredProducts]
@@ -562,6 +577,7 @@ const Home = ({
                 >
                   <ProductImage
                     src={product.thumbnails[0]}
+                    loading="lazy"
                     alt={product.name}
                   />
                   <ProductInfo>
@@ -582,19 +598,9 @@ const Home = ({
                 </ProductCard>
               ))}
           </ProductGrid>
-        </PersonalizedContainer> */}
+        </PersonalizedContainer> 
 
 
-
-           <div style={{width:"100%"}}>
-        <Category
-          searchTerm={searchTerm}
-          api={api}
-          loaderRef={loaderRef}
-          highlightText={highlightText}
-          SelectedProduct={SelectedProduct}
-        />
-      </div>
       </Container>
    
     </>
