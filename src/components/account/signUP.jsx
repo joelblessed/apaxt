@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./signUP.css";
+import Select from "react-select";
 import DateOfBirthInput from "../support/datePicker";
+import { Countries, PhoneCode } from "../support/usefulArrays";
 
 const SignUP = ({ api }) => {
   const navigate = useNavigate();
-  
+
   // Form state with better initial values
   const [formData, setFormData] = useState({
     userName: "",
@@ -21,39 +23,74 @@ const SignUP = ({ api }) => {
     address: "",
     gender: "male",
     referralCode: "",
-    role: "user"
+    role: "user",
   });
 
-  const [countries, setCountries] = useState(
-     ['Afghanistan', 'Åland Islands', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bangladesh', 'Barbados', 'Bahamas', 'Bahrain', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'British Indian Ocean Territory', 'British Virgin Islands', 'Brunei Darussalam', 'Bulgaria', 'Burkina Faso', 'Burma', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 'Central African Republic', 'Chad', 'Chile', 'China', 'Christmas Island', 'Cocos (Keeling) Islands', 'Colombia', 'Comoros', 'Congo-Brazzaville', 'Congo-Kinshasa', 'Cook Islands', 'Costa Rica', '$_[', 'Croatia', 'Curaçao', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'East Timor', 'Ecuador', 'El Salvador', 'Egypt', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'Falkland Islands', 'Faroe Islands', 'Federated States of Micronesia', 'Fiji', 'Finland', 'France', 'French Guiana', 'French Polynesia', 'French Southern Lands', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Greenland', 'Grenada', 'Guadeloupe', 'Guam', 'Guatemala', 'Guernsey', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Heard and McDonald Islands', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Martinique', 'Mauritania', 'Mauritius', 'Mayotte', 'Mexico', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Niue', 'Norfolk Island', 'Northern Mariana Islands', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Pitcairn Islands', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Réunion', 'Romania', 'Russia', 'Rwanda', 'Saint Barthélemy', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin', 'Saint Pierre and Miquelon', 'Saint Vincent', 'Samoa', 'San Marino', 'São Tomé and Príncipe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Sint Maarten', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Georgia', 'South Korea', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard and Jan Mayen', 'Sweden', 'Swaziland', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Vietnam', 'Venezuela', 'Wallis and Futuna', 'Western Sahara', 'Yemen', 'Zambia', 'Zimbabwe']
-  );
+  const [countries, setCountries] = useState(Countries);
+  const [phoneCode, SetPhoneCode] = useState(PhoneCode);
+  const [search, setSearch] = useState("");
   const [referralValid, setReferralValid] = useState(null);
   const [loading, setLoading] = useState(false);
- 
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
+  const [rePassword, setRePassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
+
+    if (name === "rePassword") {
+      setRePassword(value);
+      setPasswordError(
+        formData.password && value !== formData.password
+          ? "Passwords do not match"
+          : ""
+      );
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+      if (name === "password" && rePassword) {
+        setPasswordError(value !== rePassword ? "Passwords do not match" : "");
+      }
+    }
   };
 
   // Handle date of birth change
   const handleDateChange = (date) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      dateOfBirth: date
+      dateOfBirth: date,
     }));
   };
 
   // Validate form
   const validateForm = () => {
-    const { userName, firstName,lastName, email, password, dateOfBirth, city, address, phoneNumber } = formData;
+    const {
+      userName,
+      firstName,
+      lastName,
+      email,
+      password,
+      dateOfBirth,
+      city,
+      address,
+      phoneNumber,
+    } = formData;
     const errors = [];
 
     if (!userName) errors.push("Username");
+    if (/\s/.test(userName)) {
+      toast.warning("Username should not contain spaces");
+      return false;
+    }
     if (!firstName) errors.push("first Name");
     if (!lastName) errors.push("last Name");
     if (!dateOfBirth) errors.push("Date of Birth");
@@ -89,14 +126,14 @@ const SignUP = ({ api }) => {
     setLoading(true);
 
     try {
-      const response = await fetch( `${api}/signup`, {
+      const response = await fetch(`${api}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
           referredBy: formData.referralCode || null,
-          signUpOn: new Date().toISOString()
-        })
+          signUpOn: new Date().toISOString(),
+        }),
       });
 
       const data = await response.json();
@@ -108,7 +145,7 @@ const SignUP = ({ api }) => {
       toast.success("Registered successfully!");
       navigate("/login");
     } catch (error) {
-      toast.error(  `Registration failed: ${error.message}`);
+      toast.error(`Registration failed: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -123,7 +160,9 @@ const SignUP = ({ api }) => {
       }
 
       try {
-        const response = await fetch( `${api}/check-referral?code=${formData.referralCode}`);
+        const response = await fetch(
+          `${api}/check-referral?code=${formData.referralCode}`
+        );
         const data = await response.json();
         setReferralValid(data.valid);
       } catch (error) {
@@ -158,9 +197,14 @@ const SignUP = ({ api }) => {
     const params = new URLSearchParams(window.location.search);
     const refCode = params.get("ref");
     if (refCode) {
-      setFormData(prev => ({ ...prev, referralCode: refCode }));
+      setFormData((prev) => ({ ...prev, referralCode: refCode }));
     }
   }, []);
+
+  const phoneOptions = phoneCode.map((code) => ({
+    value: code.phone,
+    label: `${code.emoji} ${code.name} (${code.phone})`,
+  }));
 
   return (
     <div className="signup-container">
@@ -168,14 +212,14 @@ const SignUP = ({ api }) => {
         <div className="signup-card-header">
           <h1>User Registration</h1>
         </div>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="signup-card-body">
-        
-
             {/* first Name */}
             <div className="form-group">
-              <label>First Name <span className="errmsg">*</span></label>
+              <label>
+                First Name <span className="errmsg">*</span>
+              </label>
               <input
                 name="firstName"
                 value={formData.firstName}
@@ -184,9 +228,11 @@ const SignUP = ({ api }) => {
               />
             </div>
 
-             {/* last Name */}
-             <div className="form-group">
-              <label>Last Name <span className="errmsg">*</span></label>
+            {/* last Name */}
+            <div className="form-group">
+              <label>
+                Last Name <span className="errmsg">*</span>
+              </label>
               <input
                 name="lastName"
                 value={formData.lastName}
@@ -195,9 +241,11 @@ const SignUP = ({ api }) => {
               />
             </div>
 
-                {/* Username */}
-                <div className="form-group">
-              <label>User Name <span className="errmsg">*</span></label>
+            {/* Username */}
+            <div className="form-group">
+              <label>
+                User Name <span className="errmsg">*</span>
+              </label>
               <input
                 name="userName"
                 value={formData.userName}
@@ -208,7 +256,6 @@ const SignUP = ({ api }) => {
 
             {/* Date of Birth */}
             <div className="form-group">
-              <label>Date of Birth <span className="errmsg">*</span></label>
               <DateOfBirthInput
                 selectedDate={formData.dateOfBirth}
                 onChange={handleDateChange}
@@ -217,7 +264,9 @@ const SignUP = ({ api }) => {
 
             {/* Email */}
             <div className="form-group">
-              <label>Email <span className="errmsg">*</span></label>
+              <label>
+                Email <span className="errmsg">*</span>
+              </label>
               <input
                 type="email"
                 name="email"
@@ -229,32 +278,97 @@ const SignUP = ({ api }) => {
 
             {/* Password */}
             <div className="form-group">
-              <label>Password <span className="errmsg">*</span></label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                minLength="8"
-              />
+              <label>
+                Password <span className="errmsg">*</span>
+              </label>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  minLength="8"
+                  style={{ flex: 1 }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  style={{ marginLeft: 8 }}
+                  tabIndex={-1}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+            <div className="form-group">
+              <label>
+                Re-enter Password <span className="errmsg">*</span>
+              </label>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <input
+                  type={showRePassword ? "text" : "password"}
+                  name="rePassword"
+                  value={rePassword}
+                  onChange={handleChange}
+                  required
+                  minLength="8"
+                  style={{ flex: 1 }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowRePassword((prev) => !prev)}
+                  style={{ marginLeft: 8 }}
+                  tabIndex={-1}
+                >
+                  {showRePassword ? "Hide" : "Show"}
+                </button>
+              </div>
+              {passwordError && (
+                <span className="errmsg" style={{ color: "red" }}>
+                  {passwordError}
+                </span>
+              )}
             </div>
 
             {/* Phone Number */}
-            <div className="form-group">
-              <label>Phone Number <span className="errmsg">*</span></label>
-              <input
-                type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                required
-              />
+            <label>
+              Phone Number <span className="errmsg">*</span>
+            </label>
+            <div style={{ display: "flex" }} className="form-group">
+              <div style={{ width: "30%", background: "red" }}>
+                <Select
+                  name="phoneNumber"
+                  value={phoneOptions.find(
+                    (opt) => opt.value === formData.phoneNumber
+                  )}
+                  onChange={(option) =>
+                    handleChange({
+                      target: { name: "phoneNumber", value: option.value },
+                    })
+                  }
+                  options={phoneOptions}
+              
+                  placeholder="Select Country Code"
+                />
+              </div>
+              <div style={{ width: "70%", marginLeft: "auto" }}>
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  required
+                  disabled={formData.phoneNumber.length < 1}
+                />
+              </div>
             </div>
 
             {/* City */}
             <div className="form-group">
-              <label>City <span className="errmsg">*</span></label>
+              <label>
+                City <span className="errmsg">*</span>
+              </label>
               <input
                 name="city"
                 value={formData.city}
@@ -265,7 +379,9 @@ const SignUP = ({ api }) => {
 
             {/* Country */}
             <div className="form-group">
-              <label>Country <span className="errmsg">*</span></label>
+              <label>
+                Country <span className="errmsg">*</span>
+              </label>
               <select
                 name="country"
                 value={formData.country}
@@ -283,7 +399,9 @@ const SignUP = ({ api }) => {
 
             {/* Address */}
             <div className="form-group">
-              <label>Address <span className="errmsg">*</span></label>
+              <label>
+                Address <span className="errmsg">*</span>
+              </label>
               <input
                 name="address"
                 value={formData.address}
@@ -297,10 +415,14 @@ const SignUP = ({ api }) => {
               <label>
                 Referral Code (Optional)
                 {referralValid === false && (
-                  <span style={{ color: "red", marginLeft: "5px" }}>Invalid Code</span>
+                  <span style={{ color: "red", marginLeft: "5px" }}>
+                    Invalid Code
+                  </span>
                 )}
                 {referralValid === true && (
-                  <span style={{ color: "green", marginLeft: "5px" }}>Valid Code</span>
+                  <span style={{ color: "green", marginLeft: "5px" }}>
+                    Valid Code
+                  </span>
                 )}
               </label>
               <input
