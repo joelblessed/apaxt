@@ -585,11 +585,11 @@ const Home = ({
                     {product.user_products.map((up) => (
                       <PriceContainer>
                         <OriginalPrice discounted={up.discount > 0}>
-                          ${up.price.toFixed(2)}
+                          CFA{up.price.toFixed(2)}
                         </OriginalPrice>
                         {up.discount && (
                           <DiscountPrice>
-                            ${up.price - up.discount.toFixed(2)}
+                            CFA{up.price - up.discount.toFixed(2)}
                           </DiscountPrice>
                         )}
                       </PriceContainer>
