@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef,useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../../translations/i18n";
 import { useTranslation } from "react-i18next";
@@ -32,6 +32,7 @@ const MobileCard = ({
   addToCartAPI,
   addToWishlist,
   handleProductClick,
+  SelectedSeller,
   show,
   position,
   Iposition,
@@ -52,6 +53,9 @@ const MobileCard = ({
 }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch(); // Function to check screen size
+  const [selectedSeller, setSelectedSeller] = useState([])
+  
+ 
 
   const mstyles = {
     Mcontainer: {
@@ -80,7 +84,8 @@ const MobileCard = ({
 
   return (
     <React.Fragment>
-      {Mobject.user_products.map((userp)=>(
+     {Array.isArray(Mobject.user_products) && Mobject.user_products.length > 0 ? (
+      Mobject.user_products.map((userp) => (
 
    
       <div className="animated-box" style={{ ...mstyles.Mcontainer }}>
@@ -115,6 +120,9 @@ const MobileCard = ({
                     }}
                     onClick={() => {
                       handleProductClick(Mobject);
+                      SelectedSeller(userp)
+                        
+
                     }}
                   />
                 ) : (
@@ -165,7 +173,7 @@ const MobileCard = ({
                   <StatusContainer>
                     <StatusTitle>
                       {t("Status")}:
-                      <StatusContent>{Mobject.user_products.map((userp => userp.status))}</StatusContent>
+                      <StatusContent>{ userp.status}</StatusContent>
                     </StatusTitle>
                   </StatusContainer>
                   <Price key={index}>
@@ -210,7 +218,8 @@ const MobileCard = ({
         )}
         <div ref={loaderRef}> {t()}</div>
       </div>
-         ))}
+              ))
+    ) : null}
     </React.Fragment>
   );
 };

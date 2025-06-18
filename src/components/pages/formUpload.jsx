@@ -1,13 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./formUpload.css";
 import { AuthContext } from "../../AuthContext";
-import {Categories} from "../support/usefulArrays"
+import Select from "react-select";
+import { Categories } from "../support/usefulArrays";
+import { Countries, PhoneCode, CountryCities } from "../support/usefulArrays";
 
 const FormUpload = ({ api }) => {
   const { user } = useContext(AuthContext);
   const userId = localStorage.getItem("userId");
-const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
+ const [phoneCode, SetPhoneCode] = useState(PhoneCode);
 
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [countryCode, setCountryCode] = useState(PhoneCode[45]?.phone || "+1");
+
+  const fullPhoneNumber = countryCode + phoneNumber;
   // Form state
   const [formData, setFormData] = useState({
     name_en: "",
@@ -22,10 +29,11 @@ const token = localStorage.getItem("token")
     description_fr: "",
     status: "",
     address: "",
+    country: "Cameroon",
     city: "",
     colors: [],
     thumbnail_index: 0,
-    phone_number: "",
+    phone_number: fullPhoneNumber,
     brand: { name: "" },
   });
 
@@ -41,9 +49,12 @@ const token = localStorage.getItem("token")
   const [newDimKey, setNewDimKey] = useState("");
   const [newDimValue, setNewDimValue] = useState("");
 
+
+ 
+
+
   // Categories data
-  const categories = Categories
-  
+  const categories = Categories;
 
   // Initialize form with user data
   useEffect(() => {
@@ -189,12 +200,10 @@ const token = localStorage.getItem("token")
     // Append all data
     formDataToSend.append("product", JSON.stringify(productData));
 
-
     // Append images
     images.forEach((file) => {
       formDataToSend.append("images", file);
     });
-
 
     try {
       const response = await fetch(`${api}/upload`, {
@@ -202,8 +211,7 @@ const token = localStorage.getItem("token")
         headers: { Authorization: `Bearer ${token}` },
         body: formDataToSend,
       });
-    console.log("form", formDataToSend)
-
+      console.log("form", formDataToSend);
 
       if (!response.ok) {
         throw new Error(await response.text());
@@ -241,6 +249,14 @@ const token = localStorage.getItem("token")
     }
   };
 
+  const phoneOptions = phoneCode.map((code) => ({
+    value: code.phone,
+    label: `${code.emoji} ${code.name} (${code.phone})`,
+  }));
+
+
+const cities = CountryCities[formData.country] || [];
+  
   return (
     <div className="form-container">
       <h2>Upload Product</h2>
@@ -357,8 +373,6 @@ const token = localStorage.getItem("token")
             <span className="error">{errors.number_in_stock}</span>
           )}
         </div>
-
-       
 
         {/* Color Management */}
         <div className="form-group">
@@ -482,41 +496,112 @@ const token = localStorage.getItem("token")
           {errors.description && <p className="error">{errors.description}</p>}
 
           <label>Description (FR)</label>
-          <textarea value={formData.description_fr} onChange={handleChange} name="description_fr" />
+          <textarea
+            value={formData.description_fr}
+            onChange={handleChange}
+            name="description_fr"
+          />
           {errors.description_fr && (
             <p className="error">{errors.description_fr}</p>
           )}
         </div>
 
-        {/* City */}
-        <div className="form-group">
-          <label>City *</label>
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            placeholder="city"
-          />
-          {errors.city && <span className="error">{errors.city}</span>}
+         {/* Country */}
+             <div className="form-group">
+               <label>
+                 Country <span className="errmsg">*</span>
+               </label>
+               <select
+                 name="country"
+                 value={formData.country}
+                 onChange={handleChange}
+                 required
+               >
+                 <option value="">Select Country</option>
+                 {Object.keys(CountryCities).map((country) => (
+                   <option key={country} value={country}>
+                     {country}
+                   </option>
+                 ))}
+               </select>
+             </div>
+       
+             {/* City */}
+             {formData.country && (
+               <div className="form-group">
+                 <label>
+                   City <span className="errmsg">*</span>
+                 </label>
+                 <select
+                   name="city"
+                   value={formData.city}
+                   onChange={handleChange}
+                   required
+                 >
+                   <option value="">Select City</option>
+                   {cities.map((city, index) => (
+                     <option key={index} value={city}>
+                       {city}
+                     </option>
+                   ))}
+                 </select>
+               </div>
+             )}
+
+        {/* phone Number */}
+        <label>
+          Phone Number <span className="errmsg">*</span>
+        </label>
+        <div style={{ display: "flex" }} className="form-group">
+          <div style={{ width: "30%" }}>
+            <Select
+              name="countryCode"
+              value={phoneOptions.find((opt) => opt.value === countryCode)}
+              onChange={(option) => setCountryCode(option.value)}
+              options={phoneOptions}
+              placeholder="Select Country Code"
+              isSearchable
+            />
+          </div>
+          <div
+            style={{
+              width: "70%",
+              marginLeft: "auto",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <span
+              style={{
+                height: "43px",
+                padding: "8px",
+                background: "#f8f9fa",
+                border: "1px solid #ccc",
+                borderRadius: "4px 0 0 4px",
+              }}
+            >
+              {countryCode}
+            </span>
+            <input
+              type="tel"
+              name="phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              required
+              style={{
+                borderRadius: "0 4px 4px 0",
+                borderLeft: "none",
+                flex: 1,
+              }}
+              // Do NOT include the code in the input value
+            />
+          </div>
+        
         </div>
-        {/* phone number */}
-        <div className="form-group">
-          <label>Phone Number *</label>
-          <input
-            type="number"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleChange}
-            placeholder="Phone number"
-          />
-          {errors.phone_number && (
-            <span className="error">{errors.phone_number}</span>
-          )}
-        </div>
+
         {/* thumbnail Index */}
         <div className="form-group">
-          <label>Phone Number *</label>
+          <label>thumbnails *</label>
           <input
             type="number"
             name="thumbnail_index"

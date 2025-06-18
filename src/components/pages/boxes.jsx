@@ -44,6 +44,7 @@ const Box = ({
   images,
   filteredProducts,
   SelectedProduct,
+  Seller,
   addToCart,
   handleShowAlert,
   showAlert,
@@ -119,8 +120,9 @@ const Box = ({
 
 
   const handleProductClick = useCallback(
-    (product) => {
+    (product, selectedSeller) => {
       SelectedProduct(product);
+   
       localStorage.setItem("selectedProduct", JSON.stringify(product));
       navigate("/selectedProduct");
 
@@ -142,21 +144,8 @@ const Box = ({
     [SelectedProduct, navigate]
   );
 
-  // const handleProductClick = (product) => {
-  //   SelectedProduct(product);
-  //   localStorage.setItem("selectedProduct", product);
-  //   navigate("/selectedProduct");
-
-  //   fetch(`${api}/viewedProducts`, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       productId: product.id,
-  //     }),
-  //   });
-  // };
-  // const navigate = useNavigate();
-
+  
+ 
   return (
     <>
       {isMobile ? (
@@ -169,6 +158,7 @@ const Box = ({
               handleWislistToggle={handleWislistToggle}
               isInWishlist={isInWishlist}
               handleProductClick={handleProductClick}
+              SelectedSeller={Seller}
               show={show}
               loaderRef={loaderRef}
               category={category}
@@ -210,6 +200,7 @@ const Box = ({
               showDetails={showDetails}
               selectedProduct={selectedProduct}
               handleProductHid={handleProductHid}
+              
               setSelectedProduct={setSelectedProduct}
               isExpanded={isExpanded}
               toggleLike={toggleLike}

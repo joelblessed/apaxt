@@ -19,6 +19,7 @@ const Products = ({
   highlightText,
   loaderRef,
   searchTerm,
+  Seller,
   setSearchTerm,
 
   api,
@@ -216,6 +217,7 @@ console.log(fetched)
         Dobject={products}
         loaderRef={loaderRef}
         SelectedProduct={SelectedProduct}
+        Seller={Seller}
         // handleProductClick={handleProductClick}
         highlightText={highlightText}
         category={category}

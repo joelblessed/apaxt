@@ -28,10 +28,11 @@ import {
   LoadingMessage,
 } from "./selectedProductStyles";
 
-const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
+const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm }) => {
   const dispatch = useDispatch();
-    const navigate = useNavigate();
-  
+  const navigate = useNavigate();
+  console.log("test",selectedProduct)
+
   const [activeTab, setActiveTab] = useState("details"); // Tabs state
   const [isExpanded, setIsExpanded] = useState(false);
   const maxLength = 100;
@@ -52,100 +53,124 @@ const SelectedProduct = ({ selectedProduct, searchTerm, setSearchTerm }) => {
   };
 
   return (
-    <Container style={{marginTop:"150px"}}>
+    <Container style={{ marginTop: "150px" }}>
       {/* Product Image & Details */}
-      <ProductWrapper>
-        <ImageContainer>
-          {selectedProduct.images?.length > 0 ? (
-            <Slider {...sliderSettings}>
-              {selectedProduct.images.map((imgUrl, index) => (
-                <div key={index}>
-                  <ProductImage
-                    src={imgUrl}
-                    alt={`Product Image ${index + 1}`}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </Slider>
-          ) : (
-            <NoImage>No images available</NoImage>
-          )}
-        </ImageContainer>
 
-        <DetailsContainer>
-          <SellerLink  to={`/productsByOwner/${selectedProduct.user_products.map((userp)=>(
-                  userp.owner
-                ))}`}>
-            Seller: {selectedProduct.user_products.map((userp)=>(
-                  userp.owner
-                ))}
-          </SellerLink>
-          <ProductTitle>{selectedProduct.name}</ProductTitle>
-          <ProductPrice>Price: CFA{selectedProduct.price}</ProductPrice>
-
-          {/* Display Rating Above Add to Cart Button */}
-          {selectedProduct.rating && (
-            <Rating>⭐ {selectedProduct.likes} / 5</Rating>
-          )}
-
-          <ButtonsContainer>
-            <ActionButton
-              
-            >
-           <AddToCartButton product={selectedProduct}/>
-            </ActionButton>
-            <ActionButton secondary>Add To Wishlist<label><WishlistButton product={selectedProduct}/></label></ActionButton>
-          </ButtonsContainer>
-        </DetailsContainer>
-      </ProductWrapper>
-
-      {/* Tabs for Details, Seller Info, and Description */}
-      <Tabs>
-        <TabButton
-          active={activeTab === "details"}
-          onClick={() => setActiveTab("details")}
-        >
-          Product Details
-        </TabButton>
-        <TabButton
-          active={activeTab === "seller"}
-          onClick={() => setActiveTab("seller")}
-        >
-          Seller Info
-        </TabButton>
-        <TabButton
-          active={activeTab === "description"}
-          onClick={() => setActiveTab("description")}
-        >
-          Description
-        </TabButton>
-      </Tabs>
-
-      <TabContent>
-        {activeTab === "details" && (
-          <p>
-            <strong>Stock:</strong> {selectedProduct.stock} available
-          </p>
+    
+     {Array.isArray(selectedProduct.user_products) &&
+selectedProduct.user_products.length > 0
+  ? selectedProduct.user_products.map((userp) => (
+            <>
+          {seller && (
+  <>
+    <ProductWrapper>
+      <ImageContainer>
+        {selectedProduct.images?.length > 0 ? (
+          <Slider {...sliderSettings}>
+            {selectedProduct.images.map((imgUrl, index) => (
+              <div key={index}>
+                <ProductImage
+                  src={imgUrl}
+                  alt={`Product Image ${index + 1}`}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          <NoImage>No images available</NoImage>
         )}
-        {activeTab === "seller" && (
-          <p>
-            <strong>Seller Contact:</strong> {selectedProduct.user_products.map((userp)=>(
-                  userp.phone_number
-                ))}
-          </p>
+      </ImageContainer>
+
+      <DetailsContainer>
+        <SellerLink to={`/productsByOwner/${seller.owner}`}>
+          Seller: {seller.owner}
+        </SellerLink>
+        <ProductTitle>{selectedProduct.name}</ProductTitle>
+        <ProductPrice>Price: CFA{seller.price}</ProductPrice>
+
+        {/* Display Rating Above Add to Cart Button */}
+        {selectedProduct.rating && (
+          <Rating>⭐ {selectedProduct.likes} / 5</Rating>
         )}
-        {activeTab === "description" && <div>
-            <p>
-        {isExpanded ? selectedProduct.description : selectedProduct.description.slice(0, maxLength) + "..."}
-      </p>
-      {selectedProduct.description.length > maxLength && (
-        <button onClick={() => setIsExpanded(!isExpanded)} style={{color:"white", background:"orange", borderRadius:'10px', padding:'5x', fontWeight:"bold"}}>
-          {isExpanded ? "Show Less" : "Show More"}
-        </button>
+
+        <ButtonsContainer>
+          <ActionButton>
+            <AddToCartButton product={selectedProduct} />
+          </ActionButton>
+          <ActionButton secondary>
+            Add To Wishlist
+            <label>
+              <WishlistButton product={selectedProduct} />
+            </label>
+          </ActionButton>
+        </ButtonsContainer>
+      </DetailsContainer>
+    </ProductWrapper>
+
+    {/* Tabs for Details, Seller Info, and Description */}
+    <Tabs>
+      <TabButton
+        active={activeTab === "details"}
+        onClick={() => setActiveTab("details")}
+      >
+        Product Details
+      </TabButton>
+      <TabButton
+        active={activeTab === "seller"}
+        onClick={() => setActiveTab("seller")}
+      >
+        Seller Info
+      </TabButton>
+      <TabButton
+        active={activeTab === "description"}
+        onClick={() => setActiveTab("description")}
+      >
+        Description
+      </TabButton>
+    </Tabs>
+
+    <TabContent>
+      {activeTab === "details" && (
+        <p>
+          <strong>Stock:</strong> {seller.number_in_stock} available
+        </p>
       )}
-            </div>}
-      </TabContent>
+      {activeTab === "seller" && (
+        <p>
+          <strong>Seller Contact:</strong> {seller.phone_number}
+        </p>
+      )}
+      {activeTab === "description" && (
+        <div>
+          <p>
+            {isExpanded
+              ? selectedProduct.description
+              : selectedProduct.description.slice(0, maxLength) + "..."}
+          </p>
+          {selectedProduct.description.length > maxLength && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              style={{
+                color: "white",
+                background: "orange",
+                borderRadius: "10px",
+                padding: "5x",
+                fontWeight: "bold",
+              }}
+            >
+              {isExpanded ? "Show Less" : "Show More"}
+            </button>
+          )}
+        </div>
+      )}
+    </TabContent>
+  </>
+)}
+            </>
+          ))
+        : null}
+      
     </Container>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../../translations/i18n";
 import { useTranslation } from "react-i18next";
@@ -31,6 +31,7 @@ const DesktopCards = ({
   searchTerm,
   selectedProduct,
   handleProductHid,
+  Seller,
   setSelectedProduct,
   isExpanded,
   toggleLike,
@@ -51,9 +52,11 @@ const DesktopCards = ({
   const dispatch = useDispatch(); // Function to check screen size
   const token = localStorage.getItem("token");
   const imageSelect = localStorage.getItem("imageSelect");
+  const [selectedSeller, setSelectedSeller] = useState([])
   // const filtered = Dobject.filter(
   //   (product) => category === "All" || product.category === category
   // );
+
 
   const ViewedProduct = async (productId) => {
     try {
@@ -102,169 +105,139 @@ const DesktopCards = ({
     },
   };
 
-  return (
-    <React.Fragment >
-      {Dobject.user_products.map((userp) => (
-
+ return (
+  <React.Fragment>
+    {Array.isArray(Dobject.user_products) && Dobject.user_products.length > 0 ? (
+      Dobject.user_products.map((userp) => (
         <div
           className="animated-box"
+          key={userp.id}
           style={{
             ...styles.container,
           }}
         >
-          {Dobject ? (
-            <div style={{ display: "flex" }}>
-              {/* selected Product */}
-              {selectedProduct === Dobject && (
-                <div>
-                  <SelectedProductDesktop
-                    selectedProduct={selectedProduct}
-                    handleProductHid={handleProductHid}
-                  />
-                </div>
-              )}
-
-              {Dobject !== selectedProduct && (
-                <BoxContainer
-                  key={index}
-                  categoryOption={categoryShadow[Dobject.category?.main]}
+          <div style={{ display: "flex" }}>
+            {/* Selected Product */}
+            {selectedProduct?.id === Dobject.id && selectedSeller?.id === userp.id ? (
+              <div>
+                <SelectedProductDesktop
+                  selectedProduct={selectedProduct}
+                  seller={selectedSeller}
+                  handleProductHid={handleProductHid}
+                />
+              </div>
+            ) : (
+              <BoxContainer
+                categoryOption={categoryShadow[userp.category?.main]}
+              >
+                <div
+                  style={{
+                    ...styles.box,
+                  }}
                 >
-                  <div
-                    key={index}
-                    style={{
-                      ...styles.box,
-
-                      // justifyContent:
-                      // index === filteredProducts.length - 1 ? "space-evenly" : {}, // Apply style only to the last box
-                    }}
-                  >
-                    {(Dobject.thumbnails.length > 0)
-                      ? (
-                        <img
-                          src={
-                            
-                              Dobject.thumbnails[Dobject.thumbnail_index] ||
-                              "/images/Screenshot From 2025-06-05 15-29-37.png"
-                          }
-                          alt={t("Loading...")}
-                          style={{
-                            width: "250px",
-                            height: "250px",
-                            borderRadius: "10px",
-                          }}
-                          onClick={() => {
-                            setSelectedProduct(Dobject);
-                            ViewedProduct(Dobject.id);
-                            show();
-                          }}
-                        />
-                      ) : (
-                        <p>{t("No Image Available")}</p>
-                      )}
-                  </div>
-                  <div
-                    style={{ position: "relative", top: "0px", left: "212px" }}
-                  >
-                    <WishlistButton product={Dobject} />
-                  </div>
-
-                  {/* text */}
-                  <div style={{ display: "flex", marginTop: "-40px" }}>
-                    <div
-                      className="text"
+                  {Dobject.thumbnails.length > 0 ? (
+                    <img
+                      src={
+                        Dobject.thumbnails[Dobject.thumbnail_index] ||
+                        "/images/Screenshot From 2025-06-05 15-29-37.png"
+                      }
+                      alt={t("Loading...")}
                       style={{
-                        borderRadius: "10PX",
-                        width: "100%",
-                        height: "100px",
-                        //  background:"red",
-                        padding: "10px",
+                        width: "250px",
+                        height: "250px",
+                        borderRadius: "10px",
                       }}
-                    >
-                      <Name className="name">
-                        {isExpanded
-                          ? Dobject.name
-                          : Dobject.name.slice(0, 12)}
-                        {/* <span
-                          style={{ color: "black" }}
-                          dangerouslySetInnerHTML={{
-                            __html: highlightText(
-                              isExpanded
-                                ? Dobject.name
-                                : Dobject.name.slice(0, 12),
-                              searchTerm
-                            ),
-                          }}
-                        ></span>{" "} */}
-                      </Name>
-                      <DescriptionContainer>
-                        <DescriptionTitle>
-                          {t("Description")}:
-                          <DescriptionContent>
-                            {isExpanded
-                              ? Dobject.description
-                              : Dobject.description.slice(0, maxLength) + "..."}
-                          </DescriptionContent>
-                        </DescriptionTitle>
-                      </DescriptionContainer>
-                      <StatusContainer>
-                        <StatusTitle>
-                          {t("Status")}:
-                          <StatusContent>{userp.status}</StatusContent>
-                        </StatusTitle>
-                      </StatusContainer>
-                      <Price key={index}>
-                        {t("CFA")}: {userp.price - userp.discount}
-                      </Price>
-                      {Dobject.discount > 0 && (
-                        <Discount key={index}>
-                          {t("CFA")}:<s>{userp.price}</s>
-                          <label
-                            style={{
-                              width: "40px",
-                              height: "20px",
-                              background: "#90EE90",
-                              textAlign: "center",
-                              borderRadius: "5px",
-                              marginLeft: "15px",
-                            }}
-                          >
-                            -
-                            {((userp.discount / userp.price) * 100).toFixed(
-                              0
-                            )}
-                            %
-                          </label>
-                        </Discount>
-                      )}
-                    </div>
-                  </div>
+                      onClick={() => {
+                        setSelectedProduct(Dobject);
+                        ViewedProduct(Dobject.id);
+                        setSelectedSeller(userp);
+                        show();
+                      }}
+                    />
+                  ) : (
+                    <p>{t("No Image Available")}</p>
+                  )}
+                </div>
+                <div
+                  style={{ position: "relative", top: "0px", left: "212px" }}
+                >
+                  <WishlistButton product={userp} />
+                </div>
 
+                {/* text */}
+                <div style={{ display: "flex", marginTop: "-40px" }}>
                   <div
+                    className="text"
                     style={{
-                      background: "",
-                      textAlign: "center",
-                      padding: "5px",
+                      borderRadius: "10PX",
+                      width: "100%",
+                      height: "100px",
+                      padding: "10px",
                     }}
-                  ><AddtocartButton main={userp.discount < 1}>
-                      <AddToCartButton product={Dobject} />
-                    </AddtocartButton>
-
+                  >
+                    <Name className="name">
+                      {isExpanded ? Dobject.name : Dobject.name.slice(0, 12)}
+                    </Name>
+                    <DescriptionContainer>
+                      <DescriptionTitle>
+                        {t("Description")}:
+                        <DescriptionContent>
+                          {isExpanded
+                            ? Dobject.description
+                            : Dobject.description.slice(0, maxLength) + "..."}
+                        </DescriptionContent>
+                      </DescriptionTitle>
+                    </DescriptionContainer>
+                    <StatusContainer>
+                      <StatusTitle>
+                        {t("Status")}:
+                        <StatusContent>{userp.status}</StatusContent>
+                      </StatusTitle>
+                    </StatusContainer>
+                    <Price>
+                      {t("CFA")}: {userp.price - userp.discount}
+                    </Price>
+                    {userp.discount > 0 && (
+                      <Discount>
+                        {t("CFA")}:<s>{userp.price}</s>
+                        <label
+                          style={{
+                            width: "40px",
+                            height: "20px",
+                            background: "#90EE90",
+                            textAlign: "center",
+                            borderRadius: "5px",
+                            marginLeft: "15px",
+                          }}
+                        >
+                          -
+                          {((userp.discount / userp.price) * 100).toFixed(0)}%
+                        </label>
+                      </Discount>
+                    )}
                   </div>
-                </BoxContainer>
-              )}
-            </div>
-          ) : (
-            <p></p>
-          )}
+                </div>
+
+                <div
+                  style={{
+                    background: "",
+                    textAlign: "center",
+                    padding: "5px",
+                  }}
+                >
+                  <AddtocartButton main={userp.discount < 1}>
+                    <AddToCartButton product={userp} />
+                  </AddtocartButton>
+                </div>
+              </BoxContainer>
+            )}
+          </div>
           <div ref={loaderRef}> {t()}</div>
-
-          {selectedProduct && showDetails && selectedProduct && <></>}
         </div>
-      ))}
-
-      {/* {Dobject.isSelected ? "Unselect" : "Select"} */}
-    </React.Fragment>
-  );
+      ))
+    ) : null}
+  </React.Fragment>
+);
 };
 const style = {
   sliderSettings: {

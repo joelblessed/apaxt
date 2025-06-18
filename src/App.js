@@ -94,6 +94,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState([]);
+  const[seller, setSeller] =useState([])
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState();
@@ -129,6 +130,8 @@ function App() {
   const [isEnglish, setIsEnglish] = useState(i18n.language === "en");
   const loaderRef = useRef();
   const [orderCount, setOrderCount] = useState(0);
+
+
 
   // Load saved language from localStorage or default to "en"
   useEffect(() => {
@@ -342,6 +345,7 @@ function App() {
               <Products
                 filteredProducts={filteredProducts}
                 SelectedProduct={setSelectedProduct}
+                Seller={setSeller}
                 highlightText={highlightText}
                 products={products}
                 loaderRef={loaderRef}
@@ -374,7 +378,7 @@ function App() {
                 api={api}
                 selectedProduct={selectedProduct}
                 filteredProducts={filteredProducts}
-                setSelectedProduct={setSelectedProduct}
+                seller={seller}
                 cart={cart}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
@@ -411,7 +415,8 @@ function App() {
               <Box
                 api={api}
                 selectedCategory={selectedCategory}
-                SelectedProduct={setSelectedProduct}
+             
+                Seller={setSeller}
                 mobilefilteredProducts={mobilefilteredProducts}
                 highlightText={highlightText}
                 searchTerm={searchTerm}

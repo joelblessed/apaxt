@@ -71,7 +71,7 @@ const Wallet = ({ api }) => {
       </div>
 
       <div style={balanceStyle}>
-        <h3>Wallet Balance: {User.wallet}</h3>
+        <h3>Wallet Balance: CFA:{User.wallet}</h3>
       </div>
     </div>
   );

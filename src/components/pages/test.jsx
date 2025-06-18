@@ -1,161 +1,82 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
-
-import { useTranslation } from "react-i18next";
-import "./products.css";
-import { useNavigate, Link } from "react-router-dom";
-import "../translations/i18n";
-import { debounce } from 'lodash';
-import Fuse from "fuse.js";
-import Box from "./boxes";
-
-const Products = ({
-  glofilteredProducts,
-  SelectedProduct,
-  highlightText,
-  loaderRef,
-  searchTerm,
-  setSearchTerm,
-  category,
-  api,
-  Search,
-}) => {
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [mproducts, setMProducts] = useState([]);
-
-  const navigate = useNavigate();
-
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-
-  const fetchProducts = useCallback(async () => {
-    // Handle fetching new products based on page or other conditions
-    // Example:
-    const res = await fetch(`${api}/products?page=${page}&limit=4`);
-    const data = await res.json();
-    const fetched = data.products || data;
-
-    if (fetched.length === 0) setHasMore(false);
-
-    // Set filtered products based on fetched data
-    const uniqueProducts = (prev, newItems) => {
-      const ids = new Set(prev.map((p) => p.id));
-      return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
-    };
-    
-    setFilteredProducts((prev) => uniqueProducts(prev, fetched));
-    setProducts((prev) => uniqueProducts(prev, fetched));
-  
-  }, [page ]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
-
-  useEffect(() => {
-    if (!hasMore) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setPage((prev) => prev + 1);
-        }
-      },
-      { rootMargin: "100px" }
-    );
-
-    if (loaderRef.current) observer.observe(loaderRef.current);
-
-    return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
-    };
-  }, [hasMore]);
-
-
-  useEffect(() => {
-    if (searchTerm && window.innerWidth < 768) {
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 300); // delay allows render
+const product = {
+  id: 182,
+  brand: { name: "UNNEL" },
+  category: { sub: "Parts", main: "Electronics" },
+  dimensions: { kg: 0.5, hcm: 30, wcm: 19 },
+  attributes: { "suitable for": "14-43" },
+  created_at: "2025-06-13T15:49:38.699Z",
+  thumbnail_index: null,
+  name: "Flat panel TV Wall Mount",
+  description: "Tv mount",
+  user_products: [
+    {
+      id: 225,
+      city: "Douala",
+      owner: "Denis ",
+      price: 43000,
+      colors: ["black"],
+      status: "New",
+      address: "Kombe Market",
+      discount: 0,
+      owner_id: "e9959e3d-cb2f-44a5-9076-6390723cce17",
+      phone_number: "+237652799981",
+      number_in_stock: 4
+    },
+    {
+      id: 186,
+      city: "Douala",
+      owner: "Fabricetelecom",
+      price: 53000,
+      colors: ["black"],
+      status: "New",
+      address: "Kombe Market",
+      discount: 0,
+      owner_id: "f1ca2adf-723e-4fe6-b7d1-4ec5af58b96b",
+      phone_number: "+237670318040",
+      number_in_stock: 4
     }
-  }, [searchTerm]);
-
-
-
-  useEffect(() => {
-    if (searchTerm && searchTerm.trim() !== "") {
-      // Use fuse search if products already loaded
-      const fuse = new Fuse(glofilteredProducts, {
-        keys: ["name", "category", "owner", "brand.name"],
-        threshold: 0.3,
-      });
-  
-      const results = fuse.search(searchTerm.trim());
-      const matched = results.map((res) => res.item);
-      setFilteredProducts(matched);
-      setProducts(matched);
-      setHasMore(false); // Stop pagination on search
-    } else {
-      setFilteredProducts(products); // Reset when search clears
-      setProducts(products); // Reset to original products
-      setHasMore(true); // Enable pagination again
-    }
-  }, [searchTerm, glofilteredProducts, products]);
-
-
- 
-  const fetchSearchResults = async (query) => {
-    if (!query) {
-      setFilteredProducts([]); // Or fetch default list
-      return;
-    }
-
-    const res = await fetch(`${api}/search?query=${query}`);
-    const data = await res.json();
-    setFilteredProducts(data);
-    setProducts(data);
-  };
-
-  // Debounced search function
-  const debouncedSearch = debounce((query) => {
-    fetchSearchResults(query);
-  },200); // Delay in milliseconds
-
-  useEffect(() => {
-    // Trigger the debounced search when the search term changes
-    debouncedSearch(searchTerm);
-
-    // Cleanup debounce function when the component unmounts or searchTerm changes
-    return () => {
-      debouncedSearch.cancel();
-    };
-  }, [searchTerm]);
-
-
- 
-  const handleProductClick = (product) => {
-    SelectedProduct(product);
-    localStorage.setItem("selectedProduct", product);
-    navigate("/selectedProduct");
-  };
- 
-
-  return (
-    <div>
-      <div>
-        <Box
-          Mobject={products}
-          Dobject={filteredProducts}
-       
-          loaderRef={loaderRef}
-          SelectedProduct={handleProductClick}
-          handleProductClick={handleProductClick}
-          highlightText={highlightText}
-          category={category}
-        />
-      </div>
-    </div>
-  );
+  ],
+  images: [
+    "https://f004.backblazeb2.com/file/apaxt-images/products/a338c608906653eab6d6b8039c9705a9.png"
+  ],
+  primaryImage:
+    "https://f004.backblazeb2.com/file/apaxt-images/products/a338c608906653eab6d6b8039c9705a9.png",
+  thumbnail:
+    "https://f004.backblazeb2.com/file/apaxt-images/products/a338c608906653eab6d6b8039c9705a9.png"
 };
 
-export default Products;
+function Test() {
+  return (<>
+   {product.user_products.map((seller) => (
+  <div
+    key={seller.id}
+    style={{
+      border: "1px solid #ddd",
+      padding: "16px",
+      borderRadius: "8px",
+      marginBottom: "20px",
+      boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
+    }}
+  >
+    {/* Shared Product Info */}
+    <img src={product.primaryImage} alt={product.name} width={150} />
+    <h2>{product.name}</h2>
+    <p><strong>Brand:</strong> {product.brand.name}</p>
+    <p><strong>Category:</strong> {product.category.main} / {product.category.sub}</p>
+    <p><strong>Description:</strong> {product.description}</p>
+
+    <hr />
+
+    {/* Unique Seller Info */}
+    <h3>Seller: {seller.owner}</h3>
+    <p><strong>Price:</strong> {seller.price.toLocaleString()} FCFA</p>
+    <p><strong>City:</strong> {seller.city}</p>
+    <p><strong>Phone:</strong> {seller.phone_number}</p>
+    <p><strong>In Stock:</strong> {seller.number_in_stock}</p>
+  </div>
+))}
+</>
+  );
+}
+
+export default Test;

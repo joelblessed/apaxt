@@ -10,7 +10,7 @@ import AddToCartButton from "./addToCartButton";
 import WishlistButton from "./wishlistButton";
 
 
-const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => {
+const SelectedProductDesktop = ({ selectedProduct, handleProductHid , seller, text}) => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("details"); // Tabs state
   const [isExpanded, setIsExpanded] = useState(false);
@@ -60,12 +60,12 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
           <DetailsSection>
             <SellerInfo>
               Seller:{" "}
-              <SellerLink to={`/productsByOwner/${selectedProduct.user_products.map((userp)=>(
-                  userp.owner
-                ))}`}>
-                {selectedProduct.user_products.map((userp)=>(
-                  userp.owner
-                ))}
+              <SellerLink to={`/productsByOwner/${
+                  seller.owner
+                }`}>
+                {
+                  seller.owner
+                }
               </SellerLink>
             </SellerInfo>
 
@@ -99,9 +99,9 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , text}) => 
 
         <TabContent>
           {activeTab === "details" && <p><strong>Stock:</strong> {selectedProduct.stock} available</p>}
-          {activeTab === "seller" && <p><strong>Contact:</strong> {selectedProduct.user_products.map((userp)=>(
-                  userp.phone_number
-                ))}</p>}
+          {activeTab === "seller" && <p><strong>Contact:</strong> {
+                  seller.phone_number
+                }</p>}
           {activeTab === "description" && <div>
             <p>
         {isExpanded ? selectedProduct.description : selectedProduct.description.slice(0, maxLength) + "..."}
