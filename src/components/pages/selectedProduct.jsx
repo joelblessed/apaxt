@@ -29,15 +29,16 @@ import {
 } from "./selectedProductStyles";
 
 const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm }) => {
+  const [product, setProduct] = useState(  JSON.parse(localStorage.getItem("selectedProduct")) )
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("test",selectedProduct)
+  console.log("test",product)
 
   const [activeTab, setActiveTab] = useState("details"); // Tabs state
   const [isExpanded, setIsExpanded] = useState(false);
   const maxLength = 100;
 
-  if (!selectedProduct) {
+  if (!product) {
     return <LoadingMessage>Loading product...</LoadingMessage>;
   }
 
@@ -62,9 +63,9 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
   <>
     <ProductWrapper>
       <ImageContainer>
-        {selectedProduct.images?.length > 0 ? (
+        {product.thumbnails?.length > 0 ? (
           <Slider {...sliderSettings}>
-            {selectedProduct.images.map((imgUrl, index) => (
+            {product.thumbnails.map((imgUrl, index) => (
               <div key={index}>
                 <ProductImage
                   src={imgUrl}
@@ -83,22 +84,22 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
         <SellerLink to={`/productsByOwner/${seller.owner}`}>
           Seller: {seller.owner}
         </SellerLink>
-        <ProductTitle>{selectedProduct.name}</ProductTitle>
+        <ProductTitle>{product.name}</ProductTitle>
         <ProductPrice>Price: CFA{seller.price}</ProductPrice>
 
         {/* Display Rating Above Add to Cart Button */}
-        {selectedProduct.rating && (
-          <Rating>⭐ {selectedProduct.likes} / 5</Rating>
+        {product.rating && (
+          <Rating>⭐ {product.likes} / 5</Rating>
         )}
 
         <ButtonsContainer>
           <ActionButton>
-            <AddToCartButton product={selectedProduct} />
+            <AddToCartButton product={product} />
           </ActionButton>
           <ActionButton secondary>
             Add To Wishlist
             <label>
-              <WishlistButton product={selectedProduct} />
+              <WishlistButton product={product} />
             </label>
           </ActionButton>
         </ButtonsContainer>
@@ -142,10 +143,10 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
         <div>
           <p>
             {isExpanded
-              ? selectedProduct.description
-              : selectedProduct.description.slice(0, maxLength) + "..."}
+              ? product.description
+              : product.description.slice(0, maxLength) + "..."}
           </p>
-          {selectedProduct.description.length > maxLength && (
+          {product.description.length > maxLength && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               style={{

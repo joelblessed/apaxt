@@ -120,7 +120,7 @@ const Box = ({
 
 
   const handleProductClick = useCallback(
-    (product, selectedSeller) => {
+    (product, ) => {
       SelectedProduct(product);
    
       localStorage.setItem("selectedProduct", JSON.stringify(product));
