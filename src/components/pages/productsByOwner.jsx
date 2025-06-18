@@ -574,7 +574,7 @@ const normalize = (str) =>
             />
             {hasMore && (
               <div ref={loaderRef} className="loader">
-                Loading...p
+                Loading...
               </div>
             )}{" "}
             {/* Loader for infinite scroll */}

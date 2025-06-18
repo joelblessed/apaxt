@@ -45,11 +45,11 @@ const ProductCard = React.memo(({ products, userId, handleDelete, id, handleChan
   const { t } = useTranslation();
   const role = localStorage.getItem("role");
 
-    useEffect(() => {
+    // useEffect(() => {
       
-       window.scrollTo({ top: 0, behavior: "smooth" });
+    //    window.scrollTo({ top: 0, behavior: "smooth" });
      
-    }, [products]);
+    // }, [products]);
 
   return (
     <div>
@@ -251,7 +251,7 @@ const nestedCategoryStructure = useMemo(() => {
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
     const res = await fetch(
-      `${api}/userProducts?owner_id=${userId}&page=${page}&limit=20`
+      `${api}/userProducts?owner_id=${userId}&page=${page}&limit=50`
     );
     const data = await res.json();
     const fetched = data.products || data;
@@ -295,7 +295,7 @@ const nestedCategoryStructure = useMemo(() => {
           setPage((prev) => prev + 1);
         }
       },
-      { rootMargin: "100px" } // Adjust rootMargin for earlier triggering
+      { rootMargin: "200px" } // Adjust rootMargin for earlier triggering
     );
 
     const currentLoader = loaderRef?.current; // Add optional chaining to avoid errors
