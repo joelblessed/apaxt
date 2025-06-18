@@ -68,8 +68,7 @@
   .products-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 0px;
-    background-color: #ff4444;
+    gap: 10px;
     
  
   }
@@ -113,13 +112,13 @@
   @media (max-width: 768px) {
     .products-grid {
       grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-      background-color:"yellow"
     }
     .brands-container {
       display: flex;
      flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
+      width: "100%";
 
      
     }
@@ -139,7 +138,6 @@
   @media (max-width: 480px) {
     .products-grid {
       grid-template-columns: 1fr;
-      background-color:"green"
     }
   }
 

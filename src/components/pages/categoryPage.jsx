@@ -201,7 +201,7 @@ const groupedProducts = Array.isArray(filteredProducts)
                   <h3 className="subcategory-title">{subCategory}</h3>
                   <div className="brands-container">
                     {Object.entries(brands).map(([brand, products]) => (
-                      <div className="brand-section">
+                      <div style={{width:"100%"}}>
                         <h3 className="brand-title">{brand}</h3>
                         <div className="products-grid">
                           <Box
