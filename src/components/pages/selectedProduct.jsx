@@ -57,10 +57,7 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
       {/* Product Image & Details */}
 
     
-     {Array.isArray(selectedProduct.user_products) &&
-selectedProduct.user_products.length > 0
-  ? selectedProduct.user_products.map((userp) => (
-            <>
+
           {seller && (
   <>
     <ProductWrapper>
@@ -167,9 +164,8 @@ selectedProduct.user_products.length > 0
     </TabContent>
   </>
 )}
-            </>
-          ))
-        : null}
+            
+        
       
     </Container>
   );
