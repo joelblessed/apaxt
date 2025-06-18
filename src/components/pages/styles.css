@@ -52,8 +52,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    margin: 10px;
-    gap: 15px;
+ 
 
   }
   
@@ -68,7 +67,8 @@
   .products-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 0px;
+    background-color: #ff4444;
     
  
   }
@@ -111,7 +111,7 @@
   /* Responsive Adjustments */
   @media (max-width: 768px) {
     .products-grid {
-      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr));
     }
     .brands-container {
       display: flex;
