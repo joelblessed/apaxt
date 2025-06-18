@@ -120,9 +120,9 @@ const Box = ({
 
 
   const handleProductClick = useCallback(
-    (product, ) => {
+    (product, seller ) => {
       SelectedProduct(product);
-   
+      localStorage.setItem("seller", JSON.stringify(seller));
       localStorage.setItem("selectedProduct", JSON.stringify(product));
       navigate("/selectedProduct");
 

@@ -122,21 +122,21 @@ export const AuthProvider = ({ children }) => {
     //   .catch((error) => console.error("Error:", error));
   };
 
-  // useEffect (()=>{
-  //   fetch(`${api}/logs`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       userId: userId,
-  //       action: 'login'
-  //     })
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => console.log('Log created:', data))
-  //   .catch(error => console.error('Error:', error));
-  // },[login])
+  useEffect (()=>{
+    fetch(`${api}/logs`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId: user?.id,
+        action: 'login'
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log('Log created:', data))
+    .catch(error => console.error('Error:', error));
+  },[login])
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -162,20 +162,20 @@ export const AuthProvider = ({ children }) => {
 
     setUser(null);
 
-    // fetch(`${api}/logs`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //      "Authorization": `Bearer ${user.token}`
-    //   },
-    //   body: JSON.stringify({
-    //     userId: user?.id, // Fix: Correct reference to userId
-    //     action: "logout",
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => alert("Log created:", data))
-    //   .catch((error) => console.error("Error:", error));
+    fetch(`${api}/logs`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+         "Authorization": `Bearer ${user.token}`
+      },
+      body: JSON.stringify({
+        userId: user?.id, // Fix: Correct reference to userId
+        action: "logout",
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("Log created:", data))
+      .catch((error) => console.error("Error:", error));
   };
 
 localStorage.setItem("user", JSON.stringify(user));

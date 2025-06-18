@@ -30,6 +30,7 @@ import {
 
 const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm }) => {
   const [product, setProduct] = useState(  JSON.parse(localStorage.getItem("selectedProduct")) )
+  const [userp, setUserp] = useState( JSON.parse(localStorage.getItem("seller")) )
   const dispatch = useDispatch();
   const navigate = useNavigate();
   console.log("test",product)
@@ -59,7 +60,7 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
 
     
 
-          {seller && (
+          {userp && (
   <>
     <ProductWrapper>
       <ImageContainer>
@@ -81,11 +82,11 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
       </ImageContainer>
 
       <DetailsContainer>
-        <SellerLink to={`/productsByOwner/${seller.owner}`}>
-          Seller: {seller.owner}
+        <SellerLink to={`/productsByOwner/${userp.owner}`}>
+          Seller: {userp.owner}
         </SellerLink>
         <ProductTitle>{product.name}</ProductTitle>
-        <ProductPrice>Price: CFA{seller.price}</ProductPrice>
+        <ProductPrice>Price: CFA{userp.price}</ProductPrice>
 
         {/* Display Rating Above Add to Cart Button */}
         {product.rating && (
@@ -131,12 +132,12 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
     <TabContent>
       {activeTab === "details" && (
         <p>
-          <strong>Stock:</strong> {seller.number_in_stock} available
+          <strong>Stock:</strong> {userp.number_in_stock} available
         </p>
       )}
       {activeTab === "seller" && (
         <p>
-          <strong>Seller Contact:</strong> {seller.phone_number}
+          <strong>Seller Contact:</strong> {userp.phone_number}
         </p>
       )}
       {activeTab === "description" && (

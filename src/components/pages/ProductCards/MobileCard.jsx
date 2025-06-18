@@ -54,6 +54,7 @@ const MobileCard = ({
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch(); // Function to check screen size
   const [selectedSeller, setSelectedSeller] = useState([])
+   
   
  
 
@@ -119,7 +120,7 @@ const MobileCard = ({
                       borderRadius: "10px",
                     }}
                     onClick={() => {
-                      handleProductClick(Mobject);
+                      handleProductClick(Mobject,userp);
                       SelectedSeller(userp)
                         
 
