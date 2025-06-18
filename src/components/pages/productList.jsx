@@ -45,6 +45,12 @@ const ProductCard = React.memo(({ products, userId, handleDelete, id, handleChan
   const { t } = useTranslation();
   const role = localStorage.getItem("role");
 
+    useEffect(() => {
+      
+       window.scrollTo({ top: 0, behavior: "smooth" });
+     
+    }, [products]);
+
   return (
     <div>
       <Header>{t("Product Management")}</Header>

@@ -32,6 +32,12 @@ const CategoryPage = ({
     inStock: false,
   });
 
+    useEffect(() => {
+      
+       window.scrollTo({ top: 0, behavior: "smooth" });
+     
+    }, [products,searchTerm]);
+
   // //viewed products
   // const handleProductClick = useCallback(
   //   (product) => {

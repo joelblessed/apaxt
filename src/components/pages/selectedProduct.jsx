@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { useDispatch } from "react-redux";
 // import { addToCartBeforeLogin } from "../../cartAction";
@@ -39,6 +39,12 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
   const [isExpanded, setIsExpanded] = useState(false);
   const maxLength = 100;
 
+  useEffect(() => {
+    
+     window.scrollTo({ top: 0, behavior: "smooth" });
+   
+  }, [userp]);
+
   if (!product) {
     return <LoadingMessage>Loading product...</LoadingMessage>;
   }
@@ -54,6 +60,8 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
     autoplaySpeed: 3000,
   };
 
+
+ 
   return (
     <Container style={{ marginTop: "150px" }}>
       {/* Product Image & Details */}
