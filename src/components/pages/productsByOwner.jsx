@@ -14,7 +14,7 @@ import "./products.css";
 import "../translations/i18n";
 import { main } from "@popperjs/core";
 
-const Products = ({
+const ProductsByOwner = ({
   glofilteredProducts,
   SelectedProduct,
   highlightText,
@@ -138,7 +138,7 @@ const normalize = (str) =>
       category === "All"
         ? fetched
         : fetched.filter((product) =>
-            product.user_products.map(
+            product.user_products.some(
               (userp) => userp.category?.main === category
             )
           );
@@ -585,4 +585,4 @@ const normalize = (str) =>
   );
 };
 
-export default Products;
+export default ProductsByOwner;

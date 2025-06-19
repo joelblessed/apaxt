@@ -106,38 +106,23 @@ export const AuthProvider = ({ children }) => {
       
     });
 
-    // fetch(`${api}/logs`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Authorization": `Bearer ${token}`
-    //   },
-    //   body: JSON.stringify({
-    //     userId: id,
-    //     action: "login",
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => console.log("Log created:", data))
-    //   .catch((error) => console.error("Error:", error));
-  };
-
-  useEffect (()=>{
     fetch(`${api}/logs`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify({
-        userId: user?.id,
-        action: 'login'
-      })
+        userId: id,
+        action: "login",
+      }),
     })
-    .then(response => response.json())
-    .then(data => console.log('Log created:', data))
-    .catch(error => console.error('Error:', error));
-  },[login])
+      .then((response) => response.json())
+      .then((data) => console.log("Log created:", data))
+      .catch((error) => console.error("Error:", error));
+  };
 
+ 
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");

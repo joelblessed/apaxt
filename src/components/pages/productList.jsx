@@ -26,7 +26,7 @@ import {
 
 const ResponsiveGrid = styled(Grid)`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 5px;
   justify-content: center;
   align-items: center;
@@ -251,7 +251,7 @@ const nestedCategoryStructure = useMemo(() => {
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
     const res = await fetch(
-      `${api}/userProducts?owner_id=${userId}&page=${page}&limit=50`
+      `${api}/userProducts?owner_id=${userId}&page=${page}&limit=20`
     );
     const data = await res.json();
     const fetched = data.products || data;
@@ -432,14 +432,14 @@ const nestedCategoryStructure = useMemo(() => {
               ([mainCategory, subCategoryMap]) => (
                 <div key={mainCategory} style={{ marginBottom: "10px" }}>
                   {/* Main Category Dropdown */}
+                  <div style={{display:"flex", justifyContent:"space-between"}}>
                   <div
                     onClick={() => {
-                      setCategory(mainCategory);
-                      setSearch(mainCategory);
+                      setSearchTerm(mainCategory);
                       setProducts([]);
                       setPage(1);
                       setHasMore(true);
-                      setIsSubcategory(!isSubcategory);
+
                     }}
                     style={{
                       padding: "12px",
@@ -453,7 +453,14 @@ const nestedCategoryStructure = useMemo(() => {
                     }}
                   >
                     <span>{mainCategory}</span>
-                    <span>
+                   
+                  </div>
+                  <div>
+                     <button  onClick={() => {
+                      setCategory(mainCategory);
+                      
+                      setIsSubcategory(!isSubcategory);
+                    }}>
                       {isSubcategory && mainCategory === category ? (
                         <svg
                           width="20px"
@@ -483,7 +490,8 @@ const nestedCategoryStructure = useMemo(() => {
                           </g>
                         </svg>
                       )}
-                    </span>
+                    </button>
+                  </div>
                   </div>
 
                   {/* Subcategory Dropdown (only shown when category is selected) */}
@@ -492,14 +500,16 @@ const nestedCategoryStructure = useMemo(() => {
                       {Object.entries(subCategoryMap).map(
                         ([subCategory, brands]) => (
                           <div key={subCategory}>
+                            <div style={{display:"flex", justifyContent:"space-between"}}>
                             <div
                               onClick={() => {
-                                setSearch(subCategory);
-                                setSubCategory(subCategory);
+                                setSearchTerm(subCategory);
                                 setProducts([]);
                                 setPage(1);
                                 setHasMore(true);
-                                setIsBrand(!isBrand);
+                      setIsSubcategory(!isSubcategory);
+                                
+
                               }}
                               style={{
                                 padding: "10px",
@@ -513,7 +523,14 @@ const nestedCategoryStructure = useMemo(() => {
                               }}
                             >
                               <span>{subCategory}</span>
-                              <span>
+                              
+                            </div>
+                            <div>
+                              <button  onClick={() => {
+                                setSubCategory(subCategory);
+                                
+                                setIsBrand(!isBrand);
+                              }}  >
                                 {isBrand && subcategory === subCategory ? (
                                   <svg
                                     width="20px"
@@ -543,7 +560,8 @@ const nestedCategoryStructure = useMemo(() => {
                                     </g>
                                   </svg>
                                 )}
-                              </span>
+                              </button>
+                            </div>
                             </div>
 
                             {/* Brands List (only shown when subcategory is selected) */}
@@ -554,10 +572,12 @@ const nestedCategoryStructure = useMemo(() => {
                                     key={brand}
                                     onClick={() => {
                                       // setBrand(brand);
-                                      // setSearch(brand);
+                                      setSearchTerm(brand);
                                       setProducts([]);
                                       setPage(1);
                                       setHasMore(true);
+                                setIsBrand(!isBrand);
+
                                     }}
                                     style={{
                                       padding: "8px",
