@@ -14,6 +14,7 @@ const EditProduct = ({ api }) => {
   const [name_en, setName_en] = useState("");
   const [name_fr, setName_fr] = useState("");
   const [category, setCategory] = useState({ main: "", sub: "" });
+  const [brand, setBrand] = useState({name:""})
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [numberInStock, setNumberInStock] = useState(0);
@@ -56,7 +57,7 @@ const EditProduct = ({ api }) => {
         //   `${product.category?.main || ""} > ${product.category?.sub || ""}`
         // );
         setPrice(product.user_products?.[0]?.price || 0);
-
+       
         setNumberInStock(product.user_products?.[0]?.number_in_stock || 0);
         setDiscount(product.user_products?.[0]?.discount || 0);
         setStatus(product.user_products?.[0]?.status || "");
@@ -89,6 +90,10 @@ const EditProduct = ({ api }) => {
             main: product.category.main || "",
             sub: product.category.sub || "",
           });
+        }
+
+        if(product.brand){
+          setBrand({name:product.brand.name || ""})
         }
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -239,6 +244,15 @@ const EditProduct = ({ api }) => {
           />
           {errors.name_fr && <p className="error">{errors.name_fr}</p>}
         </div>
+
+          <h4>Brand</h4>
+         <input
+          type="text"
+          name="Brand"
+          value={brand.name}
+          onChange={(e) => setBrand({ name: e.target.value })}
+          required
+        />
 
         {/* Category */}
         <select

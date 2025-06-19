@@ -251,7 +251,7 @@ const nestedCategoryStructure = useMemo(() => {
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
     const res = await fetch(
-      `${api}/userProducts?owner_id=${userId}&page=${page}&limit=20`
+      `${api}/userProducts?owner_id=${userId}&page=${page}&limit=130`
     );
     const data = await res.json();
     const fetched = data.products || data;
