@@ -110,8 +110,8 @@ const MobileCard = ({
                 ? (
                   <img
                     src={
-                      Mobject.thumbnails[Mobject.thumbnail_index] ||
-                              "/images/Screenshot From 2025-06-05 15-29-37.png"
+                      Mobject.thumbnails[Mobject.thumbnail_index || 0] 
+                              
                     }
                     alt={t("Loading...")}
                     style={{

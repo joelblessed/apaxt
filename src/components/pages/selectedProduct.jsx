@@ -72,7 +72,7 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
   <>
     <ProductWrapper>
       <ImageContainer>
-        {product.thumbnails?.length > 0 ? (
+        {product.thumbnails?.length > 1 ? (
           <Slider {...sliderSettings}>
             {product.thumbnails.map((imgUrl, index) => (
               <div key={index}>
@@ -85,7 +85,14 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
             ))}
           </Slider>
         ) : (
-          <NoImage>No images available</NoImage>
+            <div>
+                <ProductImage
+                  src={selectedProduct.thumbnails}
+                  
+                  loading="lazy"
+                />
+              </div>
+          // <NoImage>No images available</NoImage>
         )}
       </ImageContainer>
 

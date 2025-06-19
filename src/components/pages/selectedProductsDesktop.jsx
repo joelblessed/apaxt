@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AddToCartButton from "./addToCartButton";
 import WishlistButton from "./wishlistButton";
+import SelectedProduct from "./selectedProduct";
 
 
 const SelectedProductDesktop = ({ selectedProduct, handleProductHid , seller, text}) => {
@@ -44,7 +45,7 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , seller, te
         {/* Product Image & Details */}
         <ContentWrapper>
           <ImageSection>
-            {selectedProduct.thumbnails?.length > 0 ? (
+            {selectedProduct.thumbnails?.length > 1 ? (
               <Slider {...sliderSettings}>
                 {selectedProduct.thumbnails.map((imgUrl, index) => (
                   <ImageWrapper key={index}>
@@ -53,7 +54,10 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , seller, te
                 ))}
               </Slider>
             ) : (
-              <NoImage>No images available</NoImage>
+               <ImageWrapper >
+                    <ProductImage src={selectedProduct.thumbnails} loading="lazy"/>
+                  </ImageWrapper>
+              // <NoImage>No images available</NoImage>
             )}
           </ImageSection>
 

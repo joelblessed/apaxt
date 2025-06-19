@@ -138,8 +138,8 @@ const DesktopCards = ({
                   {Dobject.thumbnails.length > 0 ? (
                     <img
                       src={
-                        Dobject.thumbnails[Dobject.thumbnail_index] ||
-                        "/images/Screenshot From 2025-06-05 15-29-37.png"
+                        Dobject.thumbnails[Dobject.thumbnail_index || 0] 
+                        
                       }
                       alt={t("Loading...")}
                       style={{
