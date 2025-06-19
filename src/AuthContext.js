@@ -165,6 +165,17 @@ export const AuthProvider = ({ children }) => {
 
 localStorage.setItem("user", JSON.stringify(user));
 
+// Auto signout after 24 hours
+useEffect(() => {
+  if (user?.token) {
+    const timeout = setTimeout(() => {
+      logout();
+    }, 24 * 60 * 60 * 1000); // 24 hours in ms
+
+    return () => clearTimeout(timeout); // Cleanup on unmount or token change
+  }
+}, [user?.token]);
+
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
