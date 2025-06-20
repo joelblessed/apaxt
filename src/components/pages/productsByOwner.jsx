@@ -43,7 +43,7 @@ const ProductsByOwner = ({
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
-  const { ownerName } = useParams();
+  const { sellerId, ownerName } = useParams();
   
 
 
@@ -120,7 +120,7 @@ const normalize = (str) =>
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
     const res = await fetch(
-      `${api}/products?owner=${ownerName}&page=${page}&limit=20`
+       `${api}/userProducts?owner_id=${sellerId}&page=${page}&limit=20`
     );
     const data = await res.json();
     const fetched = data.products || data;
@@ -133,15 +133,10 @@ const normalize = (str) =>
       const ids = new Set(prev.map((p) => p.id));
       return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
     };
-
-    const filteredProducts =
-      category === "All"
-        ? fetched
-        : fetched.filter((product) =>
-            product.user_products.some(
-              (userp) => userp.category?.main === category
-            )
-          );
+const filteredProducts =
+  category === "All"
+    ? fetched
+    : fetched.filter((product) => product?.category?.main === category);
 
     setProducts((prev) => uniqueProducts(prev, filteredProducts));
   }, [api, page, category]);
@@ -235,9 +230,9 @@ const normalize = (str) =>
     async (query, currentPage = 1) => {
       try {
         const res = await fetch(
-          `${api}/search?query=${encodeURIComponent(
-            query
-          )}&page=${currentPage}&limit=20`
+              `${api}/search?owner_id=${userId}&query=${encodeURIComponent(
+          query
+        )}&page=${currentPage}&limit=50`
         );
         const data = await res.json();
         const fetched = data.results || [];
@@ -249,10 +244,10 @@ const normalize = (str) =>
           return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
         };
 
-        const filteredProducts =
-          category === "All"
-            ? fetched
-            : fetched.filter((product) => product.category === category);
+       const filteredProducts =
+                 category === "All"
+                   ? fetched
+                   : fetched.filter((product) => product.category.main === category);
 
         setProducts((prev) => uniqueProducts(prev, filteredProducts));
       } catch (error) {
@@ -291,6 +286,10 @@ const normalize = (str) =>
          
   <div style={{ width: "100%" }}>
  <div style={{}}>
+
+  <div style={{justifyContent:"center", textAlign:'center', }}><h3>Products By {ownerName}</h3></div>
+         
+
   {Object.entries(nestedCategoryStructure).map(([mainCategory, subCategoryMap]) => (
     <div key={mainCategory} style={{ marginBottom: "10px" }}>
       {/* Main Category Dropdown */}
@@ -457,6 +456,7 @@ const normalize = (str) =>
     className="products-container"
     style={{ background: "", width: "100%" }}
   >
+ 
     <Box
       Mobject={products}
       Dobject={products}
@@ -472,8 +472,8 @@ const normalize = (str) =>
     )}
   </div>
 </div>
-      ) : (
-        <div style={{ display: "flex" }}>
+      ) : (<> <div style={{justifyContent:"center", textAlign:'center', }}><h3>Products By {ownerName}</h3></div>
+           <div style={{ display: "flex" }}>
           <div
             style={{
               padding: "1rem",
@@ -489,6 +489,7 @@ const normalize = (str) =>
               zIndex: 1000, // Ensure it stays above other content
             }}
           >
+        
             {Object.entries(nestedCategoryStructure).map(
               ([mainCategory, subCategoryMap]) => (
                 <div key={mainCategory} style={{ marginBottom: "1.5rem" }}>
@@ -496,7 +497,7 @@ const normalize = (str) =>
                     style={{ cursor: "pointer", color: "blue" }}
                     onClick={() => {
                       setCategory(mainCategory);
-                      setSearchTerm(mainCategory); // Clear search term when selecting category
+                      // setSearchTerm(mainCategory); // Clear search term when selecting category
                       setProducts([]); // Reset products when changing category
                       setPage(1); // Reset page to 1 when changing category
                       setHasMore(true); // Enable pagination again
@@ -563,6 +564,8 @@ const normalize = (str) =>
             className="products-container"
             style={{ background: "", width: "90%", height: "100%", }}
           >
+     
+
             <Box
               Mobject={products}
               Dobject={products}
@@ -580,7 +583,7 @@ const normalize = (str) =>
             {/* Loader for infinite scroll */}
           </div>
         </div>
-      )}
+     </> )}
     </>
   );
 };

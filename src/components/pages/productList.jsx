@@ -128,7 +128,7 @@ const ProductList = ({
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
-  const [subcategory, setSubCategory] = useState("");
+  const [subcategory, setSubCategory] = useState("All");
   const [brand, setBrand] = useState("");
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
@@ -251,7 +251,7 @@ const nestedCategoryStructure = useMemo(() => {
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
     const res = await fetch(
-      `${api}/userProducts?owner_id=${userId}&page=${page}&limit=130`
+      `${api}/userProducts?owner_id=${userId}&page=${page}&limit=20`
     );
     const data = await res.json();
     const fetched = data.products || data;
@@ -274,14 +274,12 @@ const nestedCategoryStructure = useMemo(() => {
       return [...prev, ...newItems.filter((item) => !ids.has(item.id))];
     };
 
-    const filteredProducts =
-      category === "All"
-        ? fetched
-        : fetched.filter((product) =>
-            product.user_products?.some(
-              (userp) => userp.category?.main === category
-            )
-          );
+   
+const filteredProducts =
+  category === "All"
+    ? fetched
+    : fetched.filter((product) => product?.category?.main === category);
+  
     setProducts((prev) => uniqueProducts(prev, filteredProducts));
   }, [api, page, category]);
 
@@ -374,11 +372,12 @@ const nestedCategoryStructure = useMemo(() => {
     async (query, currentPage = 1) => {
       try {
         const res = await fetch(
-          `${api}/search?query=${encodeURIComponent(
-            query
-          )}&page=${currentPage}&limit=20`
+             `${api}/ownerSearch?owner_id=${userId}&query=${encodeURIComponent(
+          query
+        )}&page=${currentPage}&limit=50`
         );
         const data = await res.json();
+        
         const fetched = data.results || [];
 
         if (fetched.length === 0) setHasMore(false);
@@ -391,7 +390,9 @@ const nestedCategoryStructure = useMemo(() => {
         const filteredProducts =
           category === "All"
             ? fetched
-            : fetched.filter((product) => product.category === category);
+            : fetched.filter((product) => product.category.main === category);
+             
+         
 
         setProducts((prev) => uniqueProducts(prev, filteredProducts));
       } catch (error) {
@@ -646,7 +647,7 @@ const nestedCategoryStructure = useMemo(() => {
                     style={{ cursor: "pointer", color: "blue" }}
                     onClick={() => {
                       setCategory(mainCategory);
-                      setSearchTerm(mainCategory); // Clear search term when selecting category
+                      // setSearchTerm(mainCategory); // Clear search term when selecting category
                       setProducts([]); // Reset products when changing category
                       setPage(1); // Reset page to 1 when changing category
                       setHasMore(true); // Enable pagination again

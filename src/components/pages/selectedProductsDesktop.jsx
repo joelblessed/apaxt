@@ -65,8 +65,8 @@ const SelectedProductDesktop = ({ selectedProduct, handleProductHid , seller, te
             <SellerInfo>
               Seller:{" "}
               <SellerLink to={`/productsByOwner/${
-                  seller.owner
-                }`}>
+                  seller.owner_id
+                }/${ seller.owner}`}>
                 {
                   seller.owner
                 }
