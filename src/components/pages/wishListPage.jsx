@@ -5,7 +5,7 @@ import Box from "./boxes";
 import { v4 as uuidv4 } from 'uuid';
 
 
-const WishlistPage = ({ filteredProducts, api, highlightText }) => {
+const WishlistPage = ({ glofilteredProducts, api, highlightText }) => {
 
 
     useEffect(() => {
@@ -35,7 +35,7 @@ const WishlistPage = ({ filteredProducts, api, highlightText }) => {
 
   useEffect(() => {
     // Filter products in the frontend
-    const filtered = filteredProducts.filter((product) =>
+    const filtered = glofilteredProducts.filter((product) =>
       WL.includes(product.id.toString())
     );
     setWishlistProducts(filtered);
@@ -47,7 +47,7 @@ const WishlistPage = ({ filteredProducts, api, highlightText }) => {
       {wishlist.length === 0 ? (
         <p>No products in wishlist.</p>
       ) : (
-        <div>
+        <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
           <Box Mobject={wishlistProducts} Dobject={wishlistProducts} highlightText={highlightText}/>
         </div>
       )}

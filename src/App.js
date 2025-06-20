@@ -335,6 +335,8 @@ function App() {
                 handleSearchButton={setHandleProductSearch}
                 allProducts={allProducts}
                 category={category}
+          
+                
               />
             }
           ></Route>
@@ -613,7 +615,8 @@ function App() {
                 api={api}
                 searchTerm={searchTerm}
                 highlightText={highlightText}
-                filteredProducts={filteredProducts}
+                glofilteredProducts={allProducts}
+             
               />
             }
           />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import WishlistPage from "./wishListPage"
 import {
   FaStar,
   FaClock,
@@ -68,6 +69,7 @@ const Home = ({
   loaderRef,
   highlightText,
   SelectedProduct,
+  filteredProducts,
 }) => {
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const [lastViewed, setLastViewed] = useState([]);
@@ -526,28 +528,9 @@ const Home = ({
         </ReviewGrid> */}
 
         {/* Last Viewed */}
-        {lastViewed.length > 0 && (
-          <>
-            <SectionTitle>Last Viewed</SectionTitle>
-            <LastViewedContainer>
-              <ProductGrid>
-                {lastViewed.map((item) => (
-                  <ProductCard
-                    key={item.id}
-                    onClick={() => handleName(item.name)}
-                  >
-                    <ProductImage src={item.image} alt={item.name} />
-                    <ProductInfo>
-                      <ProductName>{item.name}</ProductName>
-                    </ProductInfo>
-                  </ProductCard>
-                ))}
-              </ProductGrid>
-            </LastViewedContainer>
-
-            <div></div>
-          </>
-        )}
+        <div>
+          <WishlistPage highlightText={highlightText} glofilteredProducts={glofilteredProducts}/>
+        </div>
 
       
 
