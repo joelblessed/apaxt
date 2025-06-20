@@ -121,10 +121,11 @@ const Box = ({
 
   const handleProductClick = useCallback(
     (product, seller ) => {
-      SelectedProduct(product);
+      navigate("/selectedProduct");
+      // SelectedProduct(product);
       localStorage.setItem("seller", JSON.stringify(seller));
       localStorage.setItem("selectedProduct", JSON.stringify(product));
-      navigate("/selectedProduct");
+    
 
       fetch(`${api}/viewedProducts`, {
         method: "POST",

@@ -97,7 +97,9 @@ const SelectedProduct = ({ selectedProduct ,seller, searchTerm, setSearchTerm })
       </ImageContainer>
 
       <DetailsContainer>
-        <SellerLink to={`/productsByOwner/${userp.owner}`}>
+        <SellerLink to={`/productsByOwner/${
+                  seller.owner_id
+                }/${ seller.owner}`}>
           Seller: {userp.owner}
         </SellerLink>
         <ProductTitle>{product.name}</ProductTitle>

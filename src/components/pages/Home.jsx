@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import WishlistPage from "./wishListPage"
+import WishlistPage from "./wishListPage";
 import {
   FaStar,
   FaClock,
@@ -8,6 +8,8 @@ import {
   FaArrowRight,
   FaArrowLeft,
 } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
+
 import Box from "./boxes";
 import Category from "./category";
 import {
@@ -36,7 +38,7 @@ import {
   OriginalPrice,
   LastViewedContainer,
   LikesContainer,
-  PersonalizedContainer
+  PersonalizedContainer,
 } from "./HomeStyled";
 import SelectedProduct from "./selectedProduct";
 
@@ -64,17 +66,21 @@ const heroImages = [
 const Home = ({
   api,
   glofilteredProducts,
+  Seller,
   searchTerm,
   setSearchTerm,
   loaderRef,
   highlightText,
   SelectedProduct,
   filteredProducts,
+
 }) => {
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const [lastViewed, setLastViewed] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+const location = useLocation();
+
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -100,11 +106,14 @@ const Home = ({
   const handleName = (name) => navigate(`/categoryPage?categoryName=${name}`);
 
   const handleDiscounts = () => navigate(`/discountedProducts`);
-  useEffect(() => {
-    if (searchTerm.length > 0) {
-      navigate(`/products`);
-    }
-  });
+
+
+
+useEffect(() => {
+  if (searchTerm.length > 0 && location.pathname !== "/products") {
+    navigate(`/products`);
+  }
+}, [searchTerm, navigate, location.pathname]);
 
   useEffect(() => {
     fetch(`${api}/products?limit=10_sort=_id&_order=desc`) // Adjust the URL if necessary
@@ -476,31 +485,31 @@ const Home = ({
         {/* Trending Costumes */}
         <SectionTitle>Trending </SectionTitle>
         <ProductGrid>
-           <Box
-                 Mobject={products}
-                 Dobject={products}
-                 loaderRef={loaderRef}
-                 SelectedProduct={SelectedProduct}
-                 // handleProductClick={handleProductClick}
-                 highlightText={highlightText}
-                 category={category}
-              
-               />
+          <Box
+            Mobject={products}
+            Dobject={products}
+            loaderRef={loaderRef}
+            SelectedProduct={SelectedProduct}
+            // handleProductClick={handleProductClick}
+            highlightText={highlightText}
+            category={category}
+            Seller={Seller}
+          />
         </ProductGrid>
 
         {/* New Arrivals */}
         <SectionTitle>New Arrivals</SectionTitle>
         <ProductGrid>
-            <Box
-                 Mobject={products}
-                 Dobject={products}
-                 loaderRef={loaderRef}
-                 SelectedProduct={SelectedProduct}
-                 // handleProductClick={handleProductClick}
-                 highlightText={highlightText}
-                 category={category}
-              
-               />
+          <Box
+            Mobject={products}
+            Dobject={products}
+            loaderRef={loaderRef}
+            SelectedProduct={SelectedProduct}
+            // handleProductClick={handleProductClick}
+            highlightText={highlightText}
+            category={category}
+            Seller={Seller}
+          />
         </ProductGrid>
 
         {/* Customer Reviews */}
@@ -529,25 +538,25 @@ const Home = ({
 
         {/* Last Viewed */}
         <div>
-          <WishlistPage highlightText={highlightText} glofilteredProducts={glofilteredProducts}/>
+          <WishlistPage
+            highlightText={highlightText}
+            glofilteredProducts={glofilteredProducts}
+            Seller={Seller}
+          />
         </div>
 
-      
-
-           <div style={{width:"100%"}}>
-        <Category
-          searchTerm={searchTerm}
-          api={api}
-          loaderRef={loaderRef}
-          highlightText={highlightText}
-          SelectedProduct={SelectedProduct}
-        />
-      </div>
-
-
+        <div style={{ width: "100%" }}>
+          <Category
+            searchTerm={searchTerm}
+            api={api}
+            loaderRef={loaderRef}
+            highlightText={highlightText}
+            SelectedProduct={SelectedProduct}
+          />
+        </div>
 
         {/* Personalized Picks */}
-         <SectionTitle>Personalized Picks For You</SectionTitle>
+        <SectionTitle>Personalized Picks For You</SectionTitle>
         <PersonalizedContainer>
           <ProductGrid>
             {[...glofilteredProducts]
@@ -581,11 +590,8 @@ const Home = ({
                 </ProductCard>
               ))}
           </ProductGrid>
-        </PersonalizedContainer> 
-
-
+        </PersonalizedContainer>
       </Container>
-   
     </>
   );
 };
