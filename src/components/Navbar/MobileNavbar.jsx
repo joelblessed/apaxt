@@ -300,6 +300,7 @@ function MobileNavbar({
   const handleChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
+     navigate(`/products?query=${encodeURIComponent(searchTerm)}`);
     // Normalize text for diacritics (multilingual)
     const normalized = term.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     search(normalized);
