@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet-async';
 
 import {
   loadCart,
@@ -236,6 +237,11 @@ const dot3Style = { ...dotStyle, animationDelay: "0.4s" };
 
   return (
     <Container>
+      <Helmet>
+  <title>Your Cart | ApaxT</title>
+  <meta name="description" content="Review your cart items. Secure checkout with free shipping on orders over CFA 50000." />
+  <meta name="robots" content="noindex, nofollow" /> {/* Prevent indexing */}
+</Helmet>
       <Title>Your Shopping Cart</Title>
       {items.length === 0 ? (
         <EmptyCart>

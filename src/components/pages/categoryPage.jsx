@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
-
+import  CategoryStructureData from "../support/categoryStructureData"
 import SearchFilter from "./searchFilter";
 import "./styles.css";
 import Box from "./boxes";
@@ -183,6 +183,7 @@ const groupedProducts = Array.isArray(filteredProducts)
 
   return (
     <div className="category-page">
+
       <SearchFilter
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -194,6 +195,7 @@ const groupedProducts = Array.isArray(filteredProducts)
       <div style={{ gap: "20px", justifyContent: "center", width: "100%" }}>
         {Object.entries(groupedProducts).map(([category, subCategories]) => (
           <section className="category-section" key={category}>
+            < CategoryStructureData category={category}/>
             <h2 className="category-title">{category}</h2>
             <div className="brands-container">
               {Object.entries(subCategories).map(([subCategory, brands]) => (

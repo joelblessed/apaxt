@@ -6,6 +6,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import {HelmetProvider} from "react-helmet-async"
 import { AuthContext, AuthProvider } from "./AuthContext";
 import { SnackbarProvider } from "notistack";
 import { api } from "./config";
@@ -267,6 +268,8 @@ function App() {
   }
 
   return (
+    <HelmetProvider>
+    
     <AuthProvider>
       <ToastContainer theme="colored" position="top-center"></ToastContainer>
 
@@ -741,6 +744,7 @@ function App() {
         </div>
       </Router>
     </AuthProvider>
+    </HelmetProvider>
   );
 }
 

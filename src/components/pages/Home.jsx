@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import{Helmet} from 'react-helmet-async'
 import { useNavigate } from "react-router-dom";
 import WishlistPage from "./wishListPage";
 import {
@@ -224,7 +225,32 @@ useEffect(() => {
   };
 
   return (
+
+
     <>
+
+    <Helmet>
+        {/* Primary Meta Tags */}
+  <title>Shop Best [Product Category] Deals | [Brand Name]</title>
+  <meta name="description" content="Buy [Top 3 Categories] at unbeatable prices. Free shipping on orders over $50. 30-day returns. Shop now!" />
+
+  {/* Open Graph (Facebook/LinkedIn) */}
+  <meta property="og:title" content="Shop Best [Product Category] Deals | [Brand Name]" />
+  <meta property="og:description" content="Buy [Top 3 Categories] at unbeatable prices. Free shipping on orders over $50. Shop now!" />
+  <meta property="og:image" content="https://yourstore.com/social-share-home.jpg" />
+  <meta property="og:url" content="https://yourstore.com" />
+  <meta property="og:type" content="website" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Shop Best [Product Category] Deals | [Brand Name]" />
+  <meta name="twitter:description" content="Buy [Top 3 Categories] at unbeatable prices. Free shipping on orders over $50. Shop now!" />
+  <meta name="twitter:image" content="https://yourstore.com/social-share-home.jpg" />
+
+  {/* Canonical URL */}
+  <link rel="canonical" href="https://yourstore.com" />
+    </Helmet>
+
       <Container>
         {/* Hero Banner */}
         {}

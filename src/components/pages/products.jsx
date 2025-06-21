@@ -6,10 +6,15 @@ import React, {
   useMemo,
 } from "react";
 import { useTranslation } from "react-i18next";
+import ProductStructuredData from "../support/productsStructureData";
+
+
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { debounce } from "lodash";
+import { useLocation } from "react-router-dom";
 import Fuse from "fuse.js";
 import Box from "./boxes";
+import { Helmet } from "react-helmet-async";
 import "./products.css";
 import "../translations/i18n";
 
@@ -33,28 +38,48 @@ const Products = ({
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
-  const token = localStorage.getItem("token")
-  const [isMobile, setIsMobile ] = useState();
+  const token = localStorage.getItem("token");
+  const [isMobile, setIsMobile] = useState();
+
+  const location = useLocation();
+const searchParams = new URLSearchParams(location.search);
+const urlQuery = searchParams.get("query") || "";
 
 
-// Function to check screen size
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1000);
-    };
-  
-    useEffect(() => {
-      handleResize(); // Initial check
-      window.addEventListener("resize", handleResize); // Update on resize
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
-  
+
+useEffect(() => {
+  if (urlQuery && urlQuery !== searchTerm) {
+    setSearchTerm(urlQuery);
+  }
+}, [urlQuery, searchTerm, setSearchTerm]);
+
+
+ const OuterSearch = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `Search Results for ${urlQuery}`,
+    description: "Find red sneakers at ApaxT.",
+    url: `https://apaxt.com/search?query=${urlQuery}`,
+  };
+
+
+  // Function to check screen size
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 1000);
+  };
+
+  useEffect(() => {
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize); // Update on resize
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Fetch products with pagination
   const fetchProducts = useCallback(async () => {
     const res = await fetch(`${api}/products?page=${page}&limit=30`);
     const data = await res.json();
     const fetched = data.products || data;
-console.log(fetched)
+    console.log(fetched);
 
     if (fetched.length === 0) setHasMore(false);
 
@@ -67,7 +92,11 @@ console.log(fetched)
     const filteredProducts =
       category === "All"
         ? fetched
-        : fetched.filter((product) => product.user_products.map((userp)=>userp.category?.main) === category);
+        : fetched.filter(
+            (product) =>
+              product.user_products.map((userp) => userp.category?.main) ===
+              category
+          );
 
     setProducts((prev) => uniqueProducts(prev, filteredProducts));
   }, [api, page, category]);
@@ -109,29 +138,6 @@ console.log(fetched)
     }
   }, [searchTerm]);
 
-  // const handleProductClick = useCallback(
-  //   (product) => {
-  //     SelectedProduct(product);
-  //     localStorage.setItem("selectedProduct", JSON.stringify(product));
-  //     navigate("/selectedProduct");
-
-  //     fetch(`${api}/viewedProducts`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": `Bearer ${token}`
-  //       },
-  //       body: JSON.stringify({
-  //         userId: userId,
-  //         productId: product.id
-  //       }),
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => console.log("Viewed product saved:", data))
-  //       .catch((error) => console.error("Error:", error));
-  //   },
-  //   [SelectedProduct, navigate]
-  // );
 
   useEffect(() => {
     fetchProducts();
@@ -211,7 +217,56 @@ console.log(fetched)
   }, [searchTerm, debouncedSearch]);
 
   return (
-    <div className="products-container" style={{background:"", width: isMobile ? "100%" : "90%", margin:"auto", marginBottom:"0px"}}>
+    <div
+      className="products-container"
+      style={{
+        background: "",
+        width: isMobile ? "100%" : "90%",
+        margin: "auto",
+        marginBottom: "0px",
+      }}
+    >
+  
+        <Helmet>
+  <title>
+    {urlQuery
+      ? `Search Results for "${urlQuery}" | ApaxT`
+      : "Browse Products | ApaxT"}
+  </title>
+  <meta
+    name="description"
+    content={
+      urlQuery
+        ? `Find ${urlQuery} at ApaxT. Discover the best deals and products.`
+        : "Explore our collection of products at ApaxT. Find the best deals and new arrivals."
+    }
+  />
+  <link
+    rel="canonical"
+    href={`https://apaxt.com/search?query=${encodeURIComponent(urlQuery)}`}
+  />
+  {/* Optional: Structured data for SEO */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: urlQuery
+        ? `Search Results for ${urlQuery}`
+        : "Browse Products",
+      description: urlQuery
+        ? `Find ${urlQuery} at ApaxT. Discover the best deals and products.`
+        : "Explore our collection of products at ApaxT. Find the best deals and new arrivals.",
+      url: `https://apaxt.com/search?query=${encodeURIComponent(urlQuery)}`,
+    })}
+  </script>
+</Helmet>
+
+      {products.map((product) => {
+
+        <div>
+          <ProductStructuredData product={product} />
+        </div>;
+      })}
       <Box
         Mobject={products}
         Dobject={products}
@@ -221,15 +276,15 @@ console.log(fetched)
         // handleProductClick={handleProductClick}
         highlightText={highlightText}
         category={category}
-     
       />
       {hasMore && (
-  <div ref={loaderRef} style={spinnerStyle}>
-    <span style={dotStyle}></span>
-    <span style={dot2Style}></span>
-    <span style={dot3Style}></span>
-  </div>
-)} {/* Loader for infinite scroll */}
+        <div ref={loaderRef} style={spinnerStyle}>
+          <span style={dotStyle}></span>
+          <span style={dot2Style}></span>
+          <span style={dot3Style}></span>
+        </div>
+      )}{" "}
+      {/* Loader for infinite scroll */}
     </div>
   );
 };
