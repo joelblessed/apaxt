@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./products.css";
+import "../products/products.css";
 import { AuthContext } from "../../AuthContext";
 import { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,11 +10,11 @@ import Slider from "react-slick";
 import { useNavigate, Link } from "react-router-dom";
 import "../translations/i18n";
 import { addToWishlist } from "../../wishlistSlice";
-import SelectedProductDesktop from "./selectedProductsDesktop";
-import WishlistButton from "./wishlistButton";
-import AddToCartButton from "./addToCartButton";
-import DesktopCards from "./ProductCards/desktopCards";
-import MobileCard from "./ProductCards/MobileCard";
+import SelectedProductDesktop from "../products/selectedProductsDesktop";
+import WishlistButton from "../wishlist/wishlistButton";
+import AddToCartButton from "../Cart/addToCartButton";
+import DesktopCards from "../ProductCards/desktopCards";
+import MobileCard from "../ProductCards/MobileCard";
 
 import {
   BoxContainer,
@@ -36,7 +36,7 @@ import {
   iospositions,
   fontSizes,
   categoryShadow,
-} from "./styledComponents";
+} from "../support/styledComponents";
 import { addToCart, removeFromCart } from "../../cartSlice";
 import e from "cors";
 

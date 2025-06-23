@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import "./products.css";
+import "../products/products.css";
 import { AuthContext } from "../../AuthContext";
 import { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,10 +10,10 @@ import Slider from "react-slick";
 import { useNavigate, Link } from "react-router-dom";
 import "../translations/i18n";
 import { useTranslation } from "react-i18next";
-import SelectedProductDesktop from "./selectedProductsDesktop";
+import SelectedProductDesktop from "../products/selectedProductsDesktop";
 import { addToWishlist } from "../../wishlistSlice";
-import MobileCard from "./ProductCards/MobileCard";
-import DesktopCards from "./ProductCards/desktopCards";
+import MobileCard from "./MobileCard";
+import DesktopCards from "./desktopCards";
 
 import {
   BoxContainer,
@@ -35,7 +35,7 @@ import {
   categoryShadow,
   iospositions,
   iosfontSizes,
-} from "./styledComponents";
+} from "../support/styledComponents";
 
 const Box = ({
   api,

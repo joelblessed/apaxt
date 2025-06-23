@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./orders.css"
 
 const Orders2 = ({ api, glofilteredProducts }) => {
   const [orders, setOrders] = useState([]);

@@ -1,10 +1,10 @@
 import React, { useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "../../translations/i18n";
+import "../translations/i18n";
 import { useTranslation } from "react-i18next";
-import WishlistButton from "../wishlistButton";
-import { api } from "../../../config";
-import AddToCartButton from "../addToCartButton";
+import WishlistButton from "../wishlist/wishlistButton";
+import { api } from "../../config";
+import AddToCartButton from "../Cart/addToCartButton";
 import {
   BoxContainer,
   AddtocartButton,
@@ -18,7 +18,7 @@ import {
   StatusTitle,
   Name,
   categoryShadow,
-} from "../styledComponents";
+} from "../support/styledComponents";
 import { viewport } from "@popperjs/core";
 
 const DesktopCards = ({

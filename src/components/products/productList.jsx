@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { debounce } from "lodash";
 import Fuse from "fuse.js";
-import Box from "./boxes";
+import Box from "../ProductCards/boxes";
 import "./products.css";
 import "../translations/i18n";
 import { main } from "@popperjs/core";
@@ -22,7 +22,7 @@ import {
   Grid,
   EditButton,
   DeleteButton,
-} from "../../components/account/dashboardStyles";
+} from "../account/dashboardStyles";
 
 const ResponsiveGrid = styled(Grid)`
   display: grid;
@@ -85,7 +85,7 @@ const ProductCard = React.memo(({ products, userId, handleDelete, id, handleChan
             <h3>{product.name}</h3>
             {product.user_products?.map((up) => (
               <div key={up.id}>
-                <p>{t("Price")}: ${up.price}</p>
+                <p>{t("Price")}: CFA:{up.price}</p>
                 <p>{t("Stock")}: {up.number_in_stock}</p>
                 <div>
                   <EditButton to={`/editProduct/${product.id}/${userId}`}>

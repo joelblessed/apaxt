@@ -6,8 +6,8 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import AddToCartButton from "./addToCartButton";
-import WishlistButton from "./wishlistButton";
+import AddToCartButton from "../Cart/addToCartButton";
+import WishlistButton from "../wishlist/wishlistButton";
 
 import {
   Container,

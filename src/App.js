@@ -29,27 +29,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
+import ProductPage from "./components/products/product"
 import "react-toastify/dist/ReactToastify.css";
-import Products from "./components/pages/products";
+import Products from "./components/products/products";
 import Cart from "./components/Cart/cart";
 import Cart1 from "./components/Cart/cart1";
-import Box from "./components/pages/boxes";
+import Box from "./components/ProductCards/boxes";
 import Cart2 from "./components/Cart/Cart2";
-import Home from "./components/pages/Home";
-import NewProduct from "./components/pages/formUpload";
+import Home from "./components/home/Home";
+import NewProduct from "./components/formUpload/formUpload";
 import Account from "./components/account/signUP";
-import Discounts from "./components/pages/discountedProducts";
-import SelectedProduct from "./components/pages/selectedProduct";
-import Category from "./components/pages/category";
-import CategoryPage from "./components/pages/categoryPage";
+import Discounts from "./components/products/discountedProducts";
+import SelectedProduct from "./components/products/selectedProduct";
+import Category from "./components/category/category";
+import CategoryPage from "./components/category/categoryPage";
 import EditProfilePicture from "./components/account/editProfilePicture";
-import DesktopCards from "./components/pages/ProductCards/desktopCards";
-import WishlistPage from "./components/pages/wishListPage";
-import WishlistButton from "./components/pages/wishlistButton";
+import DesktopCards from "./components/ProductCards/desktopCards";
+import WishlistPage from "./components/wishlist/wishListPage";
+import WishlistButton from "./components/wishlist/wishlistButton";
 // import WishList from "./components/pages/wishList";
 import Wallet from "./components/account/wallet";
 import LastViewedProducts from "./components/account/lastviewedProducts";
-import BrandPage from "./components/pages/brandPage";
+import BrandPage from "./components/unauthirized/brandPage";
 import Payment from "./components/Payment/Payment";
 import Alert from "./components/others/alert";
 import ShowAlert from "./components/others/globalAlert";
@@ -63,27 +64,27 @@ import SignUP from "./components/account/signUP";
 import Profile from "./components/account/profile";
 import EditProfile from "./components/account/editProfile";
 import Dashboard from "./components/account/dashboard";
-import CalculateDistance from "./components/pages/calculateDistance";
+import CalculateDistance from "./components/support/calculateDistance";
 import Customer from "./components/others/customer";
-import Test from "./components/pages/test";
+import Test from "./components/support/test";
 import Orders from "./components/orders/orders";
 import Orders2 from "./components/orders/orders2";
-import EditProduct from "./components/pages/editProduct";
-import ProductsByOwner from "./components/pages/productsByOwner";
+import EditProduct from "./components/products/editProduct";
+import ProductsByOwner from "./components/products/productsByOwner";
 import Logs from "./components/account/logs";
 import Checkout from "./components/Cart/checkout";
 import ProtectedRoute from "./ProtectedRoute";
 import ForgotPassword from "./components/account/forgotPasword";
 import ResetPassword from "./components/account/resetPassword";
-import FormUpload from "./components/pages/formUpload";
+import FormUpload from "./components/formUpload/formUpload";
 import About from "./components/Navbar/about";
-import ProductList from "./components/pages/productList";
-import ProductCard from "./components/pages/ProductCards/productCard";
-import DeleteProduct from "./components/pages/deleteProduct";
+import ProductList from "./components/products/productList";
+import ProductCard from "./components/ProductCards/productCard";
+import DeleteProduct from "./components/products/deleteProduct";
 import Footer from "./components/Navbar/footer";
 import OrdersReview from "./components/orders/ordersReview";
 import OrdersPreview from "./components/orders/ordersPreview";
-import Unauthorized from "./components/pages/unauthorized";
+import Unauthorized from "./components/unauthirized/unauthorized";
 
 function App() {
   const [calalculateTotal, setCalculateTotal] = useState();
@@ -341,7 +342,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/Products"
+            path="/products"
             element={
               <Products
                 filteredProducts={filteredProducts}
@@ -359,6 +360,21 @@ function App() {
               />
             }
           ></Route>
+          <Route path="/product/:productSlug" 
+          element={<ProductPage  
+                  filteredProducts={filteredProducts}
+                SelectedProduct={setSelectedProduct}
+                Seller={setSeller}
+                highlightText={highlightText}
+                products={products}
+                loaderRef={loaderRef}
+                handleSearchButton={setHandleProductSearch}
+                api={api}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                glofilteredProducts={allProducts}
+                category={category}
+           />} />
           <Route
             path="/discountedProducts"
             element={

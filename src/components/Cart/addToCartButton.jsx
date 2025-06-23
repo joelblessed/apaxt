@@ -5,7 +5,7 @@ import {
   addToCartWithAuth,
   mergeCartsAfterLogin,
 } from "../../cartJs/cartThunks";
-import { AddtocartButton, MAddtocartButton } from "./styledComponents";
+import { AddtocartButton, MAddtocartButton } from "../support/styledComponents";
 
 const AddToCartButton = ({ product }) => {
   // Function to check screen size

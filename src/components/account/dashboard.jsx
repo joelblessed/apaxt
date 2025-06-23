@@ -9,7 +9,7 @@ import Wallet from "./wallet";
 import EditProfilePicture from "./editProfilePicture";
 import EditProfile from "./editProfile";
 import Orders from "../orders/orders"; // Add this import statement
-import ProductList from "../pages/productList";
+import ProductList from "../products/productList";
 import {
   DashboardContainer,
   Sidebar,

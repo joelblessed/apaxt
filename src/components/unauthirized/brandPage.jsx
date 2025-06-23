@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import Box from './boxes'
+import Box from '../ProductCards/boxes'
 
 const BrandPage = ({
   api,

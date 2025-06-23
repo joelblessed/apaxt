@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWishlist, removeFromWishlist } from "../../wishlistSlice";
-import Box from "./boxes";
+import Box from "../ProductCards/boxes";
 import { v4 as uuidv4 } from "uuid";
 
 const WishlistPage = ({ glofilteredProducts, api, highlightText, Seller }) => {

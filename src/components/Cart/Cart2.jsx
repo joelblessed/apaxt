@@ -1,5 +1,5 @@
 import React from "react";
-import Products from "../pages/products";
+import Products from "../products/products";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 

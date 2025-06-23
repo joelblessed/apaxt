@@ -6,8 +6,8 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "../../wishlistSlice";
-import DesktopCards from "./ProductCards/desktopCards";
-import Box from "./boxes";
+import DesktopCards from "../ProductCards/desktopCards";
+import Box from "../ProductCards/boxes";
 
 const WishlistButton = ({ product, highlightText }) => {
 

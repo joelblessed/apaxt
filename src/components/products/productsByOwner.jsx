@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { debounce } from "lodash";
 import Fuse from "fuse.js";
-import Box from "./boxes";
+import Box from "../ProductCards/boxes";
 import "./products.css";
 import "../translations/i18n";
 import { main } from "@popperjs/core";

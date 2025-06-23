@@ -2,8 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
 import  CategoryStructureData from "../support/categoryStructureData"
 import SearchFilter from "./searchFilter";
-import "./styles.css";
-import Box from "./boxes";
+import "../support/styles.css";
+import { Helmet } from "react-helmet-async";
+import Box from "../ProductCards/boxes";
 
 const CategoryPage = ({
   api,
@@ -191,6 +192,7 @@ const groupedProducts = Array.isArray(filteredProducts)
         setFilters={setFilters}
       />
       {searchTerm}
+      
 
       <div style={{ gap: "20px", justifyContent: "center", width: "100%" }}>
         {Object.entries(groupedProducts).map(([category, subCategories]) => (

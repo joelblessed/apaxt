@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import{Helmet} from 'react-helmet-async'
 import { useNavigate } from "react-router-dom";
-import WishlistPage from "./wishListPage";
+import WishlistPage from "../wishlist/wishListPage";
 import {
   FaStar,
   FaClock,
@@ -11,8 +11,8 @@ import {
 } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 
-import Box from "./boxes";
-import Category from "./category";
+import Box from "../ProductCards/boxes";
+import Category from "../category/category";
 import {
   CategoryCard,
   CategoryName,
@@ -41,7 +41,7 @@ import {
   LikesContainer,
   PersonalizedContainer,
 } from "./HomeStyled";
-import SelectedProduct from "./selectedProduct";
+import SelectedProduct from "../products/selectedProduct";
 
 // Dummy Data
 
@@ -509,34 +509,60 @@ useEffect(() => {
         </CountdownContainer>
 
         {/* Trending Costumes */}
-        <SectionTitle>Trending </SectionTitle>
-        <ProductGrid>
-          <Box
-            Mobject={products}
-            Dobject={products}
-            loaderRef={loaderRef}
-            SelectedProduct={SelectedProduct}
-            // handleProductClick={handleProductClick}
-            highlightText={highlightText}
-            category={category}
-            Seller={Seller}
-          />
-        </ProductGrid>
+        <SectionTitle>Trending Costumes</SectionTitle>
+              <ProductGrid >
+                {products.map(product => (
+                  <ProductCard key={product.id} >
+                    <ProductImage src={product.thumbnails[product.thumbnail_index || 0]} alt={product.name} onClick={ () => {handleName(product.name)}}/>
+                    <ProductInfo>
+                      <ProductName>{product.name}</ProductName>
+                        {product.user_products.map((userp)=>(<>
+                      <PriceContainer>
+                      
+                         {userp.discount > 0 && (
+                        <OriginalPrice discounted={userp.discount !== null}>
+                          CFA{userp.price.toFixed(2)}
+                        </OriginalPrice>)}
+                        {userp.discount === 0 && (
+                          <DiscountPrice>CFA{userp.price - userp.discount.toFixed(2)}</DiscountPrice>
+                        )}
+                      </PriceContainer>
+                      {/* <LikesContainer>
+                        <FaStar color="#ffc107" /> {product.likes} likes
+                      </LikesContainer> */}
+                       </> ))}
+                    </ProductInfo>
+                  </ProductCard>
+                ))}
+              </ProductGrid>
 
         {/* New Arrivals */}
-        <SectionTitle>New Arrivals</SectionTitle>
-        <ProductGrid>
-          <Box
-            Mobject={products}
-            Dobject={products}
-            loaderRef={loaderRef}
-            SelectedProduct={SelectedProduct}
-            // handleProductClick={handleProductClick}
-            highlightText={highlightText}
-            category={category}
-            Seller={Seller}
-          />
-        </ProductGrid>
+        {/* <SectionTitle>New Arrivals</SectionTitle>
+           <ProductGrid>
+                {products.map(product => (
+                  <ProductCard key={product.id}>
+                    <ProductImage src={product.thumbnails[product.thumbnail_index]} alt={product.name} />
+                    <ProductInfo>
+                      <ProductName>{product.name}</ProductName>
+                        {product.user_products.map((userp)=>(<>
+                      <PriceContainer>
+                      
+                         {userp.discount > 0 && (
+                        <OriginalPrice discounted={userp.discount !== null}>
+                          CFA{userp.price.toFixed(2)}
+                        </OriginalPrice>)}
+                        {userp.discount === 0 && (
+                          <DiscountPrice>${userp.price - userp.discount.toFixed(2)}</DiscountPrice>
+                        )}
+                      </PriceContainer>
+                      <LikesContainer>
+                        <FaStar color="#ffc107" /> {product.likes} likes
+                      </LikesContainer>
+                       </> ))}
+                    </ProductInfo>
+                  </ProductCard>
+                ))}
+              </ProductGrid> */}
 
         {/* Customer Reviews */}
         {/* <SectionTitle>Customer Reviews</SectionTitle>
@@ -563,13 +589,13 @@ useEffect(() => {
         </ReviewGrid> */}
 
         {/* Last Viewed */}
-        <div>
+        {/* <div>
           <WishlistPage
             highlightText={highlightText}
             glofilteredProducts={glofilteredProducts}
             Seller={Seller}
           />
-        </div>
+        </div> */}
 
         <div style={{ width: "100%" }}>
           <Category
@@ -582,7 +608,7 @@ useEffect(() => {
         </div>
 
         {/* Personalized Picks */}
-        <SectionTitle>Personalized Picks For You</SectionTitle>
+        <SectionTitle>Picks For You</SectionTitle>
         <PersonalizedContainer>
           <ProductGrid>
             {[...glofilteredProducts]

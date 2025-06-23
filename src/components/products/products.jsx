@@ -13,10 +13,11 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import { debounce } from "lodash";
 import { useLocation } from "react-router-dom";
 import Fuse from "fuse.js";
-import Box from "./boxes";
+import Box from "../ProductCards/boxes";
 import { Helmet } from "react-helmet-async";
 import "./products.css";
 import "../translations/i18n";
+
 
 const Products = ({
   glofilteredProducts,

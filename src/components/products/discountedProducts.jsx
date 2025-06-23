@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate} from "react-router-dom";
-import Box from "./boxes";
+import Box from "../ProductCards/boxes";
 
 const Discounts = ({
   

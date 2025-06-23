@@ -1,9 +1,9 @@
 import React, { useRef,useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "../../translations/i18n";
+import "../translations/i18n";
 import { useTranslation } from "react-i18next";
-import WishlistButton from "../wishlistButton";
-import AddToCartButton from "../addToCartButton";
+import WishlistButton from "../wishlist/wishlistButton";
+import AddToCartButton from "../Cart/addToCartButton";
 
 import {
   BoxContainer,
@@ -25,7 +25,7 @@ import {
   categoryShadow,
   iospositions,
   iosfontSizes,
-} from "../styledComponents";
+} from "../support/styledComponents";
 
 const MobileCard = ({
   Mobject,
